@@ -16,11 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/new', function () {
-    return view('admin.home');
+    return view('admin.table');
 });
 
 
 
-Auth::routes(['verify' => true]);
+Auth::routes(['verify' => true,'register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
