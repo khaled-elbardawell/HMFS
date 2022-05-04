@@ -11,16 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('/new', function () {
+        return view('admin.table');
+    });
+
+    Auth::routes(['verify' => true,'register' => false]);
+
+    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 });
 
-Route::get('/new', function () {
-    return view('admin.table');
-});
 
 
-
-Auth::routes(['verify' => true,'register' => false]);
-
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');

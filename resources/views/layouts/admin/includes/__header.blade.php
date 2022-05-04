@@ -15,19 +15,21 @@
     </div>
     <!--end logo-->
     <!-- Navbar -->
+
     <nav class="navbar-custom">
         <ul class="list-unstyled topbar-nav float-right mb-0">
             <li class="hidden-sm">
+                @php $current_lang = config('laravellocalization.supportedLocales.'.LaravelLocalization::getCurrentLocale()); @endphp
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript: void(0);" role="button"
                    aria-haspopup="false" aria-expanded="false">
-                    English <img src="{{CustomAsset('admin/assets/images/flags/us_flag.jpg')}}" class="ml-2" height="16" alt=""/> <i class="mdi mdi-chevron-down"></i>
+                    {{$current_lang['native']}} <img src="{{$current_lang['flag_path']}}" class="ml-2" width="24" height="16" alt=""/> <i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="javascript: void(0);"><span> German </span><img src="{{CustomAsset('admin/assets/images/flags/germany_flag.jpg')}}" alt="" class="ml-2 float-right" height="14"/></a>
-                    <a class="dropdown-item" href="javascript: void(0);"><span> Italian </span><img src="{{CustomAsset('admin/assets/images/flags/italy_flag.jpg')}}" alt="" class="ml-2 float-right" height="14"/></a>
-                    <a class="dropdown-item" href="javascript: void(0);"><span> French </span><img src="{{CustomAsset('admin/assets/images/flags/french_flag.jpg')}}" alt="" class="ml-2 float-right" height="14"/></a>
-                    <a class="dropdown-item" href="javascript: void(0);"><span> Spanish </span><img src="{{CustomAsset('admin/assets/images/flags/spain_flag.jpg')}}" alt="" class="ml-2 float-right" height="14"/></a>
-                    <a class="dropdown-item" href="javascript: void(0);"><span> Russian </span><img src="{{CustomAsset('admin/assets/images/flags/russia_flag.jpg')}}" alt="" class="ml-2 float-right" height="14"/></a>
+                    @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                               <span>{{ $properties['native'] }}</span><img src="{{$properties['flag_path']}}" alt="" class="ml-2 float-right" width="21" height="14"/>
+                            </a>
+                    @endforeach
                 </div>
             </li>
 
