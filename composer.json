@@ -13,7 +13,8 @@
         "laravel/framework": "^6.20.26",
         "laravel/tinker": "^2.5",
         "mcamara/laravel-localization": "^1.7",
-        "nwidart/laravel-modules": "^8.3"
+        "nwidart/laravel-modules": "^8.3",
+        "tymon/jwt-auth": "1.0.0-rc.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",

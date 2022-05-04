@@ -11,12 +11,6 @@
 |
 */
 
-Route::group(
-    [
-        'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
-    ], function(){
-         Route::resource('role',RoleController::class);
+Route::prefix('api')->group(function() {
+    Route::get('/', 'ApiController@index');
 });
-
-

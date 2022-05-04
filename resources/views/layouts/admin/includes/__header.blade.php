@@ -22,12 +22,12 @@
                 @php $current_lang = config('laravellocalization.supportedLocales.'.LaravelLocalization::getCurrentLocale()); @endphp
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript: void(0);" role="button"
                    aria-haspopup="false" aria-expanded="false">
-                    {{$current_lang['native']}} <img src="{{$current_lang['flag_path']}}" class="ml-2" width="24" height="16" alt=""/> <i class="mdi mdi-chevron-down"></i>
+                    {{$current_lang['native']}} <img src="{{CustomAsset($current_lang['flag_path'])}}" class="ml-2" width="24" height="16" alt=""/> <i class="mdi mdi-chevron-down"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                             <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                               <span>{{ $properties['native'] }}</span><img src="{{$properties['flag_path']}}" alt="" class="ml-2 float-right" width="21" height="14"/>
+                               <span>{{ $properties['native'] }}</span><img src="{{CustomAsset($properties['flag_path'])}}" alt="" class="ml-2 float-right" width="21" height="14"/>
                             </a>
                     @endforeach
                 </div>
