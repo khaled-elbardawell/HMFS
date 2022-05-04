@@ -1,5 +1,8 @@
 <?php
 
+define('PAGINATE_VALUE',8);
+
+
 
 if (!function_exists('CustomAsset')){
     /**

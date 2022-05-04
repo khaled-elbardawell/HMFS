@@ -23,59 +23,43 @@
         </div>
         <!-- end page title end breadcrumb -->
 
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="mt-0 header-title">Striped rows</h4>
-                        <p class="text-muted mb-3">
-                            Use <code>.table-striped</code> to add zebra-striping to any table row
-                            within the <code>&lt;tbody&gt;</code>.
-                        </p>
+                        <div class="mt-0 header-title">
+                            <a href="#" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
+                            <a href="#" class="btn btn-danger">Trash <i class="mdi mdi-trash-can-outline"></i></a>
+                        </div>
 
                         <div class="table-responsive">
                             <table class="table table-striped mb-0">
                                 <thead>
                                 <tr>
-                                    <th>Customer</th>
-                                    <th>Email</th>
-                                    <th>Contact No</th>
-                                    <th>Action</th>
+                                    <th>#</th>
+                                    <th>{{__('role::admin.Name')}}</th>
+                                    <th>{{__('role::admin.Permissions')}}</th>
+                                    <th>{{__('role::admin.Action')}}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><img src="../assets/images/users/user-3.jpg" alt="" class="rounded-circle thumb-sm mr-1"> Aaron Poulin</td>
-                                    <td>AaronPoulin@example.com</td>
-                                    <td>+21 21547896</td>
+                                    <td>1</td>
+                                    <td>Admain</td>
+                                    <td>
+                                        <span class="badge badge-success p-1">list roles</span>
+                                    </td>
                                     <td>
                                         <a href="#" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
                                         <a href="#"><i class="fas fa-trash-alt text-danger font-16"></i></a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td><img src="../assets/images/users/user-4.jpg" alt="" class="rounded-circle thumb-sm mr-1"> Richard Ali</td>
-                                    <td>RichardAli@example.com</td>
-                                    <td>+41 21547896</td>
-                                    <td>
-                                        <a href="#" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        <a href="#"><i class="fas fa-trash-alt text-danger font-16"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="../assets/images/users/user-5.jpg" alt="" class="rounded-circle thumb-sm mr-1"> Juan Clark</td>
-                                    <td>JuanClark@example.com</td>
-                                    <td>+65 21547896</td>
-                                    <td>
-                                        <a href="#" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        <a href="#"><i class="fas fa-trash-alt text-danger font-16"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><img src="../assets/images/users/user-6.jpg" alt="" class="rounded-circle thumb-sm mr-1"> Albert Hull</td>
-                                    <td>AlbertHull@example.com</td>
-                                    <td>+88 21547896</td>
+                                    <td>1</td>
+                                    <td>Admain</td>
+                                    <td>list crete edit</td>
                                     <td>
                                         <a href="#" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
                                         <a href="#"><i class="fas fa-trash-alt text-danger font-16"></i></a>
