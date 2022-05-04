@@ -1,8 +1,5 @@
 @extends('layouts.admin.master')
 
-
-
-
 @section('content')
     <!-- Page-Title -->
     <div class="row">
@@ -72,11 +69,7 @@
 
                     </div><!--end card-body-->
                 </div><!--end card-->
-
-
             </div><!--end col-->
-
-
         </div><!--end row-->
     </form>
 @endsection

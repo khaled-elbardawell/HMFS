@@ -2,6 +2,7 @@
 
 namespace Modules\Role\Http\Controllers;
 
+use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -11,6 +12,14 @@ use Modules\Role\Http\Requests\RoleRequest;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:role.index' , ['only' => ['index']]);
+        $this->middleware('can:role.create', ['only' => ['create','store']]);
+        $this->middleware('can:role.edit'  , ['only' => ['edit','update']]);
+        $this->middleware('can:role.delete', ['only' => ['destroy']]);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable

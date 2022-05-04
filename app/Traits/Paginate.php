@@ -27,4 +27,4 @@ trait Paginate
         return ($page * PAGINATE_VALUE) + 1 - PAGINATE_VALUE;
     }// end method
 
-}// end class
+}// end trait

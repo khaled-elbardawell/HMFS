@@ -23,9 +23,11 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="mt-0 header-title">
-                        <a href="{{route('role.create')}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
-                    </div>
+                    @can('role.create')
+                        <div class="mt-0 header-title">
+                            <a href="{{route('role.create')}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
+                        </div>
+                    @endcan
 
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">
@@ -48,12 +50,17 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        <a href="{{route('role.edit',$role->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        <form name="delete" method="POST" action="{{route('role.destroy',$role->id)}}" style="display:inline-block;">
-                                           @csrf
-                                           @method('delete')
-                                            <button class="btn btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt text-danger font-16"></i> </button>
-                                        </form>
+                                        @can('role.edit')
+                                          <a href="{{route('role.edit',$role->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                        @endcan
+
+                                       @can('role.delete')
+                                             <form name="delete" method="POST" action="{{route('role.destroy',$role->id)}}" style="display:inline-block;">
+                                               @csrf
+                                               @method('delete')
+                                                <button class="btn btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt text-danger font-16"></i> </button>
+                                             </form>
+                                       @endcan
                                     </td>
                                 </tr>
                                 @php ++$start_counter; @endphp
