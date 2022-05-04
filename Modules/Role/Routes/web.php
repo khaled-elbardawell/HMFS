@@ -11,6 +11,13 @@
 |
 */
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
+
+    Route::resource('role',RoleController::class);
+});
 
 
-Route::resource('role',RoleController::class);

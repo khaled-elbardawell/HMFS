@@ -14,7 +14,7 @@
 Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
-        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+        'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
     Route::get('/', function () {
         return view('welcome');
@@ -24,10 +24,10 @@ Route::group(
         return view('admin.table');
     });
 
-    Auth::routes(['verify' => true,'register' => false]);
 
     Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 });
 
 
+Auth::routes(['verify' => true,'register' => false]);
 
