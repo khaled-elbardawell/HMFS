@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\UploadTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,10 +10,9 @@ use Modules\Role\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-
 class User extends Authenticatable implements MustVerifyEmail , JWTSubject
 {
-    use Notifiable,HasRoles;
+    use Notifiable,HasRoles,UploadTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -62,5 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
     {
         return [];
     }
+
+
 
 }
