@@ -1,4 +1,5 @@
 {
     "Role": true,
-    "Api": true
+    "Api": true,
+    "Task": true
 }

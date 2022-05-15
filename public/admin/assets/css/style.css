@@ -1,0 +1,44 @@
+.task-board .to-do .mdi-circle-outline::before{
+    color: #ffb822 !important;
+}
+.task-board .in-progress .mdi-circle-outline::before{
+    color: #3636ff !important;
+}
+.task-board .code-review .mdi-circle-outline::before{
+    color: #f75959 !important;
+}
+.task-board .done .mdi-circle-outline::before{
+    color: #25df25 !important;
+}
+.board-card p.date{
+    margin: 0;
+    color: gray;
+}
+.board-card p.date:last-child{
+    margin-bottom: 10px;
+}
+.user-comment {
+    background: ghostwhite;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.user-comment h6 {
+    margin-top: 0;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+    font-weight: 700;
+    color: dodgerblue;
+}
+.user-comment p {
+    font-family: sans-serif;
+    margin: 0;
+    font-size: 14px;
+}
+.user-comment small {
+    color: gray;
+    font-size: 10px;
+    font-family: sans-serif;
+}
