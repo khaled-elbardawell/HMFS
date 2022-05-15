@@ -144,6 +144,11 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Task::whereId($id)->delete();
+           return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
+       }catch (\Exception $e){
+           return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+       }
     }
 }

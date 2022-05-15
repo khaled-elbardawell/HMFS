@@ -5,9 +5,13 @@
                 <a class="nav-link dropdown-toggle mr-n2 mt-n2" id="drop2" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                     <i class="fas fa-ellipsis-v text-muted"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="drop2">
-                    <a class="dropdown-item" href="{{route('task.edit',[$task->id,'post_type'=>$post_type])}}">Edit</a>
-                    <a class="dropdown-item" href="#">Delete</a>
+                <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="drop2">
+                    <a class="btn btn-sm btn-outline-none btn-table" href="{{route('task.edit',[$task->id,'post_type'=>$post_type])}}"><i class="fas fa-edit font-16"></i> Edit</a>
+                    <form name="delete" method="POST" action="{{route('task.destroy',$task->id)}}" style="display:inline-block;">
+                        @csrf
+                        @method('delete')
+                         <button class="btn btn-block btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt font-16"></i> Delete </button>
+                      </form>
                 </div>
             </div><!--end dropdown-->
             <i class="mdi mdi-circle-outline d-block mt-n2 font-18 text-warning"></i>
