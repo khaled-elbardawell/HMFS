@@ -30,5 +30,7 @@ Route::group(
 });
 
 
+
+
 Auth::routes(['verify' => true,'register' => false]);
 
