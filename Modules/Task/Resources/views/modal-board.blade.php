@@ -1,6 +1,16 @@
-<div class="modal fade" id="board" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+@php
+    $name = '';
+    $action = route('board.store');
+@endphp
+@isset($board)
+    @php
+        $name = $board->name;
+        $action = route('board.update',$board->id);
+    @endphp
+@endisset
+<div class="modal fade" id="{{$board_modal??'board'}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form method="POST" action="{{route('board.store')}}">
+        <form method="POST" action="{{$action}}">
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
@@ -13,7 +23,7 @@
                     <div class="form-group">
                         <label for="board_name-input" class="text-right">{{__('task::admin.Name')}}</label>
                         <div>
-                            <input name="board_name" class="form-control" type="text" placeholder="{{__('task::admin.Name')}}" id="board_name-input">
+                            <input name="board_name" class="form-control" type="text" placeholder="{{__('task::admin.Name')}}" id="board_name-input" value="{{$name}}">
                         </div>
                     </div>
                 </div>

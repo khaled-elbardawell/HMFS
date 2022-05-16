@@ -32,18 +32,31 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            @include('task::create-board')
+
+                            @isset($board)
+                                @dd('The Board Is Not Exist')
+                            @else
+                                @include('task::modal-board')
+                            @endisset
+
+
+
                         </div>
                         @foreach ($boards as $board)
-                        @php
-                            $board_name = str_replace(' ', '_', $board->name);
-                        @endphp
-                            @include('task::board-col',["post_type"=> $board_name])
+                            @php
+                                $board_name = str_replace(' ', '_', $board->name);
+                                $board_modal = "board";
+                            @endphp
+
+                            @isset($board)
+                                @php
+                                    $board_modal = "board_".$board->id;
+                                @endphp
+                            @endisset
+
+                            @include('task::modal-board',["board"=> $board , "board_modal"=> $board_modal])
+                            @include('task::board-col',["post_type"=> $board_name , "board_modal"=> $board_modal])
                         @endforeach
-                        {{-- @include('task::board-col',['post_type'=> 'to-do']) --}}
-                        {{-- @include('task::board-col',['post_type'=> 'in-progress'])
-                        @include('task::board-col',['post_type'=> 'code-review'])
-                        @include('task::board-col',['post_type'=> 'done']) --}}
                     </div><!--end row-->
                 </div><!--end card-body-->
             </div><!--end card-->

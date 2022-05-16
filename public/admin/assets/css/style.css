@@ -12,7 +12,6 @@
 }
 .board-card p.date{
     margin: 0;
-    color: gray;
 }
 .board-card p.date:last-child{
     margin-bottom: 10px;

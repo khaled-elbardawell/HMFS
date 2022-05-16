@@ -21,8 +21,8 @@
             @else
                 <p class="text-muted mb-2">From: {{$task->user_f->name}}</p>
             @endif
-            <p class="date"><small>Date From: {{$task->date_from}}</small></p>
-            <p class="date"><small>Date To: {{$task->date_to}}</small></p>
+            <p class="date badge badge-success"><small>Date From: {{$task->date_from}}</small></p>
+            <p class="date badge badge-danger"><small>Date To: {{$task->date_to}}</small></p>
             <div class="row justify-content-center">
                 <div class="col-6 align-self-center">
                     <ul class="list-inline mb-0">

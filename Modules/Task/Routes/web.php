@@ -17,5 +17,7 @@ Route::group(
         'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
          Route::resource('task',TaskController::class);
-         Route::post('task/board','BoardController@store')->name('board.store');
+         Route::post('task/create','BoardController@store')->name('board.store');
+         Route::post('task/{id}/edit','BoardController@update')->name('board.update');
+         Route::post('task/{id}/delete','BoardController@delete')->name('board.destroy');
 });
