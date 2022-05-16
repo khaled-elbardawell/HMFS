@@ -25,7 +25,7 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
-                        <input type="hidden" name="post_type" value="{{$post_type}}">
+                        <input type="hidden" name="board_id" value="{{$post_type}}">
                         <div class="row">
                             <div class="col-lg-12 col-12">
                                 <div class="form-group">

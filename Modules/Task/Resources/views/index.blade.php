@@ -22,11 +22,28 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        @include('task::board-col',['post_type'=> 'to-do'])
-                        @include('task::board-col',['post_type'=> 'in-progress'])
+                    <div class="row" style="overflow-x: auto; flex-wrap: nowrap;">
+                        <div class="col-md-3 col-12">
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary add-board-tasks" data-toggle="modal" data-target="#board">Add Column</button>
+
+                            @error('board_name')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @include('task::create-board')
+                        </div>
+                        @foreach ($boards as $board)
+                        @php
+                            $board_name = str_replace(' ', '_', $board->name);
+                        @endphp
+                            @include('task::board-col',["post_type"=> $board_name])
+                        @endforeach
+                        {{-- @include('task::board-col',['post_type'=> 'to-do']) --}}
+                        {{-- @include('task::board-col',['post_type'=> 'in-progress'])
                         @include('task::board-col',['post_type'=> 'code-review'])
-                        @include('task::board-col',['post_type'=> 'done'])
+                        @include('task::board-col',['post_type'=> 'done']) --}}
                     </div><!--end row-->
                 </div><!--end card-body-->
             </div><!--end card-->

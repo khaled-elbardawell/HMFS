@@ -7,8 +7,10 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Role\Entities\Permission;
+use Modules\Task\Entities\Board;
 use Modules\Task\Entities\Comment;
 use Modules\Task\Entities\Task;
+use Modules\Task\Http\Requests\BoardRequest;
 use Modules\Task\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
@@ -26,9 +28,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with(['comments','user_t','user_f'])->page();
+        $boards = Board::with(['tasks.comments','tasks.user_t','tasks.user_f'])->page();
         $start_counter = Task::getStartCounter();
-        return view('task::index',compact('tasks','start_counter'));
+        return view('task::index',compact('boards','start_counter'));
     }
 
     /**
@@ -39,7 +41,7 @@ class TaskController extends Controller
     {
         $permissions = Permission::all();
         $users = User::all();
-        $post_type = request()->post_type;
+        $post_type = request()->board_id;
         return view('task::create',compact('permissions','users','post_type'));
     }
 
@@ -50,17 +52,16 @@ class TaskController extends Controller
      */
     public function store(TaskRequest $request)
     {
-
         try {
             $task = Task::create([
                 'name' => $request->name,
+                'description' => $request->description,
                 'user_from' => auth()->user()->id,
                 'user_to' => $request->user_to,
                 'status' => $request->status,
                 'date_from' => $request->date_from,
                 'date_to' => $request->date_to,
-                'description' => $request->description,
-                'post_type' => $request->post_type,
+                'board_id' => $request->board_id,
             ]);
 
             $comment = Comment::create([
@@ -93,7 +94,7 @@ class TaskController extends Controller
     {
         $task = Task::where('id',$id)->with(['comments.user','user_t','user_f'])->first();
         $users = User::all();
-        $post_type = request()->post_type;
+        $post_type = request()->board_id;
         return view('task::edit',compact('task','users','post_type'));
     }
 
@@ -114,13 +115,13 @@ class TaskController extends Controller
         try {
             $task->update([
                 'name' => $request->name,
+                'description' => $request->description,
                 'user_from' => auth()->user()->id,
                 'user_to' => $request->user_to,
                 'status' => $request->status,
                 'date_from' => $request->date_from,
                 'date_to' => $request->date_to,
-                'description' => $request->description,
-                'post_type' => $request->post_type,
+                'board_id' => $request->board_id,
             ]);
 
             if(!$request->comment==null){
@@ -151,4 +152,5 @@ class TaskController extends Controller
            return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
        }
     }
+
 }

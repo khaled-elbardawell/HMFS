@@ -6,7 +6,7 @@
                     <i class="fas fa-ellipsis-v text-muted"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="drop2">
-                    <a class="btn btn-sm btn-outline-none btn-table" href="{{route('task.edit',[$task->id,'post_type'=>$post_type])}}"><i class="fas fa-edit font-16"></i> Edit</a>
+                    <a class="btn btn-sm btn-outline-none btn-table" href="{{route('task.edit',[$task->id,'board_id'=>$board->id])}}"><i class="fas fa-edit font-16"></i> Edit</a>
                     <form name="delete" method="POST" action="{{route('task.destroy',$task->id)}}" style="display:inline-block;">
                         @csrf
                         @method('delete')
@@ -43,4 +43,3 @@
         </div><!--end card-body-->
     </div><!--end card-->
 </a>
-

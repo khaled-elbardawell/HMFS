@@ -17,4 +17,5 @@ Route::group(
         'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
          Route::resource('task',TaskController::class);
+         Route::post('task/board','BoardController@store')->name('board.store');
 });

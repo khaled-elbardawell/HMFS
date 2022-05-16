@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddPostTypeToTasksTable extends Migration
+class AddBoardIdToTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddPostTypeToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->text('post_type')->nullable();
+            $table->unsignedBigInteger('board_id')->nullable();
+            $table->foreign('board_id')
+                ->references('id')->on('boards')->onDelete('cascade');
         });
     }
 
