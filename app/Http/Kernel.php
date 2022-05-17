@@ -70,6 +70,8 @@ class Kernel extends HttpKernel
         'localeViewPath'          => \Mcamara\LaravelLocalization\Middleware\LaravelLocalizationViewPath::class,
 
         'api.auth' => \Modules\Api\Http\Middleware\ApiCheckAuth::class,
+        'checkUrlHasOrganizationId' => \App\Http\Middleware\Admin\CheckUrlHasOrganizationId::class,
+
 
     ];
 

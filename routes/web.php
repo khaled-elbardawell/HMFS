@@ -13,6 +13,7 @@
 
 Route::group(
     [
+        'namespace' => 'Admin',
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
@@ -21,9 +22,11 @@ Route::group(
     });
 
     Route::get('/new', function () {
-        return view('admin.table');
+        return view('admin.form');
     });
 
+    Route::resource('organization',"OrganizationController");
+    Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
 
     Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 });

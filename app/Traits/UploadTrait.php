@@ -3,6 +3,7 @@
 
 namespace App\Traits;
 
+use App\Upload;
 use Intervention\Image\Facades\Image;
 
 trait UploadTrait
@@ -24,14 +25,14 @@ trait UploadTrait
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function upload(){
-        return $this->morphTo(\App\Upload::class, 'uploadable');
+        return $this->morphTo(Upload::class, 'uploadable');
     }// end method
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphMany
      */
     public function uploads(){
-        return $this->morphMany(\App\Upload::class, 'uploadable');
+        return $this->morphMany(Upload::class, 'uploadable');
     }// end method
 
 
@@ -54,7 +55,7 @@ trait UploadTrait
                 self::updateUploadDB($files,$uploadable_id,$type,$local);
             }
 
-            self::saveFile($uploadable_id,$action,$files,$type,$local,$file_input_name);
+            self::saveFile($uploadable_id,$files,$type,$local);
         }
     }// end methpd
 
@@ -68,7 +69,7 @@ trait UploadTrait
      * @param $local
      * @param $file_input_name
      */
-    private static function saveFile($uploadable_id,$action,$files,$type,$local,$file_input_name){
+    private static function saveFile($uploadable_id,$files,$type,$local){
         $imageUpload = null;
         foreach ($files as $file){
             if ($type == 'image'){
@@ -80,17 +81,16 @@ trait UploadTrait
 
             if ($type == 'image' && $imageUpload){
                 foreach (self::$listThumbFolders as $folder => $size){
-                    $path_save = public_path("upload/images/$folder/$save_file_name");
                     if ($size){
                         $imageUpload->resize($size[0],$size[1]);
                     }
-                    $imageUpload->save($path_save);
+                    $imageUpload->save(public_path("upload/images/$folder/$save_file_name"));
                 }
             }else{
                  $file->move(public_path("upload/files"), $save_file_name);
             }
 
-            \App\Upload::create([
+            Upload::create([
                 'uploadable_type' => self::class,
                 'uploadable_id'   => $uploadable_id,
                 'name'            => $original_file_name,
@@ -113,7 +113,7 @@ trait UploadTrait
      */
     private  static function updateUploadDB($files,$uploadable_id,$type,$local){
         if ($files){
-            $query = \App\Upload::where('uploadable_type',self::class)
+            $query = Upload::where('uploadable_type',self::class)
                 ->where('uploadable_id',$uploadable_id)
                 ->where('type',$type)
                 ->where('locale',$local);
