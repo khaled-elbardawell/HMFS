@@ -47,7 +47,7 @@ class UserController extends Controller
     {
         try{
             return $request;
-            
+
             return redirect(route('users.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
         }catch (\Exception $e){
             return redirect(route('users.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
