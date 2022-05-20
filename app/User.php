@@ -70,7 +70,9 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
         return $this->belongsToMany(Organization::class,'user_organizations','user_id','id');
     }
 
-
+    public function userRole(){
+        return $this->hasOne('Modules\Role\Entities\UserRoles', 'user_id');
+    }
 
 
 }

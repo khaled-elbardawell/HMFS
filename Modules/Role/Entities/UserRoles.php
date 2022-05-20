@@ -25,4 +25,8 @@ class UserRoles extends Model
         return self::sql($sql,[$organization_id,$user_id])->sqlFirst();
     }// end method
 
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
 }
