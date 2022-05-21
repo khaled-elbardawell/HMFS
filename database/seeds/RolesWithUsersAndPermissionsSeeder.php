@@ -15,7 +15,7 @@ class RolesWithUsersAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        Role::firstOrCreate(['id' => 1,'name' => "Super Admin",'status' => 0]);
+        Role::firstOrCreate(['id' => 1,'name' => "Super Admin",'role_type_id' => null,'status' => 0]);
         $user1 = \App\User::firstOrCreate(['email' => "elbardawellkhaled@gmail.com"],[
             'name'     => "khaled Elbardawell",
             'password' => bcrypt("111111111"),

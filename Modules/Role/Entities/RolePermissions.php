@@ -8,7 +8,7 @@ class RolePermissions extends Model
 {
     protected $table = 'role_permissions';
 
-    protected $fillable = [];
+    protected $guarded = [];
 
 
 }

@@ -18,4 +18,9 @@ return [
     'Status'          => 'Status',
     'Create'          => 'Create',
     'Edit'            => 'Edit',
+    'Logo'            => 'Logo',
+    'Country'         => 'Country',
+    'City'            => 'City',
+    'Street'          => 'Street',
+    'Postal code'     => 'Postal code',
 ];

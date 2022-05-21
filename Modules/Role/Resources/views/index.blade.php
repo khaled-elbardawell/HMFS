@@ -50,17 +50,21 @@
                                         @endforeach
                                     </td>
                                     <td>
-                                        @can('role.edit')
-                                          <a href="{{route('role.edit',$role->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        @endcan
+                                        @if($role->status == 3 || $role->status == 2)
+                                            @can('role.edit')
+                                              <a href="{{route('role.edit',$role->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                            @endcan
+                                         @endif
 
-                                       @can('role.delete')
-                                             <form name="delete" method="POST" action="{{route('role.destroy',$role->id)}}" style="display:inline-block;">
-                                               @csrf
-                                               @method('delete')
-                                                <button class="btn btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt text-danger font-16"></i> </button>
-                                             </form>
-                                       @endcan
+                                          @if($role->status == 3 || $role->status == 1)
+                                             @can('role.delete')
+                                                 <form name="delete" method="POST" action="{{route('role.destroy',$role->id)}}" style="display:inline-block;">
+                                                   @csrf
+                                                   @method('delete')
+                                                    <button class="btn btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt text-danger font-16"></i> </button>
+                                                 </form>
+                                              @endcan
+                                          @endif
                                     </td>
                                 </tr>
                                 @php ++$start_counter; @endphp

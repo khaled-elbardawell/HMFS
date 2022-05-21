@@ -57,7 +57,7 @@ trait UploadTrait
 
             self::saveFile($uploadable_id,$files,$type,$local);
         }
-    }// end methpd
+    }// end method
 
 
     /**

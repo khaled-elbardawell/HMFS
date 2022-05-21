@@ -126,14 +126,13 @@
 
                                 </div>
                                 <div class="col-lg-6">
-                                <div class="form-group">
+                                     <div class="form-group">
                                     <label for="password-confirm" class="text-right">{{__('admin.Confirm Password')}}</label>
                                     <div>
                                         <input name="password_confirmation" class="form-control" type="password" placeholder="{{__('admin.Confirm Password')}}" id="password-confirm">
                                     </div>
                                 </div>
-
-                            </div>
+                               </div>
                             @endif
 
                             <div class="col-lg-12">

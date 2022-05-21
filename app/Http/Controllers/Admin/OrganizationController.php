@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrganiztionRequest;
 use App\Models\Admin\Organization;
+use App\Models\Admin\UserOrganization;
+use App\User;
 use Illuminate\Http\Request;
+use Modules\Role\Entities\Permission;
+use Modules\Role\Entities\Role;
+use Modules\Role\Entities\RolePermissions;
+use Modules\Role\Entities\UserRoles;
 
 class OrganizationController extends Controller
 {
@@ -47,17 +54,25 @@ class OrganizationController extends Controller
      */
     public function store(OrganiztionRequest $request)
     {
-        try{
-            Organization::create([
-                'name'        => $request->name,
-                'description' => $request->description,
-                'status'      => $request->has('status') ? 1 : 0,
-            ]);
+//        try{
+          $owner = User::create([
+              "email" => $request->email,"name" => $request->name,"phone" => $request->phone,
+              "password"  => bcrypt($request->password),"bio" => $request->bio,
+              ]);
 
-              return redirect(route('organization.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-        }catch (\Exception $e){
-             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-        }
+           $organization = Organization::create([
+               'name' => $request->organization_name,'description'=> $request->description,'country' => $request->country,
+               'city'=> $request->city,'street'=> $request->street,'postal_code' => $request->postal_code,
+               'owner_id' => $owner->id, 'status'=> $request->has('organization_status') ? 1 : 0,
+           ]);
+
+          Organization::saveUpload($organization->id,'create','image','en','logo');
+          Organization::AssignOwnerToOrganizationWithRoles($request,$owner,$organization);
+
+          return redirect(route('organization.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
+//        }catch (\Exception $e){
+//             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+//        }
 
     }// end method
 
