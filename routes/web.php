@@ -29,7 +29,7 @@ Route::group(
     Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
     Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
 
-    Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+    Route::get('/home', 'HomeController@index')->name('home');
 
 });
 

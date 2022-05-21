@@ -51,7 +51,6 @@ class UserController extends Controller
         try{
             $user = User::where('email',$request->email)->first();
             if (!$user){
-                dd('nooo');
                 $user = User::create([
                     'email'    => $request->email,
                     'password' =>  bcrypt($request->password),

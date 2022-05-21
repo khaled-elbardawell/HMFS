@@ -1,6 +1,11 @@
 @extends('layouts.admin.master')
 
 
+@section('css')
+    <!-- Dragula -->
+    <link href="{{CustomAsset("admin/assets/css/dragula.min.css")}}" rel="stylesheet" type="text/css" />
+@endsection
+
 @section('content')
     <!-- Page-Title -->
     <div class="row">
@@ -39,8 +44,6 @@
                                 @include('task::modal-board')
                             @endisset
 
-
-
                         </div>
                         @foreach ($boards as $board)
                             @php
@@ -62,11 +65,29 @@
             </div><!--end card-->
         </div><!--end col-->
     </div><!--end row-->
-
+{{--@dd($boards)--}}
 @endsection
 
 @section('js')
     @include('components.alert-action')
+    <!-- Dragula  -->
+    <script src="{{CustomAsset("admin/plugins/dragula/dragula.min.js")}}"></script>
+
+    <script>
+        var boards = JSON.parse('@json($boards)').data
+        var iconTochange;
+        dragula([document.getElementById("dragula-left"),
+            document.getElementById("dragula-right")]);
+
+        var dragulaArr =[]
+        boards.forEach(function (item) {
+            dragulaArr.push( document.getElementById("project-list-"+item.id))
+        })
+        dragula(dragulaArr);
+
+    </script>
+
+
     {{-- <script>
         //custom html alert
         $('.delete-btn').click(function (event) {
