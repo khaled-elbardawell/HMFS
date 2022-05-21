@@ -29,25 +29,25 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        // Gate::before(function (User $user){
-        //     $is_super_admin = DB::table('user_roles')->where('role_id',1)->where('user_id',$user->id)->first();
-        //     if($is_super_admin){
-        //        return true;
-        //     }
-        // });
+        Gate::before(function (User $user){
+            $is_super_admin = DB::table('user_roles')->where('role_id',1)->where('user_id',$user->id)->first();
+            if($is_super_admin){
+               return true;
+            }
+        });
 
 
-        // Gate::define('is_super_admin', function (User $user){
-        //     return session('is_super_admin');
-        // });
+        Gate::define('is_super_admin', function (User $user){
+            return session('is_super_admin');
+        });
 
 
-        // $permissions = Permission::all();
-        // foreach ($permissions as $permission){
-        //     Gate::define($permission->name, function (User $user) use ($permission) {
-        //         return User::hasPermission($permission->name);
-        //     });
-        // }
+        $permissions = Permission::all();
+        foreach ($permissions as $permission){
+            Gate::define($permission->name, function (User $user) use ($permission) {
+                return User::hasPermission($permission->name);
+            });
+        }
 
     }
 }
