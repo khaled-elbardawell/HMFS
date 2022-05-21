@@ -28,4 +28,11 @@ class UserOrganization extends Model
         return self::sqlPage($sql,$bindings,$countPagesql,'page_counter',$bindings);
     }
 
+    public function user(){
+        return $this->belongsTo('App\User', 'user_id');
+    }
+    public function organization(){
+        return $this->belongsTo('App\Models\Admin\Organization', 'organization_id');
+    }
+
 }

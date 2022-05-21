@@ -61,3 +61,13 @@
     border: none !important;
     outline: none !important;
 }
+.left-sidenav-menu li>a.nav-link.active{
+    color: #fff;
+    background: linear-gradient(14deg, #1761fd 0%, rgba(23,97,253,0.6));
+    -webkit-box-shadow: 3px 3px 20px 0 rgb(23 97 253 / 40%);
+    box-shadow: 3px 3px 20px 0 rgb(23 97 253 / 40%);
+    border-radius: 4px;
+}
+.left-sidenav-menu li>a.nav-link.active i{
+    color: #fff;
+}

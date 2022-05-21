@@ -4,13 +4,13 @@
     <!-- LOGO -->
     <div class="topbar-left">
         <a href="{{route('home')}}" class="logo">
-                    <span>
-                        <img src="{{CustomAsset('admin/assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
-                    </span>
             <span>
-                        <img src="{{CustomAsset('admin/assets/images/logo.png')}}" alt="logo-large" class="logo-lg logo-light">
-                        <img src="{{CustomAsset('admin/assets/images/logo-dark.png')}}" alt="logo-large" class="logo-lg">
-                    </span>
+                <img src="{{CustomAsset('admin/assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
+            </span>
+            <span>
+                <img src="{{CustomAsset('admin/assets/images/logo.png')}}" alt="logo-large" class="logo-lg logo-light">
+                <img src="{{CustomAsset('admin/assets/images/logo-dark.png')}}" alt="logo-large" class="logo-lg">
+            </span>
         </a>
     </div>
     <!--end logo-->
