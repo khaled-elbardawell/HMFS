@@ -31,12 +31,9 @@ class CreateUserOrganizationsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('bio',2000)->nullable();
-            $table->string('phone',20)->nullable();
+
             $table->dateTime('last_login')->nullable();
             $table->boolean('status')->default(0);
-
-
 
             $table->dateTime('registered_at')->nullable();
             $table->timestamps();
