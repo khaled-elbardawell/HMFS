@@ -76,14 +76,28 @@
     <script>
         var boards = JSON.parse('@json($boards)').data
         var iconTochange;
-        dragula([document.getElementById("dragula-left"),
-            document.getElementById("dragula-right")]);
+        // dragula([document.getElementById("dragula-left"),
+        //     document.getElementById("dragula-right")]);
 
         var dragulaArr =[]
         boards.forEach(function (item) {
             dragulaArr.push( document.getElementById("project-list-"+item.id))
         })
-        dragula(dragulaArr);
+
+        dragula(dragulaArr).on('drag',function (el,container) {
+              console.log('gg')
+        }).on('drop', function(el, container ){
+             console.log(el)
+             console.log($(container))
+             console.log($(container).find('.list'))
+            // var Lists = $(container).find('.list');
+            // console.log(l)
+            // var reOrder = [];
+            // $.each( Lists, function( key, value ) {
+            //     reOrder.push({'film_id':$(value).data('film-id'),'trailer_id' : $(value).data('trailer-id')});
+            // });
+            // _UpdateFetaureTrailerOdering(el, reOrder);
+        });//--;
 
     </script>
 

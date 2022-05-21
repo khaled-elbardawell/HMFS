@@ -17,10 +17,10 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:task.index' , ['only' => ['index']]);
-        $this->middleware('can:task.create', ['only' => ['create','store']]);
-        $this->middleware('can:task.edit'  , ['only' => ['edit','update']]);
-        $this->middleware('can:task.delete', ['only' => ['destroy']]);
+//        $this->middleware('can:task.index' , ['only' => ['index']]);
+//        $this->middleware('can:task.create', ['only' => ['create','store']]);
+//        $this->middleware('can:task.edit'  , ['only' => ['edit','update']]);
+//        $this->middleware('can:task.delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
