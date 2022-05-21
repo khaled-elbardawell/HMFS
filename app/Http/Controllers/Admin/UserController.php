@@ -17,6 +17,15 @@ use Modules\Role\Entities\UserRoles;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:users.index' , ['only' => ['index']]);
+        $this->middleware('can:users.create', ['only' => ['create','store','userCheckEmail']]);
+        $this->middleware('can:users.edit'  , ['only' => ['edit','update']]);
+        $this->middleware('can:users.delete', ['only' => ['destroy']]);
+    }
+
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class OrganizationController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->middleware('can:is_super_admin');
+    }
+
 
 
     /**
