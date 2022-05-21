@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Admin\Organization;
 use App\Traits\Paginate;
+use App\Traits\SqlTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,7 +15,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements MustVerifyEmail , JWTSubject
 {
-    use Notifiable,HasRoles,UploadTrait,Paginate;
+    use Notifiable,HasRoles,UploadTrait,Paginate,SqlTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','phone','bio',
     ];
 
     /**

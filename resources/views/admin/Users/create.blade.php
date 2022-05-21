@@ -21,7 +21,7 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <form method="POST" action="{{route('users.store',['organization_id' => request()->organization_id])}}">
+    <form method="POST" action="{{route('users.store',request()->all())}}">
         @csrf
         <div class="row">
             <div class="col-lg-12">
@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label for="email" class="text-right">{{__('admin.Email')}}</label>
                                     <div>
-                                        <input name="email" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
+                                        <input @if(request()->has('user_exists') && request()->user_exists) disabled="true" @endif name="email" value="{{old('email',request()->email??null)}}" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
                                         @error('email')
                                         <span class="invalid-feedback d-block" role="alert">
                                                    <strong>{{ $message }}</strong>
@@ -43,7 +43,8 @@
 
                             </div>
 
-                            <div class="col-lg-6">
+                            @if(!(request()->has('user_exists') && request()->user_exists))
+                              <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="name" class="text-right">{{__('admin.Name')}}</label>
                                     <div>
@@ -58,7 +59,7 @@
 
                             </div>
 
-                            <div class="col-lg-6">
+                              <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
                                     <div>
@@ -72,6 +73,9 @@
                                 </div>
 
                             </div>
+                            @endif
+
+
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="role_id" class="text-right">{{__('admin.Role')}}</label>
@@ -92,20 +96,45 @@
 
                             </div>
 
-                            <div class="col-lg-12">
+                            @if(!(request()->has('user_exists') && request()->user_exists))
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
+                                        <div>
+                                            <textarea rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}"></textarea>
+                                            @error('bio')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                       <strong>{{ $message }}</strong>
+                                                  </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="password" class="text-right">{{__('admin.Password')}}</label>
+                                        <div>
+                                            <input name="password" class="form-control" type="password" placeholder="{{__('admin.Password')}}" id="password">
+                                            @error('password')
+                                                  <span class="invalid-feedback d-block" role="alert">
+                                                       <strong>{{ $message }}</strong>
+                                                  </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
+                                    <label for="password-confirm" class="text-right">{{__('admin.Confirm Password')}}</label>
                                     <div>
-                                        <textarea rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}"></textarea>
-                                        @error('bio')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
+                                        <input name="password_confirmation" class="form-control" type="password" placeholder="{{__('admin.Confirm Password')}}" id="password-confirm">
                                     </div>
                                 </div>
 
                             </div>
+                            @endif
 
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -121,7 +150,6 @@
                                 </div>
 
                             </div>
-
 
                         </div>
 

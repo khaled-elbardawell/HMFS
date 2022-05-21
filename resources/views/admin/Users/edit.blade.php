@@ -19,7 +19,7 @@
     <!-- end page title end breadcrumb -->
 
 
-    <form method="POST" action="{{route('users.update',[$user->user_id,'organization_id' => $user->organization_id])}}">
+    <form method="POST" action="{{route('users.update',[$user->id,'organization_id' => $user->organization_id])}}">
         @csrf
         @method('PUT')
         <div class="row">
@@ -37,35 +37,6 @@
 
                             </div>
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name" class="text-right">{{__('admin.Name')}}</label>
-                                    <div>
-                                        <input name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" value="{{$user->name}}"  id="name">
-                                        @error('name')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
-                                    <div>
-                                        <input name="phone" class="form-control" type="text" placeholder="{{__('admin.Phone')}}" value="{{$user->phone}}"  id="phone">
-                                        @error('phone')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
 
                             <div class="col-lg-6">
                                 <div class="form-group">
@@ -88,11 +59,43 @@
                             </div>
 
 
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name" class="text-right">{{__('admin.Name')}}</label>
+                                    <div>
+                                        <input name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" value="{{$user->name}}" disabled="true" id="name">
+                                        @error('name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
+                                    <div>
+                                        <input name="phone" class="form-control" type="text" placeholder="{{__('admin.Phone')}}" value="{{$user->phone}}"  disabled="true" id="phone">
+                                        @error('phone')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
                                     <div>
-                                        <textarea rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}">{{$user->bio}}</textarea>
+                                        <textarea rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}" disabled="true">{{$user->bio}}</textarea>
                                         @error('bio')
                                         <span class="invalid-feedback d-block" role="alert">
                                                    <strong>{{ $message }}</strong>
@@ -102,6 +105,9 @@
                                 </div>
 
                             </div>
+
+
+
 
                             <div class="col-lg-6">
                                 <div class="form-group">

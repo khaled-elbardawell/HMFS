@@ -24,9 +24,9 @@
                 <div class="card-body">
 
                     @can('users.create')
-                        <div class="mt-0 header-title">
-                            <a href="{{route('users.create',['organization_id' => request()->organization_id])}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
-                        </div>
+                        <button type="button" class="btn btn-primary" data-href="{{route('users.create',['organization_id' => request()->organization_id])}}" data-toggle="modal" data-target="#checkEmailModalCenter">
+                            New <i class="mdi mdi-plus"></i>
+                        </button>
                     @endcan
 
                     <div class="table-responsive">
@@ -55,7 +55,7 @@
                                     <td><span class="badge badge-dark">{{$user->registered_at}}</span></td>
                                     <td>
                                         @can('users.edit')
-                                          <a href="{{route('users.edit',[$user->user_id,'organization_id' => $user->organization_id])}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
+                                          <a href="{{route('users.edit',[$user->id,'organization_id' => $user->organization_id])}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
                                         @endcan
 
                                        @can('users.delete')
@@ -78,6 +78,38 @@
             </div><!--end card-->
         </div> <!-- end col -->
     </div> <!-- end row -->
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="checkEmailModalCenter" tabindex="-1" role="dialog" aria-labelledby="checkEmailModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="email" class="text-right">{{__('admin.Email')}}</label>
+                        <div>
+                            <input name="email" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
+                            <span  class="invalid-feedback d-none email-validate-message" role="alert">
+                                    <strong></strong>
+                             </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="check-email-btn" type="button" class="btn btn-primary">Check Email</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -102,6 +134,43 @@
                 }
             })
         });
+
+        // check email modal
+        var lock = false;
+        function checkEmail(){
+            if(lock){ return; }
+            let btn = $('#check-email-btn')
+            btn.text('loading..')
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            let email = $("input[type='email']").val();
+
+            lock = true
+            $.ajax({
+                type:'POST',
+                url:"{{ route('users.check.email',['organization_id' => request()->organization_id]) }}",
+                data:{email:email},
+                success:function(data){
+                    if(data.status == "success"){
+                        $(".email-validate-message").addClass('d-none');
+                        window.location.replace(data.redirect);
+                        lock = false
+                    }else{
+                        lock = false
+                        btn.text('Check Email')
+                        $(".email-validate-message").removeClass('d-none');
+                        $(".email-validate-message").addClass('d-block');
+                        $(".email-validate-message strong").text(data.message);
+                    }
+                }
+            });
+        }
+        $("#check-email-btn").click(function (event) {event.preventDefault();checkEmail()})
+
+        $("input[type='email']").keypress(function (e) {if(e.which == 13) { checkEmail()}})
     </script>
 @endsection
 

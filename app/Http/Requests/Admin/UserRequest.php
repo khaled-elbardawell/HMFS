@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Rules\UserEmailRule;
+use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,21 +26,38 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =  [
-            'name'            => 'required|string|max:100',
-            'bio'             => 'nullable|string|max:2000',
-            'phone'           => 'nullable|numeric|digits_between:5,15',
-            'organization_id' => 'required|exists:organizations,id',
-            'role_id'   => ['required','not_in:1',
-                Rule::exists('roles','id')
-                    ->where('organization_id',$this->organization_id)
-            ],
-        ];
+        $rules['role_id'] = $this->validateRoleId();
+        $rules['organization_id'] = 'required|exists:organizations,id';
 
-//        if ($this->method() == 'POST'){
-//            $rules['email'] = "required|email|unique:users,email";
-//        }
+        if($this->method() == "POST"){
+            $rules['email'] = [new UserEmailRule($this->organization_id)];
+            $user = User::where('email',$this->email)->first();
+            if(!$user){
+                $rules['password'] = $this->validatePassword();
+                $rules['name']  = 'required|string|max:100';
+                $rules['bio']   = 'nullable|string|max:2000';
+                $rules['phone'] = 'nullable|numeric|digits_between:5,15';
+            }
+        }
+
 
         return $rules;
     }
+
+    private function validateRoleId(){
+        return ['required','not_in:1',
+            Rule::exists('roles','id')
+                ->where('organization_id',$this->organization_id)
+        ];
+    }// end method
+
+
+    private function validatePassword(){
+        if ($this->method() == "POST"){
+            return 'required|string|min:8|confirmed';
+        }
+        return 'nullable|string|min:8|confirmed';
+    }// end method
+
+
 }

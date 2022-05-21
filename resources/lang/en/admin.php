@@ -6,6 +6,8 @@ return [
     'Users'           => 'Users',
     'Name'            => 'Name',
     'Email'           => 'Email',
+    'Password'        => 'Password',
+    'Confirm Password'=> 'Confirm Password',
     'Phone'           => 'Phone',
     'Registered_at'   => 'Registered',
     'Description'     => 'Description',

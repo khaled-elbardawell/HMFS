@@ -9,59 +9,47 @@ use Illuminate\Support\Facades\DB;
 trait SqlTrait
 {
 
-    protected $statement  = null;
-    protected $bindings = [];
-
-
     /**
-     * @param $query
      * @param $statement
      * @param array $bindings
-     * @return mixed
-     */
-    public function scopeSql($query,$statement,$bindings = [])
-    {
-        $this->statement = $statement;
-        $this->bindings = $bindings;
-        return  $query;
-    }// end method
-
-
-    /**
-     * @param $query
      * @return array
      */
-    public function scopeSqlGet($query)
+    public static function sqlGet($statement,$bindings = [])
     {
-        return DB::select($this->statement,$this->bindings);
+        return DB::select($statement,$bindings);
     }// end method
 
 
     /**
-     * @param $query
-     * @return array
+     * @param $statement
+     * @param array $bindings
+     * @return mixed|null
      */
-    public function scopeSqlFirst($query)
+    public static function sqlFirst($statement,$bindings = [])
     {
-        return $this->scopeSqlGet($query)[0]??null;
+        return DB::select($statement,$bindings)[0]??null;
     }// end method
 
 
     /**
-     * @param $query
+     * @param $statement
+     * @param array $bindings
+     * @param $countPagesql
+     * @param $counterColName
+     * @param array $countPageSqlbindings
      * @param null $paginateNum
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function scopePageSql($query,$countPagesql,$counterColName,$countPageSqlbindings = [],$paginateNum = null)
+    public static function sqlPage($statement,$bindings = [],$countPagesql,$counterColName,$countPageSqlbindings = [],$paginateNum = null)
     {
         $limit = is_null($paginateNum) ? PAGINATE_VALUE : $paginateNum;
-        $page = $this->getPageNum();
+        $page = self::getPageNum();
         $offset = ($page - 1 ) * $limit;
-        $this->statement .= " LIMIT $limit OFFSET $offset";
-        $items = DB::select($this->statement,$this->bindings);
+        $statement .= " LIMIT $limit OFFSET $offset";
+        $items = DB::select($statement,$bindings);
         $counterPage = DB::select($countPagesql,$countPageSqlbindings);
         $counterPage = isset($counterPage[0]) ? $counterPage[0]->$counterColName : 1;
-        return $this->getPaginator($items,$counterPage,$limit,$page);
+        return self::getPaginator($items,$counterPage,$limit,$page);
     }// end method
 
 
@@ -69,7 +57,7 @@ trait SqlTrait
      * Get page no from request (param)
      * @return int|mixed
      */
-    private function getPageNum(){
+    private static function getPageNum(){
         $page = 1;
         if (\request()->has('page')){
             if (\request()->page){
@@ -92,7 +80,7 @@ trait SqlTrait
      * @param $page
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    private function getPaginator($items,$counterPage,$limit,$page){
+    private static function getPaginator($items,$counterPage,$limit,$page){
         $perPage = request()->input("per_page", 10);
         $skip = $page * $perPage;
         if($limit < 1) { $limit = 1; }

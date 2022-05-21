@@ -11,7 +11,6 @@ use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
 use Modules\Role\Entities\Role;
 use Modules\Role\Entities\UserRoles;
 
@@ -51,19 +50,15 @@ class UserController extends Controller
         try{
             $user = User::where('email',$request->email)->first();
             if (!$user){
-                dd('nooo');
-                $user = User::create([
-                    'email'    => $request->email,
-                    'password' =>  bcrypt($request->password),
-                    'name'     => $request->name,
-                    'phone'    => $request->phone,
-                    'bio'      => $request->bio,
-                ]);
+                $user = User::create(['email' => $request->email,'password' =>  bcrypt($request->password)]);
             }
 
             UserOrganization::create([
                 'organization_id' => $request->organization_id,
+                'name'            => $request->name,
                 'user_id'         => $user->id,
+                'phone'           => $request->phone,
+                'bio'             => $request->bio,
                 'registered_at'   => Carbon::now(),
                 'status'          => $request->has('status') ? 1 : 0,
             ]);
@@ -78,57 +73,6 @@ class UserController extends Controller
     }// end method
 
 
-    /**
-     * Check Email Before Go to Create (AJAX Request)
-     * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function userCheckEmail(Request $request){
-        $validate = Validator::make($request->all(),['email' => 'required|email|max:255']);
-        if ($validate->fails()){
-            return response()->json([
-                'status' => 'error',
-                'message'=> $validate->getMessageBag()->getMessages()['email'][0],
-            ]);
-        }
-
-        // check Email exists in users table
-        $user = User::where('email',$request->email)->first();
-        if (!$user){
-            return response()->json([
-                'status'  => 'success',
-                'redirect'=> route("users.create",['organization_id' => $request->organization_id,'email' => $request->email]),
-            ]);
-        }
-
-        // check Is Email Exists In Organization
-        $user = User::sqlFirst("SELECT users.email FROM users
-                       INNER JOIN user_organizations ON user_organizations.user_id = users.id
-                       WHERE users.email = ? AND user_organizations.organization_id = ?",[$request->email, $request->organization_id]);
-        if ($user){
-            return response()->json([
-                'status' => 'error',
-                'message'=> 'The email already exists in this organizations',
-            ]);
-        }
-
-        //  check Is Email For SuperAdmin
-        $user = User::sqlFirst("SELECT users.email FROM users
-                       INNER JOIN user_roles ON user_roles.user_id = users.id AND user_roles.user_id = 1
-                       WHERE users.email = ?",[$request->email]);
-        if ($user){
-            return response()->json([
-                'status' => 'error',
-                'message'=> "The email can't add to this organizations,Choose another email !!",
-            ]);
-        }
-
-        return response()->json([
-            'status'  => 'success',
-            'redirect'=> route("users.create",['organization_id' => $request->organization_id,'email' => $request->email,'user_exists' => true]),
-        ]);
-    }// end method
-
 
 
     /**
@@ -140,7 +84,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $user = UserOrganization::getUsersOrganizationDB(\request()->organization_id,$user->id);
-        $user_role = UserRoles::getOrganizationUserRole($user->id,\request()->organization_id);
+        $user_role = UserRoles::getOrganizationUserRole($user->user_id,\request()->organization_id);
         $roles = Role::where('organization_id',\request()->organization_id)->get();
         return view('admin.users.edit',compact('user','roles','user_role'));
     }// end method
@@ -157,10 +101,22 @@ class UserController extends Controller
     public function update(UserRequest $request,User $user)
     {
         try {
-            UserOrganization::where('user_id',$user->id)->where('organization_id',$request->organization_id)
-               ->update(['status'=> $request->has('status') ? 1 : 0,]);
+            if ($request->password){
+                $user->update([
+                    'password' => bcrypt($request->password)
+                ]);
+            }
+
+            UserOrganization::where('user_id',$user->id)->where('organization_id',$request->organization_id)->update([
+                'name'  => $request->name,
+                'phone' => $request->phone,
+                'bio'   => $request->bio,
+                'status'=> $request->has('status') ? 1 : 0,
+            ]);
+
 
             UserRoles::updateUserRole($user->id,$request->role_id,$request->organization_id);
+
 
             return redirect(route('users.edit',[$user->id,'organization_id'=>$request->organization_id]))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
