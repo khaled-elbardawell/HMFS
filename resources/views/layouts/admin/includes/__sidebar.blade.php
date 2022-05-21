@@ -19,14 +19,12 @@
                 <span>Organizations</span>
             </a>
         </li>
-
-
-{{--        <li>--}}
-{{--            <a class="nav-link" href="{{route('users.index',['organization_id' => $user_org])}}">--}}
-{{--                <i class="fa fa-users"></i>--}}
-{{--                <span>Users</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+       {{-- <li>
+           <a class="nav-link" href="{{route('users.index',['organization_id' => $user_org])}}">
+               <i class="fa fa-users"></i>
+               <span>Users</span>
+           </a>
+       </li> --}}
         <li>
             <a class="nav-link" href="{{route('task.index')}}">
                 <i class="fa fa-tasks"></i>

@@ -25,7 +25,6 @@ class UserRoles extends Model
         return self::sqlFirst($sql,[$organization_id,$user_id]);
     }// end method
 
-<<<<<<< HEAD
 
     public static function updateUserRole($user_id,$role_id,$organization_id){
         DB::update("UPDATE user_roles
@@ -42,10 +41,8 @@ class UserRoles extends Model
     }
 
 
-=======
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
 
->>>>>>> 4f1ca77732b9803e353ada8dd1023e7cbbbde4fc
 }
