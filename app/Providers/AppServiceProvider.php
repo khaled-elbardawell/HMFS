@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer("*","App\Http\ViewComposers\MyViewComposer");
+        // view()->composer("*","App\Http\ViewComposers\MyViewComposer");
 
     }
 }
