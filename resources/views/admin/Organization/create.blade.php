@@ -33,75 +33,18 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="organization_name" class="text-right">{{__('admin.Name')}}</label>
-                                    <div>
-                                        <input name="organization_name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="organization_name" value="{{old('organization_name')}}">
-                                        @error('organization_name')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                          <?php  use App\Helpers\Builder; ?>
 
-                            </div>
+                            {!!  Builder::Input('text','organization_name',null,['label_title' => 'admin.Name','use_trans' => true]) !!}
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="country" class="text-right">{{__('admin.Country')}}</label>
-                                    <div>
-                                        <input value="{{old('country')}}" name="country" class="form-control" type="text" placeholder="{{__('admin.Country')}}" id="country">
-                                        @error('country')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                           {!!   Builder::Input('text','country',null,['col' => 'col-lg-6','label_title' => 'admin.Country','use_trans' => true]) !!}
 
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="city" class="text-right">{{__('admin.City')}}</label>
-                                    <div>
-                                        <input value="{{old('city')}}" name="city" class="form-control" type="text" placeholder="{{__('admin.City')}}" id="city">
-                                        @error('city')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                           {!!   Builder::Input('text','city',null,['col' => 'col-lg-6','label_title' => 'admin.City','use_trans' => true]) !!}
+                           {!!   Builder::Input('text','street',null,['col' => 'col-lg-6','label_title' => 'admin.Street','use_trans' => true]) !!}
+                           {!!   Builder::Input('text','postal_code',null,['col' => 'col-lg-6','label_title' => 'admin.Postal code','use_trans' => true]) !!}
+{{--                           {!!   Builder::Input('text','description',null,['label_title' => 'admin.Description','use_trans' => true]) !!}--}}
 
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="street" class="text-right">{{__('admin.Street')}}</label>
-                                    <div>
-                                        <input value="{{old('street')}}"  name="street" class="form-control" type="text" placeholder="{{__('admin.Street')}}" id="street">
-                                        @error('street')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="postal_code" class="text-right">{{__('admin.Postal code')}}</label>
-                                    <div>
-                                        <input value="{{old('postal_code')}}"  name="postal_code" class="form-control" type="text" placeholder="{{__('admin.Postal code')}}" id="postal_code">
-                                        @error('postal_code')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
+
 
                             <div class="col-lg-12">
                                 <div class="form-group">

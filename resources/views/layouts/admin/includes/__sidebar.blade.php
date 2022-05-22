@@ -7,6 +7,7 @@
                 <span>Home</span>
             </a>
         </li>
+
         @can('role.index')
             <li>
                 <a class="nav-link" href="{{route('role.index')}}">
@@ -35,15 +36,6 @@
         @endif
 
         @can('task.index')
-            <li>
-                <a class="nav-link" href="{{route('task.index')}}">
-                    <i class="fa fa-tasks"></i>
-                    <span>Tasks</span>
-                </a>
-            </li>
-        @endcan
-
-        @can('board.index')
             <li>
                 <a class="nav-link" href="{{route('task.index')}}">
                     <i class="fa fa-tasks"></i>
