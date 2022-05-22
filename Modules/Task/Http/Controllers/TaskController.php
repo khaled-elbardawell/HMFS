@@ -6,21 +6,22 @@ use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Mail;
 use Modules\Role\Entities\Permission;
-use Modules\Task\Entities\Board;
+use Modules\Task\Emails\TaskMail;
+use Modules\Task\Entities\BoardCard;
 use Modules\Task\Entities\Comment;
 use Modules\Task\Entities\Task;
-use Modules\Task\Http\Requests\BoardRequest;
 use Modules\Task\Http\Requests\TaskRequest;
 
 class TaskController extends Controller
 {
     public function __construct()
     {
-//        $this->middleware('can:task.index' , ['only' => ['index']]);
-//        $this->middleware('can:task.create', ['only' => ['create','store']]);
-//        $this->middleware('can:task.edit'  , ['only' => ['edit','update']]);
-//        $this->middleware('can:task.delete', ['only' => ['destroy']]);
+       $this->middleware('can:task.index' , ['only' => ['index']]);
+       $this->middleware('can:task.create', ['only' => ['create','store']]);
+       $this->middleware('can:task.edit'  , ['only' => ['edit','update']]);
+       $this->middleware('can:task.delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -28,9 +29,9 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $boards = Board::with(['tasks.comments','tasks.user_t','tasks.user_f'])->page();
+        $board_cards = BoardCard::with(['tasks.comments','tasks.user_t','tasks.user_f'])->page();
         $start_counter = Task::getStartCounter();
-        return view('task::index',compact('boards','start_counter'));
+        return view('task::tasks/index',compact('board_cards','start_counter'));
     }
 
     /**
@@ -41,8 +42,8 @@ class TaskController extends Controller
     {
         $permissions = Permission::all();
         $users = User::all();
-        $post_type = request()->board_id;
-        return view('task::create',compact('permissions','users','post_type'));
+        $post_type = request()->board_card_id;
+        return view('task::tasks/create',compact('permissions','users','post_type'));
     }
 
     /**
@@ -58,10 +59,10 @@ class TaskController extends Controller
                 'description' => $request->description,
                 'user_from' => auth()->user()->id,
                 'user_to' => $request->user_to,
+                'board_card_id' => $request->board_card_id,
                 'status' => $request->status,
                 'date_from' => $request->date_from,
                 'date_to' => $request->date_to,
-                'board_id' => $request->board_id,
             ]);
 
             $comment = Comment::create([
@@ -69,6 +70,9 @@ class TaskController extends Controller
                 'user_id' => auth()->user()->id,
                 'task_id' => $task->id,
             ]);
+
+            Mail::to($request->user())->send(new TaskMail($task));
+
             return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
         }catch (\Exception $e){
             return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
@@ -94,8 +98,8 @@ class TaskController extends Controller
     {
         $task = Task::where('id',$id)->with(['comments.user','user_t','user_f'])->first();
         $users = User::all();
-        $post_type = request()->board_id;
-        return view('task::edit',compact('task','users','post_type'));
+        $post_type = request()->board_card_id;
+        return view('task::tasks/edit',compact('task','users','post_type'));
     }
 
     /**
@@ -118,10 +122,10 @@ class TaskController extends Controller
                 'description' => $request->description,
                 'user_from' => auth()->user()->id,
                 'user_to' => $request->user_to,
+                'board_card_id' => $request->board_card_id,
                 'status' => $request->status,
                 'date_from' => $request->date_from,
                 'date_to' => $request->date_to,
-                'board_id' => $request->board_id,
             ]);
 
             if(!$request->comment==null){
@@ -131,6 +135,8 @@ class TaskController extends Controller
                     'task_id' => $task->id,
                 ]);
             }
+
+            Mail::to($request->user())->send(new TaskMail($task));
 
             return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
         }catch (\Exception $e){
@@ -152,5 +158,6 @@ class TaskController extends Controller
            return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
        }
     }
+
 
 }

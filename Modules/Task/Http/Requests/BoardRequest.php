@@ -14,7 +14,7 @@ class BoardRequest extends FormRequest
     public function rules()
     {
         return [
-            'board_name' => 'required|string|max:255',
+            // 'board_card_name' => 'required|string|max:255',
         ];
     }
 

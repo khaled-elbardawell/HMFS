@@ -4,7 +4,7 @@ namespace Modules\Task\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskRequest extends FormRequest
+class BoardCardRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,14 +14,7 @@ class TaskRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required|string|max:255',
-            'user_to'       => 'required',
-            'status'        => 'required|string',
-            'date_from'     => 'required|date',
-            'date_to'       => 'required|date',
-            'description'   => 'required|string|max:500',
-            'board_card_id'      => 'required',
-            'comment'       => '',
+            'board_card_name' => 'required|string|max:255',
         ];
     }
 
