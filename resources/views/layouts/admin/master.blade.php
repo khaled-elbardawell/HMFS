@@ -37,6 +37,7 @@
 
 <body>
 
+
 @include('layouts.admin.includes.__header')
 
 @include('layouts.admin.includes.__sidebar')

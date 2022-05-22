@@ -54,7 +54,7 @@ class OrganizationController extends Controller
      */
     public function store(OrganiztionRequest $request)
     {
-//        try{
+        try{
           $owner = User::create([
               "email" => $request->email,"name" => $request->name,"phone" => $request->phone,
               "password"  => bcrypt($request->password),"bio" => $request->bio,
@@ -70,9 +70,9 @@ class OrganizationController extends Controller
           Organization::AssignOwnerToOrganizationWithRoles($request,$owner,$organization);
 
           return redirect(route('organization.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-//        }catch (\Exception $e){
-//             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-//        }
+        }catch (\Exception $e){
+             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+        }
 
     }// end method
 
