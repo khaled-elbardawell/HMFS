@@ -6,7 +6,12 @@ return [
     "role.create"  => "Create Role",
     "role.edit"    => "Edit Role",
     "role.delete"  => "Delete Role",
+<<<<<<< HEAD
     "task.index"   => "List Tasks",
+=======
+
+    "task.index"   => "List Task",
+>>>>>>> 7505adb956b901298f431403d228796ad3470747
     "task.create"  => "Create Task",
     "task.edit"    => "Edit Task",
     "task.delete"  => "Delete Task",
@@ -24,6 +29,11 @@ return [
     "users.index"   => "List Users",
     "users.create"  => "Create User",
     "users.edit"  => "Edit User",
+    "users.delete"  => "Delete User",
+
+    "users.index"   => "List User",
+    "users.create"  => "Create User",
+    "users.edit"    => "Edit User",
     "users.delete"  => "Delete User",
 
 ];

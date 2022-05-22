@@ -1,6 +1,8 @@
 @extends('layouts.admin.master')
 
-
+@section('css')
+    <link href="{{CustomAsset('admin/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
+@endsection
 
 
 @section('content')
@@ -21,20 +23,23 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <form method="POST" action="{{route('organization.store')}}">
+    <form method="POST" action="{{route('organization.store')}}" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="card-header">
+                        <strong>Organization Information</strong>
+                    </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="example-text-input" class="text-right">{{__('admin.Name')}}</label>
+                                    <label for="organization_name" class="text-right">{{__('admin.Name')}}</label>
                                     <div>
-                                        <input name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="example-text-input">
-                                        @error('name')
-                                              <span class="invalid-feedback d-block" role="alert">
+                                        <input name="organization_name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="organization_name" value="{{old('organization_name')}}">
+                                        @error('organization_name')
+                                        <span class="invalid-feedback d-block" role="alert">
                                                    <strong>{{ $message }}</strong>
                                               </span>
                                         @enderror
@@ -43,12 +48,191 @@
 
                             </div>
 
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="country" class="text-right">{{__('admin.Country')}}</label>
+                                    <div>
+                                        <input value="{{old('country')}}" name="country" class="form-control" type="text" placeholder="{{__('admin.Country')}}" id="country">
+                                        @error('country')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="city" class="text-right">{{__('admin.City')}}</label>
+                                    <div>
+                                        <input value="{{old('city')}}" name="city" class="form-control" type="text" placeholder="{{__('admin.City')}}" id="city">
+                                        @error('city')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="street" class="text-right">{{__('admin.Street')}}</label>
+                                    <div>
+                                        <input value="{{old('street')}}"  name="street" class="form-control" type="text" placeholder="{{__('admin.Street')}}" id="street">
+                                        @error('street')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="postal_code" class="text-right">{{__('admin.Postal code')}}</label>
+                                    <div>
+                                        <input value="{{old('postal_code')}}"  name="postal_code" class="form-control" type="text" placeholder="{{__('admin.Postal code')}}" id="postal_code">
+                                        @error('postal_code')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="description" class="text-right">{{__('admin.Description')}}</label>
                                     <div>
-                                        <textarea rows="5" class="form-control" name="description" id="description" placeholder="{{__('admin.Description')}}"></textarea>
+                                        <textarea rows="5" class="form-control" name="description" id="description" placeholder="{{__('admin.Description')}}">{{old('description')}}</textarea>
                                         @error('description')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                       <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="description" class="text-right">{{__('admin.Logo')}}</label>
+                                    <small class="d-block text-danger mb-3">Note: The file must be an image of type PNG, JPG and JPEG, the dimensions must be 100 X 20 px, and the maximum image size is 100MB</small>
+                                    <div>
+                                        <input  type="file" name="logo" id="input-file-now" class="dropify" />
+                                        @error('logo')
+                                            <span class="invalid-feedback d-block" role="alert">
+                                                  <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch switch-success">
+                                        <input name="organization_status" type="checkbox" class="custom-control-input" id="organization_status" checked>
+                                        <label class="custom-control-label" for="organization_status">{{__('admin.Status')}}</label>
+                                        @error('organization_status')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div><!--end card-body-->
+                </div><!--end card-->
+            </div><!--end col-->
+
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                      <strong>Owner Information</strong>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="email" class="text-right">{{__('admin.Email')}}</label>
+                                    <div>
+                                        <input value="{{old('email')}}" name="email" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
+                                        @error('email')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="name" class="text-right">{{__('admin.Name')}}</label>
+                                    <div>
+                                        <input value="{{old('name')}}" name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="name">
+                                        @error('name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
+                                    <div>
+                                        <input value="{{old('phone')}}" name="phone" class="form-control" type="text" placeholder="{{__('admin.Phone')}}" id="phone">
+                                        @error('phone')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                   <strong>{{ $message }}</strong>
+                                              </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="password" class="text-right">{{__('admin.Password')}}</label>
+                                    <div>
+                                        <input name="password" class="form-control" type="password" placeholder="{{__('admin.Password')}}" id="password">
+                                        @error('password')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                                       <strong>{{ $message }}</strong>
+                                                  </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label for="password-confirm" class="text-right">{{__('admin.Confirm Password')}}</label>
+                                    <div>
+                                        <input name="password_confirmation" class="form-control" type="password" placeholder="{{__('admin.Confirm Password')}}" id="password-confirm">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
+                                    <div>
+                                        <textarea  rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}">{{old('bio')}}</textarea>
+                                        @error('bio')
                                         <span class="invalid-feedback d-block" role="alert">
                                                    <strong>{{ $message }}</strong>
                                               </span>
@@ -72,25 +256,25 @@
                                 </div>
 
                             </div>
-
-
                         </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-gradient-primary">Save</button>
-                            <button type="reset" class="btn btn-gradient-danger">Clear</button>
-                            <a href="{{route('organization.index')}}" class="btn btn-gradient-info">Back</a>
-                        </div>
-
                     </div><!--end card-body-->
                 </div><!--end card-->
-
-
             </div><!--end col-->
+
+            <div class="col-12 mt-2 mb-5">
+                    <button type="submit" class="btn btn-gradient-primary">Save</button>
+                    <button type="reset" class="btn btn-gradient-danger">Clear</button>
+                    <a href="{{route('organization.index')}}" class="btn btn-gradient-info">Back</a>
+            </div>
 
 
         </div><!--end row-->
     </form>
+@endsection
+
+@section('js')
+    <script src="{{CustomAsset('admin/plugins/dropify/js/dropify.min.js')}}"></script>
+    <script src="{{CustomAsset('admin/assets/pages/jquery.form-upload.init.js')}}"></script>
 @endsection
 
 

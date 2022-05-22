@@ -29,8 +29,9 @@ trait HasRoles
                                 INNER JOIN users ON users.id = user_roles.user_id
                                 INNER JOIN role_permissions ON user_roles.role_id = role_permissions.role_id
                                 INNER JOIN permissions ON role_permissions.permission_id = permissions.id
-                                WHERE users.id = ? AND permissions.name = ?";
-        $user_permissions = DB::select($sql,[auth()->id(),$permission_name]);
+                                INNER JOIN roles ON roles.id = user_roles.role_id AND roles.organization_id = ?
+                                WHERE users.id = ?  AND permissions.name = ?";
+        $user_permissions = DB::select($sql,[session()->get('organization_id'),auth()->id(),$permission_name]);
         if (count($user_permissions) > 0){
             return true;
         }

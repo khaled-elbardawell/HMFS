@@ -17,7 +17,19 @@ class CreateOrganizationsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->unique();
             $table->string('description',2000);
+            $table->string('country',100);
+            $table->string('city',100);
+            $table->string('street',100);
+            $table->string('postal_code',100);
             $table->boolean('status')->default(0);
+
+            $table->unsignedBigInteger('owner_id');
+            $table->foreign('owner_id')
+                ->references('id')
+                ->on('users')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

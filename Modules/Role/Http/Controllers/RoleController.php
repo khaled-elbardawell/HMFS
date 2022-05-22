@@ -26,7 +26,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $roles = Role::with(['permissions'])->page();
+        $roles = Role::where('id','!=',1)->where("organization_id",session()->get('organization_id'))->with(['permissions'])->page();
         $start_counter = Role::getStartCounter();
         return view('role::index',compact('roles','start_counter'));
     }// end method
@@ -41,16 +41,21 @@ class RoleController extends Controller
         return view('role::create',compact('permissions'));
     }// end method
 
+
+
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
-     * @return Renderable
+     * @param RoleRequest $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function store(RoleRequest $request)
     {
         try {
             $role = Role::create([
                 'name' => $request->name,
+                "organization_id" => session()->get('organization_id')
             ]);
 
             $role->permissions()->sync($request->permissions??[]);
@@ -71,24 +76,36 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $role = Role::whereId($id)->with(['permissions'])->first();
-        $permissions = Permission::all();
+        $role = Role::whereId($id)->where("id",'!=',1)->where(function ($q){
+            // All Actions => 3 | just edit => 2 | just delete => 1 | Prevent All Actions => 0
+            $q->where('status',3)->orWhere('status',2);
+        })->where("organization_id",session()->get('organization_id'))
+        ->with(['permissions'])->first();
         if (!$role){
             abort(404);
         }
-
+        $permissions = Permission::all();
         return view('role::edit',compact('role','permissions'));
     }// end method
 
+
+
     /**
      * Update the specified resource in storage.
-     * @param Request $request
-     * @param int $id
-     * @return Renderable
+     *
+     * @param RoleRequest $request
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function update(RoleRequest $request, $id)
     {
-        $role = Role::whereId($id)->first();
+        $role = Role::whereId($id)->where("id",'!=',1)->where(function ($q){
+                    // All Actions => 3 | just edit => 2 | just delete => 1 | Prevent All Actions => 0
+                    $q->where('status',3)->orWhere('status',2);
+                })->where("organization_id",session()->get('organization_id'))
+                ->first();
         if (!$role){
             abort(404);
         }
@@ -108,15 +125,24 @@ class RoleController extends Controller
     }// end method
 
 
+
     /**
      * Remove the specified resource from storage.
-     * @param int $id
-     * @return Renderable
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function destroy($id)
     {
         try {
-             Role::whereId($id)->delete();
+             Role::whereId($id)->where("id",'!=',1)
+                 ->where(function ($q){
+                    // All Actions => 3 | just edit => 2 | just delete => 1 | Prevent All Actions => 0
+                      $q->where('status',3)->orWhere('status',1);
+                 })
+                 ->where("organization_id",session()->get('organization_id'))
+                 ->delete();
             return redirect(route('role.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
         }catch (\Exception $e){
             return redirect(route('role.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);

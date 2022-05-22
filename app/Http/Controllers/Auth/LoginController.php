@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Modules\Role\Entities\UserRoles;
 
 class LoginController extends Controller
 {
@@ -41,16 +40,5 @@ class LoginController extends Controller
     }
 
 
-    /**
-     * When User Auth => Check user is super admin and save in session
-     *
-     * @param Request $request
-     * @param $user
-     */
-    public function authenticated(Request $request, $user)
-    {
-        $is_super_admin = UserRoles::where('user_id',$user->id)->where('role_id',1)->first();
-        session()->put('is_super_admin',isset($is_super_admin->user_id));
-    }
 
 }

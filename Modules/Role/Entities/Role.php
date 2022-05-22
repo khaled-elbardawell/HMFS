@@ -12,7 +12,7 @@ class Role extends Model
     use Paginate;
 
     protected $table = 'roles';
-    protected $fillable = ['name'];
+    protected $guarded = [];
 
     public function users(){
         return $this->belongsToMany(User::class,'user_roles')->withTimestamps();
