@@ -7,7 +7,10 @@
                 <span>Home</span>
             </a>
         </li>
+<<<<<<< HEAD
+=======
 
+>>>>>>> 7505adb956b901298f431403d228796ad3470747
         @can('role.index')
             <li>
                 <a class="nav-link" href="{{route('role.index')}}">
@@ -16,8 +19,12 @@
                 </a>
             </li>
         @endcan
+<<<<<<< HEAD
+        @can('organization.index')
+=======
 
         @can('is_super_admin')
+>>>>>>> 7505adb956b901298f431403d228796ad3470747
             <li>
                 <a class="nav-link" href="{{route('organization.index')}}">
                     <i class="fa fa-sitemap"></i>
@@ -25,6 +32,17 @@
                 </a>
             </li>
         @endcan
+<<<<<<< HEAD
+        @can('users.index')
+        <li>
+            <a class="nav-link" href="{{route('users.index',['organization_id' => 1])}}">
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+            </a>
+        </li>
+       @endcan
+       @can('task.index')
+=======
 
         @if(!Gate::allows('is_super_admin') && Gate::allows('users.index'))
                 <li>
@@ -37,6 +55,7 @@
 
 
         @can('task.index')
+>>>>>>> 7505adb956b901298f431403d228796ad3470747
             <li>
                 <a class="nav-link" href="{{route('task.index')}}">
                     <i class="fa fa-tasks"></i>

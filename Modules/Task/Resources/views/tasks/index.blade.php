@@ -30,42 +30,41 @@
                     <div class="row" style="overflow-x: auto; flex-wrap: nowrap;">
                         <div class="col-md-3 col-12">
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-primary add-board-tasks" data-toggle="modal" data-target="#board">Add Column</button>
+                            <button type="button" class="btn btn-primary add-board-tasks" data-toggle="modal" data-target="#board_card">Add Column</button>
 
-                            @error('board_name')
+                            @error('board_card_name')
                                 <span class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
 
-                            @isset($board)
+                            @isset($board_card)
                                 @dd('The Board Is Not Exist')
                             @else
-                                @include('task::modal-board')
+                                @include('task::tasks/modal-board')
                             @endisset
 
                         </div>
-                        @foreach ($boards as $board)
+                        @foreach ($board_cards as $board_card)
                             @php
-                                $board_name = str_replace(' ', '_', $board->name);
-                                $board_modal = "board";
+                                $board_card_name = str_replace(' ', '_', $board_card->name);
+                                $board_card_modal = "board_card";
                             @endphp
 
-                            @isset($board)
+                            @isset($board_card)
                                 @php
-                                    $board_modal = "board_".$board->id;
+                                    $board_card_modal = "board_card_".$board_card->id;
                                 @endphp
                             @endisset
 
-                            @include('task::modal-board',["board"=> $board , "board_modal"=> $board_modal])
-                            @include('task::board-col',["post_type"=> $board_name , "board_modal"=> $board_modal])
+                            @include('task::tasks/modal-board',["board_card"=> $board_card , "board_card_modal"=> $board_card_modal])
+                            @include('task::tasks/board-card',["post_type"=> $board_card_name , "board_card_modal"=> $board_card_modal])
                         @endforeach
                     </div><!--end row-->
                 </div><!--end card-body-->
             </div><!--end card-->
         </div><!--end col-->
     </div><!--end row-->
-{{--@dd($boards)--}}
 @endsection
 
 @section('js')
@@ -74,51 +73,20 @@
     <script src="{{CustomAsset("admin/plugins/dragula/dragula.min.js")}}"></script>
 
     <script>
-        var boards = JSON.parse('@json($boards)').data
+        var board_cards = JSON.parse('@json($board_cards)').data
         var iconTochange;
-        // dragula([document.getElementById("dragula-left"),
-        //     document.getElementById("dragula-right")]);
 
         var dragulaArr =[]
-        boards.forEach(function (item) {
+        board_cards.forEach(function (item) {
             dragulaArr.push( document.getElementById("project-list-"+item.id))
         })
 
         dragula(dragulaArr).on('drag',function (el,container) {
-              console.log('gg')
+              console.log('drag')
         }).on('drop', function(el, container ){
              console.log(el)
              console.log($(container))
              console.log($(container).find('.list'))
-            // var Lists = $(container).find('.list');
-            // console.log(l)
-            // var reOrder = [];
-            // $.each( Lists, function( key, value ) {
-            //     reOrder.push({'film_id':$(value).data('film-id'),'trailer_id' : $(value).data('trailer-id')});
-            // });
-            // _UpdateFetaureTrailerOdering(el, reOrder);
         });//--;
-
     </script>
-
-
-    {{-- <script>
-        //custom html alert
-        $('.delete-btn').click(function (event) {
-            event.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                // text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.value) {
-                    $(this).parent('form').submit();
-                }
-            })
-        });
-    </script> --}}
 @endsection
