@@ -24,7 +24,6 @@ class BoardController extends Controller
      */
     public function index()
     {
-
         $boards = Board::with(['boardCards.tasks.comments'])->page();
         $start_counter = Board::getStartCounter();
         return view('task::board/index',compact('boards','start_counter'));
