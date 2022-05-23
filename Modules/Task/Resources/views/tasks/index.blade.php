@@ -17,7 +17,8 @@
                         <li class="breadcrumb-item active">{{__('task::admin.Tasks')}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{__('task::admin.Tasks')}}</h4>
+                {{-- @dd($board) --}}
+                <h4 class="page-title"> {{$board->name}} </h4>
             </div><!--end page-title-box-->
         </div><!--end col-->
     </div>
@@ -45,7 +46,7 @@
                             @endisset
 
                         </div>
-                        @foreach ($board_cards as $board_card)
+                        @foreach ($board->boardCards as $board_card)
                             @php
                                 $board_card_name = str_replace(' ', '_', $board_card->name);
                                 $board_card_modal = "board_card";
@@ -73,7 +74,7 @@
     <script src="{{CustomAsset("admin/plugins/dragula/dragula.min.js")}}"></script>
 
     <script>
-        var board_cards = JSON.parse('@json($board_cards)').data
+        var board_cards = JSON.parse('@json($board->boardCards)').data
         var iconTochange;
 
         var dragulaArr =[]

@@ -5,6 +5,8 @@ namespace Modules\Task\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Task\Entities\Board;
+use Modules\Task\Http\Requests\BoardRequest;
 use Modules\Task\Http\Requests\TaskRequest;
 
 class BoardController extends Controller
@@ -22,9 +24,10 @@ class BoardController extends Controller
      */
     public function index()
     {
-        // $board_cards = BoardCard::with(['tasks.comments','tasks.user_t','tasks.user_f'])->page();
-        // $start_counter = Task::getStartCounter();
-        // return view('task::index',compact('board_cards','start_counter'));
+
+        $boards = Board::with(['boardCards.tasks.comments'])->page();
+        $start_counter = Board::getStartCounter();
+        return view('task::board/index',compact('boards','start_counter'));
     }
 
     /**
@@ -33,10 +36,7 @@ class BoardController extends Controller
      */
     public function create()
     {
-        // $permissions = Permission::all();
-        // $users = User::all();
-        // $post_type = request()->board_card_id;
-        // return view('task::create',compact('permissions','users','post_type'));
+        return view('task::board/create');
     }
 
     /**
@@ -44,32 +44,19 @@ class BoardController extends Controller
      * @param Request $request
      * @return Renderable
      */
-    public function store(TaskRequest $request)
+    public function store(BoardRequest $request)
     {
-        // try {
-        //     $task = Task::create([
-        //         'name' => $request->name,
-        //         'description' => $request->description,
-        //         'user_from' => auth()->user()->id,
-        //         'user_to' => $request->user_to,
-        //         'board_card_id' => $request->board_card_id,
-        //         'status' => $request->status,
-        //         'date_from' => $request->date_from,
-        //         'date_to' => $request->date_to,
-        //     ]);
+        try {
+            $board = Board::create([
+                'name' => $request->name,
+                'organization_id' => $request->org_id??null,
+                'user_id' => auth()->user()->id,
+            ]);
 
-        //     $comment = Comment::create([
-        //         'name' => $request->comment,
-        //         'user_id' => auth()->user()->id,
-        //         'task_id' => $task->id,
-        //     ]);
-
-        //     Mail::to($request->user())->send(new TaskMail($task));
-
-        //     return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-        // }catch (\Exception $e){
-        //     return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-        // }
+            return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
+        }catch (\Exception $e){
+            return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+        }
     }
 
     /**
@@ -79,7 +66,7 @@ class BoardController extends Controller
      */
     public function show($id)
     {
-        return view('board::show');
+        redirect(route('task.index'));
     }
 
     /**
@@ -89,10 +76,8 @@ class BoardController extends Controller
      */
     public function edit($id)
     {
-        // $task = Task::where('id',$id)->with(['comments.user','user_t','user_f'])->first();
-        // $users = User::all();
-        // $post_type = request()->board_card_id;
-        // return view('task::edit',compact('task','users','post_type'));
+        $board = Board::where('id',$id)->with(['boardCards.tasks.comments'])->first();
+        return view('task::board/edit',compact('board'));
     }
 
     /**
@@ -101,40 +86,25 @@ class BoardController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function update(TaskRequest $request, $id)
+    public function update(boardRequest $request, $id)
     {
-        // $task = Task::whereId($id)->first();
+        $board = Board::whereId($id)->first();
 
-        // if (!$task){
-        //     abort(404);
-        // }
+        if (!$board){
+            abort(404);
+        }
 
-        // try {
-        //     $task->update([
-        //         'name' => $request->name,
-        //         'description' => $request->description,
-        //         'user_from' => auth()->user()->id,
-        //         'user_to' => $request->user_to,
-        //         'board_card_id' => $request->board_card_id,
-        //         'status' => $request->status,
-        //         'date_from' => $request->date_from,
-        //         'date_to' => $request->date_to,
-        //     ]);
+        try {
+            $board->update([
+                'name' => $request->name,
+                'organization_id' => $request->org_id,
+                'user_id' => auth()->user()->id,
+            ]);
 
-        //     if(!$request->comment==null){
-        //         $comment = Comment::create([
-        //             'name' => $request->comment,
-        //             'user_id' => auth()->user()->id,
-        //             'task_id' => $task->id,
-        //         ]);
-        //     }
-
-        //     Mail::to($request->user())->send(new TaskMail($task));
-
-        //     return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-        // }catch (\Exception $e){
-        //     return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-        // }
+            return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
+        }catch (\Exception $e){
+            return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+        }
     }
 
     /**
@@ -144,12 +114,12 @@ class BoardController extends Controller
      */
     public function destroy($id)
     {
-    //     try {
-    //         Task::whereId($id)->delete();
-    //        return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
-    //    }catch (\Exception $e){
-    //        return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-    //    }
+        try {
+            Board::whereId($id)->delete();
+           return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
+       }catch (\Exception $e){
+           return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+       }
     }
 
 }

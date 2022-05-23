@@ -20,7 +20,7 @@ class TaskRequest extends FormRequest
             'date_from'     => 'required|date',
             'date_to'       => 'required|date',
             'description'   => 'required|string|max:500',
-            'board_card_id'      => 'required',
+            'board_card_id' => 'required',
             'comment'       => '',
         ];
     }

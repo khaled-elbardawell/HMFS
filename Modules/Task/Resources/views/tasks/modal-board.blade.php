@@ -20,7 +20,7 @@
                 </button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="board_id" value="3">
+                    <input type="hidden" name="board_id" value="{{$board->id}}">
                     <div class="form-group">
                         <label for="board_card_name-input" class="text-right">{{__('task::admin.Name')}}</label>
                         <div>

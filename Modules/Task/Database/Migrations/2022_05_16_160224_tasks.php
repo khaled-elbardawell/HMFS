@@ -28,7 +28,7 @@ class Tasks extends Migration
 
             $table->unsignedBigInteger('board_card_id')->nullable();
             $table->foreign('board_card_id')
-                ->references('id')->on('board_cards')->onDelete('cascade');
+                ->references('id')->on('boards')->onDelete('cascade');
 
             $table->string('status')->nullable();
             $table->date('date_from')->nullable();
