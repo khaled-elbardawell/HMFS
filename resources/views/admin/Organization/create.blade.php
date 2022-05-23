@@ -33,8 +33,6 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                          <?php  use App\Helpers\Builder; ?>
-
                             {!!  Builder::Input('text','organization_name',null,['label_title' => 'admin.Name','use_trans' => true]) !!}
 
                            {!!   Builder::Input('text','country',null,['col' => 'col-lg-6','label_title' => 'admin.Country','use_trans' => true]) !!}
