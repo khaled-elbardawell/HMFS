@@ -23,9 +23,11 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <form method="POST" action="{{route('organization.store')}}" enctype="multipart/form-data">
-        @csrf
-        <div class="row">
+    <?php  use App\Helpers\Builder;    ?>
+
+
+        {!! Builder::Form('POST',route('organization.store'),"multipart/form-data") !!}
+           <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header">
@@ -33,63 +35,14 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            {!!  Builder::Input('text','organization_name',null,['label_title' => 'admin.Name','use_trans' => true]) !!}
-
-                           {!!   Builder::Input('text','country',null,['col' => 'col-lg-6','label_title' => 'admin.Country','use_trans' => true]) !!}
-
-                           {!!   Builder::Input('text','city',null,['col' => 'col-lg-6','label_title' => 'admin.City','use_trans' => true]) !!}
-                           {!!   Builder::Input('text','street',null,['col' => 'col-lg-6','label_title' => 'admin.Street','use_trans' => true]) !!}
-                           {!!   Builder::Input('text','postal_code',null,['col' => 'col-lg-6','label_title' => 'admin.Postal code','use_trans' => true]) !!}
-{{--                           {!!   Builder::Input('text','description',null,['label_title' => 'admin.Description','use_trans' => true]) !!}--}}
-
-
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="description" class="text-right">{{__('admin.Description')}}</label>
-                                    <div>
-                                        <textarea rows="5" class="form-control" name="description" id="description" placeholder="{{__('admin.Description')}}">{{old('description')}}</textarea>
-                                        @error('description')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                       <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="description" class="text-right">{{__('admin.Logo')}}</label>
-                                    <small class="d-block text-danger mb-3">Note: The file must be an image of type PNG, JPG and JPEG, the dimensions must be 100 X 20 px, and the maximum image size is 100MB</small>
-                                    <div>
-                                        <input  type="file" name="logo" id="input-file-now" class="dropify" />
-                                        @error('logo')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                  <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch switch-success">
-                                        <input name="organization_status" type="checkbox" class="custom-control-input" id="organization_status" checked>
-                                        <label class="custom-control-label" for="organization_status">{{__('admin.Status')}}</label>
-                                        @error('organization_status')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-
+                           {!!   Builder::Input('text','organization_name',null,['label_title' => 'admin.Name','use_trans' => true,'is_required' => true]) !!}
+                           {!!   Builder::Input('text','country',null,['col' => 'col-lg-6','label_title' => 'admin.Country','use_trans' => true,'is_required' => true]) !!}
+                           {!!   Builder::Input('text','city',null,['col' => 'col-lg-6','label_title' => 'admin.City','use_trans' => true,'is_required' => true]) !!}
+                           {!!   Builder::Input('text','street',null,['col' => 'col-lg-6','label_title' => 'admin.Street','use_trans' => true,'is_required' => true]) !!}
+                           {!!   Builder::Input('text','postal_code',null,['col' => 'col-lg-6','label_title' => 'admin.Postal code','use_trans' => true,'is_required' => true]) !!}
+                           {!!   Builder::TextArea('description',null,['label_title' => 'admin.Description','use_trans' => true]) !!}
+                           {!!   Builder::FileDropify('logo',null,['id' => 'logo','label_title' => 'admin.Logo','use_trans' => true,'is_required' => true,'note' => 'Note: The file must be an image of type PNG, JPG and JPEG, the dimensions must be 100 X 20 px, and the maximum image size is 100MB']) !!}
+                           {!!  Builder::SwitchCheckBox('organization_status',true,['id' => 'organization_status','label_title' => 'admin.Status','use_trans' => true]) !!}
                         </div>
                     </div><!--end card-body-->
                 </div><!--end card-->
@@ -102,101 +55,13 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="email" class="text-right">{{__('admin.Email')}}</label>
-                                    <div>
-                                        <input value="{{old('email')}}" name="email" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
-                                        @error('email')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name" class="text-right">{{__('admin.Name')}}</label>
-                                    <div>
-                                        <input value="{{old('name')}}" name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="name">
-                                        @error('name')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
-                                    <div>
-                                        <input value="{{old('phone')}}" name="phone" class="form-control" type="text" placeholder="{{__('admin.Phone')}}" id="phone">
-                                        @error('phone')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="password" class="text-right">{{__('admin.Password')}}</label>
-                                    <div>
-                                        <input name="password" class="form-control" type="password" placeholder="{{__('admin.Password')}}" id="password">
-                                        @error('password')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                       <strong>{{ $message }}</strong>
-                                                  </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="password-confirm" class="text-right">{{__('admin.Confirm Password')}}</label>
-                                    <div>
-                                        <input name="password_confirmation" class="form-control" type="password" placeholder="{{__('admin.Confirm Password')}}" id="password-confirm">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
-                                    <div>
-                                        <textarea  rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}">{{old('bio')}}</textarea>
-                                        @error('bio')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch switch-success">
-                                        <input name="status" type="checkbox" class="custom-control-input" id="customSwitchSuccess" checked>
-                                        <label class="custom-control-label" for="customSwitchSuccess">{{__('admin.Status')}}</label>
-                                        @error('status')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
+                            {!!  Builder::Input('email','email',null,['label_title' => 'admin.Email','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::Input('text','name',null,['col' => 'col-lg-6','label_title' => 'admin.Name','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::Input('text','phone',null,['col' => 'col-lg-6','label_title' => 'admin.Phone','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::Input('password','password',null,['col' => 'col-lg-6','label_title' => 'admin.Password','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::Input('password','password_confirmation',null,['col' => 'col-lg-6','label_title' => 'admin.Confirm Password','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::TextArea('bio',null,['rows' => 5 ,'label_title' => 'admin.Bio','use_trans' => true]) !!}
+                            {!!  Builder::SwitchCheckBox('status',false,['id' => 'customSwitchSuccess','label_title' => 'admin.Status','use_trans' => true]) !!}
                         </div>
                     </div><!--end card-body-->
                 </div><!--end card-->
@@ -207,10 +72,8 @@
                     <button type="reset" class="btn btn-gradient-danger">Clear</button>
                     <a href="{{route('organization.index')}}" class="btn btn-gradient-info">Back</a>
             </div>
-
-
         </div><!--end row-->
-    </form>
+        {!! Builder::EndForm() !!}
 @endsection
 
 @section('js')
