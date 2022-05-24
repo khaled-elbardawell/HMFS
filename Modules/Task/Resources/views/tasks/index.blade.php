@@ -85,9 +85,9 @@
         dragula(dragulaArr).on('drag',function (el,container) {
               console.log('drag')
         }).on('drop', function(el, container ){
-             console.log(el)
-             console.log($(container))
-             console.log($(container).find('.list'))
+             console.log(el.getAttribute('data-task-id')) // task
+             console.log($(container)[0].getAttribute('data-board-card')) // col
+             // console.log($(container).find('.list'))
         });//--;
     </script>
 @endsection

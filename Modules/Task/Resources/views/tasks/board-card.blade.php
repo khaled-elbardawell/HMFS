@@ -21,7 +21,7 @@
         </div>
         <h4 class="header-title pb-1 mb-3 mt-0">{{$board_card->name}}</h4>
 
-        <div id="project-list-{{$board_card->id}}" class="pb-1">
+        <div id="project-list-{{$board_card->id}}" data-board-card="{{$board_card->id}}" class="pb-1">
             @foreach ($board_card->tasks as $task)
                 @if ($task->board_card_id == $board_card->id)
                     @include('task::tasks/task-card',['task'=>$task])

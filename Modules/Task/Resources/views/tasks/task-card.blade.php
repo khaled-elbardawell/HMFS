@@ -1,4 +1,4 @@
-<div class="card board-card">
+<div class="card board-card" data-task-id="{{$task->id}}">
     <div class="card-body">
         <div class="dropdown d-inline-block float-right">
             <a class="nav-link dropdown-toggle mr-n2 mt-n2" id="drop2" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
