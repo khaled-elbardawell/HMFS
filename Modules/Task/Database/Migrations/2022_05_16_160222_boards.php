@@ -21,6 +21,10 @@ class Boards extends Migration
             $table->foreign('organization_id')
                 ->references('id')->on('organizations')->onDelete('cascade');
 
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')
+                ->references('id')->on('users')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
-         Route::resource('Board',BoardController::class);
+         Route::resource('board',BoardController::class);
          Route::resource('task',TaskController::class);
          Route::post('task/create','BoardCardController@store')->name('board_card.store');
          Route::post('task/{id}/edit','BoardCardController@update')->name('board_card.update');

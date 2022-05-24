@@ -15,6 +15,7 @@ class BoardCardRequest extends FormRequest
     {
         return [
             'board_card_name' => 'required|string|max:255',
+            'board_id' => 'required',
         ];
     }
 

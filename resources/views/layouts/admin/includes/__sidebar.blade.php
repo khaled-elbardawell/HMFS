@@ -35,14 +35,24 @@
             </li>
         @endif
 
-        @can('task.index')
+        {{-- @can('task.index')
             <li>
                 <a class="nav-link" href="{{route('task.index')}}">
                     <i class="fa fa-tasks"></i>
                     <span>Tasks</span>
                 </a>
             </li>
+        @endcan --}}
+
+        @can('board.index')
+            <li>
+                <a class="nav-link" href="{{route('board.index')}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>Board</span>
+                </a>
+            </li>
         @endcan
+
         {{-- <li>
             <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Dashboard</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
             <ul class="nav-second-level" aria-expanded="false">

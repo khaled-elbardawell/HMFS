@@ -2,6 +2,7 @@
 
 namespace Modules\Task\Http\Controllers;
 use Illuminate\Routing\Controller;
+use Modules\Task\Entities\Board;
 use Modules\Task\Entities\BoardCard;
 use Modules\Task\Http\Requests\BoardCardRequest;
 
@@ -16,17 +17,15 @@ class BoardCardController extends Controller
 
     public function store(BoardCardRequest $request)
     {
-
         try {
             $board_card = BoardCard::create([
                 'name' => $request->board_card_name,
                 'board_id' => $request->board_id,
                 'user_id' => auth()->user()->id,
             ]);
-            return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
+            return redirect(route('task.index',['board_id' => $board_card->board_id]))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
         }catch (\Exception $e){
-            dd('noooooooo');
-            return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+            return redirect(route('task.index',['board_id' => $request->board_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }
 
@@ -44,19 +43,21 @@ class BoardCardController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
 
-            return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
+            return redirect(route('task.index',['board_id' => $board_card->board_id]))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
-            return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+            return redirect(route('task.index',['board_id' => $request->board_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }
 
     public function delete($id)
     {
+        $board_card = BoardCard::whereId($id)->first();
+        $board_id = $board_card->board_id;
         try {
-            BoardCard::whereId($id)->delete();
-           return redirect(route('task.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
+            $board_card->delete();
+           return redirect(route('task.index',['board_id' => $board_id]))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
        }catch (\Exception $e){
-           return redirect(route('task.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+           return redirect(route('task.index',['board_id' => $board_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
        }
     }
 

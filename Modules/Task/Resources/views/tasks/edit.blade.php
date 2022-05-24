@@ -25,7 +25,7 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
-                        <input type="hidden" name="board_card_id" value="{{$post_type}}">
+                        <input type="hidden" name="board_card_id" value="{{$board_card->id}}}">
                         <div class="row">
                             <div class="col-lg-12 col-12">
                                 <div class="form-group">
@@ -120,7 +120,7 @@
                         <div class="mt-4">
                             <button type="submit" class="btn btn-gradient-primary">Save</button>
                             <button type="reset" class="btn btn-gradient-danger">Clear</button>
-                            <a href="{{route('task.index')}}" class="btn btn-gradient-info">Back</a>
+                            <a href="{{route('task.index',['board_id'=>$board_card->board_id])}}" class="btn btn-gradient-info">Back</a>
                         </div>
 
                     </div><!--end card-body-->
@@ -164,5 +164,3 @@
         </div><!--end row-->
     </form>
 @endsection
-
-
