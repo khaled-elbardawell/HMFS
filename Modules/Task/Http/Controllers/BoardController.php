@@ -45,7 +45,7 @@ class BoardController extends Controller
      */
     public function store(BoardRequest $request)
     {
-        try {
+//        try {
             $board = Board::create([
                 'name' => $request->name,
                 'organization_id' => $request->org_id??null,
@@ -53,9 +53,9 @@ class BoardController extends Controller
             ]);
 
             return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-        }catch (\Exception $e){
-            return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-        }
+//        }catch (\Exception $e){
+//            return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+//        }
     }
 
     /**

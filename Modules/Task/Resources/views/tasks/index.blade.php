@@ -74,7 +74,7 @@
     <script src="{{CustomAsset("admin/plugins/dragula/dragula.min.js")}}"></script>
 
     <script>
-        var board_cards = JSON.parse('@json($board->boardCards)').data
+        var board_cards = JSON.parse('@json($board->boardCards)')
         var iconTochange;
 
         var dragulaArr =[]

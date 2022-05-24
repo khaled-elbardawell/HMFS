@@ -44,6 +44,8 @@ class UserRequest extends FormRequest
         return $rules;
     }
 
+
+
     private function validateRoleId(){
         return ['required','not_in:1',
             Rule::exists('roles','id')

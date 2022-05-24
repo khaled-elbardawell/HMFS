@@ -65,7 +65,7 @@ class TaskController extends Controller
         $board_card = BoardCard::where('id',$request->board_card_id)->first();
         $board_id = $board_card->board_id;
 
-        try {
+//        try {
             $task = Task::create([
                 'name' => $request->name,
                 'description' => $request->description,
@@ -86,11 +86,11 @@ class TaskController extends Controller
             Mail::to($request->user())->send(new TaskMail($task));
 
             return redirect(route('task.index',['board_id' => $board_id]))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-        }catch (\Exception $e){
-            // $users = User::all();
-            // return view('task::tasks/create',compact('task','users','board_card'));
-            return redirect(route('task.index',['board_id' => $board_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-        }
+//        }catch (\Exception $e){
+//            // $users = User::all();
+//            // return view('task::tasks/create',compact('task','users','board_card'));
+//            return redirect(route('task.index',['board_id' => $board_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+//        }
     }
 
     /**
