@@ -15,7 +15,7 @@ class BoardRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            // 'organization_id' => 'required',
+            'organization_id' => 'required|exists:organizations,id',
         ];
     }
 

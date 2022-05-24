@@ -15,12 +15,12 @@ class TaskRequest extends FormRequest
     {
         return [
             'name'          => 'required|string|max:255',
-            'user_to'       => 'required',
-            'status'        => 'required|string',
+            'user_to'       => 'required|exists:users,id|not_in:-1',
+            'status'        => 'required|string|not_in:-1',
             'date_from'     => 'required|date',
             'date_to'       => 'required|date',
             'description'   => 'required|string|max:500',
-            'board_card_id' => 'required',
+            'board_card_id' => 'required|exists:board_cards,id',
             'comment'       => '',
         ];
     }
