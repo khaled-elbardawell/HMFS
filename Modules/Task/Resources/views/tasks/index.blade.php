@@ -1,6 +1,5 @@
 @extends('layouts.admin.master')
 
-
 @section('css')
     <!-- Dragula -->
     <link href="{{CustomAsset("admin/assets/css/dragula.min.css")}}" rel="stylesheet" type="text/css" />
@@ -81,13 +80,36 @@
         board_cards.forEach(function (item) {
             dragulaArr.push( document.getElementById("project-list-"+item.id))
         })
-
         dragula(dragulaArr).on('drag',function (el,container) {
               console.log('drag')
         }).on('drop', function(el, container ){
              console.log(el.getAttribute('data-task-id')) // task
              console.log($(container)[0].getAttribute('data-board-card')) // col
-             // console.log($(container).find('.list'))
+             $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+             });
+             $.ajax({
+                type:'POST',
+                url:"{{ route('task.moveCard')}}",
+                data:{
+                    task_id:el.getAttribute('data-task-id'),
+                    board_card_id:$(container)[0].getAttribute('data-board-card-id')
+                },
+                success:function(data){
+                    if(data.status == "success"){
+                        console.log('success');
+                        console.log(data.task_id);
+                        console.log(data.board_card_id);
+                        console.log(data);
+                    }else{
+                        console.log(el.getAttribute('data-task-id')) // task
+                        console.log($(container)[0].getAttribute('data-board-card')) // col
+                    }
+                }
+            });
         });//--;
+
     </script>
 @endsection

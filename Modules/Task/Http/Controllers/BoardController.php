@@ -24,7 +24,7 @@ class BoardController extends Controller
      */
     public function index()
     {
-        $boards = Board::select('id','name')->page();
+        $boards = Board::select('id','name','organization_id')->page();
         $start_counter = Board::getStartCounter();
         return view('task::board/index',compact('boards','start_counter'));
     }
@@ -45,17 +45,19 @@ class BoardController extends Controller
      */
     public function store(BoardRequest $request)
     {
-//        try {
+       try {
             $board = Board::create([
                 'name' => $request->name,
-                'organization_id' => $request->org_id??null,
+                'organization_id' => $request->organization_id??null,
                 'user_id' => auth()->user()->id,
             ]);
 
+            dd($board);
+
             return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
-//        }catch (\Exception $e){
-//            return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
-//        }
+       }catch (\Exception $e){
+           return redirect(route('board.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
+       }
     }
 
     /**
@@ -96,7 +98,7 @@ class BoardController extends Controller
         try {
             $board->update([
                 'name' => $request->name,
-                'organization_id' => $request->org_id,
+                'organization_id' => $request->organization_id,
                 'user_id' => auth()->user()->id,
             ]);
 

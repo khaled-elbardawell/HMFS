@@ -61,4 +61,8 @@ class BoardCardController extends Controller
        }
     }
 
+    public function renameBoardCard()
+    {
+
+    }
 }

@@ -26,7 +26,7 @@
                     <div class="card-body">
 
                         <div class="row">
-                            <input type="hidden" name="org_id" value="{{session()->get('organization_id')}}">
+                            <input type="hidden" name="organization_id" value="{{session()->get('organization_id')}}">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="example-text-input" class="text-right">{{__('task::admin.Name')}}</label>

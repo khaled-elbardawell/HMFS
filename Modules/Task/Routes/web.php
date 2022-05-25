@@ -21,5 +21,7 @@ Route::group(
          Route::post('task/create','BoardCardController@store')->name('board_card.store');
          Route::post('task/{id}/edit','BoardCardController@update')->name('board_card.update');
          Route::post('task/{id}/delete','BoardCardController@delete')->name('board_card.destroy');
+         Route::post('task/moveCard','TaskController@moveCard')->name('task.moveCard');
+         Route::post('task/renameBoardCard','BoardCardController@renameBoardCard')->name('board_card.renameBoardCard');
 
 });
