@@ -54,18 +54,10 @@ class UserProfileController extends Controller
                 'password' => $password,
             ]);
 
-            // if($request->has('image_profile')){
-            //     Upload::updateOrCreate([
-            //         'uploadable_id' => ''
-            //     ],[
-            //         'uploadable_id' => '',
-            //         'uploadable_type' => 'profile-image',
-            //         'name' => '',
-            //         'file' => $user->id. '_' .Carbon::now() . '_' . $request->image_profile,
-            //         'extension' => '',
-            //         'type' => '',
-            //         'locale' => '',
-            //     ]);
+            // if(is_null($user->upload)){
+            //     User::saveUpload($user->id,'create','image','en','profile-image');
+            // }else{
+            //     User::saveUpload($user->id,'update','image','en','profile-image');
             // }
 
             return redirect(route('profile'))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);

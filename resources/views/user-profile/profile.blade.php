@@ -24,7 +24,7 @@
 </div>
 <!-- end page title end breadcrumb -->
 
-<form class="form-horizontal form-material mb-0" method="POST" action="{{route('updateProfile')}}">
+<form class="form-horizontal form-material mb-0" method="POST" action="{{route('updateProfile','multipart/form-data')}}">
     @csrf
     <div class="row">
         <div class="col-12">
