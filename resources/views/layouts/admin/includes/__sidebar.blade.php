@@ -28,21 +28,12 @@
 
         @if(!Gate::allows('is_super_admin') && Gate::allows('users.index'))
             <li>
-                <a class="nav-link" href="{{route('users.index',['organization_id' => 1])}}">
+                <a class="nav-link" href="{{route('users.index',['organization_id' => session()->get('organization_id')])}}">
                     <i class="fa fa-users"></i>
                     <span>Users</span>
                 </a>
             </li>
         @endif
-
-        {{-- @can('task.index')
-            <li>
-                <a class="nav-link" href="{{route('task.index')}}">
-                    <i class="fa fa-tasks"></i>
-                    <span>Tasks</span>
-                </a>
-            </li>
-        @endcan --}}
 
         @can('board.index')
             <li>

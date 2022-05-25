@@ -2,6 +2,7 @@
 
 namespace Modules\Task\Http\Controllers;
 
+use App\Models\Admin\UserOrganization;
 use App\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        $users = User::all();
+        $users = UserOrganization::where('organization_id',session()->get('organization_id'))->with('user')->get();
         $board_card = BoardCard::where('id',request()->board_card_id)->first();
         return view('task::tasks/create',compact('users','board_card'));
     }
@@ -111,7 +112,7 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::where('id',$id)->with(['comments.user','user_t','user_f'])->first();
-        $users = User::all();
+        $users = UserOrganization::where('organization_id',session()->get('organization_id'))->with('user')->get();
         $board_card = BoardCard::where('id',request()->board_card_id)->first();
         return view('task::tasks/edit',compact('task','users','board_card'));
     }

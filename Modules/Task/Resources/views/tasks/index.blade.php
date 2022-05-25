@@ -28,7 +28,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row" style="overflow-x: auto; flex-wrap: nowrap;">
+                    <div class="row" style="overflow-x: auto; flex-wrap: nowrap; padding-bottom: 50px;">
                         <div class="col-md-3 col-12">
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary add-board-tasks" data-toggle="modal" data-target="#board_card">Add Column</button>
@@ -76,8 +76,8 @@
     <script>
         var board_cards = JSON.parse('@json($board->boardCards)')
         var iconTochange;
-
         var dragulaArr =[]
+
         board_cards.forEach(function (item) {
             dragulaArr.push( document.getElementById("project-list-"+item.id))
         })
