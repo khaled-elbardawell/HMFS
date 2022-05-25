@@ -1,5 +1,10 @@
 @extends('layouts.admin.master')
 
+@section('css')
+    <link href="{{CustomAsset('admin/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
+@endsection
+
+
 @section('content')
     <!-- Page-Title -->
     <div class="row">
@@ -19,82 +24,65 @@
     <!-- end page title end breadcrumb -->
 
 
-    <form method="POST" action="{{route('organization.update',$organization->id)}}">
-        @csrf
-        @method('PUT')
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="example-text-input" class="text-right">{{__('admin.Name')}}</label>
-                                    <div>
-                                        <input name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" value="{{$organization->name}}"  id="example-text-input">
-                                        @error('name')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
-                            </div>
+    <?php  use App\Helpers\Builder; ?>
 
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label for="description" class="text-right">{{__('admin.Description')}}</label>
-                                    <div>
-                                        <textarea rows="5" class="form-control" name="description" id="description" placeholder="{{__('admin.Description')}}">{{$organization->description}}</textarea>
-                                        @error('description')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+    {!! Builder::Form('PUT',route('organization.update',[$organization->id]),"multipart/form-data") !!}
+          <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Organization Information</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {!!   Builder::Input('text','organization_name',$organization->organization_name,['label_title' => 'admin.Name','use_trans' => true,'is_required' => true]) !!}
+                        {!!   Builder::Input('text','country',$organization->country,['col' => 'col-lg-6','label_title' => 'admin.Country','use_trans' => true,'is_required' => true]) !!}
+                        {!!   Builder::Input('text','city',$organization->city,['col' => 'col-lg-6','label_title' => 'admin.City','use_trans' => true,'is_required' => true]) !!}
+                        {!!   Builder::Input('text','street',$organization->street,['col' => 'col-lg-6','label_title' => 'admin.Street','use_trans' => true,'is_required' => true]) !!}
+                        {!!   Builder::Input('text','postal_code',$organization->postal_code,['col' => 'col-lg-6','label_title' => 'admin.Postal code','use_trans' => true,'is_required' => true]) !!}
+                        {!!   Builder::TextArea('description',$organization->description,['label_title' => 'admin.Description','use_trans' => true]) !!}
+                        {!!   Builder::FileDropify('logo',['id' => 'logo','label_title' => 'admin.Logo','use_trans' => true,'is_required' => true,'note' => 'Note: The file must be an image of type PNG, JPG and JPEG, the dimensions must be 100 X 20 px, and the maximum image size is 100MB']) !!}
+                        {!!   Builder::SwitchCheckBox('organization_status',$organization->organization_status == 1,['id' => 'organization_status','label_title' => 'admin.Status','use_trans' => true]) !!}
+                    </div>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div><!--end col-->
 
-                            </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Owner Information</strong>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {!!  Builder::Input('email','email',$organization->email,['label_title' => 'admin.Email','use_trans' => true,'disabled' => true]) !!}
+                        {!!  Builder::Input('text','name',$organization->name,['col' => 'col-lg-6','label_title' => 'admin.Name','use_trans' => true,'is_required' => true]) !!}
+                        {!!  Builder::Input('text','phone',$organization->phone,['col' => 'col-lg-6','label_title' => 'admin.Phone','use_trans' => true,'is_required' => true]) !!}
+                        {!!  Builder::TextArea('bio',$organization->bio,['rows' => 5 ,'label_title' => 'admin.Bio','use_trans' => true]) !!}
+                        {!!  Builder::Input('password','password',null,['col' => 'col-lg-6','label_title' => 'admin.Password','use_trans' => true,'is_required' => true]) !!}
+                        {!!  Builder::Input('password','password_confirmation',null,['col' => 'col-lg-6','label_title' => 'admin.Confirm Password','use_trans' => true,'is_required' => true]) !!}
+                        {!!  Builder::SwitchCheckBox('status',$organization->status == 1,['id' => 'customSwitchSuccess','label_title' => 'admin.Status','use_trans' => true]) !!}
+                    </div>
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div><!--end col-->
 
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch switch-success">
-                                        <input name="status" type="checkbox" class="custom-control-input" id="customSwitchSuccess"  @if($organization->status) checked @endif>
-                                        <label class="custom-control-label" for="customSwitchSuccess">{{__('admin.Status')}}</label>
-                                        @error('status')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="btn btn-gradient-primary">Save</button>
-                            <button type="reset" class="btn btn-gradient-danger">Clear</button>
-                            <a href="{{route('organization.index')}}" class="btn btn-gradient-info">Back</a>
-                        </div>
-
-                    </div><!--end card-body-->
-                </div><!--end card-->
-
-
-            </div><!--end col-->
-
-
-        </div><!--end row-->
-    </form>
+        <div class="col-12 mt-2 mb-5">
+            <button type="submit" class="btn btn-gradient-primary">Save</button>
+            <button type="reset" class="btn btn-gradient-danger">Clear</button>
+            <a href="{{route('organization.index')}}" class="btn btn-gradient-info">Back</a>
+        </div>
+    </div><!--end row-->
+    {!! Builder::EndForm() !!}
 @endsection
-
 
 @section('js')
     @include('components.alert-action')
+    <script src="{{CustomAsset('admin/plugins/dropify/js/dropify.min.js')}}"></script>
+    <script src="{{CustomAsset('admin/assets/pages/jquery.form-upload.init.js')}}"></script>
 @endsection
+
+
 
 

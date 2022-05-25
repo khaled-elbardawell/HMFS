@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use App\Constant;
 use App\Traits\Paginate;
+use App\Traits\SqlTrait;
 use App\Traits\UploadTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +15,7 @@ use Modules\Role\Entities\UserRoles;
 
 class Organization extends Model
 {
-    use Paginate,UploadTrait;
+    use Paginate,UploadTrait,SqlTrait;
 
     protected $guarded = [];
 

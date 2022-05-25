@@ -24,13 +24,13 @@ class Builder
     }
 
     private static function PUT($action,$enctype){
-        $form = self::POST();
+        $form = self::POST($action,$enctype);
         $form .=  '<input type="hidden" name="_method" value="PUT">';
         return $form;
     }
 
     private static function DELETE($action,$enctype){
-        $form = self::POST();
+        $form = self::POST($action,$enctype);
         $form .=  '<input type="hidden" name="_method" value="DELETE">';
         return $form;
     }
@@ -175,7 +175,7 @@ class Builder
 
 
 
-    public static function FileDropify($name,$checked,$options = []){
+    public static function FileDropify($name,$options = []){
         $col         = $options['col']??'col-lg-12';
         $label_title = $options['label_title']??'';
         $id          = $options['id']??$name;

@@ -25,6 +25,7 @@ class OrganiztionRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
             'organization_name' => 'required|string|max:255',
             'description'       => 'nullable|string|max:2000',
@@ -33,8 +34,7 @@ class OrganiztionRequest extends FormRequest
             'street'            => 'required|string|max:100',
             'postal_code'       => 'required|string|max:100',
             'logo'              => $this->validateLogo(),
-
-            'email'             => 'required|email|max:255|unique:users,email',
+            'email'             => $this->validateEmail(),
             'name'              => 'required|string|max:100',
             'bio'               => 'nullable|string|max:2000',
             'phone'             => 'nullable|numeric|digits_between:5,15',
@@ -55,6 +55,14 @@ class OrganiztionRequest extends FormRequest
             return 'required|file|mimes:jpg,png,jpeg|max:204800|dimensions:max_width=100,max_height=20';
         }
         return 'nullable|file|mimes:jpg,png,jpeg|max:204800|dimensions:max_width=100,max_height=20';
+    }// end method
+
+
+    private function validateEmail(){
+        if ($this->method() == "POST"){
+            return "required|email|max:255|unique:users,email";
+        }
+        return '';
     }// end method
 
 }
