@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrganiztionRequest;
 use App\Models\Admin\Organization;
 use App\Models\Admin\UserOrganization;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Modules\Role\Entities\Permission;
 use Modules\Role\Entities\Role;
-use Modules\Role\Entities\RolePermissions;
-use Modules\Role\Entities\UserRoles;
+
 
 class OrganizationController extends Controller
 {
@@ -34,6 +29,10 @@ class OrganizationController extends Controller
         $start_counter = Organization::getStartCounter();
         return view('admin.organization.index',compact('organizations','start_counter'));
     }// end method
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -102,6 +101,8 @@ class OrganizationController extends Controller
 
 
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -137,6 +138,8 @@ class OrganizationController extends Controller
 
 
 
+
+
     /**
      *  Remove the specified resource from storage.
      *
@@ -155,4 +158,6 @@ class OrganizationController extends Controller
             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method
+
+
 }// end class
