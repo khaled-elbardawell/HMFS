@@ -36,6 +36,35 @@ trait UploadTrait
     }// end method
 
 
+
+    /**
+     * Delete Upload Data (Delete from DB and unlink old files)
+     * @param $uploadable_id
+     * @param string $type
+     * @param string $local
+     */
+    public static function deleteUpload($uploadable_id,$type='image',$local='en'){
+            $query = Upload::where('uploadable_type',self::class)
+                ->where('uploadable_id',$uploadable_id);
+            if(!is_null($type)){
+                $query = $query->where('type',$type);
+            }
+
+           if(!is_null($type)){
+              $query = $query->where('locale',$local);
+           }
+
+            $old_uploads = $query->get();
+            if ($old_uploads){
+                foreach ($old_uploads as $old_upload){
+                    self::unlink($old_upload->file,$type);
+                }
+                $query->delete();
+            }
+    }// end method
+
+
+
     /**
      * Save images or files Upload in DB and upload folder
      * @param $uploadable_id

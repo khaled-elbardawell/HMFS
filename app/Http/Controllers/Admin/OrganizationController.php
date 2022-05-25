@@ -9,6 +9,7 @@ use App\Models\Admin\Organization;
 use App\Models\Admin\UserOrganization;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Modules\Role\Entities\Permission;
 use Modules\Role\Entities\Role;
 use Modules\Role\Entities\RolePermissions;
@@ -85,8 +86,17 @@ class OrganizationController extends Controller
      * @param Organization $organization
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Organization $organization)
+    public function edit($organization_id)
     {
+        $organization = Organization::sqlFirst("SELECT users.name,users.email,users.bio,users.phone,organizations.id,organizations.name as organization_name,organizations.description,organizations.country,organizations.city,
+                                                          organizations.street,organizations.postal_code,organizations.status as organization_status,user_roles.user_id,user_roles.role_id,uploads.uploadable_id,uploads.file,user_organizations.status FROM organizations
+                                                          INNER JOIN users ON users.id = organizations.owner_id
+                                                          INNER JOIN user_roles ON user_roles.user_id = users.id
+                                                          INNER JOIN  uploads ON uploads.uploadable_id=organizations.id AND uploads.uploadable_type='App\\\Models\\\Admin\\\Organization'
+                                                          INNER JOIN user_organizations ON user_organizations.organization_id = organizations.id AND users.id = user_organizations.user_id
+                                                          WHERE organizations.id = ?",[$organization_id]);
+
+
         return view('admin.organization.edit',compact('organization'));
     }// end method
 
@@ -102,11 +112,22 @@ class OrganizationController extends Controller
     public function update(OrganiztionRequest $request,Organization $organization)
     {
         try {
-            $organization->update([
-                'name'        => $request->name,
-                'description' => $request->description,
-                'status'      => $request->has('status') ? 1 : 0,
+            $user = ["name" => $request->name,"phone" => $request->phone,"bio" => $request->bio,];
+            if ($request->has('password')){ $user["password" ] = bcrypt($request->password);}
+
+          User::whereId($organization->owner_id)->update($user);
+
+           Organization::whereId($organization->id)->update([
+                'name' => $request->organization_name,'description'=> $request->description,'country' => $request->country,
+                'city'=> $request->city,'street'=> $request->street,'postal_code' => $request->postal_code,
+                'status'=> $request->has('organization_status') ? 1 : 0,
             ]);
+
+            Organization::saveUpload($organization->id,'update','image','en','logo');
+
+            UserOrganization::where('user_id',$organization->owner_id)
+                            ->where('organization_id',$organization->id)
+                            ->update(["status" => $request->has('status') ? 1 : 0,]);
 
             return redirect(route('organization.edit',$organization->id))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
@@ -122,10 +143,13 @@ class OrganizationController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy($id)
+    public function destroy(Organization $organization)
     {
         try {
-            Organization::whereId($id)->delete();
+            $organization->delete();
+            UserOrganization::where('user_id',$organization->owner_id)->where('organization_id',$organization->id)->delete();
+            Organization::deleteUpload($organization->id);
+            Role::where('organization_id',$organization->id)->delete();
             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
         }catch (\Exception $e){
             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
