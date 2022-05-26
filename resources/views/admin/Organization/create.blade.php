@@ -4,7 +4,6 @@
     <link href="{{CustomAsset('admin/plugins/dropify/css/dropify.min.css')}}" rel="stylesheet">
 @endsection
 
-
 @section('content')
     <!-- Page-Title -->
     <div class="row">

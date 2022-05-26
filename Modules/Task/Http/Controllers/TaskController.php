@@ -8,7 +8,6 @@ use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
-use Modules\Role\Entities\Permission;
 use Modules\Task\Emails\TaskMail;
 use Modules\Task\Entities\Board;
 use Modules\Task\Entities\BoardCard;
@@ -181,5 +180,20 @@ class TaskController extends Controller
        }
     }
 
+    public function moveCard()
+    {
+        $task_id = $_POST['task_id'];
+        $board_card_id = $_POST['board_card_id'];
+        $task = Task::where('id',$task_id)->first();
+        $task->update([
+            'board_card_id' => $board_card_id
+        ]);
+        return response()->json([
+            'status'  => 'success',
+            'task_id'  => $task_id,
+            'board_card_id'  => $board_card_id,
+            'task'  => $task,
+        ]);
+    }
 
 }

@@ -52,6 +52,7 @@
         </div><!-- container -->
 
        @include('layouts.admin.includes.__footer')
+
     </div>
     <!-- end page content -->
 </div>

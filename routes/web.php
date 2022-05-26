@@ -31,6 +31,9 @@ Route::group(
 
     Route::get('/home', 'HomeController@index')->name('home');
 
+    Route::get('/profile', 'UserProfileController@index')->name('profile');
+    Route::POST('/updateProfile', 'UserProfileController@updateProfile')->name('updateProfile');
+
 });
 
 
