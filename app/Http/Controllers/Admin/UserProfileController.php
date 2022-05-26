@@ -54,11 +54,11 @@ class UserProfileController extends Controller
                 'password' => $password,
             ]);
 
-            // if(is_null($user->upload)){
-            //     User::saveUpload($user->id,'create','image','en','profile-image');
-            // }else{
-            //     User::saveUpload($user->id,'update','image','en','profile-image');
-            // }
+             if(is_null($user->upload)){
+                 User::saveUpload($user->id,'create','image','en','image_profile');
+             }else{
+                 User::saveUpload($user->id,'update','image','en','image_profile');
+             }
 
             return redirect(route('profile'))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
