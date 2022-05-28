@@ -21,14 +21,16 @@ return [
     "board.edit"  => "Delete Board",
     "board.delete"  => "Delete Board",
 
-    "organization.index"   => "List Organizations",
-    "organization.create"  => "Create Organization",
-    "organization.edit"  => "Edit Organization",
-    "organization.delete"  => "Delete Organization",
 
     "users.index"   => "List Users",
     "users.create"  => "Create User",
     "users.edit"    => "Edit User",
     "users.delete"  => "Delete User",
+
+
+    "departments.index"   => "List Department",
+    "departments.create"  => "Create Department",
+    "departments.edit"    => "Edit Department",
+    "departments.delete"  => "Delete Department",
 
 ];

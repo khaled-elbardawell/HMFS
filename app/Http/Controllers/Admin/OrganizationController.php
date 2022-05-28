@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\OrganiztionRequest;
 use App\Models\Admin\Organization;
 use App\Models\Admin\UserOrganization;
 use App\User;
+use Illuminate\Support\Facades\Request;
 use Modules\Role\Entities\Role;
 
 
@@ -158,6 +159,18 @@ class OrganizationController extends Controller
             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method
+
+
+    /**
+     * Super Admin Preview Organization as Admin In Organization
+     *
+     * @param Organization $organization
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function preview(Organization $organization){
+        session()->put('organization_id',$organization->id);
+        return redirect(url('home'));
+    }
 
 
 }// end class

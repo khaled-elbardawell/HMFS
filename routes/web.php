@@ -25,7 +25,14 @@ Route::group(
         return view('admin.form');
     });
 
+
     Route::resource('organization',"OrganizationController");
+    Route::get('organization/preview/{organization}','OrganizationController@preview')->name('organization.preview');
+
+
+    Route::resource('departments',"DepartmentController");
+
+
     Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
     Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
 

@@ -7,6 +7,7 @@ use App\Traits\Paginate;
 use App\Traits\SqlTrait;
 use App\Traits\UploadTrait;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Role\Entities\Permission;
 use Modules\Role\Entities\Role;
@@ -28,6 +29,7 @@ class Organization extends Model
         UserOrganization::create([
             'user_id'         => $owner->id,
             'organization_id' => $organization->id,
+            'registered_at'   => Carbon::now(),
             "status"    => $request->has('status') ? 1 : 0,
         ]);
 

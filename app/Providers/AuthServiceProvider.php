@@ -42,6 +42,15 @@ class AuthServiceProvider extends ServiceProvider
         });
 
 
+        Gate::define('super_admin_preview', function (User $user){
+//            if (session('is_super_admin')){
+//                if (session()->has('organization_id')){
+//                    return true;
+//                }
+//            }
+            return null;
+        });
+
         $permissions = Permission::all();
         foreach ($permissions as $permission){
             Gate::define($permission->name, function (User $user) use ($permission) {

@@ -3,6 +3,7 @@
 return [
     'Home'            => 'Home',
     'Organizations'   => 'Organizations',
+    'Departments'     => 'Departments',
     'Users'           => 'Users',
     'Name'            => 'Name',
     'Email'           => 'Email',
