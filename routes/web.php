@@ -28,6 +28,7 @@ Route::group(
 
     Route::resource('organization',"OrganizationController");
     Route::get('organization/preview/{organization}','OrganizationController@preview')->name('organization.preview');
+    Route::get('super-admin/preview','OrganizationController@superAdminPreview')->name('super-admin.preview');
 
 
     Route::resource('departments',"DepartmentController");

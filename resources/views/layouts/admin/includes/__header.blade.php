@@ -17,7 +17,20 @@
     <!-- Navbar -->
 
     <nav class="navbar-custom">
+
+
+
         <ul class="list-unstyled topbar-nav float-right mb-0">
+
+            @if(Gate::allows('is_super_admin') && session()->has('organization_id'))
+                <li class="hidden-sm">
+                    <a class="nav-link waves-effect waves-light" href="{{route('super-admin.preview')}}" >
+                        Back To Super Admin <i class="fas fa-eye text-info font-16"></i>
+                    </a>
+                </li>
+           @endif
+
+
             <li class="hidden-sm">
                 @php $current_lang = config('laravellocalization.supportedLocales.'.LaravelLocalization::getCurrentLocale()); @endphp
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript: void(0);" role="button"
