@@ -25,7 +25,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::page();
+        $departments = Department::where('organization_id',session('organization_id'))->page();
         $start_counter = Department::getStartCounter();
         return view('admin.Departments.index',compact('departments','start_counter'));
     }// end method
@@ -73,8 +73,12 @@ class DepartmentController extends Controller
      * @param Department $department
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit(Department $department)
+    public function edit($department_id)
     {
+        $department = Department::where('organization_id',session('organization_id'))->whereId($department_id)->first();
+        if (!$department){
+            abort(404);
+        }
         return view('admin.Departments.edit',compact('department'));
     }// end method
 
@@ -85,12 +89,17 @@ class DepartmentController extends Controller
      *  Update the specified resource in storage.
      *
      * @param DepartmentRequest $request
-     * @param Department $department
+     * @param  $department
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(DepartmentRequest $request,Department $department)
+    public function update(DepartmentRequest $request,$department_id)
     {
         try {
+            $department = Department::where('organization_id',session('organization_id'))->whereId($department_id)->first();
+            if (!$department){
+                abort(404);
+            }
+
            Department::whereId($department->id)->update([
                 'name'       => $request->name,
                 'description'=> $request->description,
@@ -111,9 +120,13 @@ class DepartmentController extends Controller
      * @param Department $department
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Department $department)
+    public function destroy($department_id)
     {
         try {
+            $department = Department::where('organization_id',session('organization_id'))->whereId($department_id)->first();
+            if (!$department){
+                abort(404);
+            }
             $department->delete();
             return redirect(route('departments.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Deleted successfully']);
         }catch (\Exception $e){

@@ -8,7 +8,7 @@
             </a>
         </li>
 
-       @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || Gate::allows('role.index'))
+       @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('role.index')))
 
             <li>
                 <a class="nav-link" href="{{route('role.index')}}">
@@ -17,6 +17,7 @@
                 </a>
             </li>
         @endif
+
 
         @can('is_super_admin')
             <li>
@@ -27,7 +28,8 @@
             </li>
         @endcan
 
-        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || Gate::allows('users.index'))
+
+        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('users.index')))
             <li>
                 <a class="nav-link" href="{{route('users.index',['organization_id' => session()->get('organization_id')])}}">
                     <i class="fa fa-users"></i>
@@ -36,23 +38,25 @@
             </li>
         @endif
 
-        @can('board.index')
+
+        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('board.index')))
             <li>
                 <a class="nav-link" href="{{route('board.index')}}">
                     <i class="fa fa-tasks"></i>
                     <span>Board</span>
                 </a>
             </li>
-        @endcan
+        @endif
 
-        @can('departments.index')
+
+       @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('departments.index')))
             <li>
                 <a class="nav-link" href="{{route('departments.index')}}">
                     <i class="fa fa-tasks"></i>
                     <span>Departments</span>
                 </a>
             </li>
-        @endcan
+      @endif
 
 
 

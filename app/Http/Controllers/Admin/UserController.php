@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrganiztionRequest;
 use App\Http\Requests\Admin\UserRequest;
+use App\Models\Admin\Department;
 use App\Models\Admin\Organization;
 use App\Models\Admin\UserOrganization;
 use App\User;
@@ -43,8 +44,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $departments = Department::where('organization_id',session('organization_id'))->get();
         $roles = Role::where('organization_id',\request()->organization_id)->get();
-        return view('admin.users.create',compact('roles'));
+        return view('admin.users.create',compact('roles','departments'));
     }// end method
 
 
@@ -71,6 +73,7 @@ class UserController extends Controller
 
             UserOrganization::create([
                 'organization_id' => $request->organization_id,
+                'department_id'   => $request->department_id,
                 'user_id'         => $user->id,
                 'registered_at'   => Carbon::now(),
                 'status'          => $request->has('status') ? 1 : 0,
@@ -147,10 +150,11 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $departments = Department::where('organization_id',session('organization_id'))->get();
         $user = UserOrganization::getUsersOrganizationDB(\request()->organization_id,$user->id);
         $user_role = UserRoles::getOrganizationUserRole($user->id,\request()->organization_id);
         $roles = Role::where('organization_id',\request()->organization_id)->get();
-        return view('admin.users.edit',compact('user','roles','user_role'));
+        return view('admin.users.edit',compact('user','roles','user_role','departments'));
     }// end method
 
 
@@ -166,7 +170,7 @@ class UserController extends Controller
     {
         try {
             UserOrganization::where('user_id',$user->id)->where('organization_id',$request->organization_id)
-               ->update(['status'=> $request->has('status') ? 1 : 0,]);
+               ->update(['department_id'   => $request->department_id,'status'=> $request->has('status') ? 1 : 0,]);
 
             UserRoles::updateUserRole($user->id,$request->role_id,$request->organization_id);
 

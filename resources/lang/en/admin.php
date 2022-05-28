@@ -4,6 +4,7 @@ return [
     'Home'            => 'Home',
     'Organizations'   => 'Organizations',
     'Departments'     => 'Departments',
+    'Department'      => 'Department',
     'Users'           => 'Users',
     'Name'            => 'Name',
     'Email'           => 'Email',

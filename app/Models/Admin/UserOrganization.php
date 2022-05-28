@@ -13,7 +13,7 @@ class UserOrganization extends Model
     public static function getUsersOrganizationDB($organization_id,$user_id = null){
         $bindings = [request()->organization_id];
 
-        $sql = "SELECT   users.*,user_organizations.organization_id,user_organizations.last_login,user_organizations.status,user_organizations.registered_at FROM user_organizations
+        $sql = "SELECT   users.*,user_organizations.department_id,user_organizations.organization_id,user_organizations.last_login,user_organizations.status,user_organizations.registered_at FROM user_organizations
                          INNER JOIN users ON users.id = user_organizations.user_id
                          WHERE user_organizations.organization_id = ?";
         if ($user_id){

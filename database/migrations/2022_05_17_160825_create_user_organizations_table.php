@@ -30,6 +30,11 @@ class CreateUserOrganizationsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')
+                ->references('id')
+                ->on('departments');
+
 
             $table->dateTime('last_login')->nullable();
             $table->boolean('status')->default(0);
