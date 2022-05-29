@@ -17,7 +17,36 @@
     <!-- Navbar -->
 
     <nav class="navbar-custom">
+
+
+
         <ul class="list-unstyled topbar-nav float-right mb-0">
+
+            @if(Gate::allows('is_super_admin') && session()->has('organization_id'))
+                <li class="hidden-sm">
+                    <a class="nav-link waves-effect waves-light" href="{{route('super-admin.preview')}}" >
+                        Back To Super Admin <i class="fas fa-eye text-info font-16"></i>
+                    </a>
+                </li>
+           @endif
+
+          @if(!Gate::allows('is_super_admin'))
+            <li class="hidden-sm">
+                <a class="nav-link dropdown-toggle waves-effect waves-light header-current-organization" data-toggle="dropdown" href="javascript: void(0);" role="button"
+                   aria-haspopup="false" aria-expanded="false">
+                    <i class="mdi mdi-chevron-down"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    @foreach($userOrganizations as $userOrganization)
+                            <a class="dropdown-item" @if($userOrganization->id == session('organization_id')) data-current-organization="true" @endif  href="{{route('change.organization.preview',[$userOrganization->id])}}">
+                               <span>{{ $userOrganization->name }}</span><img src="{{CustomAsset("upload/images/full/$userOrganization->file")}}" alt="" class="ml-2 float-right" width="21" height="14"/>
+                            </a>
+                    @endforeach
+                </div>
+            </li>
+          @endif
+
+
             <li class="hidden-sm">
                 @php $current_lang = config('laravellocalization.supportedLocales.'.LaravelLocalization::getCurrentLocale()); @endphp
                 <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript: void(0);" role="button"
@@ -158,3 +187,4 @@
     <!-- end navbar-->
 </div>
 <!-- Top Bar End -->
+

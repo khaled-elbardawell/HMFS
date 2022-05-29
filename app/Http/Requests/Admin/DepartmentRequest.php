@@ -5,9 +5,8 @@ namespace App\Http\Requests\Admin;
 use App\Rules\UserEmailRule;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class ProfileRequest extends FormRequest
+class DepartmentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,14 +26,11 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'image_profile' => 'nullable|file|mimes:jpeg,png,jpg,webp|max:204800|dimensions:max_width=100,max_height=20',
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
-            'password' => 'nullable|min:8|max:15|confirmed',
-            'phone' => 'string|min:5|max:500|nullable',
-            'bio' => 'string|min:5|max:500|nullable',
+            'name'         => 'required|string|max:255',
+            'description'  => 'nullable|string|max:2000',
         ];
     }
+
 
 
 }

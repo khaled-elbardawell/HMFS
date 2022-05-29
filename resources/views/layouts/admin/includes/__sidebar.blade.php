@@ -8,14 +8,16 @@
             </a>
         </li>
 
-        @can('role.index')
+       @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('role.index')))
+
             <li>
                 <a class="nav-link" href="{{route('role.index')}}">
                     <i class="fab fa-critical-role"></i>
                     <span>Roles</span>
                 </a>
             </li>
-        @endcan
+        @endif
+
 
         @can('is_super_admin')
             <li>
@@ -26,7 +28,8 @@
             </li>
         @endcan
 
-        @if(!Gate::allows('is_super_admin') && Gate::allows('users.index'))
+
+        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('users.index')))
             <li>
                 <a class="nav-link" href="{{route('users.index',['organization_id' => session()->get('organization_id')])}}">
                     <i class="fa fa-users"></i>
@@ -35,14 +38,29 @@
             </li>
         @endif
 
-        @can('board.index')
+
+        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('board.index')))
             <li>
                 <a class="nav-link" href="{{route('board.index')}}">
                     <i class="fa fa-tasks"></i>
                     <span>Board</span>
                 </a>
             </li>
-        @endcan
+        @endif
+
+
+       @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('departments.index')))
+            <li>
+                <a class="nav-link" href="{{route('departments.index')}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>Departments</span>
+                </a>
+            </li>
+      @endif
+
+
+
+
 
         {{-- <li>
             <a href="javascript: void(0);"><i class="ti-bar-chart"></i><span>Dashboard</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>

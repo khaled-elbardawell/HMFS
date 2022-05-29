@@ -5,7 +5,6 @@ namespace App\Helpers;
 class Builder
 {
 
-
     public static function Form($method,$action,$enctype = null){
         $method  = strtoupper($method);
         if ($method == 'GET' || $method == 'HEAD'){
@@ -35,13 +34,10 @@ class Builder
         return $form;
     }
 
-
-
     public static function EndForm()
     {
         return '</form>';
     }
-
 
     private static function DivContainerFieldBuilder($name,$value,$options = []){
         $label_title = $options['label_title']??'';
@@ -77,8 +73,7 @@ class Builder
         return $input;
     }
 
-
-     public static function TextArea($name,$value,$options = []){
+    public static function TextArea($name,$value,$options = []){
         $label_title = $options['label_title']??'';
         $rows        = $options['rows']??'5';
         $id          = $options['id']??$name;
@@ -100,9 +95,6 @@ class Builder
         return $input;
     }
 
-
-
-
     public static function Input($type,$name,$value,$options = []){
        $label_title = $options['label_title']??'';
        $id          = $options['id']??$name;
@@ -123,9 +115,7 @@ class Builder
         return $input;
    }
 
-
-
-   private static function GetValidationErrorMessage($name){
+    private static function GetValidationErrorMessage($name){
        if (session()->has('errors')){
            if (session()->get('errors')){
                if(isset(session()->get('errors')->getMessages()["$name"][0])){
@@ -136,9 +126,7 @@ class Builder
        return null;
    }
 
-
-
-   public static function SwitchCheckBox($name,$checked,$options = []){
+    public static function SwitchCheckBox($name,$checked,$options = []){
        $col         = $options['col']??'col-lg-12';
        $label_title = $options['label_title']??'';
        $id          = $options['id']??$name;
@@ -172,8 +160,6 @@ class Builder
        $input .= '</div>';// end col
        return $input;
    }
-
-
 
     public static function FileDropify($name,$options = []){
         $col         = $options['col']??'col-lg-12';
@@ -212,5 +198,33 @@ class Builder
         return $input;
     }
 
+    public static function Select($name,$value,$optionsData = [],$options = []){
+        $id                 = $options['id']??$name;
+        $disabled           = isset($options['disabled']) && $options['disabled'] ? 'disabled' : '';
+        $readonly           = isset($options['readonly']) && $options['readonly'] ? 'disabled' : '';
+        $value              = old($name)??$value;
+        $multiple           = isset($options['multiple']) && $options['multiple'] ? 'multiple' : '';
+        $option_key_value   = $options['option_key_value']??'id';
+        $option_title       = $options['option_title'];
 
-}
+        if (!$multiple){
+            $value = [$value];
+        }
+
+
+        $input = self::DivContainerFieldBuilder($name,$value,$options);
+        $input .= '<select name="'.$name.'"  class="form-control" '.$disabled.' '.$readonly.' '.$multiple.'  id="'.$id.'">';
+        $input .= '<option value="-1">Select Value..</option>';
+        foreach ($optionsData as  $option){
+            $selected = in_array($option->$option_key_value,$value)  ? 'selected' : '';
+            $input .= '<option value="'.$option->$option_key_value.'"  '.$selected.' >'.$option->$option_title.'</option>';
+         }
+        $input .= '</select>';
+        $input .= self::EndDivContainerFieldBuilder($name);
+        return $input;
+    }
+
+
+
+
+}// end class

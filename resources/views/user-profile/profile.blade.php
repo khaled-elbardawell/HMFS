@@ -24,8 +24,11 @@
 </div>
 <!-- end page title end breadcrumb -->
 
-<form class="form-horizontal form-material mb-0" method="POST" action="{{route('updateProfile','multipart/form-data')}}">
-    @csrf
+
+
+{!! Builder::Form('POST',route('updateProfile'),"multipart/form-data") !!}
+
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -115,8 +118,8 @@
                         </div>
 
                         <div class="col-md-6">
-                            <input name="confirm__password" type="password" placeholder="Re-password" class="form-control">
-                            @error('confirm__password')
+                            <input name="password_confirmation" type="password" placeholder="Re-password" class="form-control">
+                            @error('password_confirmation')
                                 <div class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </div>
@@ -152,10 +155,15 @@
         </div>
     </div>
 
-</form>
+{!! Builder::EndForm() !!}
+
+
 
 @endsection
 
+
 @section('js')
     @include('components.alert-action')
+    <script src="{{CustomAsset('admin/plugins/dropify/js/dropify.min.js')}}"></script>
+    <script src="{{CustomAsset('admin/assets/pages/jquery.form-upload.init.js')}}"></script>
 @endsection

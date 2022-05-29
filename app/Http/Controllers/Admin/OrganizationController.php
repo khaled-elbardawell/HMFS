@@ -2,18 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Constant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrganiztionRequest;
 use App\Models\Admin\Organization;
 use App\Models\Admin\UserOrganization;
 use App\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Modules\Role\Entities\Permission;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Request;
 use Modules\Role\Entities\Role;
-use Modules\Role\Entities\RolePermissions;
-use Modules\Role\Entities\UserRoles;
+
 
 class OrganizationController extends Controller
 {
@@ -34,6 +31,10 @@ class OrganizationController extends Controller
         $start_counter = Organization::getStartCounter();
         return view('admin.organization.index',compact('organizations','start_counter'));
     }// end method
+
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -102,6 +103,8 @@ class OrganizationController extends Controller
 
 
 
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -137,6 +140,8 @@ class OrganizationController extends Controller
 
 
 
+
+
     /**
      *  Remove the specified resource from storage.
      *
@@ -155,4 +160,32 @@ class OrganizationController extends Controller
             return redirect(route('organization.index'))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method
+
+
+    /**
+     * Super Admin Preview Organization as Admin In Organization
+     *
+     * @param Organization $organization
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function preview(Organization $organization){
+        session()->put('organization_id',$organization->id);
+        return redirect(url('home'));
+    }
+
+
+    /**
+     * Preview As Super Admin
+     *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function superAdminPreview(){
+        if(Gate::allows('is_super_admin') && session()->has('organization_id')){
+            session()->forget('organization_id');
+            return redirect(url('home'));
+        }
+        abort(404);
+    }
+
+
 }// end class

@@ -26,8 +26,9 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules['role_id'] = $this->validateRoleId();
+        $rules['role_id']         = $this->validateRoleId();
         $rules['organization_id'] = 'required|exists:organizations,id';
+        $rules['department_id']   = $this->validateDepartmentId();
 
         if($this->method() == "POST"){
             $rules['email'] = [new UserEmailRule($this->organization_id)];
@@ -39,7 +40,6 @@ class UserRequest extends FormRequest
                 $rules['phone'] = 'nullable|numeric|digits_between:5,15';
             }
         }
-
 
         return $rules;
     }
@@ -61,5 +61,19 @@ class UserRequest extends FormRequest
         return 'nullable|string|min:8|confirmed';
     }// end method
 
+
+    private function validateDepartmentId(){
+
+        if ($this->department_id == -1){
+            $this->request->add(['department_id' => null]);
+            return '';
+        }
+
+        return ['required',
+            Rule::exists('departments','id')
+                ->where('organization_id',$this->organization_id)
+        ];
+
+    }// end method
 
 }

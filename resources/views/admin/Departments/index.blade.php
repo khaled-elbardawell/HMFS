@@ -9,10 +9,10 @@
                 <div class="float-right">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">{{__('admin.Home')}}</a></li>
-                        <li class="breadcrumb-item active">{{__('admin.Organizations')}}</li>
+                        <li class="breadcrumb-item active">{{__('admin.Departments')}}</li>
                     </ol>
                 </div>
-                <h4 class="page-title">{{__('admin.Organizations')}}</h4>
+                <h4 class="page-title">{{__('admin.Departments')}}</h4>
             </div><!--end page-title-box-->
         </div><!--end col-->
     </div>
@@ -23,9 +23,9 @@
             <div class="card">
                 <div class="card-body">
 
-                    @can('organization.create')
+                    @can('departments.create')
                         <div class="mt-0 header-title">
-                            <a href="{{route('organization.create')}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
+                            <a href="{{route('departments.create')}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
                         </div>
                     @endcan
 
@@ -35,27 +35,21 @@
                             <tr>
                                 <th>#</th>
                                 <th>{{__('Admin.Name')}}</th>
-                                <th>{{__('Admin.Status')}}</th>
                                 <th>{{__('admin.Action')}}</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($organizations as $organization)
+                            @foreach($departments as $department)
                                 <tr>
                                     <td>{{$start_counter}}</td>
-                                    <td>{{$organization->name}}</td>
-                                    <td><span class="badge badge-{{$organization->status == 1 ? "success" : "danger" }}">{{$organization->status == 1 ? "Active" : "Not Active" }}</span></td>
+                                    <td>{{$department->name}}</td>
                                     <td>
-                                        @can('organization.preview')
-                                            <a href="{{route('organization.preview',$organization->id)}}" class="mr-2"><i class="fas fa-eye text-info font-16"></i></a>
+                                        @can('departments.edit')
+                                          <a href="{{route('departments.edit',$department->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
                                         @endcan
 
-                                        @can('organization.edit')
-                                          <a href="{{route('organization.edit',$organization->id)}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
-                                        @endcan
-
-                                       @can('organization.delete')
-                                             <form name="delete" method="POST" action="{{route('organization.destroy',$organization->id)}}" style="display:inline-block;">
+                                       @can('departments.delete')
+                                             <form name="delete" method="POST" action="{{route('departments.destroy',$department->id)}}" style="display:inline-block;">
                                                @csrf
                                                @method('delete')
                                                 <button class="btn btn-sm btn-outline-none btn-table delete-btn"><i class="fas fa-trash-alt text-danger font-16"></i> </button>
@@ -69,7 +63,7 @@
                         </table><!--end /table-->
                     </div><!--end /tableresponsive-->
                 </div><!--end card-body-->
-                {{$organizations->render()}}
+                {{$departments->render()}}
 
             </div><!--end card-->
         </div> <!-- end col -->

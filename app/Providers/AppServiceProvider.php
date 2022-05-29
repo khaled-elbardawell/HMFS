@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // view()->composer("*","App\Http\ViewComposers\MyViewComposer");
+        // view()->composer("*","App\Http\ViewComposers\AdminLayout");
+         view()->composer("layouts.admin.master","App\Http\ViewComposers\AdminLayout");
 
     }
 }

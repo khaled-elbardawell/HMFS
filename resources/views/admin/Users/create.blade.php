@@ -1,8 +1,6 @@
 @extends('layouts.admin.master')
 
 
-
-
 @section('content')
     <!-- Page-Title -->
     <div class="row">
@@ -21,135 +19,38 @@
     </div>
     <!-- end page title end breadcrumb -->
 
-    <form method="POST" action="{{route('users.store',request()->all())}}">
-        @csrf
+    <?php  use App\Helpers\Builder; ?>
+
+    {!! Builder::Form('POST',route('users.store',request()->all())) !!}
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="email" class="text-right">{{__('admin.Email')}}</label>
-                                    <div>
-                                        <input @if(request()->has('user_exists') && request()->user_exists) disabled="true" @endif name="email" value="{{old('email',request()->email??null)}}" class="form-control" type="email" placeholder="{{__('admin.Email')}}" id="email">
-                                        @error('email')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                            <?php  request()->has('user_exists') && request()->user_exists ? $disabled =true : $disabled = false ?>
+                            {!!  Builder::Input('email','email',request()->email??null,['col' => 'col-lg-6','disabled' => $disabled,'label_title' => 'admin.Email','use_trans' => true,'is_required' => true]) !!}
 
-                            </div>
+
 
                             @if(!(request()->has('user_exists') && request()->user_exists))
-                              <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="name" class="text-right">{{__('admin.Name')}}</label>
-                                    <div>
-                                        <input name="name" class="form-control" type="text" placeholder="{{__('admin.Name')}}" id="name">
-                                        @error('name')
-                                              <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-                              <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="phone" class="text-right">{{__('admin.Phone')}}</label>
-                                    <div>
-                                        <input name="phone" class="form-control" type="text" placeholder="{{__('admin.Phone')}}" id="phone">
-                                        @error('phone')
-                                              <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                            </div>
+                                  {!!  Builder::Input('text','name',null,['col' => 'col-lg-6','label_title' => 'admin.Name','use_trans' => true,'is_required' => true]) !!}
+                                  {!!  Builder::Input('text','phone',null,['col' => 'col-lg-6','label_title' => 'admin.Phone','use_trans' => true]) !!}
                             @endif
 
 
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label for="role_id" class="text-right">{{__('admin.Role')}}</label>
-                                    <div>
-                                        <select name="role_id" class="form-control" id="role_id">
-                                            <option value="-1">Select Value..</option>
-                                            @foreach($roles as $role)
-                                                <option value="{{$role->id}}">{{$role->name}}</option>
-                                            @endforeach
-                                        </select>
-                                        @error('role_id')
-                                              <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
+                            {!! Builder::Select('role_id',null,$roles,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Role','use_trans' => true,'is_required' => true]) !!}
+                            {!! Builder::Select('department_id',null,$departments,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Department','use_trans' => true]) !!}
 
-                            </div>
+
 
                             @if(!(request()->has('user_exists') && request()->user_exists))
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label for="bio" class="text-right">{{__('admin.Bio')}}</label>
-                                        <div>
-                                            <textarea rows="5" class="form-control" name="bio" id="bio" placeholder="{{__('admin.Bio')}}"></textarea>
-                                            @error('bio')
-                                            <span class="invalid-feedback d-block" role="alert">
-                                                       <strong>{{ $message }}</strong>
-                                                  </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="password" class="text-right">{{__('admin.Password')}}</label>
-                                        <div>
-                                            <input name="password" class="form-control" type="password" placeholder="{{__('admin.Password')}}" id="password">
-                                            @error('password')
-                                                  <span class="invalid-feedback d-block" role="alert">
-                                                       <strong>{{ $message }}</strong>
-                                                  </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="col-lg-6">
-                                     <div class="form-group">
-                                    <label for="password-confirm" class="text-right">{{__('admin.Confirm Password')}}</label>
-                                    <div>
-                                        <input name="password_confirmation" class="form-control" type="password" placeholder="{{__('admin.Confirm Password')}}" id="password-confirm">
-                                    </div>
-                                </div>
-                               </div>
+                                    {!!  Builder::TextArea('bio',null,['rows' => 5 ,'label_title' => 'admin.Bio','use_trans' => true]) !!}
+                                    {!!  Builder::Input('password','password',null,['col' => 'col-lg-6','label_title' => 'admin.Password','use_trans' => true,'is_required' => true]) !!}
+                                    {!!  Builder::Input('password','password_confirmation',null,['col' => 'col-lg-6','label_title' => 'admin.Confirm Password','use_trans' => true,'is_required' => true]) !!}
                             @endif
 
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-switch switch-success">
-                                        <input name="status" type="checkbox" class="custom-control-input" id="customSwitchSuccess" checked>
-                                        <label class="custom-control-label" for="customSwitchSuccess">{{__('admin.Status')}}</label>
-                                        @error('status')
-                                        <span class="invalid-feedback d-block" role="alert">
-                                                   <strong>{{ $message }}</strong>
-                                              </span>
-                                        @enderror
-                                    </div>
-                                </div>
 
-                            </div>
-
+                            {!!  Builder::SwitchCheckBox('status',false,['id' => 'customSwitchSuccess','label_title' => 'admin.Status','use_trans' => true]) !!}
                         </div>
 
                         <div class="mt-4">
@@ -166,7 +67,7 @@
 
 
         </div><!--end row-->
-    </form>
+  {!! Builder::EndForm() !!}
 @endsection
 
 
