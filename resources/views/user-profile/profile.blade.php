@@ -39,14 +39,15 @@
                                 <div class="met-profile-main" style="justify-content: center;flex-direction: column;">
                                     <div class="met-profile-main-pic m-0">
                                         @if (!is_null($user->upload))
-                                            {{-- <img src="{{CustomAsset('admin/assets/images/users/user-1.png')}}" alt="profile-user" class="rounded-circle" /> --}}
                                         @else
                                             <img src="{{CustomAsset('admin/assets/images/users/user-1.png')}}" alt="profile-user" class="rounded-circle" />
                                         @endif
-                                        <span class="fro-profile_main-pic-change">
-                                            {!!  Builder::FileDropify('image_profile',null,['id' => 'image_profile','use_trans' => true,'is_required' => true]) !!}
+                                        {!!  Builder::FileDropify('image_profile',null,['id' => 'image_profile','use_trans' => true,'is_required' => true]) !!}
+
+                                        {{-- <span class="fro-profile_main-pic-change">
+
                                             <i class="fas fa-camera"></i>
-                                        </span>
+                                        </span> --}}
                                     </div>
                                     <div class="met-profile_user-detail text-center">
                                         <h5 class="met-user-name">{{$user->name}}</h5>

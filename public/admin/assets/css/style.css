@@ -71,3 +71,18 @@
 .left-sidenav-menu li>a.nav-link.active i{
     color: #fff;
 }
+.met-profile .met-profile-main .met-profile-main-pic {
+    border-radius: 50%;
+    overflow: hidden;
+}
+.met-profile .met-profile-main .met-profile-main-pic div.col-lg-12 {
+    position: absolute;
+    top: -45px;
+    left: 0;
+    height: max-content;
+    width: 100%;
+    padding: 0;
+}
+.met-profile .met-profile-main .met-profile-main-pic div.col-lg-12 label {
+    display: none;
+}
