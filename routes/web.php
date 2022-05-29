@@ -36,6 +36,7 @@ Route::group(
 
     Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
     Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
+    Route::get('user/organization/preview{organization_id}','UserController@changeOrganizationPreview')->name('change.organization.preview');
 
     Route::get('/home', 'HomeController@index')->name('home');
 

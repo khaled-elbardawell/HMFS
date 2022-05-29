@@ -198,4 +198,16 @@ class UserController extends Controller
             return redirect(route('users.index',['organization_id' => \request()->organization_id]))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method
+
+
+    public function changeOrganizationPreview($organization_id){
+        $userOrganization = UserOrganization::getUsersOrganizationDB($organization_id,auth()->id());
+        if (!$userOrganization){
+            abort(404);
+        }
+        session()->put('organization_id',$userOrganization->organization_id);
+        return redirect(url('home'));
+    }
+
+
 }// end class

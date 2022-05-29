@@ -84,6 +84,20 @@
 <!-- App js -->
 <script src="{{CustomAsset('admin/assets/js/app.js')}}"></script>
 
+<script>
+    function organizationMenu() {
+        var el_current_organization =$(`[data-current-organization='true']`)
+        if(el_current_organization){
+            el_current_organization.css('background-color','#f0eded')
+            var header_current_organization = $('.header-current-organization');
+            header_current_organization.attr('href',el_current_organization.attr('href'))
+            header_current_organization.html($(`[data-current-organization='true'] span`).text() + header_current_organization.html())
+        }
+    }
+
+    organizationMenu()
+</script>
+
 @yield('js')
 
 
