@@ -17,26 +17,21 @@ Route::group(
         'prefix' => LaravelLocalization::setLocale(),
         'middleware' => ['auth','localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
     ], function(){
-    Route::get('/', function () {
-        return view('welcome');
+
+        Route::get('/new', function () {
+            return view('admin.form');
+        });
+
+        Route::resource('organization',"OrganizationController");
+        Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
+        Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
+
+        Route::get('/home', 'HomeController@index')->name('home');
+
+        Route::get('/profile', 'UserProfileController@index')->name('profile');
+        Route::POST('/updateProfile', 'UserProfileController@updateProfile')->name('updateProfile');
+
     });
-
-    Route::get('/new', function () {
-        return view('admin.form');
-    });
-
-    Route::resource('organization',"OrganizationController");
-    Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
-    Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
-
-    Route::get('/home', 'HomeController@index')->name('home');
-
-    Route::get('/profile', 'UserProfileController@index')->name('profile');
-    Route::POST('/updateProfile', 'UserProfileController@updateProfile')->name('updateProfile');
-
-});
-
-
 
 
 Auth::routes(['verify' => true,'register' => false]);

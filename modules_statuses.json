@@ -1,5 +1,6 @@
 {
     "Role": true,
     "Api": true,
-    "Task": true
+    "Task": true,
+    "Website": true
 }
