@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
       theme: MyThemeMode.lightTheme,
       title: 'HMFS',
       initialBinding: Binding(),
-      home: OnboardingScreen(),
+      // home: OnboardingScreen(),
+      home: Home(),
       initialRoute: '/',
       getPages: [
         GetPage(

@@ -18,90 +18,14 @@ class HomeController extends GetxController {
 
   final currentIndex = 0.obs;
 
+  final selectedItemIndex = 0.obs;
+
   List<Widget> buildScreens = [
     const HomeScreen(),
     const MessagesScreen(),
     DoctorsScreen(),
     const ReservationScreen(),
     const UserProfileScreen(),
-  ];
-
-  List<PersistentBottomNavBarItem> navBarsItems = [
-    PersistentBottomNavBarItem(
-      icon: SvgPicture.asset(
-        "assets/images/Icon-home-active.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      inactiveIcon: SvgPicture.asset(
-        "assets/images/Icon-home-unactive.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      activeColorPrimary: HexColor.fromHex('#6574CF'),
-    ),
-    PersistentBottomNavBarItem(
-      icon: SvgPicture.asset(
-        "assets/images/Icon-message-active.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      inactiveIcon: SvgPicture.asset(
-        "assets/images/Icon-message-unactive.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      activeColorPrimary: HexColor.fromHex('#6574CF'),
-    ),
-    PersistentBottomNavBarItem(
-      icon: SvgPicture.asset(
-        "assets/images/Icon-doctors-active.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      inactiveIcon: SvgPicture.asset(
-        "assets/images/Icon-doctors-unactive.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      activeColorPrimary: HexColor.fromHex('#6574CF'),
-    ),
-    PersistentBottomNavBarItem(
-      icon: SvgPicture.asset(
-        "assets/images/Icon-reservation-active.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      inactiveIcon: SvgPicture.asset(
-        "assets/images/Icon-reservation-unactive.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      activeColorPrimary: HexColor.fromHex('#6574CF'),
-    ),
-    PersistentBottomNavBarItem(
-      icon: SvgPicture.asset(
-        "assets/images/Icon-userprofile-active.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      inactiveIcon: SvgPicture.asset(
-        "assets/images/Icon-userprofile-unactive.svg",
-        semanticsLabel: "semanticsLabel",
-        width: 30.0,
-        height: 30.0,
-      ),
-      activeColorPrimary: HexColor.fromHex('#6574CF'),
-    ),
   ];
 
   @override
