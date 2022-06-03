@@ -8,6 +8,7 @@ import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
 import 'package:hmfs/app/modules/edite_account/view.dart';
+import 'package:hmfs/app/modules/onboarding/view.dart';
 import 'package:hmfs/app/modules/reset_password/view.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
 import 'package:hmfs/app/modules/signup/view.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: MyThemeMode.lightTheme,
       title: 'HMFS',
       initialBinding: Binding(),
-      home: SignInScreen(),
+      home: OnboardingScreen(),
       initialRoute: '/',
       getPages: [
         GetPage(

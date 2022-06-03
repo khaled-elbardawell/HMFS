@@ -1,0 +1,7 @@
+<svg id="logo_1" data-name="logo/1" xmlns="http://www.w3.org/2000/svg" width="76" height="76" viewBox="0 0 76 76">
+  <g id="red-cross-2">
+    <path id="overlay_fill_primary" data-name="overlay/ fill primary" d="M76,22.8H53.2V0H22.8V22.8H0V53.2H22.8V76H53.2V53.2H76Z" fill="#6574cf"/>
+    <path id="Path" d="M15.2,22.8V0H0V76H15.2V53.2H38V22.8Z" transform="translate(38)" fill="#afbaff"/>
+    <path id="background_basic_100" data-name="background/ basic 100" d="M28.054,2.016a7.438,7.438,0,0,0-10.513.33L15.2,4.839,12.858,2.346A7.437,7.437,0,1,0,2.016,12.529L15.2,25.333l13.184-12.8A7.437,7.437,0,0,0,28.054,2.016Z" transform="translate(22.8 27.867)" fill="#fff"/>
+  </g>
+</svg>

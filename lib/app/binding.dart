@@ -10,6 +10,8 @@ import 'package:hmfs/app/modules/signin/controller.dart';
 import 'package:hmfs/app/modules/signup/controller.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
 
+import 'modules/onboarding/controller.dart';
+
 class Binding extends Bindings {
   @override
   void dependencies() {
@@ -42,6 +44,9 @@ class Binding extends Bindings {
     );
     Get.lazyPut(
       () => NewPasswordController(),
+    );
+    Get.lazyPut(
+      () => OnboardingController(),
     );
   }
 }
