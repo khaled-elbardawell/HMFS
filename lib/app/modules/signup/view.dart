@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
-import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/signup/controller.dart';
 import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
@@ -77,7 +76,7 @@ class SignUpScreen extends StatelessWidget {
                             buttonText: 'Sign UP',
                             formKey: signUpCtrl.signUpformKey,
                             // Todo: API call to sign up
-                            pageBotton: () => Get.offAllNamed('/home'),
+                            pageButton: () => Get.offAllNamed('/home'),
                             textSpan: 'Do you have an account?',
                             buttonTextSpan: 'Sign In',
                             pageButtonTextSpan: '/SignIn',

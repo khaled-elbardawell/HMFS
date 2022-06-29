@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/modules/new_password/controller.dart';
-import 'package:hmfs/app/modules/signin/view.dart';
 import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
 import 'package:hmfs/app/widgets/custom_textfield.dart';
@@ -60,7 +59,7 @@ class NewPasswordScreen extends StatelessWidget {
                     CustomLogButton(
                       formKey: newPasswordCtrl.formKey,
                       buttonText: 'Continue',
-                      pageBotton: () => Get.offAllNamed('/SignIn'),
+                      pageButton: () => Get.offAllNamed('/SignIn'),
                       textSpan: 'Did you remember the password? ',
                       buttonTextSpan: 'Sign In',
                       pageButtonTextSpan: '/SignIn',

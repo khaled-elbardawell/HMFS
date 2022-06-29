@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
-import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/signin/controller.dart';
 import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
@@ -82,7 +81,7 @@ class SignInScreen extends GetView<SignInController> {
                             formKey: controller.formKey,
                             buttonText: 'Sign in',
                             // Todo: API call to sign in
-                            pageBotton: () => Get.offAllNamed('/home'),
+                            pageButton: () => Get.offAllNamed('/home'),
                             textSpan: 'Don’t have an account?',
                             buttonTextSpan: 'Sign Up',
                             pageButtonTextSpan: '/SignUp',

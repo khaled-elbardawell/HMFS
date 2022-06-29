@@ -6,7 +6,7 @@ import 'package:hmfs/app/core/utils/extensions.dart';
 class CustomLogButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final String buttonText;
-  final Function pageBotton;
+  final Function pageButton;
   final String textSpan;
   final String buttonTextSpan;
   final String pageButtonTextSpan;
@@ -15,7 +15,7 @@ class CustomLogButton extends StatelessWidget {
     Key? key,
     required this.formKey,
     required this.buttonText,
-    required this.pageBotton,
+    required this.pageButton,
     required this.textSpan,
     required this.buttonTextSpan,
     required this.pageButtonTextSpan,
@@ -38,7 +38,7 @@ class CustomLogButton extends StatelessWidget {
             ),
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                pageBotton();
+                pageButton();
               }
             },
             child: Text(

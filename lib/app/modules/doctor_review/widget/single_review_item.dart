@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/modules/doctor_review/controller.dart';
 
+// ignore: must_be_immutable
 class SingleReviewItem extends StatelessWidget {
   var reviewCtrl = Get.put(DoctorReviewController());
   final String iconName;
@@ -55,7 +56,7 @@ class SingleReviewItem extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    '${rate}',
+                    '$rate',
                     style: TextStyle(
                       color: HexColor.fromHex('#707FD5'),
                       fontWeight: FontWeight.w900,

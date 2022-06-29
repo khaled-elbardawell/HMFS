@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
-import 'package:hmfs/app/home.dart';
-import 'package:hmfs/app/modules/new_password/view.dart';
 import 'package:hmfs/app/modules/reset_password/controller.dart';
 import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
@@ -48,7 +46,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       formKey: resetCtrl.formKey,
                       buttonText: 'Continue',
                       // Todo: API call for reset password
-                      pageBotton: () => Get.offAllNamed('/home'),
+                      pageButton: () => Get.offAllNamed('/home'),
                       textSpan: 'Did you remember the password? ',
                       buttonTextSpan: 'Sign In',
                       pageButtonTextSpan: '/SignIn',
