@@ -38,7 +38,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: signUpCtrl.nameController,
                             textInputType: TextInputType.text,
                             hintText: 'Name',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: false,
                             marginBottom: 3.0.hp,
@@ -48,7 +48,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: signUpCtrl.emailController,
                             textInputType: TextInputType.emailAddress,
                             hintText: 'email',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: false,
                             marginBottom: 3.0.hp,
@@ -58,7 +58,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: signUpCtrl.mobilephoneController,
                             textInputType: TextInputType.phone,
                             hintText: 'Mobile Number',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: false,
                             marginBottom: 3.0.hp,
@@ -68,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
                             controller: signUpCtrl.passwordController,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: true,
                             marginBottom: 4.0.hp,
@@ -76,7 +76,8 @@ class SignUpScreen extends StatelessWidget {
                           CustomLogButton(
                             buttonText: 'Sign UP',
                             formKey: signUpCtrl.signUpformKey,
-                            pageBotton: Home(),
+                            // Todo: API call to sign up
+                            pageBotton: () => Get.offAllNamed('/home'),
                             textSpan: 'Do you have an account?',
                             buttonTextSpan: 'Sign In',
                             pageButtonTextSpan: '/SignIn',

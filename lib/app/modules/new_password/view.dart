@@ -39,7 +39,7 @@ class NewPasswordScreen extends StatelessWidget {
                           controller: newPasswordCtrl.passwordController,
                           textInputType: TextInputType.emailAddress,
                           hintText: 'Password',
-                          erroMessage:
+                          errorMessage:
                               'Caption text, description, error notification',
                           obscureText: true,
                           title: 'New Password',
@@ -49,7 +49,7 @@ class NewPasswordScreen extends StatelessWidget {
                           controller: newPasswordCtrl.repeatPasswordController,
                           textInputType: TextInputType.emailAddress,
                           hintText: 'Password',
-                          erroMessage:
+                          errorMessage:
                               'Caption text, description, error notification',
                           obscureText: true,
                           title: 'Repeat Password',
@@ -60,7 +60,7 @@ class NewPasswordScreen extends StatelessWidget {
                     CustomLogButton(
                       formKey: newPasswordCtrl.formKey,
                       buttonText: 'Continue',
-                      pageBotton: SignInScreen(),
+                      pageBotton: () => Get.offAllNamed('/SignIn'),
                       textSpan: 'Did you remember the password? ',
                       buttonTextSpan: 'Sign In',
                       pageButtonTextSpan: '/SignIn',

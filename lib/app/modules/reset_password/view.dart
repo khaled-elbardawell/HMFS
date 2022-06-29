@@ -8,6 +8,7 @@ import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
 import 'package:hmfs/app/widgets/custom_textfield.dart';
 
+// Todo: Add singlechildscrollview to avoid overflow error
 class ResetPasswordScreen extends StatelessWidget {
   ResetPasswordScreen({Key? key}) : super(key: key);
   final resetCtrl = Get.put(ResetPasswordController());
@@ -37,7 +38,7 @@ class ResetPasswordScreen extends StatelessWidget {
                       controller: resetCtrl.emailController,
                       textInputType: TextInputType.emailAddress,
                       hintText: 'Email',
-                      erroMessage:
+                      errorMessage:
                           'Caption text, description, error notification',
                       obscureText: false,
                       title: 'Email',
@@ -46,11 +47,12 @@ class ResetPasswordScreen extends StatelessWidget {
                     CustomLogButton(
                       formKey: resetCtrl.formKey,
                       buttonText: 'Continue',
-                      pageBotton: NewPasswordScreen(),
+                      // Todo: API call for reset password
+                      pageBotton: () => Get.offAllNamed('/home'),
                       textSpan: 'Did you remember the password? ',
                       buttonTextSpan: 'Sign In',
                       pageButtonTextSpan: '/SignIn',
-                    )
+                    ),
                   ],
                 ),
               ),

@@ -32,8 +32,7 @@ class MyApp extends StatelessWidget {
       theme: MyThemeMode.lightTheme,
       title: 'HMFS',
       initialBinding: Binding(),
-      // home: OnboardingScreen(),
-      home: Home(),
+      home: OnboardingScreen(),
       initialRoute: '/',
       getPages: [
         GetPage(
@@ -58,7 +57,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/SignIn',
-          page: () => SignInScreen(),
+          page: () => const SignInScreen(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(

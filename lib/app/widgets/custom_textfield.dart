@@ -5,7 +5,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final TextInputType textInputType;
   final String hintText;
-  final String erroMessage;
+  final String errorMessage;
   final bool obscureText;
   final String title;
   final double marginBottom;
@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.textInputType,
     required this.hintText,
-    required this.erroMessage,
+    required this.errorMessage,
     required this.obscureText,
     required this.title,
     required this.marginBottom,
@@ -61,7 +61,7 @@ class CustomTextField extends StatelessWidget {
           ),
           validator: (value) {
             if (value!.isEmpty) {
-              return erroMessage;
+              return errorMessage;
             }
             return null;
           },

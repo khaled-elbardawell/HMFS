@@ -1,6 +1,4 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/home.dart';
@@ -9,9 +7,15 @@ import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
 import 'package:hmfs/app/widgets/custom_textfield.dart';
 
-class SignInScreen extends StatelessWidget {
-  SignInScreen({Key? key}) : super(key: key);
-  final signInCtrl = Get.put(SignInController());
+class SignInScreen extends GetView<SignInController> {
+  const SignInScreen({Key? key}) : super(key: key);
+  // final signInCtrl = Get.put(
+  //   SignInController(
+  //     userRepository: UserRepository(
+  //       userProvider: UserProvider(),
+  //     ),
+  //   ),
+  // );
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +35,25 @@ class SignInScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Form(
-                      key: signInCtrl.formKey,
+                      key: controller.formKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
-                            controller: signInCtrl.emailController,
+                            controller: controller.emailController,
                             textInputType: TextInputType.emailAddress,
                             hintText: 'Email',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: false,
                             title: 'Email',
                             marginBottom: 3.0.hp,
                           ),
                           CustomTextField(
-                            controller: signInCtrl.passwordController,
+                            controller: controller.passwordController,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
-                            erroMessage:
+                            errorMessage:
                                 'Caption text, description, error notification',
                             obscureText: true,
                             title: 'PassWord',
@@ -75,9 +79,10 @@ class SignInScreen extends StatelessWidget {
                             height: 4.0.hp,
                           ),
                           CustomLogButton(
-                            formKey: signInCtrl.formKey,
+                            formKey: controller.formKey,
                             buttonText: 'Sign in',
-                            pageBotton: Home(),
+                            // Todo: API call to sign in
+                            pageBotton: () => Get.offAllNamed('/home'),
                             textSpan: 'Don’t have an account?',
                             buttonTextSpan: 'Sign Up',
                             pageButtonTextSpan: '/SignUp',

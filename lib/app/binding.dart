@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:hmfs/app/modules/chat/controller.dart';
 import 'package:hmfs/app/modules/doctor_profile/controller.dart';
 import 'package:hmfs/app/modules/doctor_review/controller.dart';
 import 'package:hmfs/app/modules/doctors/controller.dart';
@@ -10,7 +11,10 @@ import 'package:hmfs/app/modules/signin/controller.dart';
 import 'package:hmfs/app/modules/signup/controller.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
 
+import 'data/providers/user/provider.dart';
+import 'data/services/api/repository.dart';
 import 'modules/onboarding/controller.dart';
+import 'modules/single_chat/binding.dart';
 
 class Binding extends Bindings {
   @override
@@ -34,7 +38,11 @@ class Binding extends Bindings {
       () => UserProfileControllrer(),
     );
     Get.lazyPut(
-      () => SignInController(),
+      () => SignInController(
+        userRepository: UserRepository(
+          userProvider: UserProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
       () => SignUpController(),
@@ -47,6 +55,12 @@ class Binding extends Bindings {
     );
     Get.lazyPut(
       () => OnboardingController(),
+    );
+    Get.lazyPut(
+      () => ChatController(),
+    );
+    Get.lazyPut(
+      () => SingleChatBinding(),
     );
   }
 }
