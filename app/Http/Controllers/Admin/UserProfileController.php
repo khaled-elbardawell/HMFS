@@ -48,7 +48,7 @@ class UserProfileController extends Controller
                 'email' => $request->email,
             ],[
                 'name' => $request->name,
-                'email' => $request->email,
+                // 'email' => $request->email,
                 'bio' => $request->bio,
                 'phone' => $request->phone,
                 'password' => $password,
