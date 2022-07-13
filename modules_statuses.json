@@ -2,5 +2,6 @@
     "Role": true,
     "Api": true,
     "Task": true,
-    "Website": true
+    "Website": true,
+    "Reservations": true
 }

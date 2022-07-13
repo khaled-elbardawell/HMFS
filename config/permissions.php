@@ -33,4 +33,10 @@ return [
     "departments.edit"    => "Edit Department",
     "departments.delete"  => "Delete Department",
 
+
+    "reservation.index"   => "List Reservations",
+    "reservation.create"  => "Create Reservation",
+    "reservation.edit"    => "Edit Reservation",
+    "reservation.delete"  => "Delete Reservation",
+
 ];

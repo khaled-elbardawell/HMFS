@@ -27,8 +27,8 @@
                     <div class="card-body">
                         <div class="row">
                             {!!  Builder::Input('email','email',$user->email,['col' => 'col-lg-6','label_title' => 'admin.Email','use_trans' => true,'disabled' => true]) !!}
-                            {!! Builder::Select('role_id',$user_role->role_id??null,$roles,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Role','use_trans' => true,'is_required' => true]) !!}
-                            {!! Builder::Select('department_id',$user->department_id??null,$departments,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Department','use_trans' => true]) !!}
+                            {!!  Builder::Select('role_id',$user_role->role_id??null,$roles,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Role','use_trans' => true,'is_required' => true]) !!}
+                            {!!  Builder::Select('department_id',$user->department_id??null,$departments,['col' => 'col-lg-3','option_title' => 'name','option_key_value' => 'id','label_title' => 'admin.Department','use_trans' => true]) !!}
                             {!!  Builder::Input('text','name',$user->name,['col' => 'col-lg-6','label_title' => 'admin.Name','use_trans' => true,'is_required' => true,'disabled' => true]) !!}
                             {!!  Builder::Input('text','phone',$user->phone,['col' => 'col-lg-6','label_title' => 'admin.Phone','use_trans' => true,'is_required' => true,'disabled' => true]) !!}
                             {!!  Builder::TextArea('bio',$user->bio,['rows' => 5 ,'label_title' => 'admin.Bio','use_trans' => true,'disabled' => true]) !!}

@@ -59,6 +59,15 @@
       @endif
 
 
+        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('reservation.index')))
+            <li>
+                <a class="nav-link" href="{{route('reservations.index',['organization_id' => session()->get('organization_id')])}}">
+                    <i class="fa fa-users"></i>
+                    <span>Reservation</span>
+                </a>
+            </li>
+        @endif
+
 
 
 
