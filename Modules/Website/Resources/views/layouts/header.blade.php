@@ -13,7 +13,7 @@
         <div class="main-header">
             <div class="header-left">
                 <div class="header-logo">
-                    <a href="index.html" class="d-flex">
+                    <a href="{{route('home')}}" class="d-flex">
                         <img alt="HMFS" height="75px" class="w-100" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" />
                     </a>
                 </div>
@@ -24,10 +24,10 @@
                                 <a class="active" href="{{route('home')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="index.html">Offers</a>
+                                <a class="active" href="{{route('offers')}}">Offers</a>
                             </li>
                             <li>
-                                <a class="active" href="index.html">Blogs</a>
+                                <a class="active" href="{{route('blogs')}}">Blogs</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('contactUs')}}">Contact Us</a>
@@ -53,8 +53,8 @@
             </div>
             <div class="header-right">
                 <div class="block-signin">
-                    <a href="#" class="text-link-bd-btom hover-up">Apply Now</a>
-                    <a href="#" class="btn btn-default btn-shadow ml-40 hover-up">Sign in</a>
+                    <a href="#" class="text-link-bd-btom btn-sm hover-up">Apply Now</a>
+                    <a href="#" class="btn btn-default  btn-sm btn-shadow ml-40 hover-up">Sign in</a>
                 </div>
             </div>
         </div>
@@ -87,10 +87,10 @@
                                 <a class="active" href="{{route('home')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="index.html">Offers</a>
+                                <a class="active" href="{{route('offers')}}">Offers</a>
                             </li>
                             <li>
-                                <a class="active" href="index.html">Blogs</a>
+                                <a class="active" href="{{route('blogs')}}">Blogs</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('aboutUs')}}">Contact Us</a>
@@ -101,8 +101,8 @@
                             <li class="has-children">
                                 <a href="#">Pages</a>
                                 <ul class="sub-menu">
-                                    <li><a href="page-service.html">Our Services</a></li>
-                                    <li><a href="pages-faqs.html">FAQs</a></li>
+                                    <li><a href="{{route('ourServices')}}">Our Services</a></li>
+                                    <li><a href="{{route('faqs')}}">FAQs</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -117,15 +117,15 @@
                         <li><a href="#">Sign Out</a></li>
                     </ul>
                 </div>
-                <div class="mobile-social-icon mb-50">
+                {{-- <div class="mobile-social-icon mb-50">
                     <h6 class="mb-25">Follow Us</h6>
                     <a href="#"><img src="{{CustomAsset('front/assets/imgs/theme/icons/icon-facebook.svg')}} alt="jobhub" /></a>
                     <a href="#"><img src="{{CustomAsset('front/assets/imgs/theme/icons/icon-twitter.svg')}} alt="jobhub" /></a>
                     <a href="#"><img src="{{CustomAsset('front/assets/imgs/theme/icons/icon-instagram.svg')}} alt="jobhub" /></a>
                     <a href="#"><img src="{{CustomAsset('front/assets/imgs/theme/icons/icon-pinterest.svg')}} alt="jobhub" /></a>
                     <a href="#"><img src="{{CustomAsset('front/assets/imgs/theme/icons/icon-youtube.svg')}} alt="jobhub" /></a>
-                </div>
-                <div class="site-copyright">Copyright 2022 © JobHub. <br />Designed by AliThemes.</div>
+                </div> --}}
+                <div class="site-copyright">Copyright 2022 © HMFS. <br />Designed by AliThemes.</div>
             </div>
         </div>
     </div>

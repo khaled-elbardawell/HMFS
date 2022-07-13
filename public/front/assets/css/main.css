@@ -132,7 +132,7 @@ main {
 }
 
 main.main {
-  padding-top: 108px;
+    padding-top: 75px;
 }
 
 thead {
@@ -3166,7 +3166,7 @@ label {
 }
 
 .header {
-  padding: 10px 0;
+  padding: 0;
   float: left;
   width: 100%;
   position: absolute;
@@ -3400,7 +3400,7 @@ label {
 }
 
 .sticky-bar.stick .burger-icon {
-    top: 50%;
+    top: 40px;
     transform: translateY(-50%);
 }
 
@@ -3452,7 +3452,7 @@ label {
 .mobile-header-wrapper-style {
   position: fixed;
   top: 0;
-  width: 380px;
+  width: 100%;
   min-height: 100vh;
   bottom: 0;
   right: 0;
@@ -3474,7 +3474,7 @@ label {
 }
 
 .mobile-header-wrapper-style .mobile-header-wrapper-inner {
-  padding: 0px 0px 30px;
+  padding: 75px 0px 30px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -3722,7 +3722,7 @@ label {
   cursor: pointer;
   -webkit-transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  top: 45px;
+  top: 30px;
   right: 27px;
   z-index: 999999;
 }
@@ -7656,6 +7656,9 @@ label {
   .custom-class {
     display: block;
   }
+  .header-right {
+    padding-right: 5%;
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -7664,9 +7667,6 @@ label {
   }
   .pl-lg-15 {
     padding-left: 15px !important;
-  }
-  .header-right {
-    padding-right: 50px;
   }
   h2.section-title {
     font-size: 48px;
@@ -7827,6 +7827,7 @@ label {
     height: 328px;
     width: 100%;
   }
+
 }
 
 @media (max-width: 767.98px) {
@@ -7836,9 +7837,7 @@ label {
   .banner-hero .block-banner {
     padding: 0;
   }
-  .header-right {
-    display: none;
-  }
+
   .mobile-header-wrapper-style .mobile-header-wrapper-inner .mobile-header-top {
     padding: 15px 30px 13px 30px;
     border-bottom: 1px solid #ececec;
@@ -8056,18 +8055,27 @@ label {
   .section-title-large {
     font-size: 38px;
   }
-}
-
-@media (min-width: 1400px) {
-  .container.wide {
-    max-width: 1544px;
-  }
-}
-
-/*OTHER SCREEN*/
-@media screen and (min-width: 1200px) and (max-width: 1440px) {
   .header-right {
     display: none;
   }
 }
+
+@media (min-width: 1200px) {
+    .container.wide {
+        max-width: 1544px;
+    }
+    .burger-icon {
+        display: none;
+    }
+    .header-right {
+        display: none;
+    }
+}
+
+/*OTHER SCREEN*/
+/* @media screen and (min-width: 1200px) and (max-width: 1440px) {
+  .header-right {
+    display: none;
+  }
+} */
 /*# sourceMappingURL=main.css.map */

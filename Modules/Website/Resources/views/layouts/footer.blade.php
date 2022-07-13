@@ -46,7 +46,7 @@
             <div class="footer-bottom mt-50">
                 <div class="row">
                     <div class="col-md-6">
-                        Copyright ©2021 <a href="#"><strong>Jobhub</strong></a>. All Rights Reserved
+                        Copyright ©2021 <a href="#"><strong>HMFS</strong></a>. All Rights Reserved
                     </div>
                     <div class="col-md-6 text-md-end text-start">
                         <div class="footer-social">
