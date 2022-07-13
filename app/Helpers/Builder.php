@@ -182,7 +182,7 @@ class Builder
         }
         $input .= '<div>';
 
-        $input .= '<input name="'.$name.'" type="file" class="dropify"  id="'.$id.'"/>';
+        $input .= '<input name="'.$name.'" type="file" class="dropify"  id="'.$id.'" data-default-file="http://localhost:8000/upload/images/full/2022-07-05-17-44-12_check.png" />';
 
 
         if($error_message = self::GetValidationErrorMessage($name)){

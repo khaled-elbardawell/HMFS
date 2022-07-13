@@ -38,16 +38,24 @@
                             <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
                                 <div class="met-profile-main" style="justify-content: center;flex-direction: column;">
                                     <div class="met-profile-main-pic m-0">
-                                        @if (!is_null($user->upload))
+
+                                        @php
+                                            if($user->upload->file != null){
+                                                $url = CustomAsset('upload/images/full/'.$user->upload->file);
+                                            }else{
+                                                $url = null;
+                                            }
+                                        @endphp
+
+                                        {{-- @if (!is_null($user->upload))
+                                            <img src="{{$url}}" alt="profile-user" class="rounded-circle" />
                                         @else
                                             <img src="{{CustomAsset('admin/assets/images/users/user-1.png')}}" alt="profile-user" class="rounded-circle" />
-                                        @endif
+                                        @endif --}}
+
+
                                         {!!  Builder::FileDropify('image_profile',null,['id' => 'image_profile','use_trans' => true,'is_required' => true]) !!}
 
-                                        {{-- <span class="fro-profile_main-pic-change">
-
-                                            <i class="fas fa-camera"></i>
-                                        </span> --}}
                                     </div>
                                     <div class="met-profile_user-detail text-center">
                                         <h5 class="met-user-name">{{$user->name}}</h5>
@@ -61,19 +69,6 @@
                                     <li class="mt-2"><i class="dripicons-mail text-info font-18 mt-2 mr-2"></i> <b> Email </b> : {{$user->email}}</li>
                                     <li class="mt-2"><i class="dripicons-location text-info font-18 mt-2 mr-2"></i> <b>Location</b> : USA</li>
                                 </ul>
-                                {{-- <div class="button-list btn-social-icon">
-                                    <button type="button" class="btn btn-blue btn-circle">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-secondary btn-circle ml-2">
-                                        <i class="fab fa-twitter"></i>
-                                    </button>
-
-                                    <button type="button" class="btn btn-pink btn-circle  ml-2">
-                                        <i class="fab fa-dribbble"></i>
-                                    </button>
-                                </div> --}}
                             </div><!--end col-->
                         </div><!--end row-->
                     </div><!--end f_profile-->
@@ -157,8 +152,6 @@
     </div>
 
 {!! Builder::EndForm() !!}
-
-
 
 @endsection
 
