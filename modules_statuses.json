@@ -3,5 +3,6 @@
     "Api": true,
     "Task": true,
     "Website": true,
-    "Reservations": true
+    "Reservations": true,
+    "Chat": true
 }

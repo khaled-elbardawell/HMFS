@@ -9,12 +9,15 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "beyondcode/laravel-websockets": "^1.13",
         "fideloper/proxy": "^4.4",
         "intervention/image": "^2.7",
         "laravel/framework": "^6.20.26",
+        "laravel/telescope": "3.0",
         "laravel/tinker": "^2.5",
         "mcamara/laravel-localization": "^1.7",
         "nwidart/laravel-modules": "^8.3",
+        "pusher/pusher-php-server": "~3.0",
         "tymon/jwt-auth": "1.0.0-rc.5"
     },
     "require-dev": {
