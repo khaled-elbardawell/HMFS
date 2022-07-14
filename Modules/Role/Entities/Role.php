@@ -4,12 +4,13 @@ namespace Modules\Role\Entities;
 
 use App\Models\Admin\Organization;
 use App\Traits\Paginate;
+use App\Traits\SqlTrait;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    use Paginate;
+    use Paginate,SqlTrait;
 
     protected $table = 'roles';
     protected $guarded = [];

@@ -16,6 +16,206 @@
                 </div><!--end col-->
             </div>
             <!-- end page title end breadcrumb -->
+
+
+            <div class="row justify-content-center">
+                <?php  $bgColors = ['success','danger','purple','dark','info','primary','secondary']; ?>
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">All Users</p>
+                                    <h3 class="my-3">{{ $allUsersCount }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $allUsersCount }}</span> All Users Count</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-user-group report-main-icon bg-soft-purple text-purple"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">All Organizations</p>
+                                    <h3 class="my-3">{{ $organizationsCount->count }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $organizationsCount->count }}</span>
+                                        All Organizations</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="fa fa-sitemap report-main-icon  bg-soft-{{$bgColors[5]}} text-{{$bgColors[5]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">All Departments</p>
+                                    <h3 class="my-3">{{ $departmentsCount->count }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $departmentsCount->count }}</span>
+                                        All Departments</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-view-thumb report-main-icon  bg-soft-{{$bgColors[6]}} text-{{$bgColors[6]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                {{--                <div class="col-md-6 col-lg-3">--}}
+                {{--                    <div class="card report-card">--}}
+                {{--                        <div class="card-body">--}}
+                {{--                            <div class="d-flex justify-content-between">--}}
+                {{--                                <div>--}}
+                {{--                                    <p class="text-dark font-weight-semibold font-14">All Reservations</p>--}}
+                {{--                                    <h3 class="my-3">{{ $reservationsCount->not_complete_reservations + $reservationsCount->complete_reservations }}</h3>--}}
+                {{--                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $reservationsCount->not_complete_reservations + $reservationsCount->complete_reservations}}</span>--}}
+                {{--                                        All Reservations</p>--}}
+                {{--                                </div>--}}
+                {{--                                <div class="align-self-center">--}}
+                {{--                                    <i class="dripicons-clock report-main-icon  bg-soft-{{$bgColors[2]}} text-{{$bgColors[2]}}"></i>--}}
+                {{--                                </div>--}}
+                {{--                            </div>--}}
+                {{--                        </div><!--end card-body-->--}}
+                {{--                    </div><!--end card-->--}}
+                {{--                </div> <!--end col-->--}}
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">Not Complete Reservations</p>
+                                    <h3 class="my-3">{{ $reservationsCount->not_complete_reservations }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $reservationsCount->not_complete_reservations }}</span>
+                                        Not Complete Reservations</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-clock report-main-icon  bg-soft-{{$bgColors[1]}} text-{{$bgColors[1]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">Complete Reservations</p>
+                                    <h3 class="my-3">{{ $reservationsCount->complete_reservations }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $reservationsCount->complete_reservations }}</span>
+                                        Complete Reservations</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-clock report-main-icon  bg-soft-{{$bgColors[0]}} text-{{$bgColors[0]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-dark font-weight-semibold font-14">All Roles</p>
+                                        <h3 class="my-3">{{ $rolesCount->count }}</h3>
+                                        <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $rolesCount->count }}</span>
+                                            All Roles</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="fab fa-critical-role report-main-icon bg-soft-{{$bgColors[4]}} text-{{$bgColors[4]}}"></i>
+                                    </div>
+                                </div>
+                            </div><!--end card-body-->
+                        </div><!--end card-->
+                    </div> <!--end col-->
+
+
+
+                @foreach($usersRolesCount as $usersRole)
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card report-card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between">
+                                    <div>
+                                        <p class="text-dark font-weight-semibold font-14">{{$usersRole->name}}</p>
+                                        <h3 class="my-3">{{ $usersRole->count }}</h3>
+                                        <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $usersRole->count }}</span>
+                                            {{$usersRole->name}}</p>
+                                    </div>
+                                    <div class="align-self-center">
+                                        <i class="dripicons-user-group report-main-icon bg-soft-{{$bgColors[$loop->index]}} text-{{$bgColors[$loop->index]}}"></i>
+                                    </div>
+                                </div>
+                            </div><!--end card-body-->
+                        </div><!--end card-->
+                    </div> <!--end col-->
+                @endforeach
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">All Boards</p>
+                                    <h3 class="my-3">{{ $boardsCount->count }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $boardsCount->count }}</span>
+                                        All Boards</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-checklist report-main-icon  bg-soft-{{$bgColors[3]}} text-{{$bgColors[3]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+
+
+                <div class="col-md-6 col-lg-3">
+                    <div class="card report-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-dark font-weight-semibold font-14">Health Profiles</p>
+                                    <h3 class="my-3">{{ $healthProfilesCount->count }}</h3>
+                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> {{ $healthProfilesCount->count }}</span>
+                                        Health Profiles Count</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <i class="dripicons-wallet report-main-icon  bg-soft-{{$bgColors[4]}} text-{{$bgColors[4]}}"></i>
+                                </div>
+                            </div>
+                        </div><!--end card-body-->
+                    </div><!--end card-->
+                </div> <!--end col-->
+            </div><!--end row-->
+
+
+
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
@@ -105,72 +305,9 @@
                     </div><!--end card-->
                 </div><!--end col-->
             </div><!--end row-->
-            <div class="row justify-content-center">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card report-card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-dark font-weight-semibold font-14">Sessions</p>
-                                    <h3 class="my-3">24k</h3>
-                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i>8.5%</span> New Sessions Today</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="dripicons-user-group report-main-icon bg-soft-purple text-purple"></i>
-                                </div>
-                            </div>
-                        </div><!--end card-body-->
-                    </div><!--end card-->
-                </div> <!--end col-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card report-card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-dark font-weight-semibold font-14">Avg.Sessions</p>
-                                    <h3 class="my-3">00:18</h3>
-                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i>1.5%</span> Weekly Avg.Sessions</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="dripicons-clock report-main-icon bg-soft-danger text-danger"></i>
-                                </div>
-                            </div>
-                        </div><!--end card-body-->
-                    </div><!--end card-->
-                </div> <!--end col-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card report-card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-dark font-weight-semibold font-14">Bounce Rate</p>
-                                    <h3 class="my-3">$2400</h3>
-                                    <p class="mb-0 text-truncate"><span class="text-danger"><i class="mdi mdi-trending-down"></i>35%</span> Bounce Rate Weekly</p>
-                                </div>
-                                <div  class="align-self-center">
-                                    <i class="dripicons-meter report-main-icon bg-soft-secondary text-secondary"></i>
-                                </div>
-                            </div>
-                        </div><!--end card-body-->
-                    </div><!--end card-->
-                </div> <!--end col-->
-                <div class="col-md-6 col-lg-3">
-                    <div class="card report-card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                                <div>
-                                    <p class="text-dark font-weight-semibold font-14">Goal Completions</p>
-                                    <h3 class="my-3">85000</h3>
-                                    <p class="mb-0 text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i>10.5%</span> Completions Weekly</p>
-                                </div>
-                                <div class="align-self-center">
-                                    <i class="dripicons-wallet report-main-icon bg-soft-warning text-warning"></i>
-                                </div>
-                            </div>
-                        </div><!--end card-body-->
-                    </div><!--end card-->
-                </div> <!--end col-->
-            </div><!--end row-->
+
+
+
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">

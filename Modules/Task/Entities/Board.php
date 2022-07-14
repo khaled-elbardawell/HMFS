@@ -3,11 +3,12 @@
 namespace Modules\Task\Entities;
 
 use App\Traits\Paginate;
+use App\Traits\SqlTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Board extends Model
 {
-    use Paginate;
+    use Paginate,SqlTrait;
     protected $guarded = [];
 
     public function boardCards(){
