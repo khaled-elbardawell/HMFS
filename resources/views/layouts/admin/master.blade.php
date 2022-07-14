@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Crovex - Admin & Dashboard Template</title>
+    <title>HMFS - Health Management & Follow-up System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="" name="author" />
@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{CustomAsset("admin/assets/images/favicon.ico")}}">
+    <link rel="shortcut icon" href="{{CustomAsset("front/assets/imgs/hmfs_logo_1.svg")}}">
 
     <!-- jvectormap -->
     <link href="{{CustomAsset("admin/plugins/jvectormap/jquery-jvectormap-2.0.2.css")}}" rel="stylesheet">

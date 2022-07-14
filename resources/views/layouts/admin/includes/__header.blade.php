@@ -5,11 +5,7 @@
     <div class="topbar-left">
         <a href="{{route('home')}}" class="logo">
             <span>
-                <img src="{{CustomAsset('admin/assets/images/logo-sm.png')}}" alt="logo-small" class="logo-sm">
-            </span>
-            <span>
-                <img src="{{CustomAsset('admin/assets/images/logo.png')}}" alt="logo-large" class="logo-lg logo-light">
-                <img src="{{CustomAsset('admin/assets/images/logo-dark.png')}}" alt="logo-large" class="logo-lg">
+                <img height="90px" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" alt="HMFS" class="w-100">
             </span>
         </a>
     </div>
@@ -17,8 +13,6 @@
     <!-- Navbar -->
 
     <nav class="navbar-custom">
-
-
 
         <ul class="list-unstyled topbar-nav float-right mb-0">
 
@@ -176,12 +170,12 @@
                     <i class="ti-menu nav-icon"></i>
                 </button>
             </li>
-            <li class="hide-phone app-search">
-                <form role="search" class="">
-                    <input type="text" id="AllCompo" placeholder="Search..." class="form-control">
-                    <a href=""><i class="fas fa-search"></i></a>
-                </form>
-            </li>
+{{--            <li class="hide-phone app-search">--}}
+{{--                <form role="search" class="">--}}
+{{--                    <input type="text" id="AllCompo" placeholder="Search..." class="form-control">--}}
+{{--                    <a href=""><i class="fas fa-search"></i></a>--}}
+{{--                </form>--}}
+{{--            </li>--}}
         </ul>
     </nav>
     <!-- end navbar-->
