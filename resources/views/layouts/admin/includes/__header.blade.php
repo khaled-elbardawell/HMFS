@@ -3,7 +3,7 @@
 
     <!-- LOGO -->
     <div class="topbar-left">
-        <a href="{{route('home')}}" class="logo">
+        <a href="{{url('home')}}" class="logo">
             <span>
                 <img height="90px" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" alt="HMFS" class="w-100">
             </span>

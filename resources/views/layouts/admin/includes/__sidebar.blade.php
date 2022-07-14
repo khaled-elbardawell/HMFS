@@ -2,7 +2,7 @@
 <div class="left-sidenav">
     <ul class="metismenu left-sidenav-menu">
         <li>
-            <a class="nav-link" href="{{route('home')}}">
+            <a class="nav-link" href="{{url('home')}}">
                 <i class="fa fa-home"></i>
                 <span>Home</span>
             </a>

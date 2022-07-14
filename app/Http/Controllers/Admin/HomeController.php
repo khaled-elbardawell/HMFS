@@ -42,12 +42,31 @@ class HomeController extends Controller
         $reservationsCount = $this->getReservationsCount();
         $boardsCount = $this->getBoards();
         $healthProfilesCount = $this->getHealthProfilesCount();
-//        dd($allUsersCount);
+        $latestReservations = $this->getLatestReservationsData();
 
+//        dd($latestReservations[0]->id);
 
-        return view('admin.home',compact('allUsersCount','healthProfilesCount','boardsCount','reservationsCount','usersRolesCount','organizationsCount','rolesCount','departmentsCount'));
+        return view('admin.home',compact('latestReservations','allUsersCount','healthProfilesCount','boardsCount','reservationsCount','usersRolesCount','organizationsCount','rolesCount','departmentsCount'));
     }// end method
 
+
+
+    private function getLatestReservationsData(){
+        $sql = "SELECT reservations.*,doctors.name as doctor_name,users.name as user_name,
+                       IF(reservations.status = 0,'Not Complete','Complete') as status_text FROM reservations
+                     INNER JOIN users ON users.id = reservations.user_id
+                     INNER JOIN users as doctors ON doctors.id = reservations.doctor_id ";
+
+        $bindings = [];
+        if (session()->has('organization_id')){
+            $sql .= " WHERE reservations.organization_id = ?";
+
+            $bindings = [session()->get('organization_id')];
+        }
+
+        $sql .= " ORDER BY reservations.reservation_date DESC LIMIT 8";
+        return Reservation::sqlGet($sql,$bindings);
+    }
 
     /**
      * @param $usersRolesCount
@@ -62,6 +81,8 @@ class HomeController extends Controller
         }
         return $count;
     }// end method
+
+
 
     /**
      * @return mixed|null

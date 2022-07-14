@@ -186,7 +186,7 @@
                                         Health Profiles Count</p>
                                 </div>
                                 <div class="align-self-center">
-                                    <i class="dripicons-wallet report-main-icon  bg-soft-{{$bgColors[4]}} text-{{$bgColors[4]}}"></i>
+                                    <i class="dripicons-user-id report-main-icon  bg-soft-{{$bgColors[4]}} text-{{$bgColors[4]}}"></i>
                                 </div>
                             </div>
                         </div><!--end card-body-->
@@ -200,50 +200,33 @@
 
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
-                            <h4 class="header-title mt-0 mb-3">Browser Used By Users</h4>
+                            <h4 class="header-title mt-0 mb-3">Latest Reservations</h4>
                             <div class="table-responsive browser_users">
                                 <table class="table mb-0">
                                     <thead class="thead-light">
                                     <tr>
-                                        <th class="border-top-0">Browser</th>
-                                        <th class="border-top-0">Sessions</th>
-                                        <th class="border-top-0">Bounce Rate</th>
-                                        <th class="border-top-0">Transactions</th>
+                                        <th class="border-top-0">#</th>
+                                        <th class="border-top-0">User</th>
+                                        <th class="border-top-0">Doctor</th>
+                                        <th class="border-top-0">Date</th>
+                                        <th class="border-top-0">Time</th>
+                                        <th class="border-top-0">Status</th>
                                     </tr><!--end tr-->
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><i class="fab fa-chrome mr-2 text-danger font-16"></i>Chrome</td>
-                                        <td>10853<small class="text-muted">(52%)</small></td>
-                                        <td> 52.80%</td>
-                                        <td>566<small class="text-muted">(92%)</small></td>
-                                    </tr><!--end tr-->
-                                    <tr>
-                                        <td><i class="fab fa-safari mr-2 text-info font-16"></i>Safari</td>
-                                        <td>2545<small class="text-muted">(47%)</small></td>
-                                        <td> 47.54%</td>
-                                        <td>498<small class="text-muted">(81%)</small></td>
-                                    </tr><!--end tr-->
-                                    <tr>
-                                        <td><i class="fab fa-internet-explorer mr-2 text-warning font-16"></i>Internet-Explorer</td>
-                                        <td>1836<small class="text-muted">(38%)</small></td>
-                                        <td> 41.12%</td>
-                                        <td>455<small class="text-muted">(74%)</small></td>
-                                    </tr><!--end tr-->
-                                    <tr>
-                                        <td><i class="fab fa-opera mr-2 text-danger font-16"></i>Opera</td>
-                                        <td>1958<small class="text-muted">(31%)</small></td>
-                                        <td> 36.82%</td>
-                                        <td>361<small class="text-muted">(61%)</small></td>
-                                    </tr><!--end tr-->
-                                    <tr>
-                                        <td><i class="fab fa-firefox mr-2 text-blue font-16"></i>Firefox</td>
-                                        <td>1566<small class="text-muted">(26%)</small></td>
-                                        <td> 29.33%</td>
-                                        <td>299<small class="text-muted">(49%)</small></td>
-                                    </tr><!--end tr-->
+                                    <?php $statusColors = ['danger','success'] ?>
+                                       @foreach($latestReservations as $latestReservation)
+                                            <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td>{{$latestReservation->user_name}}</td>
+                                                <td>{{$latestReservation->doctor_name}}</td>
+                                                <td>{{$latestReservation->reservation_date}}</td>
+                                                <td>{{$latestReservation->reservation_time}}</td>
+                                                <td><span class="badge badge-{{$statusColors[$latestReservation->status]}}">{{$latestReservation->status_text}}</span></td>
+                                            </tr><!--end tr-->
+                                      @endforeach
                                     </tbody>
                                 </table> <!--end table-->
                             </div><!--end /div-->
@@ -255,7 +238,7 @@
 
                 <div class="col-lg-6">
 
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h4 class="header-title mt-0">Users</h4>
                             <div id="ana_device" class="apex-charts"></div>
