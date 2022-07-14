@@ -54,6 +54,10 @@
                                     <td><span class="badge badge-secondary">{{$user->last_login}}</span></td>
                                     <td><span class="badge badge-dark">{{$user->registered_at}}</span></td>
                                     <td>
+                                        @can('users.health-profile')
+                                            <a title="preview health profile" href="{{route('health-profile.index',['user_id' => $user->id])}}" class="mr-2"><i class="fas fa-eye text-info font-16"></i></a>
+                                        @endcan
+
                                         @can('users.edit')
                                           <a href="{{route('users.edit',[$user->id,'organization_id' => $user->organization_id])}}" class="mr-2"><i class="fas fa-edit text-info font-16"></i></a>
                                         @endcan

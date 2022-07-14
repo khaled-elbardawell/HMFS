@@ -80,7 +80,7 @@ class Builder
         $use_trans   = $options['use_trans']??true;
         $disabled    = isset($options['disabled']) && $options['disabled'] ? 'disabled' : '';
         $readonly    = isset($options['readonly']) && $options['readonly'] ? 'disabled' : '';
-        $is_required = isset($options['is_required']) ? '<span class="text-danger">*</span>' : '';
+        $is_required = isset($options['is_required']) ? '*' : '';
         $placeholder = ucfirst($options['placeholder']??$label_title);
         $value       = old($name)??$value;
 
@@ -168,6 +168,8 @@ class Builder
         $use_trans   = $options['use_trans']??true;
         $is_required = isset($options['is_required']) ? '<span class="text-danger">*</span>' : '';
         $note = isset($options['note']) ? $options['note'] : '';
+        $multiple = isset($options['multiple']) && $options['multiple'] ? "multiple" : "";
+
 
         if ($use_trans){
             $label_title = trans($label_title);
@@ -182,7 +184,7 @@ class Builder
         }
         $input .= '<div>';
 
-        $input .= '<input name="'.$name.'" type="file" class="dropify"  id="'.$id.'" data-default-file="http://localhost:8000/upload/images/full/2022-07-05-17-44-12_check.png" />';
+        $input .= '<input name="'.$name.'" type="file" class="dropify"  id="'.$id.'" '.$multiple.'/>';
 
 
         if($error_message = self::GetValidationErrorMessage($name)){
@@ -197,6 +199,7 @@ class Builder
 
         return $input;
     }
+
 
     public static function Select($name,$value,$optionsData = [],$options = []){
         $id                 = $options['id']??$name;

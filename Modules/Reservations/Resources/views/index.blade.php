@@ -23,7 +23,7 @@
             <div class="card">
                 <div class="card-body">
 
-                    @can('reservations.create')
+                    @can('reservation.create')
                         <div class="mt-0 header-title">
                             <a href="{{route('reservations.create')}}" class="btn btn-primary">New <i class="mdi mdi-plus"></i></a>
                         </div>

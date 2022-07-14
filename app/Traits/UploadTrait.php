@@ -75,6 +75,7 @@ trait UploadTrait
      */
     public static function saveUpload($uploadable_id,$action='create',$type='image',$local='en',$file_input_name='file'){
         $files = request()->file($file_input_name);
+
         if ($files){
             if (!is_array($files)){
                  $files = [$files];

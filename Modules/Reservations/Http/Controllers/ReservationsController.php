@@ -12,6 +12,17 @@ use Modules\Reservations\Http\Requests\ReservationsRequest;
 
 class ReservationsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:reservation.index' , ['only' => ['index']]);
+        $this->middleware('can:reservation.create', ['only' => ['create','store','doctors_search','users_search']]);
+        $this->middleware('can:reservation.edit'  , ['only' => ['edit','update']]);
+        $this->middleware('can:reservation.delete', ['only' => ['destroy']]);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      * @return Renderable

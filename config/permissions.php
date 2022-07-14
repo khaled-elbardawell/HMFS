@@ -18,7 +18,7 @@ return [
 
     "board.index"   => "List Boards",
     "board.create"  => "Delete Board",
-    "board.edit"  => "Delete Board",
+    "board.edit"    => "Delete Board",
     "board.delete"  => "Delete Board",
 
 
@@ -26,6 +26,7 @@ return [
     "users.create"  => "Create User",
     "users.edit"    => "Edit User",
     "users.delete"  => "Delete User",
+    "users.health-profile"  => "Preview health profile",
 
 
     "departments.index"   => "List Department",

@@ -19,29 +19,33 @@ Route::group(
     ], function(){
 
 
-    Route::resource('organization',"OrganizationController");
-    Route::get('organization/preview/{organization}','OrganizationController@preview')->name('organization.preview');
-    Route::get('super-admin/preview','OrganizationController@superAdminPreview')->name('super-admin.preview');
-
-
-    Route::resource('departments',"DepartmentController");
-
-
-    Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
-    Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
-    Route::get('user/organization/preview{organization_id}','UserController@changeOrganizationPreview')->name('change.organization.preview');
-
         Route::resource('organization',"OrganizationController");
+        Route::get('organization/preview/{organization}','OrganizationController@preview')->name('organization.preview');
+        Route::get('super-admin/preview','OrganizationController@superAdminPreview')->name('super-admin.preview');
+
+
+        Route::resource('departments',"DepartmentController");
+
+
         Route::resource('users',"UserController")->middleware('checkUrlHasOrganizationId');
         Route::post('users/check/email','UserController@userCheckEmail')->name('users.check.email')->middleware('checkUrlHasOrganizationId');
+        Route::get('user/organization/preview{organization_id}','UserController@changeOrganizationPreview')->name('change.organization.preview');
+
 
         Route::get('/home', 'HomeController@index')->name('home');
 
         Route::get('/profile', 'UserProfileController@index')->name('profile');
-        Route::POST('/updateProfile', 'UserProfileController@updateProfile')->name('updateProfile');
+        Route::post('/updateProfile', 'UserProfileController@updateProfile')->name('updateProfile');
 
-    });
+
+        Route::resource('health-profile',"HealthProfileController");
+
+});
 
 
 Auth::routes(['verify' => true,'register' => false]);
+
+
+
+
 
