@@ -13,8 +13,7 @@
         <div class="page-title-box">
             <div class="float-right">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
-                    <li class="breadcrumb-item"><a href="javascript:void(0);">Pages</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">HMFS</a></li>
                     <li class="breadcrumb-item active">Profile</li>
                 </ol>
             </div>
@@ -40,11 +39,12 @@
                                     <div class="met-profile-main-pic m-0">
 
                                         @php
-                                            if($user->upload->file != null){
-                                                $url = CustomAsset('upload/images/full/'.$user->upload->file);
-                                            }else{
-                                                $url = null;
-                                            }
+                                            $user_upload = $user->upload;
+                                             if( isset($user_upload->file) && $user_upload->file != null){
+                                                 $url = CustomAsset('upload/images/full/'.$user->upload->file);
+                                             }else{
+                                                 $url = null;
+                                             }
                                         @endphp
 
                                         {{-- @if (!is_null($user->upload))
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="met-profile_user-detail text-center">
                                         <h5 class="met-user-name">{{$user->name}}</h5>
-                                        <p class="mb-0 met-user-name-post">UI/UX Designer</p>
+{{--                                        <p class="mb-0 met-user-name-post">UI/UX Designer</p>--}}
                                     </div>
                                 </div>
                             </div><!--end col-->
@@ -67,7 +67,7 @@
                                 <ul class="list-unstyled personal-detail">
                                     <li class=""><i class="dripicons-phone mr-2 text-info font-18"></i> <b> phone </b> : {{$user->phone}}</li>
                                     <li class="mt-2"><i class="dripicons-mail text-info font-18 mt-2 mr-2"></i> <b> Email </b> : {{$user->email}}</li>
-                                    <li class="mt-2"><i class="dripicons-location text-info font-18 mt-2 mr-2"></i> <b>Location</b> : USA</li>
+{{--                                    <li class="mt-2"><i class="dripicons-location text-info font-18 mt-2 mr-2"></i> <b>Location</b> : USA</li>--}}
                                 </ul>
                             </div><!--end col-->
                         </div><!--end row-->
@@ -91,10 +91,9 @@
                             @enderror
                         </div>
 
-                        {{-- {!!   Builder::Input('text','name',null,['col'=>'col-md-6' , 'label_title'=>'admin.Name']) !!} --}}
 
                         <div class="col-md-6">
-                            <input name="email" type="email" placeholder="Email" class="form-control" value="{{$user->email??null}}">
+                            <input name="email" disabled="true" type="email" placeholder="Email" class="form-control" value="{{$user->email??null}}">
                             @error('email')
                                 <div class="invalid-feedback d-block" role="alert">
                                     <strong>{{ $message }}</strong>
