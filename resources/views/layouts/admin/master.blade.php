@@ -74,7 +74,6 @@
 <script src="{{CustomAsset("admin/plugins/moment/moment.js")}}"></script>
 <script src="{{CustomAsset("admin/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js")}}"></script>
 <script src="{{CustomAsset("admin/plugins/jvectormap/jquery-jvectormap-us-aea-en.js")}}"></script>
-<script src="{{CustomAsset("admin/assets/pages/jquery.analytics_dashboard.init.js")}}"></script>
 
 <!-- Sweet-Alert  -->
 <script src="{{CustomAsset("admin/plugins/sweet-alert2/sweetalert2.min.js")}}"></script>

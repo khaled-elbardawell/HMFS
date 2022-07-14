@@ -56,19 +56,19 @@ var options = {
       data: [0,45,10,75,35,94,40,115,30,105,65,190]
   }],
 
-  
+
 
   xaxis: {
       type: 'datetime',
-      categories: ["2019-09-19T00:00:00", "2019-09-19T01:30:00", "2019-09-19T02:30:00", "2019-09-19T03:30:00", "2019-09-19T04:30:00", "2019-09-19T05:30:00", "2019-09-19T06:30:00", "2019-09-19T07:30:00", "2019-09-19T08:30:00", "2019-09-19T09:30:00", "2019-09-19T10:30:00", "2019-09-19T11:30:00"],  
+      categories: ["2019-09-19T00:00:00", "2019-09-19T01:30:00", "2019-09-19T02:30:00", "2019-09-19T03:30:00", "2019-09-19T04:30:00", "2019-09-19T05:30:00", "2019-09-19T06:30:00", "2019-09-19T07:30:00", "2019-09-19T08:30:00", "2019-09-19T09:30:00", "2019-09-19T10:30:00", "2019-09-19T11:30:00"],
       axisBorder: {
         show: true,
         color: '#45404a2e',
-      },  
+      },
       axisTicks: {
         show: true,
         color: '#45404a2e',
-      },                  
+      },
   },
 
   fill: {
@@ -115,7 +115,7 @@ var options = {
         color: '#45404a2e',
         opacity: 0.15
     },
-  }, 
+  },
   plotOptions: {
     pie: {
       donut: {
@@ -131,7 +131,7 @@ var options = {
       width: 2,
       colors: ['transparent']
   },
- 
+
   series: [10, 65, 25,],
   legend: {
       show: true,
@@ -145,7 +145,7 @@ var options = {
   },
   labels: [ "Tablet", "Desktop", "Mobile"],
   colors: ["#34bfa3", "#5d78ff", "#fd3c97"],
- 
+
   responsive: [{
       breakpoint: 600,
       options: {
@@ -153,7 +153,7 @@ var options = {
             donut: {
               customScale: 0.2
             }
-          },        
+          },
           chart: {
               height: 240
           },
@@ -170,7 +170,7 @@ var options = {
         }
     }
   }
-  
+
 }
 
 var chart = new ApexCharts(
@@ -209,7 +209,7 @@ var options = {
   plotOptions: {
       bar: {
           dataLabels: {
-              position: 'top', // top, center, bottom              
+              position: 'top', // top, center, bottom
           },
           columnWidth: '30',
           distributed: true,
