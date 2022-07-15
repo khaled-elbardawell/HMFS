@@ -21,11 +21,12 @@ trait UploadTrait
 
 
 
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function upload(){
-        return $this->morphTo(Upload::class, 'uploadable');
+        return $this->morphOne(Upload::class, 'uploadable');
     }// end method
 
     /**

@@ -75,9 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail , JWTSubject
         return $this->hasOne('Modules\Role\Entities\UserRoles', 'user_id');
     }
 
-    public function upload(){
-        return $this->hasOne('App\Upload', 'uploadable_id');
-    }
+
 
 
 }

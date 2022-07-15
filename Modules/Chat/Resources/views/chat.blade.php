@@ -1,6 +1,21 @@
 @extends('layouts.admin.master')
 
 
+@section('css')
+    <style>
+        .rounded-circle-text {
+            border-radius: 50% !important;
+            background-color: #cccccc;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            line-height: 48px;
+            font-weight: bold;
+        }
+    </style>
+@endsection
+
+
 @section('content')
                     <!-- Page-Title -->
                     <div class="row">
@@ -8,8 +23,7 @@
                             <div class="page-title-box">
                                 <div class="float-right">
                                     <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="javascript:void(0);">Crovex</a></li>
-                                        <li class="breadcrumb-item"><a href="javascript:void(0);">Apps</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript:void(0);">HMFS</a></li>
                                         <li class="breadcrumb-item active">Chat</li>
                                     </ol>
                                 </div>
@@ -20,10 +34,10 @@
                     <!-- end page title end breadcrumb -->
                     <div class="row">
                         <div class="col-12">
-                            <div class="chat-box-left">
+                             <div class="chat-box-left">
                                 <ul class="nav nav-pills mb-3 nav-justified" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="general_chat_tab" data-toggle="pill" href="#general_chat">General</a>
+                                        <a class="nav-link active" id="general_chat_tab" data-toggle="pill" href="#general_chat">Chats</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="group_chat_tab" data-toggle="pill" href="#group_chat">Groups</a>
@@ -45,128 +59,29 @@
 
                                 <div class="tab-content chat-list slimscroll" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="general_chat">
-                                        <a href="" class="media new-message">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-1.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-success"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
+                                        @foreach($chats as $chat)
+                                             <a href="{{route('chat',['chat_id' => $chat->chat_id])}}" class="media new-message">
+                                                <div class="media-left">
+                                                    @if($chat->file)
+                                                         <img src="{{CustomAsset('upload/images/full/'.$chat->file)}}" alt="{{$chat->name}}" class="rounded-circle thumb-md">
+                                                         <span class="round-10 bg-success"></span>
+                                                    @else
+                                                        <div  class="rounded-circle-text">{{TextImage($chat->name??$chat->label)}}</div>
+                                                        <span class="round-10 bg-success"></span>
+
+                                                    @endif
+                                                </div><!-- media-left -->
+                                                <div class="media-body">
                                                 <div class="d-inline-block">
-                                                    <h6>Daniel Madsen</h6>
-                                                    <p>Good morning! Congratulations Friend...</p>
+                                                    <h6>{{$chat->name??$chat->label}}</h6>
+                                                    <p>{{$chat->last_message??''}}</p>
                                                 </div>
                                                 <div>
-                                                    <span>20 Feb</span>
-                                                    <span>3</span>
+                                                    <span>{{$chat->updated_at}}</span>
                                                 </div>
                                             </div><!-- end media-body -->
-                                        </a> <!--end media-->
-                                        <a href="" class="media new-message">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-2.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-success"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Robert Jefferson</h6>
-                                                    <p>Congratulations Friend...</p>
-                                                </div>
-                                                <div>
-                                                    <span>20 Feb</span>
-                                                    <span>1</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a> <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-3.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-danger"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Jesse Ross</h6>
-                                                    <p>How are you Friend...</p>
-                                                </div>
-                                                <div>
-                                                    <span>15 Feb</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a> <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-4.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-danger"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Mary Schneider</h6>
-                                                    <p>Have A Nice day...</p>
-                                                </div>
-                                                <div>
-                                                    <span>14 Feb</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a> <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-5.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-success"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>David Herrmann</h6>
-                                                    <p>Good morning! How are you?</p>
-                                                </div>
-                                                <div>
-                                                    <span>10 Feb</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a>  <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-6.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-danger"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Mary Hayes</h6>
-                                                    <p>How are you Friend...</p>
-                                                </div>
-                                                <div>
-                                                    <span>1 Feb</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a> <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-7.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-danger"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Rita Duarte</h6>
-                                                    <p>Have A Nice day...</p>
-                                                </div>
-                                                <div>
-                                                    <span>30 Jan</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a>   <!--end media-->
-                                        <a href="" class="media">
-                                            <div class="media-left">
-                                                <img src="../assets/images/users/user-8.jpg" alt="user" class="rounded-circle thumb-md">
-                                                <span class="round-10 bg-danger"></span>
-                                            </div><!-- media-left -->
-                                            <div class="media-body">
-                                                <div>
-                                                    <h6>Dennis Wilson</h6>
-                                                    <p>Good morning! How are you?</p>
-                                                </div>
-                                                <div>
-                                                    <span>26 Jan</span>
-                                                </div>
-                                            </div><!-- end media-body -->
-                                        </a> <!--end media-->
+                                             </a> <!--end media-->
+                                        @endforeach
                                     </div><!--end general chat-->
 
                                     <div class="tab-pane fade" id="group_chat">
@@ -361,6 +276,8 @@
                                                 </div>
                                             </div><!-- end media-body -->
                                         </a><!--end media-->
+
+
                                         <a href="" class="media">
                                             <div class="media-left">
                                                 <img src="../assets/images/users/user-8.jpg" alt="user" class="rounded-circle thumb-md">
@@ -380,140 +297,175 @@
                                 </div><!--end tab-content-->
                             </div><!--end chat-box-left -->
 
+
+
+
                             <div class="chat-box-right">
-                                <div class="chat-header">
-                                    <a href="" class="media">
-                                        <div class="media-left">
-                                            <img src="../assets/images/users/user-4.jpg" alt="user" class="rounded-circle thumb-md">
-                                        </div><!-- media-left -->
-                                        <div class="media-body">
-                                            <div>
-                                                <h6 class="mb-1 mt-0">Mary Schneider</h6>
-                                                <p class="mb-0">Last seen: 2 hours ago</p>
-                                            </div>
-                                        </div><!-- end media-body -->
-                                    </a><!--end media-->
-                                    <div class="chat-features">
-                                        <div class="d-none d-sm-inline-block">
-                                            <a href=""><i class="fas fa-phone"></i></a>
-                                            <a href=""><i class="fas fa-video"></i></a>
-                                            <a href=""><i class="fas fa-trash-alt"></i></a>
-                                            <a href=""><i class="fas fa-ellipsis-v"></i></a>
-                                        </div>
-                                    </div><!-- end chat-features -->
-                                </div><!-- end chat-header -->
-                                <div class="chat-body ">
-                                    <div class="chat-detail slimscroll">
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-4.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
+                                @if($messages)
+                                    <div class="chat-header">
+                                        <a href="" class="media">
+                                                @isset($receiver->user->upload->file)
+                                                    <div class="media-left">
+                                                        <img src="{{CustomAsset("upload/images/full/{$receiver->user->upload->file}")}}" alt="{{$receiver->name}}" class="rounded-circle thumb-md">
+                                                    </div><!-- media-left -->
+                                                @endisset
                                             <div class="media-body">
-                                                <div class="chat-msg">
-                                                    <p>Good Morning !</p>
+                                                <div>
+                                                    <h6 class="mb-1 mt-0">{{$receiver->user->name}}</h6>
+                                                    <p class="mb-0 typing d-none">typing...</p>
                                                 </div>
-                                                <div class="chat-msg">
-                                                    <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                        </div><!--end media-->
+                                            </div><!-- end media-body -->
+                                        </a><!--end media-->
+                                    </div><!-- end chat-header -->
 
-                                        <div class="media">
-                                            <div class="media-body reverse">
-                                                <div class="chat-msg">
-                                                    <p>Good Morning !</p>
-                                                </div>
-                                                <div class="chat-msg">
-                                                    <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-3.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
-                                        </div><!--end media-->
 
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-4.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="chat-msg">
-                                                    <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                        </div><!--end media-->
+                                    <div class="chat-body ">
+                                            <div style="overflow-y:scroll;overflow-x:hidden;height:100%;" class="chat-detail" id="chatbox">
 
-                                        <div class="media">
-                                            <div class="media-body reverse">
-                                                <div class="chat-msg">
-                                                    <p>Good Morning !</p>
-                                                </div>
-                                                <div class="chat-msg">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout.
-                                                        The point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as opposed to using 'Content here.
-                                                    </p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-3.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
-                                        </div><!--end media-->
+                                            @foreach($messages as $message)
+                                                @if($message->sender_id != auth()->id())
+                                                   <div class="media">
+                                                        <div class="media-img p-3"></div>
+                                                        <div class="media-body">
+                                                            <div class="chat-msg">
+                                                                <p>{{$message->message}}</p>
+                                                            </div>
+                                                        </div><!--end media-body-->
+                                                   </div><!--end media-->
+                                                @else
+                                                   <div class="media">
+                                                <div class="media-body reverse">
+                                                    <div class="chat-msg">
+                                                        <p>{{$message->message}}</p>
+                                                    </div>
+                                                </div><!--end media-body-->
+                                                <div class="media-img p-3"></div>
+                                            </div><!--end media-->
+                                                @endif
+                                            @endforeach
 
-                                        <div class="media">
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-4.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
-                                            <div class="media-body">
-                                                <div class="chat-msg">
-                                                    <p>Good Morning !</p>
-                                                </div>
-                                                <div class="chat-msg">
-                                                    <p>It is a long established fact that a reader will be distracted by
-                                                        the readable content of a page when looking at its layout.
-                                                        The point of using Lorem Ipsum is that it has a more-or-less normal
-                                                        distribution of letters, as opposed to using 'Content here.
-                                                    </p>
-                                                </div>
-                                                <div class="chat-msg">
-                                                    <p>Ok</p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                        </div> <!--end media-->
+                                        </div>  <!-- end chat-detail -->
+                                    </div><!-- end chat-body -->
 
-                                        <div class="media">
-                                            <div class="media-body reverse">
-                                                <div class="chat-msg">
-                                                    <p>Good Morning !</p>
-                                                </div>
-                                                <div class="chat-msg">
-                                                    <p>There are many variations of passages of Lorem Ipsum available.</p>
-                                                </div>
-                                            </div><!--end media-body-->
-                                            <div class="media-img">
-                                                <img src="../assets/images/users/user-3.jpg" alt="user" class="rounded-circle thumb-md">
-                                            </div>
-                                        </div> <!--end media-->
-                                    </div>  <!-- end chat-detail -->
-                                </div><!-- end chat-body -->
-                                <div class="chat-footer">
+
+                                    <div class="chat-footer">
                                     <div class="row">
                                         <div class="col-12 col-md-9">
-                                            <span class="chat-admin"><img src="../assets/images/users/user-3.jpg" alt="user" class="rounded-circle thumb-sm"></span>
-                                            <input type="text" class="form-control" placeholder="Type something here...">
+                                            <input type="text" class="form-control message-input" placeholder="Type something here...">
                                         </div><!-- col-8 -->
-                                        <div class="col-3 text-right">
-                                            <div class="d-none d-sm-inline-block chat-features">
-                                                <a href=""><i class="fas fa-camera"></i></a>
-                                                <a href=""><i class="fas fa-paperclip"></i></a>
-                                                <a href=""><i class="fas fa-microphone"></i></a>
-                                            </div>
-                                        </div><!-- end col -->
+
                                     </div><!-- end row -->
                                 </div><!-- end chat-footer -->
+                                @endif
+
                             </div><!--end chat-box-right -->
                         </div> <!-- end col -->
                     </div><!-- end row -->
+@endsection
+
+@section('js')
+@if(request()->has('chat_id') && request()->chat_id)
+    <script>
+    var receiver = null;
+    @isset($receiver)
+        receiver = @json($receiver)
+    @endisset
+
+    $(function () {
+        scrollBottom()
+    })
+
+
+    const messages = document.getElementById('chatbox');
+    function scrollBottom(){
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function buildMessageHtml(message,flag = 0){
+        return `<div class="media">
+                    <div class="media-img p-3"></div>
+                    <div class="media-body ${ flag == 1 ? 'reverse' : '' }">
+                        <div class="chat-msg">
+                            <p>${message}</p>
+                        </div>
+                    </div>
+              </div>`
+    }
+
+
+
+    function appendMessageToChatBox(message,flag){
+       var html = buildMessageHtml(message,flag)
+       $('#chatbox').append(html)
+        scrollBottom()
+    }
+
+
+    window.timeout = false
+
+    $('.message-input').keyup(function (event) {
+        typeingEvent()
+
+        if( window.timeout){
+            clearTimeout( window.timeout)
+        }
+
+        window.timeout = setTimeout(() => {
+            Echo.join(`chat.{{request()->chat_id}}`).whisper('stop-typing',{receiver : receiver});
+
+            window.timeout = false
+                        },2000)
+
+        if (event.key === "Enter") {
+            event.preventDefault();
+            var message = $(this).val()
+            if(!message){ return }
+
+            appendMessageToChatBox(message,1)
+
+             $(this).val('')
+
+            // Send a POST request
+            axios({
+                method: 'post',
+                url: '{{route('send.message')}}',
+                data: {
+                    message     : message,
+                    chat_id     : "{{request()->chat_id}}",
+                }
+            });
+        }
+
+    })
+
+
+    Echo.join('chat.{{request()->chat_id}}')
+        .here(user => {
+            console.log(user);
+        })
+        .joining(user => {
+            console.log(user);
+        })
+        .leaving(user => {
+            console.log(user);
+        })
+        .listen('SendMessageEvent', (e) => {
+            appendMessageToChatBox(e.message.message,0)
+        })
+        .listenForWhisper('typing', e => {
+            $('.typing').removeClass('d-none')
+        })
+        .listenForWhisper('stop-typing', e => {
+        $('.typing').addClass('d-none')
+    });
+
+    function typeingEvent() {
+        console.log('ddd')
+        Echo.join(`chat.{{request()->chat_id}}`).whisper('typing',{receiver : receiver});
+    }
+
+</script>
+@endif
+
 @endsection
 

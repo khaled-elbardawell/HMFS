@@ -11,6 +11,30 @@
 |
 */
 
+use Modules\Chat\Entities\Participant;
+
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+
+//Broadcast::channel('chat.{sender_id}', function ($user,$sender_id) {
+//    if ((int) $user->id === (int) $sender_id){
+//        return $user;
+//    }
+//    return null;
+//});
+
+
+
+
+Broadcast::channel('chat.{chat_id}', function ($user,$chat_id) {
+    // check if sender participant in this chat
+    $sender_participant = Participant::where('user_id',$user->id)->where('chat_id',$chat_id)->first();
+    if ($sender_participant){
+        return $user;
+    }
+
+    return null;
+});
+
