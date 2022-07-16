@@ -2,8 +2,10 @@
 
 namespace Modules\Chat\Http\Controllers;
 
+use App\Events\SeenMessageEvent;
 use App\Events\SendMessageEvent;
 use App\Events\UserChatNotifyEvent;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -130,6 +132,7 @@ class ChatController extends Controller
            Recipient::create([
                'user_id'    => $participant->user_id,
                'message_id' => $message->id,
+               'seen_at'    => $participant->user_id == auth()->id() ? Carbon::now() : null,
            ]);
 
            broadcast(new UserChatNotifyEvent($message->load('sender'), $participant->user_id))->toOthers();
@@ -141,5 +144,15 @@ class ChatController extends Controller
        return $this->returnSuccessfulResponse();
     }// end method
 
+
+
+    public function seenMessages(Request $request){
+        Recipient::whereHas('message',function ($q) use ($request){
+            $q->where('chat_id',$request->chat_id)->where('seen_at',null)->where('user_id',auth()->id());
+        })->update(['seen_at' => Carbon::now()]);
+
+        broadcast(new SeenMessageEvent($request->chat_id));
+        return $this->returnSuccessfulResponse();
+    }
 
 }

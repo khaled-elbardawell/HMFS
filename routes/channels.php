@@ -39,6 +39,17 @@ Broadcast::channel('chat.{chat_id}', function ($user,$chat_id) {
 });
 
 
+Broadcast::channel('chat.seen.{chat_id}', function ($user,$chat_id) {
+    // check if sender participant in this chat
+    $sender_participant = Participant::where('user_id',$user->id)->where('chat_id',$chat_id)->first();
+    if ($sender_participant){
+        return $user;
+    }
+
+    return null;
+});
+
+
 Broadcast::channel('online', function ($user) {
         return $user;
 });

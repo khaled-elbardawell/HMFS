@@ -308,7 +308,7 @@
                                                   @isset($receiver->user->upload->file)
                                                         <img src="{{CustomAsset("upload/images/full/{$receiver->user->upload->file}")}}" alt="{{$receiver->name}}" class="rounded-circle thumb-md">
                                                   @else
-                                                         <div  class="rounded-circle-text">{{TextImage($chat->name??$chat->label)}}</div>
+                                                         <div  class="rounded-circle-text">{{TextImage($receiver->user->name)}}</div>
                                                 @endisset
                                              </div><!-- media-left -->
 
@@ -325,7 +325,6 @@
 
                                     <div class="chat-body ">
                                             <div style="overflow-y:scroll;overflow-x:hidden;height:100%;" class="chat-detail" id="chatbox">
-
                                             @foreach($messages as $message)
                                                 @if($message->sender_id != auth()->id())
                                                    <div class="media">
@@ -341,6 +340,23 @@
                                                 <div class="media-body reverse">
                                                     <div class="chat-msg">
                                                         <p>{{$message->message}}</p>
+
+                                                        <div class="img-group d-block text-right pr-4">
+                                                            @foreach($message->recipients as $recipient)
+                                                                @if($recipient->user_id != auth()->id() && $recipient->seen_at)
+                                                                    @isset($recipient->user->upload)
+                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                                                                            <img style="width: 15px;height: 15px" src="{{CustomAsset('upload/images/full/'.$recipient->user->upload->file)}}" alt="user" class="thumb-md rounded-circle">
+                                                                        </a>
+                                                                    @else
+                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                                                                            <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">{{TextImage($recipient->user->name)}}</div>
+                                                                        </a>
+                                                                    @endisset
+                                                                @endif
+                                                            @endforeach
+
+                                                        </div><!--end img-group-->
                                                     </div>
                                                 </div><!--end media-body-->
                                                 <div class="media-img p-3"></div>
@@ -369,6 +385,7 @@
 
 @section('js')
     <script>
+        window.chats = JSON.parse('@json($chats)')
 
         function sortChats(user_id){
             var chat_box = $(`[data-user-id =  ${user_id}]`)
@@ -379,23 +396,21 @@
         }
 
         function setChatHeaderStatus(){
-                    var user_id = $(`[data-header-user-id]`).attr('data-header-user-id')
-                    if( $(`[data-user-id =  ${user_id}] .bg-success`).hasClass('d-none')){
-                        $(`[data-header-user-id]`).html(`<span class='badge badge-danger'>offline</span>`)
+                var user_id = $(`[data-header-user-id]`).attr('data-header-user-id')
+                if( $(`[data-user-id =  ${user_id}] .bg-success`).hasClass('d-none')){
+                    $(`[data-header-user-id]`).html(`<span class='badge badge-danger'>offline</span>`)
 
-                    }else{
-                        $(`[data-header-user-id]`).html(`<span class='badge badge-success'>online</span>`)
-                    }
+                }else{
+                    $(`[data-header-user-id]`).html(`<span class='badge badge-success'>online</span>`)
+                }
         }
-
-        window.chats = JSON.parse('@json($chats)')
 
     </script>
 
 
 
 @if(request()->has('chat_id') && request()->chat_id)
-    <script>
+ <script>
     var receiver = null;
     @isset($receiver)
         receiver = @json($receiver)
@@ -404,23 +419,39 @@
 
     $(function () {
         scrollBottom()
+        seenMessagesRequest()
     })
 
 
-    const messages = document.getElementById('chatbox');
     function scrollBottom(){
+        const messages = document.getElementById('chatbox');
         messages.scrollTop = messages.scrollHeight;
     }
 
+    function seenMessagesRequest() {
+        axios({
+            method: 'post',
+            url: '{{route('seen.messages')}}',
+            data: {
+                chat_id     : "{{request()->chat_id}}",
+            }
+        });
+    }
+
     function buildMessageHtml(message,flag = 0){
-        return `<div class="media">
+        var html = '';
+        html += `<div class="media">
                     <div class="media-img p-3"></div>
                     <div class="media-body ${ flag == 1 ? 'reverse' : '' }">
                         <div class="chat-msg">
-                            <p>${message}</p>
-                        </div>
-                    </div>
-              </div>`
+                            <p>${message}</p>`
+        if(flag == 1){
+            html += `<div class="img-group d-block text-right" style="padding-right: 50px !important;"></div>`
+        }
+
+        html +=   `</div></div></div>`
+
+        return html
     }
 
 
@@ -433,19 +464,17 @@
 
 
     window.timeout = false
-
     $('.message-input').keyup(function (event) {
-        typeingEvent()
+         typeingEvent()
 
         if( window.timeout){
             clearTimeout( window.timeout)
         }
 
-        window.timeout = setTimeout(() => {
+         window.timeout = setTimeout(() => {
             Echo.join(`chat.{{request()->chat_id}}`).whisper('stop-typing',{receiver : receiver});
-
             window.timeout = false
-                        },2000)
+         },2000)
 
         if (event.key === "Enter") {
             event.preventDefault();
@@ -467,14 +496,18 @@
                 }
             });
         }
-
     })
 
+
+    function typeingEvent() {
+        Echo.join(`chat.{{request()->chat_id}}`).whisper('typing',{receiver : receiver});
+    }
 
     Echo.join('chat.{{request()->chat_id}}')
         .listen('SendMessageEvent', (e) => {
             appendMessageToChatBox(e.message.message,0)
             sortChats(receiver.id)
+            seenMessagesRequest()
         })
         .listenForWhisper('typing', e => {
             $('.typing').removeClass('d-none')
@@ -483,10 +516,24 @@
           $('.typing').addClass('d-none')
        });
 
-    function typeingEvent() {
-        Echo.join(`chat.{{request()->chat_id}}`).whisper('typing',{receiver : receiver});
-    }
 
+   Echo.join('chat.seen.{{request()->chat_id}}')
+        .listen('SeenMessageEvent', (e) => {
+            if({{request()->chat_id}} == e.chat_id){
+                var html = '';
+                if(e.user.upload){
+                     html = `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                              <img style="width: 15px;height: 15px" src="/upload/images/full/${e.user.upload.file}" alt="user" class="thumb-md rounded-circle">
+                             </a>`
+                 }else{
+                     html =  `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                                <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">${$('.chat-header .rounded-circle-text').text()}</div>
+                              </a>`
+                 }
+                $('.media-body.reverse .chat-msg .img-group').html(html)
+            }
+        });
+     
 </script>
 @endif
 

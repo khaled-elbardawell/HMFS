@@ -13,4 +13,7 @@ class Recipient extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function message(){
+        return $this->belongsTo(Message::class,'message_id');
+    }
 }
