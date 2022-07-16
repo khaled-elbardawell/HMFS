@@ -60,14 +60,14 @@
                                 <div class="tab-content chat-list slimscroll" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="general_chat">
                                         @foreach($chats as $chat)
-                                             <a href="{{route('chat',['chat_id' => $chat->chat_id])}}" class="media new-message">
+                                             <a data-chat-id="{{$chat->chat_id}}" data-user-id="{{$chat->user_id}}" href="{{route('chat',['chat_id' => $chat->chat_id])}}" class="media new-message">
                                                 <div class="media-left">
                                                     @if($chat->file)
                                                          <img src="{{CustomAsset('upload/images/full/'.$chat->file)}}" alt="{{$chat->name}}" class="rounded-circle thumb-md">
-                                                         <span class="round-10 bg-success"></span>
+                                                         <span class="round-10 bg-success d-none"></span>
                                                     @else
                                                         <div  class="rounded-circle-text">{{TextImage($chat->name??$chat->label)}}</div>
-                                                        <span class="round-10 bg-success"></span>
+                                                        <span class="round-10 bg-success d-none"></span>
 
                                                     @endif
                                                 </div><!-- media-left -->
@@ -364,12 +364,52 @@
 @endsection
 
 @section('js')
+    <script>
+
+        function sortChats(user_id){
+            var chat_box = $(`[data-user-id =  ${user_id}]`)
+            if(chat_box){
+                $(`[data-user-id =  ${user_id}]`).remove()
+                $('#general_chat').prepend(chat_box.clone())
+            }
+        }
+
+        window.chats = JSON.parse('@json($chats)')
+
+        Echo.join('online')
+            .here(users => {
+                window.chats.forEach((chat) => {
+                    users.forEach((user) => {
+                        if(chat.user_id == user.id){
+                            $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
+                        }
+                    })
+                })
+            })
+            .joining(user => {
+                window.chats.forEach((chat) => {
+                        if(chat.user_id == user.id){
+                            $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
+                        }
+                })
+            })
+            .leaving(user => {
+                window.chats.forEach((chat) => {
+                    if(chat.user_id == user.id){
+                        $(`[data-user-id =  ${user.id}] .bg-success`).addClass('d-none')
+                    }
+                })
+            });
+
+    </script>
+
 @if(request()->has('chat_id') && request()->chat_id)
     <script>
     var receiver = null;
     @isset($receiver)
         receiver = @json($receiver)
     @endisset
+
 
     $(function () {
         scrollBottom()
@@ -424,6 +464,7 @@
             appendMessageToChatBox(message,1)
 
              $(this).val('')
+             sortChats(receiver.id)
 
             // Send a POST request
             axios({
@@ -440,27 +481,18 @@
 
 
     Echo.join('chat.{{request()->chat_id}}')
-        .here(user => {
-            console.log(user);
-        })
-        .joining(user => {
-            console.log(user);
-        })
-        .leaving(user => {
-            console.log(user);
-        })
         .listen('SendMessageEvent', (e) => {
             appendMessageToChatBox(e.message.message,0)
+            sortChats(receiver.id)
         })
         .listenForWhisper('typing', e => {
             $('.typing').removeClass('d-none')
         })
         .listenForWhisper('stop-typing', e => {
-        $('.typing').addClass('d-none')
-    });
+          $('.typing').addClass('d-none')
+       });
 
     function typeingEvent() {
-        console.log('ddd')
         Echo.join(`chat.{{request()->chat_id}}`).whisper('typing',{receiver : receiver});
     }
 

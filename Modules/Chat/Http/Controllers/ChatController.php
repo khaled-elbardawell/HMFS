@@ -3,8 +3,7 @@
 namespace Modules\Chat\Http\Controllers;
 
 use App\Events\SendMessageEvent;
-use App\Models\Admin\UserOrganization;
-use App\User;
+use App\Events\UserChatNotifyEvent;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -90,7 +89,7 @@ class ChatController extends Controller
                     participants
                 WHERE
                     participants.user_id = ? AND participants.chat_id = chats.id
-            ) AND participants.user_id != ?";
+            ) AND participants.user_id != ? ORDER BY chats.updated_at DESC";
 
         return  Chat::sqlGet($sql,[auth()->id(),auth()->id()]);
     }
@@ -132,6 +131,9 @@ class ChatController extends Controller
                'user_id'    => $participant->user_id,
                'message_id' => $message->id,
            ]);
+
+           broadcast(new UserChatNotifyEvent($message->load('sender'), $participant->user_id))->toOthers();
+
        }
 
         broadcast(new SendMessageEvent($message->load('sender'), $chat_with_participants->id))->toOthers();

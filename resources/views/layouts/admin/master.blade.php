@@ -96,6 +96,36 @@
     }
 
     organizationMenu()
+
+    Echo.join('user.{{auth()->id()}}')
+        .listen('UserChatNotifyEvent', (e) => {
+
+            var chat_box = $(`[data-user-id =  ${e.message.sender_id}]`)
+            if(chat_box) {
+                sortChats(e.message.sender_id)
+            }
+
+                @if(!(request()->has('chat_id') && request()->chat_id))
+            const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+            Toast.fire({
+                icon: 'success',
+                title: `New Message from ${e.message.sender.name}`
+            })
+            @endif
+
+        });
+
 </script>
 
 @yield('js')

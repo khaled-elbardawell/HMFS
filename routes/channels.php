@@ -13,9 +13,9 @@
 
 use Modules\Chat\Entities\Participant;
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+//Broadcast::channel('App.User.{id}', function ($user, $id) {
+//    return (int) $user->id === (int) $id;
+//});
 
 
 //Broadcast::channel('chat.{sender_id}', function ($user,$sender_id) {
@@ -35,6 +35,18 @@ Broadcast::channel('chat.{chat_id}', function ($user,$chat_id) {
         return $user;
     }
 
+    return null;
+});
+
+
+Broadcast::channel('online', function ($user) {
+        return $user;
+});
+
+Broadcast::channel('user.{user_id}', function ($user,$user_id) {
+    if($user->id == $user_id){
+        return $user;
+    }
     return null;
 });
 
