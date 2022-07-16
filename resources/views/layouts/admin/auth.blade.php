@@ -43,6 +43,7 @@
 
 <!-- App js -->
 <script src="{{CustomAsset('admin/assets/js/app.js')}}"></script>
+<script src="{{CustomAsset('js/app.js')}}"></script>
 
 
 @yield('js')

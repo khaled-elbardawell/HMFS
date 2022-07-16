@@ -112,8 +112,18 @@
                 })
             }
 
+            // document.querySelectorAll('#general_chat .media-left').forEach( (el) => {
+            //     // console.log($('#group_chat'))
+            //     console.log(el.classList)
+            //     // if(!el.classList.contains('d-none')) {
+            //     //     console.log(el)
+            //     //      $('#group_chat').html(el.clone)
+            //     //     // $('#group_chat').append()
+            //     // }
+            // })
+
             @if(request()->has('chat_id') && request()->chat_id)
-            setChatHeaderStatus()
+                setChatHeaderStatus()
             @endif
         })
         .joining(user => {
@@ -148,30 +158,29 @@
 
     Echo.join('user.{{auth()->id()}}')
         .listen('UserChatNotifyEvent', (e) => {
-
             var chat_box = $(`[data-user-id =  ${e.message.sender_id}]`)
-            if(chat_box) {
+            if(chat_box[0]) {
                 sortChats(e.message.sender_id)
             }
 
-                @if(!(request()->has('chat_id') && request()->chat_id))
-            const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    onOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
+         @if(!(request()->has('chat_id') && request()->chat_id))
+                const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    })
 
-            Toast.fire({
-                icon: 'success',
-                title: `New Message from ${e.message.sender.name}`
-            })
-            @endif
+                Toast.fire({
+                    icon: 'success',
+                    title: `New Message from ${e.message.sender.name}`
+                })
+          @endif
 
         });
 

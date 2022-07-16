@@ -54,6 +54,8 @@ Broadcast::channel('online', function ($user) {
         return $user;
 });
 
+
+
 Broadcast::channel('user.{user_id}', function ($user,$user_id) {
     if($user->id == $user_id){
         return $user;

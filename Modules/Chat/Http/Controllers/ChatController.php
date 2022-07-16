@@ -5,6 +5,7 @@ namespace Modules\Chat\Http\Controllers;
 use App\Events\SeenMessageEvent;
 use App\Events\SendMessageEvent;
 use App\Events\UserChatNotifyEvent;
+use App\Models\Admin\UserOrganization;
 use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
@@ -155,4 +156,66 @@ class ChatController extends Controller
         return $this->returnSuccessfulResponse();
     }
 
+    public function chatSearchUser(Request $request){
+        $chat_user_search = '%'.$request->chat_user_search.'%';
+        $bindings = [];
+        $sql = "SELECT users.* FROM users";
+        if (!(session()->has('is_super_admin') && session()->get('is_super_admin'))){
+            $sql .= " INNER JOIN user_organizations ON users.id = user_organizations.user_id
+                     WHERE user_organizations.organization_id = ?
+                     AND  (users.name LIKE ? OR users.email LIKE ?)";
+            $bindings = [session()->get('organization_id'),$chat_user_search,$chat_user_search];
+        }else{
+            $sql .= " WHERE (users.name LIKE ? OR users.email LIKE ?)";
+            $bindings = [$chat_user_search,$chat_user_search];
+        }
+
+        $sql .= " AND users.id != ?";
+        $bindings[] = auth()->id();
+        $users = UserOrganization::sqlGet($sql,$bindings);
+        return view('chat::search-users',compact('users'));
+
+    }
+
+
+    public function chatUser(Request $request){
+        $sql = "SELECT
+                    chats.id AS chat_id
+                FROM
+                    chats
+                INNER JOIN participants ON participants.chat_id = chats.id
+                WHERE EXISTS
+                    (
+                    SELECT
+                        *
+                    FROM
+                        participants
+                    WHERE
+                        participants.user_id = ? AND participants.chat_id = chats.id
+                ) AND participants.user_id = ?";
+
+        $chat_id = null;
+        $chatDB = Chat::sqlFirst($sql,[auth()->id(),$request->user_id]);
+        if (!$chatDB){
+            $chat = Chat::create([
+                    'user_id' => auth()->id(),
+                ]);
+
+            Participant::create([
+                'chat_id' => $chat->id,
+                'user_id' => auth()->id()
+            ]);
+
+            Participant::create([
+                'chat_id' => $chat->id,
+                'user_id' => $request->user_id
+            ]);
+
+            $chat_id = $chat->id;
+        }else{
+            $chat_id = $chatDB->chat_id;
+        }
+        return redirect(route('chat',['chat_id' => $chat_id]));
+
+    }
 }
