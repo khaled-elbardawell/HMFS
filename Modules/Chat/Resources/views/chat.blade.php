@@ -304,14 +304,18 @@
                                 @if($messages)
                                     <div class="chat-header">
                                         <a href="" class="media">
-                                                @isset($receiver->user->upload->file)
-                                                    <div class="media-left">
+                                            <div class="media-left">
+                                                  @isset($receiver->user->upload->file)
                                                         <img src="{{CustomAsset("upload/images/full/{$receiver->user->upload->file}")}}" alt="{{$receiver->name}}" class="rounded-circle thumb-md">
-                                                    </div><!-- media-left -->
+                                                  @else
+                                                         <div  class="rounded-circle-text">{{TextImage($chat->name??$chat->label)}}</div>
                                                 @endisset
-                                            <div class="media-body">
+                                             </div><!-- media-left -->
+
+                                    <div class="media-body">
                                                 <div>
                                                     <h6 class="mb-1 mt-0">{{$receiver->user->name}}</h6>
+                                                    <p class="mb-0 typing" data-header-user-id="{{$receiver->user->id}}"></p>
                                                     <p class="mb-0 typing d-none">typing...</p>
                                                 </div>
                                             </div><!-- end media-body -->
@@ -374,32 +378,17 @@
             }
         }
 
-        window.chats = JSON.parse('@json($chats)')
+        function setChatHeaderStatus(){
+                    var user_id = $(`[data-header-user-id]`).attr('data-header-user-id')
+                    if( $(`[data-user-id =  ${user_id}] .bg-success`).hasClass('d-none')){
+                        $(`[data-header-user-id]`).html(`<span class='badge badge-danger'>offline</span>`)
 
-        Echo.join('online')
-            .here(users => {
-                window.chats.forEach((chat) => {
-                    users.forEach((user) => {
-                        if(chat.user_id == user.id){
-                            $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
-                        }
-                    })
-                })
-            })
-            .joining(user => {
-                window.chats.forEach((chat) => {
-                        if(chat.user_id == user.id){
-                            $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
-                        }
-                })
-            })
-            .leaving(user => {
-                window.chats.forEach((chat) => {
-                    if(chat.user_id == user.id){
-                        $(`[data-user-id =  ${user.id}] .bg-success`).addClass('d-none')
+                    }else{
+                        $(`[data-header-user-id]`).html(`<span class='badge badge-success'>online</span>`)
                     }
-                })
-            });
+        }
+
+        window.chats = JSON.parse('@json($chats)')
 
     </script>
 

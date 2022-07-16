@@ -97,6 +97,55 @@
 
     organizationMenu()
 
+
+
+
+    Echo.join('online')
+        .here(users => {
+            if( window.chats){
+                window.chats.forEach((chat) => {
+                    users.forEach((user) => {
+                        if(chat.user_id == user.id){
+                            $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
+                        }
+                    })
+                })
+            }
+
+            @if(request()->has('chat_id') && request()->chat_id)
+            setChatHeaderStatus()
+            @endif
+        })
+        .joining(user => {
+            if( window.chats) {
+                window.chats.forEach((chat) => {
+                    if (chat.user_id == user.id) {
+                        $(`[data-user-id =  ${user.id}] .bg-success`).removeClass('d-none')
+                    }
+                })
+            }
+
+            @if(request()->has('chat_id') && request()->chat_id)
+            setChatHeaderStatus()
+            @endif
+        })
+        .leaving(user => {
+            if( window.chats) {
+                window.chats.forEach((chat) => {
+                    if (chat.user_id == user.id) {
+                        $(`[data-user-id =  ${user.id}] .bg-success`).addClass('d-none')
+                    }
+                })
+            }
+
+            @if(request()->has('chat_id') && request()->chat_id)
+            setChatHeaderStatus()
+            @endif
+        });
+
+
+
+
     Echo.join('user.{{auth()->id()}}')
         .listen('UserChatNotifyEvent', (e) => {
 
