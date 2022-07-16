@@ -33,4 +33,5 @@ return [
     'Doctor'          => 'Doctor',
     'User'            => 'User',
     'Created At'      => 'Created At',
+    'Chat Users Results'      => 'Chat Users Results',
 ];

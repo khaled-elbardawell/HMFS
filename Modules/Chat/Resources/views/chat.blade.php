@@ -169,8 +169,8 @@
                                     </div><!-- end row -->
                                 </div><!-- end chat-footer -->
                                 @else
-                                    <div class="chat-body " style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
-                                        <span><i class="ti-comment noti-icon"></i> Pick Chat To preview</span>
+                                    <div class="chat-body " style="background-color: #ffffff;display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
+                                        <span style="font-size: 30px"><i class="ti-comment noti-icon"></i> Choose the chat to preview</span>
                                     </div>
                                 @endif
 

@@ -21,6 +21,22 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                <div class="card-header">
+                    <div class="chat-search">
+                        <form action="{{route('chat.search.user')}}" method="GET">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" id="chat-search" value="{{request()->chat_user_search}}" name="chat_user_search" class="form-control" placeholder="Search User..">
+                                    <span class="input-group-append">
+                                           <button type="submit" class="btn btn-gradient-primary shadow-none"><i class="fas fa-search"></i></button>
+                                   </span>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div><!--end chat-search-->
+                </div>
+
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-striped mb-0">
