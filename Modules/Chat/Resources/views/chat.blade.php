@@ -315,7 +315,7 @@
                                     <div class="media-body">
                                                 <div>
                                                     <h6 class="mb-1 mt-0">{{$receiver->user->name}}</h6>
-                                                    <p class="mb-0 typing" data-header-user-id="{{$receiver->user->id}}"></p>
+                                                    <p class="mb-0" data-header-user-id="{{$receiver->user->id}}"></p>
                                                     <p class="mb-0 typing d-none">typing...</p>
                                                 </div>
                                             </div><!-- end media-body -->
@@ -391,6 +391,8 @@
         window.chats = JSON.parse('@json($chats)')
 
     </script>
+
+
 
 @if(request()->has('chat_id') && request()->chat_id)
     <script>
