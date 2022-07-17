@@ -1,6 +1,5 @@
 @extends('layouts.admin.master')
 
-
 @section('content')
     <!-- Page-Title -->
     <div class="row">

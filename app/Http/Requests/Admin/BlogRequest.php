@@ -29,9 +29,15 @@ class BlogRequest extends FormRequest
             'title'         => 'required|string|max:255',
             'excerpt'  => 'required|string|max:1000',
             'description'  => 'required|string|max:2000',
+            'logo'  => $this->validateLogo(),
         ];
     }
 
-
+    private function validateLogo(){
+        if ($this->method() == "POST"){
+            return 'required|file|mimes:jpg,png,jpeg|max:204800';
+        }
+        return 'nullable|file|mimes:jpg,png,jpeg|max:204800';
+    }// end method
 
 }

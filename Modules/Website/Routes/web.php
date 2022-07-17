@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,12 +14,13 @@ Route::group(
     [
         'prefix' => LaravelLocalization::setLocale(),
     ], function(){
-        Route::get('/', 'HomeController@index')->name('home');
-        Route::get('/blogs', 'HomeController@blogs')->name('blogs');
-        Route::get('/blog-single', 'HomeController@blogSingle')->name('blogSingle');
-        Route::get('/offers', 'HomeController@offers')->name('offers');
-        Route::get('/about-us', 'HomeController@aboutUs')->name('aboutUs');
-        Route::get('/contact-us', 'HomeController@contactUs')->name('contactUs');
-        Route::get('/faqs', 'HomeController@faqs')->name('faqs');
-        Route::get('/our-services', 'HomeController@ourServices')->name('ourServices');
+        Route::get('/', 'FrontController@index')->name('index');
+        Route::get('/posts', 'FrontController@posts')->name('posts');
+        Route::get('/blog-single/{id}', 'FrontController@postSingle')->name('blogSingle');
+        Route::get('/offers', 'FrontController@offers')->name('offers');
+        Route::get('/about-us', 'FrontController@aboutUs')->name('aboutUs');
+        Route::get('/contact-us', 'FrontController@contactUs')->name('contactUs');
+        Route::post('/sendContactUs', 'FrontController@sendContactUs')->name('sendContactUs');
+        Route::get('/faqs', 'FrontController@faqs')->name('faqs');
+        Route::get('/our-services', 'FrontController@ourServices')->name('ourServices');
     });

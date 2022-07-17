@@ -34,4 +34,12 @@ return [
     'User'            => 'User',
     'Created At'      => 'Created At',
     'Chat Users Results'      => 'Chat Users Results',
+    'Blogs'      => 'Blogs',
+    ' Blogs'      => 'Blogs',
+    'Excerpt'      => 'Excerpt',
+    'Contacts'      => 'Contacts',
+    'email'      => 'Email',
+    'phone'      => 'Phone',
+    'subject'      => 'Subject',
+    'message'      => 'Message',
 ];

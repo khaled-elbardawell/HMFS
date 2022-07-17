@@ -130,7 +130,9 @@
         </div>
     </section>
 
-    @include('website::layouts.newsletter')
+    @include('website::layouts.latest-blog')
+
+    {{-- @include('website::layouts.newsletter') --}}
 
     <!-- End Content -->
 
