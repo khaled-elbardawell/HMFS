@@ -40,6 +40,7 @@ Route::group(
 
         Route::resource('health-profile',"HealthProfileController");
 
+        Route::resource('blogs',"BlogController");
 });
 
 
