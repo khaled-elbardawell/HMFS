@@ -40,15 +40,12 @@ Route::group(
 
         Route::resource('health-profile',"HealthProfileController");
 
-<<<<<<< HEAD
           Route::get('test',function (){
                broadcast(new \App\Events\PublicEvent());
           })->name('test');
 
 
-=======
         Route::resource('blogs',"BlogController");
->>>>>>> 8e8ddb0fe665a1eba7059c7b177839cfd6b2fe5e
 });
 
 
