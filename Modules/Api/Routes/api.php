@@ -38,4 +38,9 @@ Route::group([
 
 
 
+    Route::get('get/user/profile', 'UserProfileController@getUserProfileData')->name('get.user.profile');
+    Route::post('update/user/profile', 'UserProfileController@updateUserProfileData')->name('update.user.profile');
+
+
+
 });

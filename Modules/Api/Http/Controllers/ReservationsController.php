@@ -35,8 +35,12 @@ class ReservationsController extends Controller
         },'organization' => function($q){
             $q->select('id','name');
         }])->where('status',0)
-            ->where('reservation_date','>=',Carbon::now()->format("Y-m-d"))
-            ->where('reservation_time','>=',Carbon::now()->format("H:i:s"))
+            ->where(function ($q){
+                $q->where('reservation_date','=',Carbon::now()->format("Y-m-d"))
+                    ->where('reservation_time','>=',Carbon::now()->format("H:i:s"));
+            })->orWhere(function ($q){
+                $q->where('reservation_date','>=',Carbon::now()->format("Y-m-d"));
+            })
             ->where('user_id',$user->id)
             ->get();
 
@@ -85,6 +89,15 @@ class ReservationsController extends Controller
      */
     public function getUserReservation(Request $request)
     {
+        $validator =Validator::make($request->all(),[
+            'reservation_id'    => "required",
+        ]);
+
+        if($validator->fails()){
+            return $this->returnValidationErrorResponse($validator,401);
+        }
+
+
         $user = auth()->guard('api')->user();
         if (!$user){
             return $this->returnErrorResponse(404,['error' => 'Not Found']);
@@ -99,7 +112,7 @@ class ReservationsController extends Controller
         }])->where('user_id',$user->id)
            ->where('id',$request->reservation_id)
            ->first();
-        
+
         return $this->returnDataResponse($reservation);
 
     }// end method
