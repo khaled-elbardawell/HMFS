@@ -18,14 +18,14 @@
             </li>
         @endif
 
-        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('blogs.index')))
-            <li>
-                <a class="nav-link" href="{{route('blogs.index')}}">
-                    <i class="fa fa-tasks"></i>
-                    <span>Blogs</span>
-                </a>
-            </li>
-        @endif
+{{--        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('blogs.index')))--}}
+{{--            <li>--}}
+{{--                <a class="nav-link" href="{{route('blogs.index')}}">--}}
+{{--                    <i class="fa fa-tasks"></i>--}}
+{{--                    <span>Blogs</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        @endif--}}
 
         @can('is_super_admin')
             <li>

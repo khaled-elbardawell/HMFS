@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Modules\Api\Traits\ApiResponseTrait;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -88,7 +89,11 @@ class AuthController extends Controller
      */
     public function me()
     {
-        return $this->returnDataResponse($this->guard()->user());
+        $token = \request()->bearerToken();
+        $user = $this->guard()->user();
+        $user->token_details = $this->respondWithToken($token);
+
+        return $this->returnDataResponse($user);
     }
 
     /**
@@ -136,5 +141,20 @@ class AuthController extends Controller
     public function guard()
     {
         return Auth::guard('api');
+    }
+
+
+
+    /**
+     * Get the bearer token from the request headers.
+     *
+     * @return string|null
+     */
+    public function bearerToken()
+    {
+        $header = $this->header('Authorization', '');
+        if (\Str::startsWith($header, 'Bearer ')) {
+            return \Str::substr($header, 7);
+        }
     }
 }
