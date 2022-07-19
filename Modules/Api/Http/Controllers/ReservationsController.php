@@ -78,6 +78,7 @@ class ReservationsController extends Controller
             ->where('user_id',$user->id)
             ->get();
 
+
         return $this->returnDataResponse($reservations);
     }// end method
 
@@ -113,6 +114,9 @@ class ReservationsController extends Controller
            ->where('id',$request->reservation_id)
            ->first();
 
+        if (!$reservation){
+            return $this->returnErrorResponse(404,['error' => 'Not Found']);
+        }
         return $this->returnDataResponse($reservation);
 
     }// end method
