@@ -42,5 +42,12 @@ Route::group([
     Route::post('update/user/profile', 'UserProfileController@updateUserProfileData')->name('update.user.profile');
 
 
+    Route::get('get/user/chats', 'ChatController@getChats')->name('get.user.chats');
+    Route::get('get/user/chat/messages', 'ChatController@getMessagesChat')->name('get.user.chat.messages');
+    Route::post('user/chat/send', 'ChatController@sendMessage')->name('user.chat.sendMessage');
+    Route::post('user/chat/seen/messages', 'ChatController@seenMessages')->name('user.chat.seenMessages');
+    Route::post('create/user/chat', 'ChatController@createChatUser')->name('user.chat.create.user.chat');
+    Route::get('chat/search/users', 'ChatController@chatSearchUsers')->name('user.chat.search.users');
+
 
 });
