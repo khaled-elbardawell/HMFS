@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:hmfs/app/widgets/custom_appbar.dart';
+import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/modules/chat/widget/singleuserchatcard.dart';
+
+import 'package:hmfs/app/widgets/custom_new_appbar.dart';
+
+import '../../core/utils/extensions.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        CustomAppBar(
-          appBarColor: "#6574CF",
-          title: "Profile",
-          titleColor: "#FFFFFF",
-          iconName1: "assets/images/Icon-alert.svg",
-          iconSemantics1: 'Icon alert',
-          colorIcon1: '#ffffff',
-          iconName2: "assets/images/Icon-setting.svg",
-          iconSemantics2: 'Icon-setting.svg',
-          colorIcon2: '#ffffff',
-          iconSize: 4.0,
-          bottomPadding: 9.0,
-        ),
-      ],
+    return Scaffold(
+      backgroundColor: HexColor.fromHex(white),
+      appBar: customAppBar("Chat", blue, white, Icons.search_outlined, () {}),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: 40,
+              itemBuilder: (context, index) {
+                return const SingleUserChatCard();
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

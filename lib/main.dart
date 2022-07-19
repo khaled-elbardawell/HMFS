@@ -1,28 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:hmfs/app/binding.dart';
 import 'package:hmfs/app/core/style/style.dart';
+import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
 import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
-import 'package:hmfs/app/modules/edite_account/view.dart';
-import 'package:hmfs/app/modules/onboarding/view.dart';
+import 'package:hmfs/app/modules/edit_account/view.dart';
+import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/reset_password/view.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
 import 'package:hmfs/app/modules/signup/view.dart';
+import 'app/modules/doctors/view.dart';
+import 'app/modules/single_chat/view.dart';
 
 void main() async {
-  await GetStorage.init();
-  await Get.putAsync(
-    () => StorageServices().init(),
-  );
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await CacheHelper.init();
+  bool isOnboarding = CacheHelper.getData(keyOnboarding);
+  // bool isLoggedIn = CacheHelper.getTokenData(keyToken) == '' ? false : true;
+  bool isLoggedIn = false;
+  runApp(MyApp(isOnboarding, isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isOnboarding;
+  final bool isLoggedIn;
+  const MyApp(this.isOnboarding, this.isLoggedIn, {Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -32,12 +38,16 @@ class MyApp extends StatelessWidget {
       theme: MyThemeMode.lightTheme,
       title: 'HMFS',
       initialBinding: Binding(),
-      home: OnboardingScreen(),
-      initialRoute: '/',
+      // home: isOnboarding
+      //     ? isLoggedIn
+      //         ? const Home()
+      //         : const SignInScreen()
+      //     : OnboardingScreen(),
+      home: const Home(),
       getPages: [
         GetPage(
           name: '/',
-          page: () => Home(),
+          page: () => const Home(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
@@ -62,12 +72,27 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/SignUp',
-          page: () => SignUpScreen(),
+          page: () => const SignUpScreen(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/ResetPassword',
           page: () => ResetPasswordScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/Reservation',
+          page: () => const ReservationScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/Doctors',
+          page: () => DoctorsScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/SingleChat',
+          page: () => const SingleChatScreen(),
           transition: Transition.rightToLeftWithFade,
         ),
       ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 import 'package:hmfs/app/widgets/user_data_card.dart';
 
 class SingleCardReservation extends StatelessWidget {
@@ -14,7 +15,7 @@ class SingleCardReservation extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 2.0.wp, horizontal: 0.5.wp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: HexColor.fromHex('#ffffff'),
+        color: HexColor.fromHex(white),
         boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 1)],
       ),
       child: Column(
@@ -23,12 +24,12 @@ class SingleCardReservation extends StatelessWidget {
             imageName: "assets/images/doctor-avatar.jpg",
             imageSize: 18.0,
             isOnline: true,
-            title: "Chikanso Chima",
-            titleColor: '#222B45',
+            title: "Rajab Aabed",
+            titleColor: darkBlue,
             titleSize: 12.5,
             subTitle: "Ophthalmologist",
             subTitleSize: 10.0,
-            subTitleColor: '#8F9BB3',
+            subTitleColor: lightBlue,
           ),
           SizedBox(
             height: 0.5.hp,
@@ -46,7 +47,7 @@ class SingleCardReservation extends StatelessWidget {
                 child: Text(
                   "Visit Profile",
                   style: TextStyle(
-                    color: HexColor.fromHex('#6574CF'),
+                    color: HexColor.fromHex(blue),
                     fontSize: 12.0.sp,
                     fontWeight: FontWeight.bold,
                   ),
@@ -61,7 +62,7 @@ class SingleCardReservation extends StatelessWidget {
                     semanticsLabel: 'clock Icon',
                     width: 3.3.wp,
                     height: 3.3.hp,
-                    color: HexColor.fromHex('#8F9BB3'),
+                    color: HexColor.fromHex(lightBlue),
                   ),
                   SizedBox(
                     width: 1.5.wp,
@@ -69,7 +70,7 @@ class SingleCardReservation extends StatelessWidget {
                   Text(
                     '1 hour',
                     style: TextStyle(
-                      color: HexColor.fromHex('#8F9BB3'),
+                      color: HexColor.fromHex(lightBlue),
                       fontSize: 11.0.sp,
                       fontWeight: FontWeight.w500,
                     ),
@@ -82,7 +83,7 @@ class SingleCardReservation extends StatelessWidget {
             thickness: 1.8,
             indent: 1,
             endIndent: 1,
-            color: HexColor.fromHex('#EDF1F7'),
+            color: HexColor.fromHex(grey),
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,7 +94,7 @@ class SingleCardReservation extends StatelessWidget {
                   Text(
                     "In 5 days",
                     style: TextStyle(
-                      color: HexColor.fromHex('#8F9BB3'),
+                      color: HexColor.fromHex(lightBlue),
                       fontSize: 11.5.sp,
                     ),
                   ),
@@ -103,7 +104,7 @@ class SingleCardReservation extends StatelessWidget {
                   Text(
                     "12 May, 12:50 AM",
                     style: TextStyle(
-                      color: HexColor.fromHex('#222B45'),
+                      color: HexColor.fromHex(darkBlue),
                       fontSize: 13.0.sp,
                       fontWeight: FontWeight.w600,
                     ),
@@ -112,13 +113,16 @@ class SingleCardReservation extends StatelessWidget {
               ),
               const Spacer(),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  // TODO: single chat for doctor
+                  Get.toNamed('/SingleChat');
+                },
                 child: Container(
                   padding: EdgeInsets.all(1.7.wp),
                   decoration: BoxDecoration(
-                    color: HexColor.fromHex('#6574CF').withOpacity(0.27),
+                    color: HexColor.fromHex(blue).withOpacity(0.27),
                     border: Border.all(
-                      color: HexColor.fromHex('#6574CF'),
+                      color: HexColor.fromHex(blue),
                       width: 1.5,
                     ),
                     borderRadius: BorderRadius.circular(6),
@@ -128,7 +132,7 @@ class SingleCardReservation extends StatelessWidget {
                     semanticsLabel: 'Location Icon',
                     width: 3.2.wp,
                     height: 3.2.hp,
-                    color: HexColor.fromHex('#6574CF'),
+                    color: HexColor.fromHex(blue),
                   ),
                 ),
               ),

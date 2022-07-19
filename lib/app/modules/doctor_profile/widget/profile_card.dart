@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({Key? key}) : super(key: key);
@@ -22,9 +23,9 @@ class ProfileCard extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.all(2.0.wp),
                   decoration: BoxDecoration(
-                    color: HexColor.fromHex('#6574CF').withOpacity(0.27),
+                    color: HexColor.fromHex(blue).withOpacity(0.27),
                     border: Border.all(
-                      color: HexColor.fromHex('#6574CF'),
+                      color: HexColor.fromHex(blue),
                       width: 2,
                     ),
                     borderRadius: BorderRadius.circular(6),
@@ -34,7 +35,7 @@ class ProfileCard extends StatelessWidget {
                     semanticsLabel: 'Location Icon',
                     width: 3.8.wp,
                     height: 3.8.hp,
-                    color: HexColor.fromHex('#6574CF'),
+                    color: HexColor.fromHex(blue),
                   ),
                 ),
               ),
@@ -71,7 +72,7 @@ class ProfileCard extends StatelessWidget {
             "Dr. Chikanso Chima",
             style: TextStyle(
               fontSize: 15.0.sp,
-              color: HexColor.fromHex('#222B45'),
+              color: HexColor.fromHex(darkBlue),
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -82,7 +83,7 @@ class ProfileCard extends StatelessWidget {
             "Ophthalmologist",
             style: TextStyle(
               fontSize: 11.5.sp,
-              color: HexColor.fromHex('#8F9BB3'),
+              color: HexColor.fromHex(lightBlue),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -98,6 +99,7 @@ class ProfileCard extends StatelessWidget {
                 semanticsLabel: 'star Icon',
                 width: 3.5.wp,
                 height: 3.5.hp,
+                color: HexColor.fromHex(blue),
               ),
               SizedBox(
                 width: 1.0.wp,
@@ -106,7 +108,7 @@ class ProfileCard extends StatelessWidget {
                 "4.7",
                 style: TextStyle(
                   fontSize: 15.5.sp,
-                  color: HexColor.fromHex('#6574CF'),
+                  color: HexColor.fromHex(blue),
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -117,7 +119,7 @@ class ProfileCard extends StatelessWidget {
                 "(12 reviews)",
                 style: TextStyle(
                   fontSize: 9.9.sp,
-                  color: HexColor.fromHex('#8F9BB3'),
+                  color: HexColor.fromHex(lightBlue),
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -157,7 +159,7 @@ class ProfileCard extends StatelessWidget {
                               "New York",
                               style: TextStyle(
                                 fontSize: 15.5.sp,
-                                color: HexColor.fromHex('#222B45'),
+                                color: HexColor.fromHex(darkBlue),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -168,7 +170,7 @@ class ProfileCard extends StatelessWidget {
                               "Location",
                               style: TextStyle(
                                 fontSize: 12.0.sp,
-                                color: HexColor.fromHex('#8F9BB3'),
+                                color: HexColor.fromHex(lightBlue),
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -182,7 +184,7 @@ class ProfileCard extends StatelessWidget {
               Container(
                 height: 10.9.hp,
                 width: 2.0,
-                color: HexColor.fromHex('#EDF1F7'),
+                color: HexColor.fromHex(grey),
               ),
               Expanded(
                 flex: 1,
@@ -211,7 +213,7 @@ class ProfileCard extends StatelessWidget {
                               "20 Years",
                               style: TextStyle(
                                 fontSize: 15.5.sp,
-                                color: HexColor.fromHex('#222B45'),
+                                color: HexColor.fromHex(darkBlue),
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -222,7 +224,7 @@ class ProfileCard extends StatelessWidget {
                               "Experience",
                               style: TextStyle(
                                 fontSize: 12.0.sp,
-                                color: HexColor.fromHex('#8F9BB3'),
+                                color: HexColor.fromHex(lightBlue),
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -236,7 +238,7 @@ class ProfileCard extends StatelessWidget {
             ],
           ),
           Divider(
-            color: HexColor.fromHex('#EDF1F7'),
+            color: HexColor.fromHex(grey),
             thickness: 2,
             indent: 4,
             endIndent: 4,
@@ -248,7 +250,7 @@ class ProfileCard extends StatelessWidget {
           Container(
             width: 50.0.wp,
             decoration: BoxDecoration(
-              color: HexColor.fromHex('#6574CF'),
+              color: HexColor.fromHex(blue),
               borderRadius: BorderRadius.circular(6),
             ),
             child: TextButton(
@@ -271,7 +273,7 @@ class ProfileCard extends StatelessWidget {
                     "Reservation",
                     style: TextStyle(
                       fontSize: 15.0.sp,
-                      color: HexColor.fromHex('#ffffff'),
+                      color: HexColor.fromHex(white),
                       fontWeight: FontWeight.w400,
                     ),
                   ),

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class SingleOnboarding extends StatelessWidget {
   final String title;
   final String subTitle;
-  final String paragrah;
+  final String paragraph;
   final String image;
 
   const SingleOnboarding({
     Key? key,
     required this.title,
     required this.subTitle,
-    required this.paragrah,
+    required this.paragraph,
     required this.image,
   }) : super(key: key);
 
@@ -25,7 +26,7 @@ class SingleOnboarding extends StatelessWidget {
           child: Text(
             title,
             style: TextStyle(
-              color: HexColor.fromHex('#6D7BD1'),
+              color: HexColor.fromHex(blue),
               fontSize: 20.0.sp,
               fontWeight: FontWeight.normal,
             ),
@@ -39,7 +40,7 @@ class SingleOnboarding extends StatelessWidget {
           child: Text(
             subTitle,
             style: TextStyle(
-              color: HexColor.fromHex('#222B45'),
+              color: HexColor.fromHex(darkBlue),
               fontSize: 20.0.sp,
               fontWeight: FontWeight.normal,
             ),
@@ -49,9 +50,9 @@ class SingleOnboarding extends StatelessWidget {
           height: 1.5.hp,
         ),
         Text(
-          paragrah,
+          paragraph,
           style: TextStyle(
-            color: HexColor.fromHex('#8F9BB3'),
+            color: HexColor.fromHex(lightBlue),
             fontSize: 11.0.sp,
             fontWeight: FontWeight.normal,
             height: 1.4,

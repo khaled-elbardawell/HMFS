@@ -3,11 +3,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/state_manager.dart';
+import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/modules/doctors/view.dart';
 import 'package:hmfs/app/modules/home/view.dart';
 import 'package:hmfs/app/modules/chat/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/user_profile/view.dart';
+
+import '../../data/services/api/repository.dart';
+import '../../data/services/storage/services.dart';
 
 class HomeController extends GetxController {
   final currentIndex = 0.obs;
@@ -22,10 +26,30 @@ class HomeController extends GetxController {
     const UserProfileScreen(),
   ];
 
+  final UserRepository userRepository;
+
+  HomeController({required this.userRepository});
+
+  void meUser() {
+    String token = CacheHelper.getTokenData(keyToken);
+    print('token is: $token');
+    userRepository.meUser(token).then((value) {
+      user = value!;
+      CacheHelper.putTokenData(keyToken, value.data.tokenDetails.accessToken);
+      print('me user! ' + user.data.email);
+    });
+  }
+
   @override
   void onInit() {
     super.onInit();
-    print("onInit print");
+    // meUser();
+    // if (user == null) {
+    //   print("user null");
+    // } else {
+    //   print("user not null");
+    // }
+    print("onInit print home");
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 import '../modules/home/controller.dart';
 
@@ -47,7 +48,7 @@ class CustomNavbar extends StatelessWidget {
               alignment: Alignment.center,
               fit: BoxFit.contain,
               color: homeCtrl.selectedItemIndex.value == index
-                  ? HexColor.fromHex('#6574CF')
+                  ? HexColor.fromHex(blue)
                   : Colors.grey,
             ),
           ),
@@ -59,7 +60,7 @@ class CustomNavbar extends StatelessWidget {
       border: Border(
         top: BorderSide(
           width: 3.0,
-          color: HexColor.fromHex('#6574CF'),
+          color: HexColor.fromHex(blue),
         ),
       ),
       color: Colors.white,

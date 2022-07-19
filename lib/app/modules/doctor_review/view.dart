@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 import 'package:hmfs/app/modules/doctor_review/controller.dart';
 import 'package:hmfs/app/modules/doctor_review/widget/single_review_item.dart';
 
@@ -13,10 +14,17 @@ class DoctorReviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor.fromHex('#ffffff'),
+      backgroundColor: HexColor.fromHex(white),
       appBar: AppBar(
-        title: const Text(
+        backgroundColor: HexColor.fromHex(blue),
+        centerTitle: true,
+        title: Text(
           "Review Details",
+          style: TextStyle(
+            fontSize: 18.0.sp,
+            fontWeight: FontWeight.bold,
+            color: HexColor.fromHex(white),
+          ),
         ),
       ),
       body: Padding(
@@ -41,12 +49,13 @@ class DoctorReviewScreen extends StatelessWidget {
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       "Sakane Miiko",
                       style: TextStyle(
                         fontSize: 13.5.sp,
-                        color: HexColor.fromHex('#222B45'),
+                        color: HexColor.fromHex(darkBlue),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -57,36 +66,8 @@ class DoctorReviewScreen extends StatelessWidget {
                       "1 day ago",
                       style: TextStyle(
                         fontSize: 9.5.sp,
-                        color: HexColor.fromHex('#8F9BB3'),
+                        color: HexColor.fromHex(lightBlue),
                         fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                Row(
-                  children: [
-                    IconButton(
-                      splashRadius: 5.0.wp,
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        'assets/images/Icon-share.svg',
-                        semanticsLabel: 'Social Media Share Icon',
-                        width: 4.0.wp,
-                        height: 4.0.hp,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 0.1.wp,
-                    ),
-                    IconButton(
-                      splashRadius: 5.0.wp,
-                      onPressed: () {},
-                      icon: SvgPicture.asset(
-                        'assets/images/Icon-heart.svg',
-                        semanticsLabel: 'Heart Icon',
-                        width: 4.0.wp,
-                        height: 4.0.hp,
                       ),
                     ),
                   ],
@@ -100,7 +81,7 @@ class DoctorReviewScreen extends StatelessWidget {
               endIndent: 2,
               indent: 2,
               thickness: 2,
-              color: HexColor.fromHex('#EDF1F7'),
+              color: HexColor.fromHex(grey),
             ),
             SizedBox(
               height: 2.0.hp,
@@ -112,7 +93,7 @@ class DoctorReviewScreen extends StatelessWidget {
                 Obx(() => Text(
                       '${reviewCtrl.totalRate.value}',
                       style: TextStyle(
-                        color: HexColor.fromHex('#707FD5'),
+                        color: HexColor.fromHex(blue),
                         fontWeight: FontWeight.w900,
                         fontSize: 16.5.sp,
                       ),
@@ -125,7 +106,7 @@ class DoctorReviewScreen extends StatelessWidget {
                       itemBuilder: (context, index) => SvgPicture.asset(
                         'assets/images/Icon-star-review.svg',
                         semanticsLabel: 'Star Icon',
-                        color: HexColor.fromHex('#707FD5'),
+                        color: HexColor.fromHex(blue),
                         width: 4.0.wp,
                         height: 4.0.hp,
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -31,7 +32,7 @@ class CustomTextField extends StatelessWidget {
           style: TextStyle(
             fontSize: 10.5.sp,
             fontWeight: FontWeight.bold,
-            color: HexColor.fromHex('#8992A3'),
+            color: HexColor.fromHex(lightBlue),
           ),
         ),
         SizedBox(
@@ -40,23 +41,23 @@ class CustomTextField extends StatelessWidget {
         TextFormField(
           controller: controller,
           style: TextStyle(
-            color: HexColor.fromHex('#222B45'),
+            color: HexColor.fromHex(darkBlue),
           ),
           obscureText: obscureText,
-          cursorColor: HexColor.fromHex('#8F9BB3'),
+          cursorColor: HexColor.fromHex(lightBlue),
           keyboardType: textInputType,
           decoration: InputDecoration(
-            fillColor: HexColor.fromHex('#F7F9FC'),
+            fillColor: HexColor.fromHex(white),
             filled: true,
             border: OutlineInputBorder(
               borderSide: BorderSide(
-                color: HexColor.fromHex('#E4E9F2'),
+                color: HexColor.fromHex(white),
                 width: 2,
               ),
             ),
             hintText: hintText,
             hintStyle: TextStyle(
-              color: HexColor.fromHex('#8F9BB3'),
+              color: HexColor.fromHex(lightBlue),
             ),
           ),
           validator: (value) {

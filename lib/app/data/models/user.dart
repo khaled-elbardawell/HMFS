@@ -55,9 +55,9 @@ class Data {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    bio = json['bio'];
-    phone = json['phone'];
-    emailVerifiedAt = json['email_verified_at'];
+    bio = json['bio'] ?? '';
+    phone = json['phone'] ?? '';
+    emailVerifiedAt = json['email_verified_at'] ?? '';
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     tokenDetails = TokenDetails.fromJson(json['token_details']);

@@ -81,7 +81,7 @@ class SignInScreen extends GetView<SignInController> {
                             formKey: controller.formKey,
                             buttonText: 'Sign in',
                             // Todo: API call to sign in
-                            pageButton: () => Get.offAllNamed('/home'),
+                            pageButton: () => controller.loginUser(),
                             textSpan: 'Don’t have an account?',
                             buttonTextSpan: 'Sign Up',
                             pageButtonTextSpan: '/SignUp',

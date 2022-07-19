@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 import 'package:hmfs/app/modules/doctor_profile/controller.dart';
 import 'package:hmfs/app/modules/doctor_profile/widget/profile_card.dart';
 import 'package:hmfs/app/modules/doctor_profile/widget/single_small_card.dart';
+import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   DoctorProfileScreen({Key? key}) : super(key: key);
@@ -13,25 +14,9 @@ class DoctorProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor.fromHex('#F7F9FC'),
-      appBar: AppBar(
-        title: const Text(
-          "Doctor's Profile",
-        ),
-        actions: [
-          IconButton(
-            splashRadius: 5.8.wp,
-            onPressed: () {},
-            icon: SvgPicture.asset(
-              'assets/images/Icon-location.svg',
-              semanticsLabel: 'Location Icon',
-              width: 3.8.wp,
-              height: 3.8.hp,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
+      backgroundColor: HexColor.fromHex(white),
+      appBar: customAppBar(
+          "Doctor's Profile", blue, white, Icons.search_outlined, () {}),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
@@ -44,7 +29,7 @@ class DoctorProfileScreen extends StatelessWidget {
             InkWell(
               onTap: () {},
               child: const SingleInfoCard(
-                iconanme: 'assets/images/Icon-medical-reports.svg',
+                iconName: 'assets/images/Icon-medical-reports.svg',
                 semanticsLabel: 'Medical Reports',
                 title: 'Medical Reports',
               ),
@@ -57,7 +42,7 @@ class DoctorProfileScreen extends StatelessWidget {
                 Get.toNamed('/doctorReview');
               },
               child: const SingleInfoCard(
-                iconanme: 'assets/images/Icon-reviews.svg',
+                iconName: 'assets/images/Icon-reviews.svg',
                 semanticsLabel: 'reviews Icon',
                 title: 'Reviews',
               ),

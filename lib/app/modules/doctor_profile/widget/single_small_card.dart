@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class SingleInfoCard extends StatelessWidget {
-  final String iconanme;
+  final String iconName;
   final String semanticsLabel;
   final String title;
 
   const SingleInfoCard(
       {Key? key,
-      required this.iconanme,
+      required this.iconName,
       required this.semanticsLabel,
       required this.title})
       : super(key: key);
@@ -35,10 +36,11 @@ class SingleInfoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              iconanme,
+              iconName,
               semanticsLabel: semanticsLabel,
               width: 4.9.wp,
               height: 4.9.hp,
+              color: HexColor.fromHex(blue),
             ),
             SizedBox(
               width: 5.0.wp,
@@ -46,7 +48,7 @@ class SingleInfoCard extends StatelessWidget {
             Container(
               height: 7.0.hp,
               width: 2.0,
-              color: HexColor.fromHex('#EDF1F7'),
+              color: HexColor.fromHex(white),
             ),
             SizedBox(
               width: 5.0.wp,
@@ -55,7 +57,7 @@ class SingleInfoCard extends StatelessWidget {
               title,
               style: TextStyle(
                 fontSize: 14.0.sp,
-                color: HexColor.fromHex('#222B45'),
+                color: HexColor.fromHex(darkBlue),
                 fontWeight: FontWeight.w500,
               ),
             ),

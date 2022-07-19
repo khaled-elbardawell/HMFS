@@ -1,6 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/models/onboarding_data.dart';
+
+import '../../data/services/storage/services.dart';
 
 class OnboardingController extends GetxController {
   var selectedPageIndex = 0.obs;
@@ -11,6 +14,7 @@ class OnboardingController extends GetxController {
 
   forwardAction() {
     if (isLastPage) {
+      CacheHelper.putOnboardingData(keyOnboarding, true);
       Get.offNamed('/SignIn');
     } else {
       pageController.nextPage(duration: 300.milliseconds, curve: Curves.easeIn);

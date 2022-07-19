@@ -5,7 +5,7 @@ class UserProfileBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => UserProfileControllrer(),
+      () => UserProfileController(),
     );
   }
 }

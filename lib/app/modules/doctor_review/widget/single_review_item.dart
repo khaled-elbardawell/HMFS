@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 import 'package:hmfs/app/modules/doctor_review/controller.dart';
 
 // ignore: must_be_immutable
@@ -36,7 +37,7 @@ class SingleReviewItem extends StatelessWidget {
                   SvgPicture.asset(
                     iconName,
                     semanticsLabel: semanticsLabel,
-                    color: HexColor.fromHex('#8F9BB3'),
+                    color: HexColor.fromHex(lightBlue),
                     width: 3.5.wp,
                     height: 3.5.hp,
                   ),
@@ -46,7 +47,7 @@ class SingleReviewItem extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      color: HexColor.fromHex('#8F9BB3'),
+                      color: HexColor.fromHex(lightBlue),
                       fontSize: 10.0.sp,
                     ),
                   )
@@ -58,7 +59,7 @@ class SingleReviewItem extends StatelessWidget {
                   Text(
                     '$rate',
                     style: TextStyle(
-                      color: HexColor.fromHex('#707FD5'),
+                      color: HexColor.fromHex(blue),
                       fontWeight: FontWeight.w900,
                       fontSize: 13.0.sp,
                     ),
@@ -73,7 +74,7 @@ class SingleReviewItem extends StatelessWidget {
                     itemBuilder: (context, index) => SvgPicture.asset(
                       'assets/images/Icon-star-review.svg',
                       semanticsLabel: 'Star Icon',
-                      color: HexColor.fromHex('#707FD5'),
+                      color: HexColor.fromHex(blue),
                       width: 4.0.wp,
                       height: 4.0.hp,
                     ),
@@ -95,7 +96,7 @@ class SingleReviewItem extends StatelessWidget {
             endIndent: 2,
             indent: 2,
             thickness: 2,
-            color: HexColor.fromHex('#EDF1F7'),
+            color: HexColor.fromHex(grey),
           ),
         ],
       ),

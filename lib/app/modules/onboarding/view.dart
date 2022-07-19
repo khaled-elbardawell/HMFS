@@ -4,6 +4,8 @@ import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/modules/onboarding/controller.dart';
 import 'package:hmfs/app/modules/onboarding/widget/singleonboarding.dart';
 
+import '../../core/values/colors.dart';
+
 class OnboardingScreen extends StatelessWidget {
   final onboardingCrtl = Get.put(OnboardingController());
   OnboardingScreen({Key? key}) : super(key: key);
@@ -34,7 +36,7 @@ class OnboardingScreen extends StatelessWidget {
                         subTitle:
                             onboardingCrtl.onboardingPages[index].subTitle,
                         image: onboardingCrtl.onboardingPages[index].image,
-                        paragrah:
+                        paragraph:
                             onboardingCrtl.onboardingPages[index].paragrah,
                       ),
                     ],
@@ -65,8 +67,8 @@ class OnboardingScreen extends StatelessWidget {
                                   color:
                                       onboardingCrtl.selectedPageIndex.value ==
                                               index
-                                          ? HexColor.fromHex('#6574CF')
-                                          : HexColor.fromHex('#C5CEE0'),
+                                          ? HexColor.fromHex(blue)
+                                          : HexColor.fromHex(grey),
                                   borderRadius: BorderRadius.circular(50),
                                 ),
                               );
@@ -76,7 +78,7 @@ class OnboardingScreen extends StatelessWidget {
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(
-                      HexColor.fromHex('#6574CF'),
+                      HexColor.fromHex(blue),
                     ),
                     padding: MaterialStateProperty.all(
                       EdgeInsets.symmetric(

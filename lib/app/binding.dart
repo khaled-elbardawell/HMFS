@@ -20,7 +20,11 @@ class Binding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(
-      () => HomeController(),
+      () => HomeController(
+        userRepository: UserRepository(
+          userProvider: UserProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
       () => DoctorsController(),
@@ -35,7 +39,7 @@ class Binding extends Bindings {
       () => ReservationController(),
     );
     Get.lazyPut(
-      () => UserProfileControllrer(),
+      () => UserProfileController(),
     );
     Get.lazyPut(
       () => SignInController(
@@ -45,7 +49,11 @@ class Binding extends Bindings {
       ),
     );
     Get.lazyPut(
-      () => SignUpController(),
+      () => SignUpController(
+        userRepository: UserRepository(
+          userProvider: UserProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
       () => ResetPasswordController(),

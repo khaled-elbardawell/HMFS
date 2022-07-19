@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class CustomLogButton extends StatelessWidget {
   final GlobalKey<FormState> formKey;
@@ -29,7 +30,7 @@ class CustomLogButton extends StatelessWidget {
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            color: HexColor.fromHex('#6574CF'),
+            color: HexColor.fromHex(blue),
             borderRadius: BorderRadius.circular(5.0),
           ),
           child: TextButton(
@@ -63,14 +64,14 @@ class CustomLogButton extends StatelessWidget {
                   TextSpan(
                     text: textSpan,
                     style: TextStyle(
-                      color: HexColor.fromHex('#8F9BB3'),
+                      color: HexColor.fromHex(lightBlue),
                       fontSize: 13.0.sp,
                     ),
                   ),
                   TextSpan(
                     text: buttonTextSpan,
                     style: TextStyle(
-                      color: HexColor.fromHex('#6574CF'),
+                      color: HexColor.fromHex(blue),
                       fontSize: 13.0.sp,
                     ),
                     recognizer: TapGestureRecognizer()

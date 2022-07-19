@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/values/colors.dart';
 
 class SingleGridDoctor extends StatelessWidget {
   const SingleGridDoctor({Key? key}) : super(key: key);
@@ -23,29 +24,14 @@ class SingleGridDoctor extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(600.0),
-                  child: Image.asset(
-                    "assets/images/doctor-avatar.jpg",
-                    fit: BoxFit.fill,
-                    width: 20.0.wp,
-                    height: 20.0.wp,
-                  ),
-                ),
-                Positioned(
-                  right: 1.5.wp,
-                  bottom: 1.0.wp,
-                  child: SvgPicture.asset(
-                    'assets/images/Icon-online.svg',
-                    semanticsLabel: 'location Icon',
-                    width: 2.0.wp,
-                    height: 2.0.hp,
-                  ),
-                ),
-              ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(600.0),
+              child: Image.asset(
+                "assets/images/doctor-avatar.jpg",
+                fit: BoxFit.fill,
+                width: 20.0.wp,
+                height: 20.0.wp,
+              ),
             ),
             SizedBox(
               height: 2.5.hp,
@@ -54,7 +40,7 @@ class SingleGridDoctor extends StatelessWidget {
               "Chikanso Chima",
               style: TextStyle(
                 fontSize: 12.5.sp,
-                color: HexColor.fromHex('#222B45'),
+                color: HexColor.fromHex(darkBlue),
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -65,7 +51,7 @@ class SingleGridDoctor extends StatelessWidget {
               "Ophthalmologist",
               style: TextStyle(
                 fontSize: 10.0.sp,
-                color: HexColor.fromHex('#8F9BB3'),
+                color: HexColor.fromHex(lightBlue),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -89,7 +75,7 @@ class SingleGridDoctor extends StatelessWidget {
                   "68km away",
                   style: TextStyle(
                     fontSize: 8.5.sp,
-                    color: HexColor.fromHex('#8F9BB3'),
+                    color: HexColor.fromHex(lightBlue),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -136,6 +122,7 @@ class SingleGridDoctor extends StatelessWidget {
                               semanticsLabel: 'star Icon',
                               width: 2.0.wp,
                               height: 2.0.hp,
+                              color: HexColor.fromHex(blue),
                             ),
                             SizedBox(
                               width: 0.8.wp,
@@ -144,7 +131,7 @@ class SingleGridDoctor extends StatelessWidget {
                               "4.7",
                               style: TextStyle(
                                 fontSize: 11.0.sp,
-                                color: HexColor.fromHex('#6574CF'),
+                                color: HexColor.fromHex(blue),
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -154,7 +141,7 @@ class SingleGridDoctor extends StatelessWidget {
                           "(12)",
                           style: TextStyle(
                             fontSize: 8.0.sp,
-                            color: HexColor.fromHex('#8F9BB3'),
+                            color: HexColor.fromHex(lightBlue),
                             fontWeight: FontWeight.w400,
                           ),
                         ),

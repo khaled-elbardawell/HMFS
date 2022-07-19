@@ -6,9 +6,8 @@ import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
 import 'package:hmfs/app/widgets/custom_textfield.dart';
 
-class SignUpScreen extends StatelessWidget {
-  SignUpScreen({Key? key}) : super(key: key);
-  final signUpCtrl = Get.put(SignUpController());
+class SignUpScreen extends GetView<SignUpController> {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +27,13 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Form(
-                      key: signUpCtrl.signUpformKey,
+                      key: controller.signUpformKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
                             title: 'name',
-                            controller: signUpCtrl.nameController,
+                            controller: controller.nameController,
                             textInputType: TextInputType.text,
                             hintText: 'Name',
                             errorMessage:
@@ -44,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           CustomTextField(
                             title: 'email',
-                            controller: signUpCtrl.emailController,
+                            controller: controller.emailController,
                             textInputType: TextInputType.emailAddress,
                             hintText: 'email',
                             errorMessage:
@@ -53,18 +52,8 @@ class SignUpScreen extends StatelessWidget {
                             marginBottom: 3.0.hp,
                           ),
                           CustomTextField(
-                            title: 'Mobile Number',
-                            controller: signUpCtrl.mobilephoneController,
-                            textInputType: TextInputType.phone,
-                            hintText: 'Mobile Number',
-                            errorMessage:
-                                'Caption text, description, error notification',
-                            obscureText: false,
-                            marginBottom: 3.0.hp,
-                          ),
-                          CustomTextField(
                             title: 'PassWord',
-                            controller: signUpCtrl.passwordController,
+                            controller: controller.passwordController,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
                             errorMessage:
@@ -74,9 +63,9 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           CustomLogButton(
                             buttonText: 'Sign UP',
-                            formKey: signUpCtrl.signUpformKey,
+                            formKey: controller.signUpformKey,
                             // Todo: API call to sign up
-                            pageButton: () => Get.offAllNamed('/home'),
+                            pageButton: () => controller.registerUser(),
                             textSpan: 'Do you have an account?',
                             buttonTextSpan: 'Sign In',
                             pageButtonTextSpan: '/SignIn',

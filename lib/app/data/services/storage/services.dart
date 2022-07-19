@@ -1,21 +1,29 @@
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:hmfs/app/core/utils/key.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class StorageServices extends GetxService {
-  late GetStorage _box;
+class CacheHelper {
+  static late SharedPreferences sharedPreferences;
 
-  Future<StorageServices> init() async {
-    _box = GetStorage();
-    await _box.writeIfNull(key, []);
-    return this;
+  static init() async {
+    sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  T read<T>(String key) {
-    return _box.read(key);
+  static Future<bool> putOnboardingData(String key, bool value) async {
+    return await sharedPreferences.setBool(key, value);
   }
 
-  void write(String key, dynamic value) async {
-    await _box.write(key, value);
+  static Future<bool> putTokenData(String key, String value) async {
+    return await sharedPreferences.setString(key, value);
+  }
+
+  static bool getData(String key) {
+    return sharedPreferences.getBool(key) ?? false;
+  }
+
+  static String getTokenData(String key) {
+    return sharedPreferences.getString(key) ?? '';
+  }
+
+  static Future<bool> deleteData(String key) async {
+    return await sharedPreferences.remove(key);
   }
 }
