@@ -50,4 +50,8 @@ Route::group([
     Route::get('chat/search/users', 'ChatController@chatSearchUsers')->name('user.chat.search.users');
 
 
+    Route::get('get/user/doctors', 'UserDoctorController@getUserDoctors')->name('get.user.doctors');
+    Route::get('get/user/doctor', 'UserDoctorController@getUserDoctor')->name('get.user.doctor');
+
+
 });
