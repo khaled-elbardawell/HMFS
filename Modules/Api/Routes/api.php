@@ -13,9 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::middleware('auth:api')->get('/api', function (Request $request) {
-//    return $request->user();
-//});
 
 
 Route::group([
@@ -27,7 +24,17 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+});
 
+
+
+Route::group([
+    'middleware' => ['api','api.auth:api'],
+], function ($router) {
+
+    Route::get('get/user/upcoming/reservations', 'ReservationsController@getUserUpcomingReservation')->name('get.user.upcoming.reservations');
+    Route::get('get/user/previous/reservations', 'ReservationsController@getUserPreviousReservation')->name('get.user.previous.reservations');
+    Route::get('get/user/reservation', 'ReservationsController@getUserReservation')->name('get.user.reservation');
 
 
 
