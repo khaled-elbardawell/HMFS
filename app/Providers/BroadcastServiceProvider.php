@@ -15,12 +15,9 @@ class BroadcastServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        
+         
 
-//        Broadcast::routes(['middleware' => 'auth:api']);
-//        Broadcast::routes();
-
-        if (request()->hasHeader('authorization')){
+        if (request()->hasHeader('Authorization')){
             Broadcast::routes(['middleware' => 'auth:api']);
         } else {
             Broadcast::routes();
