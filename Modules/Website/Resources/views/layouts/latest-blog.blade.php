@@ -1,4 +1,4 @@
-<section class="section-box mt-50">
+<section class="section-box mt-70">
     <div class="container">
         <div class="row align-items-end">
             <div class="col-lg-7 col-md-7">

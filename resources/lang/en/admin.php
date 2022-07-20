@@ -42,4 +42,7 @@ return [
     'phone'      => 'Phone',
     'subject'      => 'Subject',
     'message'      => 'Message',
+    'Features'      => 'Features',
+    'Key'      => 'Key',
+    'Value'      => 'Value',
 ];

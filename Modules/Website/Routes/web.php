@@ -17,7 +17,7 @@ Route::group(
         Route::get('/', 'FrontController@index')->name('index');
         Route::get('/posts', 'FrontController@posts')->name('posts');
         Route::get('/blog-single/{id}', 'FrontController@postSingle')->name('blogSingle');
-        Route::get('/offers', 'FrontController@offers')->name('offers');
+        Route::get('/offers-front', 'FrontController@offers')->name('offers-front');
         Route::get('/about-us', 'FrontController@aboutUs')->name('aboutUs');
         Route::get('/contact-us', 'FrontController@contactUs')->name('contactUs');
         Route::post('/sendContactUs', 'FrontController@sendContactUs')->name('sendContactUs');

@@ -38,6 +38,24 @@
 
         @can('is_super_admin')
             <li>
+                <a class="nav-link" href="{{route('features.index')}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>Features</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('is_super_admin')
+            <li>
+                <a class="nav-link" href="{{route('offers.index')}}">
+                    <i class="fa fa-tasks"></i>
+                    <span>Offers</span>
+                </a>
+            </li>
+        @endcan
+
+        @can('is_super_admin')
+            <li>
                 <a class="nav-link" href="{{route('organization.index')}}">
                     <i class="fa fa-sitemap"></i>
                     <span>Organizations</span>

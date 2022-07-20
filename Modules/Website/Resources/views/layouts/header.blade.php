@@ -24,7 +24,7 @@
                                 <a class="active" href="{{route('index')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('offers')}}">Offers</a>
+                                <a class="active" href="{{route('offers-front')}}">Offers</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('posts')}}">Blogs</a>
@@ -83,7 +83,7 @@
                                 <a class="active" href="{{route('index')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('offers')}}">Offers</a>
+                                <a class="active" href="{{route('offers-front')}}">Offers</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('posts')}}">Blogs</a>
