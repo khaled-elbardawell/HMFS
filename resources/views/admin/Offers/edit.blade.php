@@ -47,7 +47,7 @@
                             <h6>{{__('admin.Features')}}</h6>
                         </div>
                         @foreach ($features as $feature)
-                            @foreach ($offer_features as $offer_feature)
+
 
                                 <div class="col-md-12 check">
                                     <div class="form-group">
@@ -55,12 +55,12 @@
                                             {{$feature->key}} <span class="text-danger">*</span>
                                         </label>
                                         <div>
-                                            <input name="features[]" type="checkbox" value="{{$feature->id}}" class="form-control" placeholder="{{$feature->key}} *" id="feature-{{$feature->key}}" @if($feature->id == $offer_feature->feature_id) checked @endif >
+                                            <input name="features[]" type="checkbox" value="{{$feature->id}}" class="form-control" placeholder="{{$feature->key}} *" id="feature-{{$feature->key}}" @foreach ($offer_features as $offer_feature) @if($feature->id == $offer_feature->feature_id) checked @endif  @endforeach>
                                         </div>
                                     </div>
                                 </div>
 
-                            @endforeach
+
 
                             {{-- {!! Builder::Input('checkbox','feature',null,['label_title' => $feature->key,'is_required' => true , 'col' => 'col-md-12 check']) !!} --}}
 

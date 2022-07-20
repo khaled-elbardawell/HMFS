@@ -113,7 +113,7 @@ class OfferController extends Controller
 
             if(!is_null($request->features)){
                 foreach($request->features as $key => $value){
-                    OfferFeatures::where('offer_id',$offer_id)->updateOrCreate(
+                    OfferFeatures::where('offer_id',$offer_id)->sync(
                         [
                             'offer_id' => $offer_id,
                             'feature_id' => $value,
