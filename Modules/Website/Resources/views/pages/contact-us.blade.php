@@ -3,13 +3,16 @@
 @section('content')
 <!-- Content -->
 
-{{-- <div class="container wide mb-50">
-    <div class="border-radius-15 overflow-hidden">
-        <div id="map-basic" class="leaflet-map"></div>
-    </div>
-</div> --}}
-
 <div class="container mt-90 mt-md-30">
+
+    <div class="row">
+        <div class="col-md-12">
+            @if(session()->get('status') == true)
+                <div class="alert alert-success">{{ session()->get('message') }}</div>
+            @endif
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-xl-10 col-lg-12 m-auto">
             <section class="mb-50">
@@ -35,27 +38,43 @@
                             <h5 class="text-blue text-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">Send Message</h5>
                             <h2 class="section-title mt-15 mb-10 text-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">Drop Us a Line</h2>
                             <p class="text-muted mb-30 font-md text-center wow animate__animated animate__fadeInUp" data-wow-delay=".1s">Your email address will not be published. Required fields are marked *</p>
-                            <form class="contact-form-style mt-80" id="contact-form" action="#" method="post">
+                            <form class="contact-form-style mt-80" id="contact-form" action="{{route('sendContactUs')}}" method="POST">
+                                @csrf
                                 <div class="row wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                                     <div class="col-lg-6 col-md-6">
                                         <div class="input-style mb-20">
-                                            <input name="name" placeholder="First Name" type="text">
+                                            <input name="name" placeholder="Name *" type="text">
+                                            @error('name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="input-style mb-20">
+                                            <input name="email" placeholder="Your Email *" type="email">
+                                            @error('email')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="input-style mb-20">
+                                            <input name="phone" placeholder="Your Phone *" type="tel">
+                                            @error('phone')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-lg-6 col-md-6">
                                         <div class="input-style mb-20">
-                                            <input name="email" placeholder="Your Email" type="email">
+                                            <input name="subject" placeholder="Subject *" type="text">
+                                            @error('subject')
+                                            <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="input-style mb-20">
-                                            <input name="telephone" placeholder="Your Phone" type="tel">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 col-md-6">
-                                        <div class="input-style mb-20">
-                                            <input name="subject" placeholder="Subject" type="text">
-                                        </div>
+
                                     </div>
                                     <div class="col-lg-12 col-md-12 text-center">
                                         <div class="textarea-style mb-30">

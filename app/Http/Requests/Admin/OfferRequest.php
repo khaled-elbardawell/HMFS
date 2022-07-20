@@ -6,7 +6,7 @@ use App\Rules\UserEmailRule;
 use App\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BlogRequest extends FormRequest
+class OfferRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,10 +26,9 @@ class BlogRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'         => 'required|string|max:255',
-            'excerpt'  => 'required|string|max:1000',
+            'name'         => 'required|string|max:255',
             'description'  => 'required|string|max:2000',
-            'logo'  => $this->validateLogo(),
+            // 'logo'  => $this->validateLogo(),
         ];
     }
 

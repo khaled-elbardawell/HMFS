@@ -46,6 +46,12 @@ Route::group(
 
 
         Route::resource('blogs',"BlogController");
+
+        Route::resource('features',"FeatureController");
+
+        Route::resource('offers',"OfferController");
+
+        Route::resource('contacts',"ContactController");
 });
 
 

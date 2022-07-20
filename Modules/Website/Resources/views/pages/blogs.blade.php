@@ -2,20 +2,13 @@
 
 @section('content')
     <section>
-        <div class="container">
+        <div class="container mt-30">
             <div class="row">
-                <div class="col-md-4 col-sm-6 col-12">
-                    @include('website::layouts.card-blog')
-                </div>
-                <div class="col-md-4 col-sm-6 col-12">
-                    @include('website::layouts.card-blog')
-                </div>
-                <div class="col-md-4 col-sm-6 col-12">
-                    @include('website::layouts.card-blog')
-                </div>
-                <div class="col-md-4 col-sm-6 col-12">
-                    @include('website::layouts.card-blog')
-                </div>
+                @foreach ($blogs as $blog)
+                    <div class="col-md-4 col-sm-6 col-12">
+                        @include('website::layouts.card-blog',['blog'=>$blog])
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBlogTable extends Migration
+class CreateOfferFeaturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,22 @@ class CreateBlogTable extends Migration
      */
     public function up()
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('offer_features', function (Blueprint $table) {
             $table->bigIncrements('id');
+
+            $table->unsignedBigInteger('offer_id')->nullable();
+            $table->foreign('offer_id')
+                ->references('id')
+                ->on('offers')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('feature_id')->nullable();
+            $table->foreign('feature_id')
+                ->references('id')
+                ->on('features')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
 
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')
@@ -23,14 +37,10 @@ class CreateBlogTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->string('title')->nullable();
-            $table->text('excerpt')->nullable();
-            $table->text('description')->nullable();
-            $table->string('post_date')->nullable();
-
             $table->timestamps();
         });
     }
+
     /**
      * Reverse the migrations.
      *
@@ -38,6 +48,6 @@ class CreateBlogTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('offer_features');
     }
 }

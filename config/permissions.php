@@ -40,10 +40,4 @@ return [
     "reservation.edit"    => "Edit Reservation",
     "reservation.delete"  => "Delete Reservation",
 
-
-    "blogs.index"   => "List Blogs",
-    "blogs.create"  => "Create Blog",
-    "blogs.edit"    => "Edit Blog",
-    "blogs.delete"  => "Delete Blog",
-
 ];

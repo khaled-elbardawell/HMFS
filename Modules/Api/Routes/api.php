@@ -54,4 +54,9 @@ Route::group([
     Route::get('get/user/doctor', 'UserDoctorController@getUserDoctor')->name('get.user.doctor');
 
 
+    Route::get('get/user/list/health-profile', 'HealthProfileController@getListUserHealthProfile')->name('get.user.list.health-profile');
+    Route::get('get/user/health-profile', 'HealthProfileController@getUserHealthProfile')->name('get.user.health-profile');
+
+
+
 });

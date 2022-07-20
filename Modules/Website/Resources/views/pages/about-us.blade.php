@@ -14,9 +14,8 @@
                             <div class="banner-description box-mw-70 mt-30">Search and connect with the right candidates faster. This talent seach gives you the opportunity to find candidates who may be a perfect fit for your role</div>
                             <div class="mt-60">
                                 <div class="box-button-shadow mr-10">
-                                    <a href="#" class="btn btn-default">Contact us</a>
+                                    <a href="{{route('contactUs')}}" class="btn btn-default">Contact us</a>
                                 </div>
-                                <a href="#" class="btn">Support center</a>
                             </div>
                         </div>
                     </div>
@@ -33,7 +32,7 @@
         </div>
     </section>
 
-    <section class="section-box mt-90">
+    {{-- <section class="section-box mt-90">
         <div class="container">
             <div class="row">
                 <div class="col-lg-11 mx-auto">
@@ -90,7 +89,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="section-box mt-90 mb-80">
         <div class="container">
@@ -103,7 +102,7 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12 col-12">
                         <div class="box-info-job pl-90 pt-30 pr-90">
-                            <span class="text-blue wow animate__animated animate__fadeInUp">Find jobs</span>
+                            <span class="text-blue wow animate__animated animate__fadeInUp">Find Offers</span>
                             <h5 class="heading-36 mb-30 mt-30 wow animate__animated animate__fadeInUp">Create free count and start apply your dream job today</h5>
                             <p class="text-lg wow animate__animated animate__fadeInUp">
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is
@@ -119,7 +118,7 @@
         </div>
     </section>
 
-    <section class="section-box mt-90 mt-md-0">
+    {{-- <section class="section-box mt-90 mt-md-0">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-12 col-sm-12 col-12">
@@ -140,7 +139,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <section class="section-box mt-90 mt-md-50">
         <div class="container">
@@ -149,7 +148,7 @@
                 Find the type of work you need, clearly defined and ready to start. Work begins as soon as you purchase and provide requirements.
             </div>
             <div class="row mt-60">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="card-grid-2  wow animate__animated animate__fadeIn">
                         <div class="text-center card-grid-2-image">
                             <a href="#">
@@ -168,7 +167,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="card-grid-2  wow animate__animated animate__fadeIn">
                         <div class="text-center card-grid-2-image">
                             <a href="#">
@@ -187,140 +186,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card-grid-2  wow animate__animated animate__fadeIn">
-                        <div class="text-center card-grid-2-image">
-                            <a href="#">
-                                <figure><img src="{{CustomAsset('front/assets/imgs/page/about/marc8.png')}}" alt="jobhub" /></figure>
-                            </a>
-                        </div>
-                        <div class="card-block-info pt-10 text-center">
-                            <h5 class="font-bold text-lg mb-5">Warren Buffett</h5>
-                            <p class="text-small text-muted">Marketing Crew</p>
-                            <div class="card-2-bottom mt-15">
-                                <a href="#" class="card-grid-2-socials icon-fb-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-tw-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-inst-sym"></a>
-                                <a href="#" class="card-grid-2-socials icon-linkedin-sym"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="card-grid-2  wow animate__animated animate__fadeIn">
                         <div class="text-center card-grid-2-image">
                             <a href="#">
@@ -347,7 +213,7 @@
 
     @include('website::layouts.latest-blog')
 
-    @include('website::layouts.newsletter')
+    {{-- @include('website::layouts.newsletter') --}}
 
     <!-- End Content -->
 
