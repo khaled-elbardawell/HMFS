@@ -98,7 +98,11 @@
     organizationMenu()
 
 
-
+    Echo.channel('public')
+        .listen('PublicEvent', (e) => {
+            console.log(e);
+            alert('fuck project');
+        });
 
     Echo.join('online')
         .here(users => {

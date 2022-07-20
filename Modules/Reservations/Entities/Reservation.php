@@ -2,6 +2,7 @@
 
 namespace Modules\Reservations\Entities;
 
+use App\Models\Admin\Organization;
 use App\Traits\Paginate;
 use App\Traits\SqlTrait;
 use App\User;
@@ -22,6 +23,10 @@ class Reservation extends Model
 
     public function doctor(){
         return $this->belongsTo(User::class,'doctor_id');
+    }
+
+    public function organization(){
+        return $this->belongsTo(Organization::class,'organization_id');
     }
 
 }

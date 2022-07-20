@@ -18,6 +18,7 @@
             </li>
         @endif
 
+<<<<<<< HEAD
         @can('is_super_admin')
             <li>
                 <a class="nav-link" href="{{route('blogs.index')}}">
@@ -53,6 +54,16 @@
                 </a>
             </li>
         @endcan
+=======
+{{--        @if( (Gate::allows('is_super_admin') && session()->has('organization_id')) || (!Gate::allows('is_super_admin') && Gate::allows('blogs.index')))--}}
+{{--            <li>--}}
+{{--                <a class="nav-link" href="{{route('blogs.index')}}">--}}
+{{--                    <i class="fa fa-tasks"></i>--}}
+{{--                    <span>Blogs</span>--}}
+{{--                </a>--}}
+{{--            </li>--}}
+{{--        @endif--}}
+>>>>>>> e8cce16bfcb60f84ae8cc4384d1302b815c67eef
 
         @can('is_super_admin')
             <li>
