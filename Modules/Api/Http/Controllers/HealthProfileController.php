@@ -21,7 +21,7 @@ class HealthProfileController extends Controller
                 $q->select('id','name','email')->with(['upload' => function($q){
                     $q->select('id','file','uploadable_type','uploadable_id');
                 }]);
-            },'upload' => function($q){
+            },'uploads' => function($q){
                 $q->select('id','file','uploadable_type','uploadable_id');
             }])->where('user_id',$user->id)->orderBy('id','DESC')->get();
         return $this->returnDataResponse($userHealthProfiles);
@@ -43,7 +43,7 @@ class HealthProfileController extends Controller
                 $q->select('id','name','email')->with(['upload' => function($q){
                     $q->select('id','file','uploadable_type','uploadable_id');
                 }]);
-            },'upload' => function($q){
+            },'uploads' => function($q){
                 $q->select('id','file','uploadable_type','uploadable_id');
             }])->where('user_id',$user->id)->where('id',\request()->health_profile_id)->first();
         return $this->returnDataResponse($userHealthProfiles);

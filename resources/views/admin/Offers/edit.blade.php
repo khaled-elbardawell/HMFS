@@ -50,6 +50,8 @@
 
 
                                 <div class="col-md-12 check">
+                                     {!! Builder::Input('checkbox','feature',null,['label_title' => $feature->key,'is_required' => true , 'col' => 'col-md-12 check']) !!}
+
                                     <div class="form-group">
                                         <label for="feature-{{$feature->key}}" class="text-right">
                                             {{$feature->key}} <span class="text-danger">*</span>
@@ -62,7 +64,6 @@
 
 
 
-                            {{-- {!! Builder::Input('checkbox','feature',null,['label_title' => $feature->key,'is_required' => true , 'col' => 'col-md-12 check']) !!} --}}
 
                         @endforeach
 

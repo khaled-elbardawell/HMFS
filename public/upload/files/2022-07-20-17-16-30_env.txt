@@ -1,0 +1,273 @@
+APP_NAME="Bakkah Inc."
+
+APP_ENV=local
+
+APP_KEY=base64:r7NpkIHqMLZlKujOEWk+4BOQp4Sa8G4LvR5O+0Ao1Pk=
+
+APP_DEBUG=true
+
+APP_URL=http://127.0.0.1:8000/
+
+HAS_SOCIAL_SCRIPTS=false
+
+SESSION_SECURE_COOKIE=false
+
+HAS_GEOPLUGIN=false
+
+CURRENCY_PER_COUNTRY=false
+
+NODE_ENV=local
+
+# NODE_ENV=testing
+
+# NODE_ENV=production
+
+
+
+LOG_CHANNEL=stack
+
+
+
+DB_CONNECTION=mysql
+
+DB_HOST=127.0.0.1
+
+DB_PORT=3306
+
+# DB_DATABASE=final_db
+
+DB_DATABASE=bakkah_learning_db
+
+DB_USERNAME=root
+
+DB_PASSWORD=
+
+
+
+BROADCAST_DRIVER=log
+
+CACHE_DRIVER=file
+
+QUEUE_CONNECTION=database
+
+SESSION_DRIVER=file
+
+SESSION_LIFETIME=120
+
+
+
+# REDIS_CLIENT=predis
+
+# REDIS_HOST=127.0.0.1
+
+# REDIS_PASSWORD=null
+
+# REDIS_PORT=6379
+
+
+
+#MAIL_DRIVER=smtp
+
+MAIL_MAILER=smtp
+
+MAIL_HOST=smtp.mailtrap.io
+
+MAIL_PORT=2525
+
+
+
+#Ahorany
+
+# MAIL_USERNAME=098e93fc271988
+
+# MAIL_PASSWORD=856fd243f3e2f8
+
+
+
+# #Hani
+
+# MAIL_USERNAME=560eaf18048aaa
+
+# MAIL_PASSWORD=f5b64a24151d07
+
+
+
+# Mohammed
+
+#MAIL_USERNAME=566e98cedd718e
+
+#MAIL_PASSWORD=1ac5d138c65470
+
+
+
+# Jihad
+
+MAIL_USERNAME=2958ee5807f11f
+
+MAIL_PASSWORD=16ee9ac29a4b31
+
+
+
+MAIL_ENCRYPTION=tls
+
+MAIL_FROM_ADDRESS=hsalah@bakkah.net.sa
+
+# MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+#MAIL_DRIVER=smtp
+
+# MAIL_MAILER=smtp
+
+# MAIL_HOST=smtp.office365.com
+
+# MAIL_PORT=587
+
+# MAIL_USERNAME=webadmin@bakkah.net.sa
+
+# MAIL_PASSWORD="Ron07815"
+
+# MAIL_ENCRYPTION=tls
+
+# MAIL_FROM_ADDRESS=webadmin@bakkah.net.sa
+
+# MAIL_FROM_NAME="${APP_NAME}"
+
+
+
+AWS_ACCESS_KEY_ID=
+
+AWS_SECRET_ACCESS_KEY=
+
+AWS_DEFAULT_REGION=us-east-1
+
+AWS_BUCKET=
+
+
+
+PUSHER_APP_ID=
+
+PUSHER_APP_KEY=
+
+PUSHER_APP_SECRET=
+
+PUSHER_APP_CLUSTER=mt1
+
+
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+
+
+APP_ASSET=
+
+LIVE_ASSET=
+
+SERVER_APP_ASSET=public/
+
+
+
+payment_mode=test
+
+payment_url=https://test.oppwa.com/v1
+
+payment_authorization=OGE4Mjk0MTc1ZWU3YTZlMjAxNWVlODdmZjlhODA2NjF8OU5Dc3FTN2RyTQ==
+
+payment_entityId=8a8294185ee7c1ba015ee889d68104e6
+
+SSL_VERIFYPEER=false
+
+
+
+####payment_entityId_mada=8ac7a4c9720813c201720897547d00f6
+
+# testMode=live
+
+# payment_url=https://oppwa.com/v1
+
+# payment_authorization=OGFjZGE0Y2E1Zjk1ZTI1NzAxNWY5NmUzNzBmZDBmYzR8QUFqc3JQcndrMg==
+
+# payment_entityId=8acda4ca5f95e257015f96e3b7700fcb
+
+# SSL_VERIFYPEER=true
+
+
+
+reCAPTCHA_site_key=6LcbRM8ZAAAAABw_fbEqYfDMA3qNl8Zlwqb99Gcn
+
+reCAPTCHA_secret_key=6LcbRM8ZAAAAAOwhkxf64T9XQvU3-Cnt2wLFP14R
+
+
+
+ALGOLIA_APP_ID=GZX3ABM7FT
+
+ALGOLIA_SECRET=3b45c9dbf04e906a9f3d853405d32d8d
+
+MIX_ALGOLIA_APP_ID=GZX3ABM7FT
+
+MIX_ALGOLIA_SEARCH=e5a7dae9287765d31f71dc49225990eb
+
+
+
+LMS_WORK=false
+
+
+
+XERO_CLIENT_ID="B711564CFE7C41FEA534EC93C0F47024"
+
+XERO_CLIENT_SECRET="TXybgm6AJ1NjJVTolspb69k9hGJUBNzFOOn-vtEa3HOk9y1N"
+
+#XERO_WEBHOOK_KEY=+7xcpsUZLu91bnKoPuleXK4otCLlUczqGgiqVDkUA7biRxd/eeHLbR0a5jncGf0+9KY15DMi4gkxGBeCeDMo/A==
+
+#XTID=x30localtest
+
+#XERO_CALLBACK=https://localhost:8000/xero/auth/callback
+
+
+
+#XERO_CLIENT_ID=C24B79F13B1D4293AD02AD32167F150E
+
+#XERO_CLIENT_SECRET=8CcfasUG3mE86rsz042vwB3t2ilswDTUSYT9iVnn6VPElRS8
+
+#XERO_WEBHOOK_KEY=YVuqgNwLuNnvCnuYpWfsgS3C0JhyVp1ECO4s+dPcKnjkME5GyJ7RiUmyIVWiDNdghe8mmX46NbA5qla2cQQDYw==
+
+#XTID=x30testingbakkah
+
+#XERO_CALLBACK=https://testing.bakkah.net.sa/xero/auth/callback
+
+
+
+# https://developer.paypal.com/docs/api/overview/#get-credentials
+
+PAYPAL_SANDBOX_CLIENT_ID=AZs90uRawA1rTC7O6JK3tFhON8sDThmo16Ug_Qj-ghottvBHg2s4Txk0r6M7MDffUyg0QDpZhEn9HvmF
+
+PAYPAL_SANDBOX_CLIENT_SECRET=EAsCWao-Y3aI9a8YmxTaxm6lZDViHH5Uv_ZJo6b3PMrEmtxPwf7zx7XjjvDspGil_rtAyZjG4vhIpZsc
+
+
+
+PAYPAL_LIVE_ACCOUNT=accounting@bakkah.net.sa
+
+PAYPAL_LIVE_CLIENT_ID=Ad1MffgqwFmlfJz_Ha_UkeYBADhAnasY9_g2hAgQSDFcvQdQKTMlWAJmYjgGGKUPwpnoaLLBeXVSJgkh
+
+PAYPAL_LIVE_CLIENT_SECRET=EHMX-Y20rGoFAe1xFz0iK2cEZ41S1IUfm0D52WVen6vO7qzqKmSEXC1ahyfi0HgUUlCDGSlWUYMKiS6Z
+
+
+
+CHECHOUT_PUBLIC_KEY=pk_test_5977eaa1-1404-41e7-85bf-185fcbcee2bd
+
+CHECHOUT_SECRET_KEY=sk_test_8d7c9bd1-ed3b-44b4-a0a8-b2db38e17dde
+
+
+
+#lms links
+
+Moodle_URL=https://learn.bakkah.com/login/index.php
+
+TalentLMS_URL=https://lms.bakkah.com
+
+
+
+NEW_WEBSITE=tru
