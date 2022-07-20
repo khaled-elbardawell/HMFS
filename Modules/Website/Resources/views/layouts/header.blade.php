@@ -13,7 +13,7 @@
         <div class="main-header">
             <div class="header-left">
                 <div class="header-logo">
-                    <a href="{{route('home')}}" class="d-flex">
+                    <a href="{{route('index')}}" class="d-flex">
                         <img alt="HMFS" height="75px" class="w-100" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" />
                     </a>
                 </div>
@@ -21,13 +21,13 @@
                     <nav class="nav-main-menu d-none d-xl-block">
                         <ul class="main-menu">
                             <li>
-                                <a class="active" href="{{route('home')}}">Home</a>
+                                <a class="active" href="{{route('index')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('offers')}}">Offers</a>
+                                <a class="active" href="{{route('offers-front')}}">Offers</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('blogs')}}">Blogs</a>
+                                <a class="active" href="{{route('posts')}}">Blogs</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('contactUs')}}">Contact Us</a>
@@ -35,12 +35,8 @@
                             <li>
                                 <a class="active" href="{{route('aboutUs')}}">About Us</a>
                             </li>
-                            <li class="has-children">
-                                <a href="#">Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="page-service.html">Our Services</a></li>
-                                    <li><a href="pages-faqs.html">FAQs</a></li>
-                                </ul>
+                            <li>
+                                <a class="active" href="{{route('faqs')}}">FAQs</a>
                             </li>
                         </ul>
                     </nav>
@@ -84,13 +80,13 @@
                     <nav>
                         <ul class="mobile-menu font-heading">
                             <li>
-                                <a class="active" href="{{route('home')}}">Home</a>
+                                <a class="active" href="{{route('index')}}">Home</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('offers')}}">Offers</a>
+                                <a class="active" href="{{route('offers-front')}}">Offers</a>
                             </li>
                             <li>
-                                <a class="active" href="{{route('blogs')}}">Blogs</a>
+                                <a class="active" href="{{route('posts')}}">Blogs</a>
                             </li>
                             <li>
                                 <a class="active" href="{{route('aboutUs')}}">Contact Us</a>

@@ -86,3 +86,13 @@
 .met-profile .met-profile-main .met-profile-main-pic div.col-lg-12 label {
     display: none;
 }
+.check .form-group{
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    justify-content: start;
+    margin: 0;
+}
+.check label{
+    margin: 0 5px;
+}

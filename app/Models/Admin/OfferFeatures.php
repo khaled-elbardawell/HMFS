@@ -7,7 +7,7 @@ use App\Traits\SqlTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class OfferFeatures extends Model
 {
     use Paginate,UploadTrait,SqlTrait;
 
@@ -15,6 +15,14 @@ class Blog extends Model
 
     public function user(){
         return $this->hasOne('App\User', 'id');
+    }
+
+    public function offer(){
+        return $this->hasOne('App\Offer', 'id');
+    }
+
+    public function features(){
+        return $this->hasMany('App\Feature', 'id');
     }
 
 }
