@@ -2,14 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:hmfs/app/data/models/doctor.dart';
+import 'package:hmfs/app/data/models/healthprofile.dart';
+import 'package:hmfs/app/data/models/reservation.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
+
 import '../../../core/utils/key.dart';
 
-class DoctorWebServices {
+class HealthProfileWebServices {
   late Dio dio;
 
-  DoctorWebServices() {
+  HealthProfileWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
@@ -19,16 +21,15 @@ class DoctorWebServices {
     dio = Dio(options);
   }
 
-  Future<List<dynamic>> getUserDoctors(String token) async {
+  Future<List<dynamic>> getListUserHealthProfiles(String token) async {
     try {
       Response response = await dio.get(
-        '/api/get/user/doctors',
+        '/api/get/user/list/health-profile',
         queryParameters: {
           "token": token,
         },
       );
-
-      return response.data["doctors"];
+      return response.data["data"];
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
@@ -58,18 +59,18 @@ class DoctorWebServices {
     }
   }
 
-  Future<Doctor?> getUserDoctor(String token, String doctorId) async {
-    Doctor? doctor;
+  Future<HealthProfile?> getUserHealthProfile(
+      String token, int healthProfileId) async {
+    HealthProfile? healthProfile;
     try {
       Response response = await dio.get(
-        '/api/get/user/doctor',
+        '/api/get/user/health-profile',
         queryParameters: {
-          "doctor_id": doctorId,
+          "health_profile_id": healthProfileId,
           "token": token,
         },
       );
-
-      doctor = Doctor.fromJson(response.data["doctor"]);
+      healthProfile = HealthProfile.fromJson(response.data["data"]);
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
@@ -96,6 +97,6 @@ class DoctorWebServices {
         );
       }
     }
-    return doctor;
+    return healthProfile;
   }
 }

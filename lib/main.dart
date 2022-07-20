@@ -8,6 +8,7 @@ import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
 import 'package:hmfs/app/modules/edit_account/view.dart';
+import 'package:hmfs/app/modules/onboarding/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/reset_password/view.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
@@ -38,13 +39,11 @@ class MyApp extends StatelessWidget {
       theme: MyThemeMode.lightTheme,
       title: 'HMFS',
       initialBinding: Binding(),
-      // home: isOnboarding
-      //     ? isLoggedIn
-      //         ? const Home()
-      //         : const SignInScreen()
-      //     : OnboardingScreen(),
-      // elbardawellkhaled@gmail.com
-      home: const Home(),
+      home: isOnboarding
+          ? isLoggedIn
+              ? const Home()
+              : const SignInScreen()
+          : OnboardingScreen(),
       getPages: [
         GetPage(
           name: '/',

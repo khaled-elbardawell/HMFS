@@ -1,5 +1,3 @@
-// ignore: file_names
-
 class Message {
   final String message;
   final DateTime sendDate;

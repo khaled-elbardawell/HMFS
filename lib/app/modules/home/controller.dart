@@ -55,6 +55,8 @@ class HomeController extends GetxController {
   @override
   void onClose() {
     print("onClose print");
+    currentIndex.value = 0;
+    selectedItemIndex.value = 0;
     super.onClose();
   }
 }

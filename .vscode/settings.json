@@ -3,6 +3,7 @@
         "Aabed",
         "appbar",
         "Getx",
+        "healthprofile",
         "hmfs",
         "isbutton",
         "mobilephone",
@@ -14,6 +15,7 @@
         "singleuserchatcard",
         "textfield",
         "Upform",
-        "userapi"
+        "userapi",
+        "userprofile"
     ]
 }

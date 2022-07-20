@@ -1,15 +1,19 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:hmfs/app/data/models/doctor.dart';
+import 'package:hmfs/app/data/models/userprofile.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
-import '../../../core/utils/key.dart';
 
-class DoctorWebServices {
+import '../../../core/utils/key.dart';
+import '../../models/user.dart';
+
+class UserProfileWebServices {
   late Dio dio;
 
-  DoctorWebServices() {
+  UserProfileWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
@@ -19,21 +23,21 @@ class DoctorWebServices {
     dio = Dio(options);
   }
 
-  Future<List<dynamic>> getUserDoctors(String token) async {
+  Future<UserProfile?> getUserProfileData(String token) async {
+    UserProfile? userProfile;
     try {
       Response response = await dio.get(
-        '/api/get/user/doctors',
+        '/api/get/user/profile',
         queryParameters: {
           "token": token,
         },
       );
-
-      return response.data["doctors"];
+      userProfile = UserProfile.fromJson(response.data);
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
           'Error',
-          'Unauthenticated User',
+          'Invalid email or password',
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
@@ -42,7 +46,7 @@ class DoctorWebServices {
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
-          'Check your Internet connection',
+          'Check your internet connection',
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
@@ -54,27 +58,37 @@ class DoctorWebServices {
           colorText: Colors.black,
         );
       }
-      return [];
     }
+    return userProfile;
   }
 
-  Future<Doctor?> getUserDoctor(String token, String doctorId) async {
-    Doctor? doctor;
+  Future<UserProfile?> updateUserProfileData(
+      String token, String name, String phone, String bio, File image) async {
+    String imageName = image.path.split('/').last;
+    FormData data = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        image.path,
+        filename: imageName,
+      ),
+    });
+    UserProfile? userProfile;
     try {
-      Response response = await dio.get(
-        '/api/get/user/doctor',
-        queryParameters: {
-          "doctor_id": doctorId,
+      Response response = await dio.post(
+        '/api/update/user/profile',
+        data: {
           "token": token,
+          "name": name,
+          "phone": phone,
+          "bio": bio,
+          "image": data,
         },
       );
-
-      doctor = Doctor.fromJson(response.data["doctor"]);
+      userProfile = UserProfile.fromJson(response.data);
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
           'Error',
-          'Unauthenticated User',
+          'The email has already been taken.',
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
@@ -96,6 +110,6 @@ class DoctorWebServices {
         );
       }
     }
-    return doctor;
+    return userProfile;
   }
 }

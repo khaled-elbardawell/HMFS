@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hmfs/app/data/models/reservation.dart';
+import 'package:hmfs/app/data/services/storage/services.dart';
 
 import '../../../core/utils/key.dart';
 
@@ -37,6 +38,8 @@ class ReservationWebServices {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
+        CacheHelper.deleteData(keyToken);
+        Get.offNamed('/SignIn');
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
@@ -74,6 +77,8 @@ class ReservationWebServices {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
+        CacheHelper.deleteData(keyToken);
+        Get.offNamed('/SignIn');
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
@@ -105,7 +110,7 @@ class ReservationWebServices {
         },
       );
 
-      reservation = Reservation.fromJson(response.data);
+      reservation = Reservation.fromJson(response.data["data"]);
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
@@ -114,6 +119,8 @@ class ReservationWebServices {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
+        CacheHelper.deleteData(keyToken);
+        Get.offNamed('/SignIn');
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
