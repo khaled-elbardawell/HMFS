@@ -10,8 +10,8 @@ import 'package:hmfs/app/modules/chat/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/user_profile/view.dart';
 
-import '../../data/services/api/repository.dart';
 import '../../data/services/storage/services.dart';
+import '../../data/services/userapi/repository.dart';
 
 class HomeController extends GetxController {
   final currentIndex = 0.obs;
@@ -35,20 +35,14 @@ class HomeController extends GetxController {
     print('token is: $token');
     userRepository.meUser(token).then((value) {
       user = value!;
-      CacheHelper.putTokenData(keyToken, value.data.tokenDetails.accessToken);
-      print('me user! ' + user.data.email);
+      print('me user! ' + user.data.tokenDetails.accessToken);
     });
   }
 
   @override
   void onInit() {
     super.onInit();
-    // meUser();
-    // if (user == null) {
-    //   print("user null");
-    // } else {
-    //   print("user not null");
-    // }
+    meUser();
     print("onInit print home");
   }
 

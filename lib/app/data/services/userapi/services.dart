@@ -2,14 +2,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:hmfs/app/data/models/reservation.dart';
 
 import '../../../core/utils/key.dart';
 import '../../models/user.dart';
 
-class WebServices {
+class UserWebServices {
   late Dio dio;
 
-  WebServices() {
+  UserWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
@@ -80,7 +81,7 @@ class WebServices {
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
-          'Check your enternet connection',
+          'Check your Internet connection',
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
@@ -101,10 +102,11 @@ class WebServices {
     try {
       Response response = await dio.post(
         '/api/auth/me',
-        data: {
+        queryParameters: {
           "token": token,
         },
       );
+      print("test null token" + response.data.toString());
       user = User.fromJson(response.data);
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
@@ -117,7 +119,7 @@ class WebServices {
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
-          'Check your enternet connection',
+          'Check your Internet connection',
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );

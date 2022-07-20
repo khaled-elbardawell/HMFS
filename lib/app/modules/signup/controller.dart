@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/utils/key.dart';
-import '../../data/services/api/repository.dart';
 import '../../data/services/storage/services.dart';
+import '../../data/services/userapi/repository.dart';
 
 class SignUpController extends GetxController {
   final signUpformKey = GlobalKey<FormState>();

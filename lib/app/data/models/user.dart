@@ -1,3 +1,6 @@
+import 'package:hmfs/app/core/utils/key.dart';
+import 'package:hmfs/app/data/services/storage/services.dart';
+
 class User {
   late bool status;
   late String msg;
@@ -90,7 +93,7 @@ class TokenDetails {
       required this.expiresIn});
 
   TokenDetails.fromJson(Map<String, dynamic> json) {
-    accessToken = json['access_token'];
+    accessToken = json['access_token'] ?? CacheHelper.getTokenData(keyToken);
     tokenType = json['token_type'];
     expiresIn = json['expires_in'];
   }

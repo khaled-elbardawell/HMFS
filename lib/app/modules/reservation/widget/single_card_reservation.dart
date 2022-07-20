@@ -3,31 +3,39 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/models/reservation.dart';
 import 'package:hmfs/app/widgets/user_data_card.dart';
 
 class SingleCardReservation extends StatelessWidget {
-  const SingleCardReservation({Key? key}) : super(key: key);
+  final Reservation reservation;
+  const SingleCardReservation({Key? key, required this.reservation})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var outputFormat = DateTime.parse(
+        '${reservation.reservationDate} ${reservation.reservationTime}');
+    var now = DateTime.now();
+    var difference = outputFormat.difference(now);
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5.5.wp, horizontal: 4.0.wp),
-      margin: EdgeInsets.symmetric(vertical: 2.0.wp, horizontal: 0.5.wp),
+      margin: EdgeInsets.symmetric(vertical: 2.0.wp, horizontal: 0.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: HexColor.fromHex(white),
+        color: HexColor.fromHex('FFFFFF'),
         boxShadow: [BoxShadow(color: Colors.grey[300]!, blurRadius: 1)],
       ),
       child: Column(
         children: [
-          const UserDataCard(
+          UserDataCard(
             imageName: "assets/images/doctor-avatar.jpg",
             imageSize: 18.0,
             isOnline: true,
-            title: "Rajab Aabed",
+            title: reservation.doctor.name,
             titleColor: darkBlue,
             titleSize: 12.5,
-            subTitle: "Ophthalmologist",
+            subTitle: reservation.organization.name,
             subTitleSize: 10.0,
             subTitleColor: lightBlue,
           ),
@@ -42,7 +50,12 @@ class SingleCardReservation extends StatelessWidget {
                   splashFactory: NoSplash.splashFactory,
                 ),
                 onPressed: () {
-                  Get.toNamed('/doctorProfile');
+                  Get.toNamed(
+                    '/doctorProfile',
+                    parameters: {
+                      "doctorId": reservation.doctorId.toString(),
+                    },
+                  );
                 },
                 child: Text(
                   "Visit Profile",
@@ -68,7 +81,7 @@ class SingleCardReservation extends StatelessWidget {
                     width: 1.5.wp,
                   ),
                   Text(
-                    '1 hour',
+                    '1 hour ',
                     style: TextStyle(
                       color: HexColor.fromHex(lightBlue),
                       fontSize: 11.0.sp,
@@ -92,7 +105,11 @@ class SingleCardReservation extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "In 5 days",
+                    difference.inDays >= 0
+                        ? difference.inDays == 0
+                            ? 'Today'
+                            : "In ${difference.inDays} days"
+                        : "In ${-difference.inDays} days ago",
                     style: TextStyle(
                       color: HexColor.fromHex(lightBlue),
                       fontSize: 11.5.sp,
@@ -102,7 +119,7 @@ class SingleCardReservation extends StatelessWidget {
                     height: 0.5.hp,
                   ),
                   Text(
-                    "12 May, 12:50 AM",
+                    "${reservation.reservationDate}, ${outputFormat.hour}:${outputFormat.minute}",
                     style: TextStyle(
                       color: HexColor.fromHex(darkBlue),
                       fontSize: 13.0.sp,
@@ -114,8 +131,12 @@ class SingleCardReservation extends StatelessWidget {
               const Spacer(),
               InkWell(
                 onTap: () {
-                  // TODO: single chat for doctor
-                  Get.toNamed('/SingleChat');
+                  Get.toNamed(
+                    '/SingleChat',
+                    parameters: {
+                      "doctorId": reservation.doctorId.toString(),
+                    },
+                  );
                 },
                 child: Container(
                   padding: EdgeInsets.all(1.7.wp),
@@ -129,7 +150,7 @@ class SingleCardReservation extends StatelessWidget {
                   ),
                   child: SvgPicture.asset(
                     'assets/images/Icon-chat.svg',
-                    semanticsLabel: 'Location Icon',
+                    semanticsLabel: 'chat Icon',
                     width: 3.2.wp,
                     height: 3.2.hp,
                     color: HexColor.fromHex(blue),
