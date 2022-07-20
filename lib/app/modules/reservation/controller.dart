@@ -18,8 +18,10 @@ class ReservationController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
     getUpcomingReservation();
     getPreviousReservation();
+
     print("onInit print");
   }
 
@@ -40,10 +42,10 @@ class ReservationController extends GetxController {
       var now = DateTime.now();
       var outputFormatA =
           DateTime.parse('${a.reservationDate} ${a.reservationTime}');
-      var differenceA = outputFormatA.difference(now).inDays;
+      var differenceA = outputFormatA.difference(now).inMinutes;
       var outputFormatB =
           DateTime.parse('${b.reservationDate} ${b.reservationTime}');
-      var differenceB = outputFormatB.difference(now).inDays;
+      var differenceB = outputFormatB.difference(now).inMinutes;
       return differenceA.compareTo(differenceB);
     });
   }
@@ -53,6 +55,7 @@ class ReservationController extends GetxController {
     print('token is: $token');
     reservationRepository.getUserUpcomingReservations(token).then((value) {
       upcomingReservationData = value;
+
       sortTime(upcomingReservationData);
       requesting.value = true;
     });
@@ -63,6 +66,7 @@ class ReservationController extends GetxController {
     print('token is: $token');
     reservationRepository.getUserPreviousReservations(token).then((value) {
       previousReservationData = value;
+
       sortTime(previousReservationData);
       requesting.value = true;
     });

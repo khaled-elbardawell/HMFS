@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/models/doctor.dart';
 
 class SingleGridDoctor extends StatelessWidget {
-  const SingleGridDoctor({Key? key}) : super(key: key);
+  final Doctor doctor;
+  const SingleGridDoctor({Key? key, required this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class SingleGridDoctor extends StatelessWidget {
               height: 2.5.hp,
             ),
             Text(
-              "Chikanso Chima",
+              "Dr.${doctor.name}",
               style: TextStyle(
                 fontSize: 12.5.sp,
                 color: HexColor.fromHex(darkBlue),
@@ -48,7 +50,7 @@ class SingleGridDoctor extends StatelessWidget {
               height: 0.5.hp,
             ),
             Text(
-              "Ophthalmologist",
+              doctor.phone,
               style: TextStyle(
                 fontSize: 10.0.sp,
                 color: HexColor.fromHex(lightBlue),
@@ -62,17 +64,16 @@ class SingleGridDoctor extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SvgPicture.asset(
-                  'assets/images/Icon-location.svg',
-                  semanticsLabel: 'location Icon',
-                  width: 2.0.wp,
-                  height: 2.0.hp,
+                Icon(
+                  Icons.email_outlined,
+                  color: HexColor.fromHex(lightBlue),
+                  size: 18.0,
                 ),
                 SizedBox(
                   width: 1.5.wp,
                 ),
                 Text(
-                  "68km away",
+                  doctor.email,
                   style: TextStyle(
                     fontSize: 8.5.sp,
                     color: HexColor.fromHex(lightBlue),
@@ -88,26 +89,13 @@ class SingleGridDoctor extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      'assets/images/Icon-calendar.svg',
-                      semanticsLabel: 'calendar Icon',
-                      width: 3.3.wp,
-                      height: 3.3.hp,
-                    ),
-                    SizedBox(
-                      width: 5.5.wp,
-                    ),
-                    SvgPicture.asset(
-                      'assets/images/Icon-chat.svg',
-                      semanticsLabel: 'chat Icon',
-                      width: 3.3.wp,
-                      height: 3.3.hp,
-                    ),
-                  ],
-                ),
-                const Spacer(),
+                // SvgPicture.asset(
+                //   'assets/images/Icon-chat.svg',
+                //   semanticsLabel: 'chat Icon',
+                //   width: 3.3.wp,
+                //   height: 3.3.hp,
+                // ),
+                // const Spacer(),
                 Row(
                   children: [
                     Column(

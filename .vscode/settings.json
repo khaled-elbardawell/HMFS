@@ -6,11 +6,14 @@
         "hmfs",
         "isbutton",
         "mobilephone",
+        "reciver",
+        "reservationapi",
         "signin",
         "signup",
         "singlechildscrollview",
         "singleuserchatcard",
         "textfield",
-        "Upform"
+        "Upform",
+        "userapi"
     ]
 }

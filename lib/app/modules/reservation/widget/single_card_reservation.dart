@@ -81,7 +81,7 @@ class SingleCardReservation extends StatelessWidget {
                     width: 1.5.wp,
                   ),
                   Text(
-                    '1 hour ',
+                    '1 hour',
                     style: TextStyle(
                       color: HexColor.fromHex(lightBlue),
                       fontSize: 11.0.sp,
@@ -107,7 +107,9 @@ class SingleCardReservation extends StatelessWidget {
                   Text(
                     difference.inDays >= 0
                         ? difference.inDays == 0
-                            ? 'Today'
+                            ? outputFormat.day == now.day
+                                ? 'Today'
+                                : "In 1 days"
                             : "In ${difference.inDays} days"
                         : "In ${-difference.inDays} days ago",
                     style: TextStyle(

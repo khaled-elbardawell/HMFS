@@ -21,7 +21,7 @@ class HomeController extends GetxController {
   List<Widget> buildScreens = [
     const HomeScreen(),
     const ChatScreen(),
-    DoctorsScreen(),
+    const DoctorsScreen(),
     const ReservationScreen(),
     const UserProfileScreen(),
   ];

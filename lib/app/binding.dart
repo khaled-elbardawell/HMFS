@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:hmfs/app/data/providers/doctor/provider.dart';
+import 'package:hmfs/app/data/services/doctorapi/repository.dart';
 import 'package:hmfs/app/data/services/userapi/repository.dart';
 import 'package:hmfs/app/modules/chat/controller.dart';
 import 'package:hmfs/app/modules/doctor_profile/controller.dart';
@@ -29,10 +31,18 @@ class Binding extends Bindings {
       ),
     );
     Get.lazyPut(
-      () => DoctorsController(),
+      () => DoctorsController(
+        doctorRepository: DoctorRepository(
+          doctorProvider: DoctorProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
-      () => DoctorProfileController(),
+      () => DoctorProfileController(
+        doctorRepository: DoctorRepository(
+          doctorProvider: DoctorProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
       () => DoctorReviewController(),

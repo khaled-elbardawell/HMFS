@@ -13,7 +13,6 @@ import 'package:hmfs/app/modules/reset_password/view.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
 import 'package:hmfs/app/modules/signup/view.dart';
 import 'app/modules/doctors/view.dart';
-import 'app/modules/onboarding/view.dart';
 import 'app/modules/single_chat/view.dart';
 
 void main() async {
@@ -21,7 +20,6 @@ void main() async {
 
   await CacheHelper.init();
   bool isOnboarding = CacheHelper.getData(keyOnboarding);
-  print(CacheHelper.getTokenData(keyToken));
   bool isLoggedIn = CacheHelper.getTokenData(keyToken) == '' ? false : true;
 
   runApp(MyApp(isOnboarding, isLoggedIn));
@@ -45,6 +43,7 @@ class MyApp extends StatelessWidget {
       //         ? const Home()
       //         : const SignInScreen()
       //     : OnboardingScreen(),
+      // elbardawellkhaled@gmail.com
       home: const Home(),
       getPages: [
         GetPage(
@@ -89,7 +88,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/Doctors',
-          page: () => DoctorsScreen(),
+          page: () => const DoctorsScreen(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(

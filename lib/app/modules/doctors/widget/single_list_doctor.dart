@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/models/doctor.dart';
 
 class SingleListDoctor extends StatelessWidget {
-  const SingleListDoctor({Key? key}) : super(key: key);
+  final Doctor doctor;
+  const SingleListDoctor({Key? key, required this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +43,7 @@ class SingleListDoctor extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Chikanso Chima",
+                      "Dr.${doctor.name}",
                       style: TextStyle(
                         fontSize: 12.5.sp,
                         color: HexColor.fromHex(darkBlue),
@@ -52,7 +54,7 @@ class SingleListDoctor extends StatelessWidget {
                       height: 0.5.hp,
                     ),
                     Text(
-                      "Ophthalmologist",
+                      doctor.phone,
                       style: TextStyle(
                         fontSize: 10.0.sp,
                         color: HexColor.fromHex(lightBlue),
@@ -66,17 +68,16 @@ class SingleListDoctor extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        SvgPicture.asset(
-                          'assets/images/Icon-location.svg',
-                          semanticsLabel: 'location Icon',
-                          width: 2.0.wp,
-                          height: 2.0.hp,
+                        Icon(
+                          Icons.email_outlined,
+                          color: HexColor.fromHex(lightBlue),
+                          size: 18.0,
                         ),
                         SizedBox(
                           width: 1.5.wp,
                         ),
                         Text(
-                          "68km away",
+                          doctor.email,
                           style: TextStyle(
                             fontSize: 8.5.sp,
                             color: HexColor.fromHex(lightBlue),
@@ -130,27 +131,27 @@ class SingleListDoctor extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SvgPicture.asset(
-                  'assets/images/Icon-calendar.svg',
-                  semanticsLabel: 'calendar Icon',
-                  width: 3.3.wp,
-                  height: 3.3.hp,
-                ),
-                SizedBox(
-                  width: 4.5.wp,
-                ),
-                SvgPicture.asset(
-                  'assets/images/Icon-chat.svg',
-                  semanticsLabel: 'chat Icon',
-                  width: 3.3.wp,
-                  height: 3.3.hp,
-                ),
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.end,
+            //   crossAxisAlignment: CrossAxisAlignment.center,
+            //   children: [
+            //     SvgPicture.asset(
+            //       'assets/images/Icon-calendar.svg',
+            //       semanticsLabel: 'calendar Icon',
+            //       width: 3.3.wp,
+            //       height: 3.3.hp,
+            //     ),
+            //     SizedBox(
+            //       width: 4.5.wp,
+            //     ),
+            //     SvgPicture.asset(
+            //       'assets/images/Icon-chat.svg',
+            //       semanticsLabel: 'chat Icon',
+            //       width: 3.3.wp,
+            //       height: 3.3.hp,
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

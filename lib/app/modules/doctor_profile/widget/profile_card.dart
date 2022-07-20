@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/models/doctor.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({Key? key}) : super(key: key);
+  final Doctor doctor;
+  const ProfileCard({Key? key, required this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,10 @@ class ProfileCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed('/SingleChat',
+                      parameters: {'doctorId': doctor.id.toString()});
+                },
                 child: Container(
                   padding: EdgeInsets.all(2.0.wp),
                   decoration: BoxDecoration(
@@ -32,7 +38,7 @@ class ProfileCard extends StatelessWidget {
                   ),
                   child: SvgPicture.asset(
                     'assets/images/Icon-chat.svg',
-                    semanticsLabel: 'Location Icon',
+                    semanticsLabel: 'chat Icon',
                     width: 3.8.wp,
                     height: 3.8.hp,
                     color: HexColor.fromHex(blue),
@@ -41,35 +47,20 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-          Stack(
-            alignment: AlignmentDirectional.bottomEnd,
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(600.0),
-                child: Image.asset(
-                  "assets/images/doctor-avatar.jpg",
-                  fit: BoxFit.fill,
-                  width: 30.0.wp,
-                  height: 30.0.wp,
-                ),
-              ),
-              Positioned(
-                right: 3.0.wp,
-                bottom: 1.8.wp,
-                child: SvgPicture.asset(
-                  'assets/images/Icon-online.svg',
-                  semanticsLabel: 'location Icon',
-                  width: 2.2.wp,
-                  height: 2.2.hp,
-                ),
-              ),
-            ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(600.0),
+            child: Image.asset(
+              "assets/images/doctor-avatar.jpg",
+              fit: BoxFit.fill,
+              width: 30.0.wp,
+              height: 30.0.wp,
+            ),
           ),
           SizedBox(
             height: 2.5.hp,
           ),
           Text(
-            "Dr. Chikanso Chima",
+            "Dr.${doctor.name}",
             style: TextStyle(
               fontSize: 15.0.sp,
               color: HexColor.fromHex(darkBlue),
@@ -80,7 +71,7 @@ class ProfileCard extends StatelessWidget {
             height: 0.9.hp,
           ),
           Text(
-            "Ophthalmologist",
+            doctor.email,
             style: TextStyle(
               fontSize: 11.5.sp,
               color: HexColor.fromHex(lightBlue),
@@ -142,11 +133,16 @@ class ProfileCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SvgPicture.asset(
-                          'assets/images/Icon-location.svg',
-                          semanticsLabel: 'location Icon',
-                          width: 3.2.wp,
-                          height: 3.2.hp,
+                        // SvgPicture.asset(
+                        //   'assets/images/Icon-location.svg',
+                        //   semanticsLabel: 'location Icon',
+                        //   width: 3.2.wp,
+                        //   height: 3.2.hp,
+                        // ),
+                        Icon(
+                          Icons.phone_android_outlined,
+                          color: HexColor.fromHex(lightBlue),
+                          size: 18,
                         ),
                         SizedBox(
                           width: 2.5.wp,
@@ -156,7 +152,7 @@ class ProfileCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "New York",
+                              doctor.phone,
                               style: TextStyle(
                                 fontSize: 15.5.sp,
                                 color: HexColor.fromHex(darkBlue),
@@ -167,7 +163,7 @@ class ProfileCard extends StatelessWidget {
                               height: 0.6.hp,
                             ),
                             Text(
-                              "Location",
+                              "Phone",
                               style: TextStyle(
                                 fontSize: 12.0.sp,
                                 color: HexColor.fromHex(lightBlue),
@@ -237,50 +233,6 @@ class ProfileCard extends StatelessWidget {
               ),
             ],
           ),
-          Divider(
-            color: HexColor.fromHex(grey),
-            thickness: 2,
-            indent: 4,
-            endIndent: 4,
-            height: 6,
-          ),
-          SizedBox(
-            height: 3.0.hp,
-          ),
-          Container(
-            width: 50.0.wp,
-            decoration: BoxDecoration(
-              color: HexColor.fromHex(blue),
-              borderRadius: BorderRadius.circular(6),
-            ),
-            child: TextButton(
-              onPressed: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/Icon-reservation-unactive.svg',
-                    semanticsLabel: 'location Icon',
-                    width: 3.5.wp,
-                    height: 3.5.hp,
-                    color: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 2.5.wp,
-                  ),
-                  Text(
-                    "Reservation",
-                    style: TextStyle(
-                      fontSize: 15.0.sp,
-                      color: HexColor.fromHex(white),
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
         ],
       ),
     );

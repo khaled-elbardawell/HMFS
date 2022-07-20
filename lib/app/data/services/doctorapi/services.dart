@@ -2,15 +2,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:hmfs/app/data/services/storage/services.dart';
-
+import 'package:hmfs/app/data/models/doctor.dart';
 import '../../../core/utils/key.dart';
-import '../../models/user.dart';
 
-class UserWebServices {
+class DoctorWebServices {
   late Dio dio;
 
-  UserWebServices() {
+  DoctorWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
@@ -20,94 +18,16 @@ class UserWebServices {
     dio = Dio(options);
   }
 
-  Future<User?> loginUser(String email, String password) async {
-    User? user;
+  Future<List<dynamic>> getUserDoctors(String token) async {
     try {
-      Response response = await dio.post(
-        '/api/auth/login',
-        data: {
-          "email": email,
-          "password": password,
-        },
-      );
-      user = User.fromJson(response.data);
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 401) {
-        Get.snackbar(
-          'Error',
-          'Invalid email or password',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else if (e.response?.statusCode == 500) {
-        Get.snackbar(
-          'Error',
-          'Check your internet connection',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else {
-        Get.snackbar(
-          'Error',
-          'Something is wrong',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      }
-    }
-    return user;
-  }
-
-  Future<User?> registerUser(String email, String name, String password) async {
-    User? user;
-    try {
-      Response response = await dio.post(
-        '/api/auth/register',
-        data: {
-          "email": email,
-          "name": name,
-          "password": password,
-        },
-      );
-      user = User.fromJson(response.data);
-    } on DioError catch (e) {
-      if (e.response?.statusCode == 401) {
-        Get.snackbar(
-          'Error',
-          'The email has already been taken.',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else if (e.response?.statusCode == 500) {
-        Get.snackbar(
-          'Error',
-          'Check your Internet connection',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else {
-        Get.snackbar(
-          'Error',
-          'Something is wrong',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      }
-    }
-    return user;
-  }
-
-  Future<User?> meUser(String token) async {
-    User? user;
-    try {
-      Response response = await dio.post(
-        '/api/auth/me',
+      Response response = await dio.get(
+        '/api/get/user/doctors',
         queryParameters: {
           "token": token,
         },
       );
 
-      user = User.fromJson(response.data);
+      return response.data["doctors"];
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
@@ -116,8 +36,45 @@ class UserWebServices {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
-        CacheHelper.deleteData(keyToken);
-        Get.offNamed('/SignIn');
+      } else if (e.response?.statusCode == 500) {
+        Get.snackbar(
+          'Error',
+          'Check your Internet connection',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Something is wrong',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      }
+      return [];
+    }
+  }
+
+  Future<Doctor?> getUserDoctor(String token, String doctorId) async {
+    Doctor? doctor;
+    try {
+      Response response = await dio.get(
+        '/api/get/user/doctor',
+        queryParameters: {
+          "doctor_id": doctorId,
+          "token": token,
+        },
+      );
+
+      doctor = Doctor.fromJson(response.data["doctor"]);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        Get.snackbar(
+          'Error',
+          'Unauthenticated User',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
@@ -134,6 +91,6 @@ class UserWebServices {
         );
       }
     }
-    return user;
+    return doctor;
   }
 }

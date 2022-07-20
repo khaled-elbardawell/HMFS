@@ -3,7 +3,6 @@ import 'package:get/state_manager.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/modules/reservation/controller.dart';
 import 'package:hmfs/app/modules/reservation/widget/previousreservations.dart';
-import 'package:hmfs/app/modules/reservation/widget/single_card_reservation.dart';
 import 'package:hmfs/app/modules/reservation/widget/upcomingreservations.dart';
 
 import '../../core/values/colors.dart';

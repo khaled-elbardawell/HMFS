@@ -7,74 +7,84 @@ import 'package:hmfs/app/modules/doctors/widget/grid_view_doctors.dart';
 import 'package:hmfs/app/modules/doctors/widget/list_view_doctors.dart';
 import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 
-class DoctorsScreen extends StatelessWidget {
-  DoctorsScreen({Key? key}) : super(key: key);
-  final doctorsCtrl = Get.put(DoctorsController());
+class DoctorsScreen extends GetView<DoctorsController> {
+  const DoctorsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor.fromHex(white),
-      appBar:
-          customAppBar("My Doctor", blue, white, Icons.search_rounded, () {}),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 3.5.wp, horizontal: 6.5.wp),
-            child: Row(
+        backgroundColor: HexColor.fromHex(white),
+        appBar:
+            customAppBar("My Doctor", blue, white, Icons.search_rounded, () {}),
+        body: Obx(() {
+          if (controller.requesting.value) {
+            return Column(
               children: [
-                Text(
-                  "Doctor List",
-                  style: TextStyle(
-                    color: HexColor.fromHex(darkBlue),
-                    fontSize: 12.0.sp,
-                    fontWeight: FontWeight.w500,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 3.5.wp, horizontal: 6.5.wp),
+                  child: Row(
+                    children: [
+                      Text(
+                        "Doctor List",
+                        style: TextStyle(
+                          color: HexColor.fromHex(darkBlue),
+                          fontSize: 12.0.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          controller.changeViewDoctorList();
+                        },
+                        child: Obx(() => Row(
+                              children: [
+                                Icon(
+                                  controller.gridView.value
+                                      ? Icons.view_list_sharp
+                                      : Icons.grid_view_sharp,
+                                  size: 5.0.wp,
+                                  color: HexColor.fromHex(lightBlue),
+                                ),
+                                SizedBox(
+                                  width: 1.0.wp,
+                                ),
+                                Text(
+                                  controller.gridView.value
+                                      ? "List View"
+                                      : "Card View",
+                                  style: TextStyle(
+                                    fontSize: 9.5.sp,
+                                    color: HexColor.fromHex(lightBlue),
+                                  ),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ],
                   ),
                 ),
-                const Spacer(),
-                InkWell(
-                  onTap: () {
-                    doctorsCtrl.changeViewDoctorList();
-                  },
-                  child: Obx(() => Row(
-                        children: [
-                          Icon(
-                            doctorsCtrl.gridView.value
-                                ? Icons.view_list_sharp
-                                : Icons.grid_view_sharp,
-                            size: 5.0.wp,
-                            color: HexColor.fromHex(lightBlue),
-                          ),
-                          SizedBox(
-                            width: 1.0.wp,
-                          ),
-                          Text(
-                            doctorsCtrl.gridView.value
-                                ? "List View"
-                                : "Card View",
-                            style: TextStyle(
-                              fontSize: 9.5.sp,
-                              color: HexColor.fromHex(lightBlue),
-                            ),
-                          ),
-                        ],
-                      )),
+                Expanded(
+                  child: Obx(
+                    () => Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 6.0.wp),
+                        child: controller.gridView.value
+                            ? GridViewDoctors(
+                                doctors: controller.doctors,
+                              )
+                            : ListViewDOctors(
+                                doctors: controller.doctors,
+                              )),
+                  ),
                 ),
               ],
-            ),
-          ),
-          Expanded(
-            child: Obx(
-              () => Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.0.wp),
-                child: doctorsCtrl.gridView.value
-                    ? const GridViewDoctors()
-                    : const ListViewDOctors(),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        }));
   }
 }
