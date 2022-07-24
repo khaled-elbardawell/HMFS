@@ -127,7 +127,6 @@ class OfferController extends Controller
             }
             return redirect(route('offers.edit',$offer->id))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
-            dd('aa');
             return redirect(route('offers.edit',$offer->id))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method
