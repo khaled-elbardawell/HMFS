@@ -16,7 +16,7 @@ class PublicEvent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message = null;
-    public $user = null;
+   
     /**
      * Create a new event instance.
      *
@@ -25,6 +25,7 @@ class PublicEvent implements ShouldBroadcast
     public function __construct()
     {
         $this->message = "hello !!";
+
     }
 
     /**
@@ -35,5 +36,10 @@ class PublicEvent implements ShouldBroadcast
     public function broadcastOn()
     {
         return new Channel('public');
+        // return ['public'];
     }
+
+       public function broadcastAs(){
+               return 'PublicEvent';
+           }
 }

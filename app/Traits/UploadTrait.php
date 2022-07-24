@@ -14,6 +14,7 @@ trait UploadTrait
      */
     private static $listThumbFolders = [
         'full'     => null,
+        'thumb50' => ['50','50'],
         'thumb200' => ['200','200'],
         'thumb600' => ['600','600'],
     ];

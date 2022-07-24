@@ -41,5 +41,8 @@ class UserChatNotifyEvent implements ShouldBroadcast
         return new PresenceChannel("user.{$this->user_id}");
     }
 
+    public function broadcastAs(){
+        return 'UserChatNotifyEvent';
+    }
 
 }

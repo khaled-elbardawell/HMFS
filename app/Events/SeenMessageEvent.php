@@ -41,5 +41,8 @@ class SeenMessageEvent implements ShouldBroadcast
         return new PresenceChannel("chat.seen.{$this->chat_id}");
     }
 
+    public function broadcastAs(){
+        return 'SeenMessageEvent';
+    }
 
 }
