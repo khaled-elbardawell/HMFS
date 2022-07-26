@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\Admin\PaymentController;
+
 Route::group(
     [
         'namespace' => 'Admin',
@@ -52,6 +54,10 @@ Route::group(
         Route::resource('offers',"OfferController");
 
         Route::resource('contacts',"ContactController");
+
+        Route::get('payment',[PaymentController::class,'payment'])->name('payment');
+        Route::get('cancel-payment',[PaymentController::class,'cancelPayment'])->name('cancel-payment');
+        Route::get('success-payment',[PaymentController::class,'successPayment'])->name('success-payment');
 });
 
 
