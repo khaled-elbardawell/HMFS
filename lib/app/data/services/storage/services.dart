@@ -15,11 +15,19 @@ class CacheHelper {
     return await sharedPreferences.setString(key, value);
   }
 
+  static Future<bool> putString(String key, String value) async {
+    return await sharedPreferences.setString(key, value);
+  }
+
   static bool getData(String key) {
     return sharedPreferences.getBool(key) ?? false;
   }
 
   static String getTokenData(String key) {
+    return sharedPreferences.getString(key) ?? '';
+  }
+
+  static String getString(String key) {
     return sharedPreferences.getString(key) ?? '';
   }
 
