@@ -14,7 +14,7 @@
             <div class="header-left">
                 <div class="header-logo">
                     <a href="{{route('index')}}" class="d-flex">
-                        <img alt="HMFS" height="75px" class="w-100" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" />
+                        <img alt="HMFS" height="75px" class="w-75" src="{{CustomAsset('front/assets/imgs/logo-horizontal.svg')}}" />
                     </a>
                 </div>
                 <div class="header-nav">

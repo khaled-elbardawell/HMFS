@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-sm-12">
-                    <a href="index.html"><img alt="HMFS" class="h-50" src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" /></a>
+                    <a href="{{route('index')}}"><img alt="HMFS" class="w-50" src="{{CustomAsset('front/assets/imgs/logo-horizontal.svg')}}" /></a>
                     <div class="mt-20 mb-20">Jobhub is the heart of the design community and the best resource to discover and connect with designers and jobs worldwide.</div>
                 </div>
                 <div class="col-md-2 col-xs-6">
