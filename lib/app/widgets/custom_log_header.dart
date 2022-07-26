@@ -29,7 +29,7 @@ class CustomLogHeader extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/images/logo.svg',
-              width: 15.0.wp,
+              width: 17.0.wp,
             ),
             SizedBox(
               height: 6.5.hp,

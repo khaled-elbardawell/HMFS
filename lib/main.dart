@@ -7,14 +7,15 @@ import 'package:hmfs/app/data/services/storage/services.dart';
 import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
-import 'package:hmfs/app/modules/edit_account/view.dart';
 import 'package:hmfs/app/modules/onboarding/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/reset_password/view.dart';
+import 'package:hmfs/app/modules/search/view.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
 import 'package:hmfs/app/modules/signup/view.dart';
 import 'app/modules/doctors/view.dart';
 import 'app/modules/single_chat/view.dart';
+import 'app/modules/user_profile/widget/edit_profile.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
               ? const Home()
               : const SignInScreen()
           : OnboardingScreen(),
+      // home: const SearchScreen(),
       getPages: [
         GetPage(
           name: '/',
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
         ),
         GetPage(
           name: '/editAccount',
-          page: () => const EditAccountScreen(),
+          page: () => const EditProfile(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
@@ -93,6 +95,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/SingleChat',
           page: () => const SingleChatScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/SearchScreen',
+          page: () => const SearchScreen(),
           transition: Transition.rightToLeftWithFade,
         ),
       ],

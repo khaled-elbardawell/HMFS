@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 
 AppBar customAppBar(
@@ -27,7 +28,7 @@ AppBar customAppBar(
           color: HexColor.fromHex(textColor),
           size: 30.0,
         ),
-        onPressed: () => onPressed(),
+        onPressed: () => Get.toNamed('/SearchScreen'),
       ),
     ],
   );

@@ -27,7 +27,6 @@ class HomeController extends GetxController {
   ];
 
   final UserRepository userRepository;
-
   HomeController({required this.userRepository});
 
   void meUser() {
@@ -49,6 +48,7 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     print("onReady print");
+
     super.onReady();
   }
 
