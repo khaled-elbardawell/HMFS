@@ -46,24 +46,20 @@
                         <div class="col-md-12">
                             <h6>{{__('admin.Features')}}</h6>
                         </div>
+
                         @foreach ($features as $feature)
 
+                            <div class="col-md-12 check">
 
-                                <div class="col-md-12 check">
-                                     {!! Builder::Input('checkbox','feature',null,['label_title' => $feature->key,'is_required' => true , 'col' => 'col-md-12 check']) !!}
-
-                                    <div class="form-group">
-                                        <label for="feature-{{$feature->key}}" class="text-right">
-                                            {{$feature->key}} <span class="text-danger">*</span>
-                                        </label>
-                                        <div>
-                                            <input name="features[]" type="checkbox" value="{{$feature->id}}" class="form-control" placeholder="{{$feature->key}} *" id="feature-{{$feature->key}}" @foreach ($offer_features as $offer_feature) @if($feature->id == $offer_feature->feature_id) checked @endif  @endforeach>
-                                        </div>
+                                <div class="form-group">
+                                    <label for="feature-{{$feature->key}}" class="text-right">
+                                        {{$feature->key}} <span class="text-danger">*</span>
+                                    </label>
+                                    <div>
+                                        <input name="features[]" type="checkbox" value="{{$feature->id}}" class="form-control" placeholder="{{$feature->key}} *" id="feature-{{$feature->key}}" @foreach ($offer_features as $offer_feature) @if($feature->id == $offer_feature->feature_id) checked @endif  @endforeach >
                                     </div>
                                 </div>
-
-
-
+                            </div>
 
                         @endforeach
 

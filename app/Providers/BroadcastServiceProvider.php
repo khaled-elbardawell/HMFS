@@ -14,14 +14,11 @@ class BroadcastServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
         if (request()->hasHeader('Authorization')){
-            Broadcast::routes(['middleware' => ['web','auth:api']]);
+             Broadcast::routes(['middleware' =>['api.auth:api']]);
         } else {
             Broadcast::routes();
         }
-//
-//        Broadcast::routes();
 
         require base_path('routes/channels.php');
     }

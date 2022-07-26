@@ -54,8 +54,6 @@
                                     </div>
                                 </div>
 
-                                {{-- {!! Builder::Input('checkbox','feature',null,['label_title' => $feature->key,'is_required' => true , 'col' => 'col-md-12 check']) !!} --}}
-
                             @endforeach
 
                         </div>

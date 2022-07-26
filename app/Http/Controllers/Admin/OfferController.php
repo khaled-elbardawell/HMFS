@@ -57,11 +57,13 @@ class OfferController extends Controller
 
             if(!is_null($request->features)){
                 foreach($request->features as $key => $value){
-                    OfferFeatures::create([
+                    OfferFeatures::create(
+                        [
                         'offer_id' => $offer->id,
                         'feature_id' => $value,
                         'user_id' => auth()->user()->id,
-                    ]);
+                        ]
+                    );
                 }
             }
 
@@ -99,7 +101,6 @@ class OfferController extends Controller
      */
     public function update(OfferRequest $request,$offer_id)
     {
-        // dd($offer_id);
         try {
             $offer = Offer::whereId($offer_id)->first();
             if (!$offer){
@@ -110,15 +111,12 @@ class OfferController extends Controller
                 'name' => $request->name,
                 'description'=> $request->description,
             ]);
-
+            OfferFeatures::where('offer_id',$offer_id)->delete();
             if(!is_null($request->features)){
                 foreach($request->features as $key => $value){
-                    OfferFeatures::where('offer_id',$offer_id)->sync(
+                    OfferFeatures::where('offer_id',$offer_id)->Create(
                         [
-                            'offer_id' => $offer_id,
-                            'feature_id' => $value,
-                        ],[
-                            'offer_id' => $offer_id,
+                            'offer_id' => $offer->id,
                             'feature_id' => $value,
                             'user_id' => auth()->user()->id,
                         ]
@@ -127,7 +125,6 @@ class OfferController extends Controller
             }
             return redirect(route('offers.edit',$offer->id))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){
-            dd('aa');
             return redirect(route('offers.edit',$offer->id))->with(['alert' => true,'status' => 'error', 'message' => 'Something is wrong']);
         }
     }// end method

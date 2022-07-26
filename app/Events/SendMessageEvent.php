@@ -40,6 +40,9 @@ class SendMessageEvent implements ShouldBroadcast
     {
         return new PresenceChannel("chat.{$this->chat_id}");
     }
+    public function broadcastAs(){
+        return 'SendMessageEvent';
+    }
 
 
 }
