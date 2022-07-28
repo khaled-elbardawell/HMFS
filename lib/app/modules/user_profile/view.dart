@@ -2,23 +2,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
+import 'package:hmfs/app/core/utils/key.dart';
+import 'package:hmfs/app/data/providers/userprofile/provider.dart';
+import 'package:hmfs/app/data/services/userprofile/repository.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
 import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 import 'package:hmfs/app/widgets/user_data_card.dart';
-
 import '../../core/values/colors.dart';
 
 class UserProfileScreen extends GetView<UserProfileController> {
-  const UserProfileScreen({Key? key}) : super(key: key);
+  UserProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: HexColor.fromHex(white),
-      appBar: customAppBar("Profile", blue, white, Icons.logout_outlined,
-          () => controller.logout()),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: HexColor.fromHex(blue),
+        elevation: 0.0,
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            fontSize: 18.0.sp,
+            fontWeight: FontWeight.bold,
+            color: HexColor.fromHex(white),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.logout_outlined,
+              color: HexColor.fromHex(white),
+              size: 30.0,
+            ),
+            onPressed: () => controller.logout(),
+          ),
+        ],
+      ),
       body: Obx(() {
         if (controller.requesting.value) {
+          print('object ${controller.imageName.value}');
           return Column(
             children: [
               Container(
@@ -31,7 +55,10 @@ class UserProfileScreen extends GetView<UserProfileController> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6.5.wp),
                       child: UserDataCard(
-                        imageName: "assets/images/doctor-avatar.jpg",
+                        typeImage: controller.typeImage.value,
+                        imageName: controller.typeImage.value == "assets"
+                            ? "assets/images/user-assets.png"
+                            : '$baseUrl/upload/images/full/${controller.imageName.value}',
                         imageSize: 20.0,
                         isOnline: false,
                         title: controller.userProfile.data.name,
@@ -130,7 +157,8 @@ class UserProfileScreen extends GetView<UserProfileController> {
                             padding: EdgeInsets.symmetric(vertical: 2.5.wp),
                             child: ListTile(
                               onTap: () {
-                                Get.offNamed('/editAccount');
+                                controller.requesting.value = false;
+                                Get.toNamed('/editAccount');
                               },
                               contentPadding: const EdgeInsets.all(0.0),
                               title: Text(

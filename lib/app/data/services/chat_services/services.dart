@@ -1,38 +1,31 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:hmfs/app/data/models/userprofile.dart';
-import 'package:hmfs/app/data/services/storage/services.dart';
-
+import 'package:hmfs/app/data/models/message.dart';
+import 'package:hmfs/app/data/models/user_chat.dart';
 import '../../../core/utils/key.dart';
-import '../../models/user.dart';
 
-class UserProfileWebServices {
+class ChatWebServices {
   late Dio dio;
 
-  UserProfileWebServices() {
+  ChatWebServices() {
     BaseOptions options = BaseOptions(
       baseUrl: baseUrl,
       receiveDataWhenStatusError: true,
-      // connectTimeout: 20 * 1000,
-      // receiveTimeout: 20 * 1000,
     );
     dio = Dio(options);
   }
 
-  Future<UserProfile?> getUserProfileData(String token) async {
-    UserProfile? userProfile;
+  Future<List<dynamic>> getUserChats(String token) async {
     try {
       Response response = await dio.get(
-        '/api/get/user/profile',
+        '/api/get/user/chats',
         queryParameters: {
           "token": token,
         },
       );
-      userProfile = UserProfile.fromJson(response.data);
+      return response.data["data"];
     } on DioError catch (e) {
       if (e.response?.statusCode == 401) {
         Get.snackbar(
@@ -41,8 +34,44 @@ class UserProfileWebServices {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
-        CacheHelper.deleteData(keyToken);
-        Get.offNamed('/SignIn');
+      } else if (e.response?.statusCode == 500) {
+        Get.snackbar(
+          'Error',
+          'Check your internet connection',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Something is wrong',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      }
+      return [];
+    }
+  }
+
+  Future<Message?> getMessagesChat(String token, String chatId) async {
+    Message? messages;
+    try {
+      Response response = await dio.get(
+        '/api/get/user/chat/messages',
+        queryParameters: {
+          "token": token,
+          "chat_id": chatId,
+        },
+      );
+      messages = Message.fromJson(response.data);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        Get.snackbar(
+          'Error',
+          'Invalid email or password',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
       } else if (e.response?.statusCode == 500) {
         Get.snackbar(
           'Error',
@@ -59,66 +88,6 @@ class UserProfileWebServices {
         );
       }
     }
-    return userProfile;
-  }
-
-  Future<void> updateUserProfileData(String token, dynamic name, dynamic phone,
-      dynamic bio, dynamic image) async {
-    late FormData data;
-    print("immm : " + image.toString());
-    if (image != null) {
-      String imageName = image.path.split('/').last;
-      data = FormData.fromMap({
-        "file": await MultipartFile.fromFile(
-          image.path,
-          filename: imageName,
-        ),
-      });
-    }
-    try {
-      Response response = await dio.post(
-        '/api/update/user/profile',
-        data: {
-          "token": token,
-          "name": name,
-          "phone": phone,
-          "bio": bio,
-          "image": image != null ? data : image,
-        },
-      );
-      Get.snackbar(
-        'Success',
-        'Update your profile Success',
-        backgroundColor: Colors.white,
-        colorText: Colors.black,
-      );
-    } on DioError catch (e) {
-      print("error :" + e.error.toString());
-      print("response :" + e.response.toString());
-      print("message :" + e.message.toString());
-      print("stackTrace :" + e.stackTrace.toString());
-      if (e.response?.statusCode == 401) {
-        Get.snackbar(
-          'Error',
-          'The email has already been taken.',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else if (e.response?.statusCode == 500) {
-        Get.snackbar(
-          'Error',
-          'Check your Internet connection',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      } else {
-        Get.snackbar(
-          'Error',
-          'Something is wrong',
-          backgroundColor: Colors.white,
-          colorText: Colors.black,
-        );
-      }
-    }
+    return messages;
   }
 }

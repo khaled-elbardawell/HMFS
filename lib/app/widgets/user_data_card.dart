@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 
@@ -11,6 +13,7 @@ class UserDataCard extends StatelessWidget {
   final String subTitleColor;
   final double titleSize;
   final double subTitleSize;
+  final String typeImage;
   const UserDataCard({
     Key? key,
     required this.imageName,
@@ -22,6 +25,7 @@ class UserDataCard extends StatelessWidget {
     required this.subTitleColor,
     required this.titleSize,
     required this.subTitleSize,
+    required this.typeImage,
   }) : super(key: key);
 
   @override
@@ -31,12 +35,31 @@ class UserDataCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(600.0),
-          child: Image.asset(
-            imageName,
-            fit: BoxFit.fill,
-            width: imageSize.wp,
-            height: imageSize.wp,
-          ),
+          child: typeImage == 'network'
+              ? Image.network(
+                  imageName,
+                  fit: BoxFit.fill,
+                  width: imageSize.wp,
+                  height: imageSize.wp,
+                  errorBuilder: (context, url, error) {
+                    print('errors : ' + error.toString());
+                    print('errors : ' + url.toString());
+                    return Container(
+                      color: Colors.amber,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'Whoops!',
+                        style: TextStyle(fontSize: 30),
+                      ),
+                    );
+                  },
+                )
+              : Image.asset(
+                  imageName,
+                  fit: BoxFit.fill,
+                  width: imageSize.wp,
+                  height: imageSize.wp,
+                ),
         ),
         SizedBox(
           width: 4.0.wp,

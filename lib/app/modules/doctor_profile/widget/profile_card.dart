@@ -50,7 +50,7 @@ class ProfileCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(600.0),
             child: Image.asset(
-              "assets/images/doctor-avatar.jpg",
+              "assets/images/user-assets.png",
               fit: BoxFit.fill,
               width: 30.0.wp,
               height: 30.0.wp,

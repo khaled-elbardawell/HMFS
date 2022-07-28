@@ -1,14 +1,13 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/providers/chat/provider.dart';
+import 'package:hmfs/app/modules/chat/controller.dart';
 import 'package:hmfs/app/modules/chat/widget/singleuserchatcard.dart';
 import 'package:hmfs/app/widgets/custom_new_appbar.dart';
-import 'package:laravel_flutter_pusher/laravel_flutter_pusher.dart';
 import '../../core/utils/extensions.dart';
-import '../../core/utils/key.dart';
-import '../../data/services/storage/services.dart';
-
-// import 'package:dart_pusher_channels/dart_pusher_channels.dart';
+import '../../data/services/PusherWebSockets/pusher.dart';
+import '../../data/services/chat_services/repository.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -18,40 +17,50 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  // ChatController chatCtrl = Get.put(ChatController(
+  //   chatRepository: ChatRepository(
+  //     chatProvider: ChatProvider(),
+  //   ),
+  // ));
+  ChatController chatCtrl = Get.find<ChatController>();
+
   @override
   void initState() {
-    setUpServices();
+    print('initState chat');
+    // setUpServices();
     super.initState();
   }
 
   void setUpServices() {
-    String token = CacheHelper.getTokenData(keyToken);
-    print('token pusher : $token');
-    var options = PusherOptions(
-      host: '10.0.2.2',
-      port: 6001,
-      cluster: 'mt1',
-      auth: PusherAuth(
-        'http://10.0.2.2:8000/broadcasting/auth',
-        headers: {
-          'Authorization': 'Bearer ' + token,
-        },
-      ),
-    );
+    // String token = CacheHelper.getTokenData(keyToken);
 
-    LaravelFlutterPusher pusher = LaravelFlutterPusher(
-      'pusherKey',
-      options,
-      enableLogging: true,
-      onError: (error) {
-        print("erorr message :" + error.message);
-      },
-      onConnectionStateChange: (status) {
-        print("status : " + status.currentState);
-      },
-    );
+    // var options = PusherOptions(
+    //   host: '10.0.2.2',
+    //   port: 6001,
+    //   cluster: 'mt1',
+    //   auth: PusherAuth(
+    //     'http://10.0.2.2:8000/broadcasting/auth',
+    //     headers: {
+    //       'Authorization': 'Bearer ' + token,
+    //     },
+    //   ),
+    // );
 
-    pusher.subscribe("presence-user.1").bind(
+    // LaravelFlutterPusher pusher = LaravelFlutterPusher(
+    //   'pusherKey',
+    //   options,
+    //   enableLogging: true,
+    //   onError: (error) {
+    //     print("erorr message :" + error.message);
+    //   },
+    //   onConnectionStateChange: (status) {
+    //     print("status : " + status.currentState);
+    //   },
+    // );
+
+    PusherService pusherService = PusherService();
+
+    pusherService.pusher.subscribe("presence-user.2").bind(
       'UserChatNotifyEvent',
       (event) {
         print('chat event =>qaaa');
@@ -65,19 +74,41 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       backgroundColor: HexColor.fromHex(white),
       appBar: customAppBar("Chat", blue, white, Icons.search_outlined, () {}),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 40,
-              itemBuilder: (context, index) {
-                return const SingleUserChatCard();
-              },
-            ),
-          ),
-        ],
+      body: Obx(
+        () {
+          if (chatCtrl.requesting.value) {
+            if (chatCtrl.isNotEmptyUsers.value) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: chatCtrl.userChats.length,
+                      itemBuilder: (context, index) {
+                        return SingleUserChatCard(
+                          image: chatCtrl.userChats[index].file,
+                          lastMessage: chatCtrl.userChats[index].lastMessage,
+                          name: chatCtrl.userChats[index].name,
+                          updatedAt: chatCtrl.userChats[index].updatedAt,
+                          userId: chatCtrl.userChats[index].userId,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            } else {
+              return const Center(
+                child: Text('There is no chats'),
+              );
+            }
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
     );
   }

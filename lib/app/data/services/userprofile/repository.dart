@@ -11,8 +11,8 @@ class UserProfileRepository {
   Future<UserProfile?> getUserProfileData(String token) async =>
       await userProfileProvider.getUserProfileData(token);
 
-  Future<UserProfile?> updateUserProfileData(String token, String name,
-          String phone, String bio, File image) async =>
+  Future<void> updateUserProfileData(String token, dynamic name, dynamic phone,
+          dynamic bio, dynamic image) async =>
       await userProfileProvider.updateUserProfileData(
           token, name, phone, bio, image);
 }

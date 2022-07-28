@@ -4,7 +4,7 @@ import 'package:hmfs/app/modules/signup/controller.dart';
 import '../../data/providers/user/provider.dart';
 import '../../data/services/userapi/repository.dart';
 
-class SignInBinding extends Bindings {
+class SignUpBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(

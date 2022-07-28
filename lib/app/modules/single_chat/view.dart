@@ -20,7 +20,7 @@ class SingleChatScreen extends GetView<SingleChatController> {
         backgroundColor: Colors.white,
         centerTitle: true,
         title: Text(
-          'Single Chat',
+          Get.arguments['name'],
           style: TextStyle(
             color: HexColor.fromHex(darkBlue),
             fontSize: 18.0.sp,

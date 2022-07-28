@@ -10,10 +10,8 @@ class UserProfileProvider {
     return userProfile;
   }
 
-  Future<UserProfile?> updateUserProfileData(
-      String token, String name, String phone, String bio, File image) async {
-    final userProfile = await _webServices.updateUserProfileData(
-        token, name, phone, bio, image);
-    return userProfile;
+  Future<void> updateUserProfileData(String token, dynamic name, dynamic phone,
+      dynamic bio, dynamic image) async {
+    await _webServices.updateUserProfileData(token, name, phone, bio, image);
   }
 }

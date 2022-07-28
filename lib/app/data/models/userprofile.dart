@@ -60,7 +60,7 @@ class Data {
     emailVerifiedAt = json['email_verified_at'] ?? '';
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    upload = Upload.fromJson(json['upload']);
+    upload = json['upload'] == null ? null : Upload.fromJson(json['upload']);
   }
 
   Map<String, dynamic> toJson() {

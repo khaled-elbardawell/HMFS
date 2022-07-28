@@ -29,7 +29,8 @@ class SingleCardReservation extends StatelessWidget {
       child: Column(
         children: [
           UserDataCard(
-            imageName: "assets/images/doctor-avatar.jpg",
+            typeImage: 'assets',
+            imageName: "assets/images/user-assets.png",
             imageSize: 18.0,
             isOnline: true,
             title: reservation.doctor.name,

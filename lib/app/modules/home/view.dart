@@ -31,57 +31,12 @@ class HomeScreen extends StatelessWidget {
                   color: red,
                 ),
                 SizedBox(
-                  height: 2.0.hp,
+                  height: 5.0.hp,
                 ),
-                const SingleSmallCard(
-                  iconanme: 'assets/images/Icon-last-status.svg',
-                  semanticsLabel: 'Specialities icon',
-                  title: 'Specialities',
-                  subTitle: 'Last Status',
-                  color: blue,
-                ),
-                SizedBox(
-                  height: 2.0.hp,
-                ),
-                SizedBox(
-                  height: 30.0.hp,
-                  child: ListView(
-                    physics: const BouncingScrollPhysics(),
-                    shrinkWrap: false,
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 6.5.wp,
-                          right: 4.0.wp,
-                        ),
-                        child: const BigCard(
-                          iconanme: 'assets/images/Icon-heart-rate.svg',
-                          semanticsLabel: 'Heart Rate icon',
-                          title: 'Heart Beats',
-                          subTitle: 'Heart Rate',
-                          color: red,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 0,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(
-                          left: 4.0.wp,
-                          right: 6.5.wp,
-                        ),
-                        child: const BigCard(
-                          iconanme: 'assets/images/Icon-blood-pressure.svg',
-                          semanticsLabel: 'Blood Pressure icon',
-                          title: 'Blood Pressure',
-                          subTitle: 'Blood Pressure Rate',
-                          color: blue,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 6.5.wp),
+                  child: const Text("Recent Reservation"),
+                )
               ],
             ),
           ),

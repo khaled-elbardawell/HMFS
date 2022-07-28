@@ -23,7 +23,7 @@ class HomeController extends GetxController {
     const ChatScreen(),
     const DoctorsScreen(),
     const ReservationScreen(),
-    const UserProfileScreen(),
+    UserProfileScreen(),
   ];
 
   final UserRepository userRepository;
