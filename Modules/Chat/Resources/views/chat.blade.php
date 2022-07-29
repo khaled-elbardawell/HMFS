@@ -39,9 +39,6 @@
                                     <li class="nav-item">
                                         <a class="nav-link active" id="general_chat_tab" data-toggle="pill" href="#general_chat">Chats</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="group_chat_tab" data-toggle="pill" href="#group_chat">Online</a>
-                                    </li>
                                 </ul>
                                 <div class="chat-search">
                                     <form action="{{route('chat.search.user')}}" method="GET">
@@ -83,9 +80,6 @@
                                              </a> <!--end media-->
                                         @endforeach
                                     </div><!--end general chat-->
-
-                                    <div class="tab-pane fade" id="group_chat">
-                                    </div><!--end group chat-->
                                 </div><!--end tab-content-->
                             </div><!--end chat-box-left -->
 
@@ -300,7 +294,7 @@
     }
 
     Echo.join('chat.{{request()->chat_id}}')
-        .listen('SendMessageEvent', (e) => {
+        .listen('.SendMessageEvent', (e) => {
             appendMessageToChatBox(e.message.message,0)
             sortChats(receiver.id)
             seenMessagesRequest()
@@ -314,7 +308,7 @@
 
 
    Echo.join('chat.seen.{{request()->chat_id}}')
-        .listen('SeenMessageEvent', (e) => {
+        .listen('.SeenMessageEvent', (e) => {
             if({{request()->chat_id}} == e.chat_id){
                 var html = '';
                 if(e.user.upload){
