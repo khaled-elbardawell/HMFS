@@ -6,11 +6,12 @@ import 'package:hmfs/app/widgets/custom_log_bottom.dart';
 import 'package:hmfs/app/widgets/custom_log_header.dart';
 import 'package:hmfs/app/widgets/custom_textfield.dart';
 
-class SignUpScreen extends GetView<SignUpController> {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SignUpController signUpCtrl = Get.find<SignUpController>();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -27,13 +28,13 @@ class SignUpScreen extends GetView<SignUpController> {
                 child: Column(
                   children: [
                     Form(
-                      key: controller.signUpformKey,
+                      key: signUpCtrl.signUpformKey,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           CustomTextField(
                             title: 'name',
-                            controller: controller.nameController,
+                            controller: signUpCtrl.nameController,
                             textInputType: TextInputType.text,
                             hintText: 'Name',
                             errorMessage:
@@ -43,7 +44,7 @@ class SignUpScreen extends GetView<SignUpController> {
                           ),
                           CustomTextField(
                             title: 'email',
-                            controller: controller.emailController,
+                            controller: signUpCtrl.emailController,
                             textInputType: TextInputType.emailAddress,
                             hintText: 'email',
                             errorMessage:
@@ -53,7 +54,7 @@ class SignUpScreen extends GetView<SignUpController> {
                           ),
                           CustomTextField(
                             title: 'PassWord',
-                            controller: controller.passwordController,
+                            controller: signUpCtrl.passwordController,
                             textInputType: TextInputType.text,
                             hintText: 'Password',
                             errorMessage:
@@ -63,9 +64,9 @@ class SignUpScreen extends GetView<SignUpController> {
                           ),
                           CustomLogButton(
                             buttonText: 'Sign UP',
-                            formKey: controller.signUpformKey,
+                            formKey: signUpCtrl.signUpformKey,
                             // Todo: API call to sign up
-                            pageButton: () => controller.registerUser(),
+                            pageButton: () => signUpCtrl.registerUser(),
                             textSpan: 'Do you have an account?',
                             buttonTextSpan: 'Sign In',
                             pageButtonTextSpan: '/SignIn',

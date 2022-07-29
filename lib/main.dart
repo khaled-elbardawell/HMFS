@@ -5,25 +5,18 @@ import 'package:hmfs/app/core/style/style.dart';
 import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
 import 'package:hmfs/app/home.dart';
-import 'package:hmfs/app/modules/doctor_profile/binding.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
-import 'package:hmfs/app/modules/doctors/binding.dart';
 import 'package:hmfs/app/modules/home/binding.dart';
 import 'package:hmfs/app/modules/onboarding/view.dart';
-import 'package:hmfs/app/modules/reservation/binding.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
-import 'package:hmfs/app/modules/reset_password/binding.dart';
 import 'package:hmfs/app/modules/reset_password/view.dart';
-import 'package:hmfs/app/modules/search/binding.dart';
 import 'package:hmfs/app/modules/search/view.dart';
 import 'package:hmfs/app/modules/signin/binding.dart';
 import 'package:hmfs/app/modules/signin/view.dart';
-import 'package:hmfs/app/modules/signup/binding.dart';
 import 'package:hmfs/app/modules/signup/view.dart';
-import 'package:hmfs/app/modules/single_chat/binding.dart';
-import 'app/modules/doctor_review/binding.dart';
 import 'app/modules/doctors/view.dart';
+import 'app/modules/single_chat/binding.dart';
 import 'app/modules/single_chat/view.dart';
 import 'app/modules/user_profile/binding.dart';
 import 'app/modules/user_profile/widget/edit_profile.dart';
@@ -66,13 +59,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/doctorProfile',
           page: () => DoctorProfileScreen(),
-          binding: DoctorProfileBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/doctorReview',
           page: () => DoctorReviewScreen(),
-          binding: DoctorReviewBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
@@ -90,37 +81,32 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/SignUp',
           page: () => const SignUpScreen(),
-          binding: SignUpBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/ResetPassword',
           page: () => ResetPasswordScreen(),
-          binding: ResetPasswordBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/Reservation',
           page: () => const ReservationScreen(),
-          binding: ReservationBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/Doctors',
           page: () => const DoctorsScreen(),
-          binding: DoctorBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
         GetPage(
           name: '/SingleChat',
           page: () => const SingleChatScreen(),
-          binding: SingleChatBinding(),
           transition: Transition.rightToLeftWithFade,
+          binding: SingleChatBinding(),
         ),
         GetPage(
           name: '/SearchScreen',
           page: () => const SearchScreen(),
-          binding: SearchBinding(),
           transition: Transition.rightToLeftWithFade,
         ),
       ],

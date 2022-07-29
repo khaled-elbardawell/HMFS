@@ -10,8 +10,8 @@ class ChatProvider {
     return userChats.map((e) => UserChats.fromJson(e)).toList();
   }
 
-  Future<Message?> getMessagesChat(String token, String chatId) async {
-    final messages = await _webServices.getMessagesChat(token, chatId);
-    return messages;
+  Future<ChatMessage?> getMessagesChat(String token, String chatId) async {
+    final chatMessage = await _webServices.getMessagesChat(token, chatId);
+    return chatMessage;
   }
 }

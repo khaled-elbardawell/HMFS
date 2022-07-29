@@ -7,8 +7,22 @@ import 'package:hmfs/app/modules/doctors/widget/grid_view_doctors.dart';
 import 'package:hmfs/app/modules/doctors/widget/list_view_doctors.dart';
 import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 
-class DoctorsScreen extends GetView<DoctorsController> {
+class DoctorsScreen extends StatefulWidget {
   const DoctorsScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DoctorsScreen> createState() => _DoctorsScreenState();
+}
+
+class _DoctorsScreenState extends State<DoctorsScreen> {
+  DoctorsController doctorsCtrl = Get.find<DoctorsController>();
+
+  @override
+  void initState() {
+    doctorsCtrl.requesting.value = false;
+    doctorsCtrl.getUserDoctors();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +31,7 @@ class DoctorsScreen extends GetView<DoctorsController> {
         appBar:
             customAppBar("My Doctor", blue, white, Icons.search_rounded, () {}),
         body: Obx(() {
-          if (controller.requesting.value) {
+          if (doctorsCtrl.requesting.value) {
             return Column(
               children: [
                 Padding(
@@ -36,12 +50,12 @@ class DoctorsScreen extends GetView<DoctorsController> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          controller.changeViewDoctorList();
+                          doctorsCtrl.changeViewDoctorList();
                         },
                         child: Obx(() => Row(
                               children: [
                                 Icon(
-                                  controller.gridView.value
+                                  doctorsCtrl.gridView.value
                                       ? Icons.view_list_sharp
                                       : Icons.grid_view_sharp,
                                   size: 5.0.wp,
@@ -51,7 +65,7 @@ class DoctorsScreen extends GetView<DoctorsController> {
                                   width: 1.0.wp,
                                 ),
                                 Text(
-                                  controller.gridView.value
+                                  doctorsCtrl.gridView.value
                                       ? "List View"
                                       : "Card View",
                                   style: TextStyle(
@@ -69,20 +83,22 @@ class DoctorsScreen extends GetView<DoctorsController> {
                   child: Obx(
                     () => Padding(
                         padding: EdgeInsets.symmetric(horizontal: 6.0.wp),
-                        child: controller.gridView.value
+                        child: doctorsCtrl.gridView.value
                             ? GridViewDoctors(
-                                doctors: controller.doctors,
+                                doctors: doctorsCtrl.doctors,
                               )
                             : ListViewDOctors(
-                                doctors: controller.doctors,
+                                doctors: doctorsCtrl.doctors,
                               )),
                   ),
                 ),
               ],
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(
+                color: HexColor.fromHex(blue),
+              ),
             );
           }
         }));

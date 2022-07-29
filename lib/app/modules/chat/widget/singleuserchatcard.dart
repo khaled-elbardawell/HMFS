@@ -39,7 +39,7 @@ class SingleUserChatCard extends StatelessWidget {
     return ListTile(
       onTap: () {
         Get.toNamed('/SingleChat', arguments: {
-          "userId": userId.toString(),
+          "chatId": userId.toString(),
           "name": name,
         });
       },

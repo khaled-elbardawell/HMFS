@@ -7,8 +7,21 @@ import 'package:hmfs/app/modules/user_profile/controller.dart';
 import 'package:hmfs/app/widgets/user_data_card.dart';
 import '../../core/values/colors.dart';
 
-class UserProfileScreen extends GetView<UserProfileController> {
+class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UserProfileScreen> createState() => _UserProfileScreenState();
+}
+
+class _UserProfileScreenState extends State<UserProfileScreen> {
+  UserProfileController userProfileCtrl = Get.find<UserProfileController>();
+
+  @override
+  void initState() {
+    userProfileCtrl.getUserProfile();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +46,12 @@ class UserProfileScreen extends GetView<UserProfileController> {
               color: HexColor.fromHex(white),
               size: 30.0,
             ),
-            onPressed: () => controller.logout(),
+            onPressed: () => userProfileCtrl.logout(),
           ),
         ],
       ),
       body: Obx(() {
-        if (controller.requesting.value) {
+        if (userProfileCtrl.requesting.value) {
           return Column(
             children: [
               Container(
@@ -51,16 +64,16 @@ class UserProfileScreen extends GetView<UserProfileController> {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6.5.wp),
                       child: UserDataCard(
-                        typeImage: controller.typeImage.value,
-                        imageName: controller.typeImage.value == "assets"
+                        typeImage: userProfileCtrl.typeImage.value,
+                        imageName: userProfileCtrl.typeImage.value == "assets"
                             ? "assets/images/user-assets.png"
-                            : '$baseUrl/upload/images/full/${controller.imageName.value}',
+                            : '$baseUrl/upload/images/full/${userProfileCtrl.imageName.value}',
                         imageSize: 20.0,
                         isOnline: false,
-                        title: controller.userProfile.data.name,
+                        title: userProfileCtrl.userProfile.data.name,
                         titleColor: white,
                         titleSize: 13.0,
-                        subTitle: controller.userProfile.data.email,
+                        subTitle: userProfileCtrl.userProfile.data.email,
                         subTitleSize: 10.5,
                         subTitleColor: white,
                       ),
@@ -127,7 +140,8 @@ class UserProfileScreen extends GetView<UserProfileController> {
                                       height: 0.7.hp,
                                     ),
                                     Text(
-                                      controller.userProfile.data.id.toString(),
+                                      userProfileCtrl.userProfile.data.id
+                                          .toString(),
                                       style: TextStyle(
                                         color: HexColor.fromHex(blue),
                                         fontSize: 12.5.sp,
@@ -153,7 +167,7 @@ class UserProfileScreen extends GetView<UserProfileController> {
                             padding: EdgeInsets.symmetric(vertical: 2.5.wp),
                             child: ListTile(
                               onTap: () {
-                                controller.requesting.value = false;
+                                userProfileCtrl.requesting.value = false;
                                 Get.toNamed('/editAccount');
                               },
                               contentPadding: const EdgeInsets.all(0.0),
@@ -196,8 +210,10 @@ class UserProfileScreen extends GetView<UserProfileController> {
             ],
           );
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
+          return Center(
+            child: CircularProgressIndicator(
+              color: HexColor.fromHex(blue),
+            ),
           );
         }
       }),

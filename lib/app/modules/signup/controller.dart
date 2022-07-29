@@ -16,6 +16,15 @@ class SignUpController extends GetxController {
 
   SignUpController({required this.userRepository});
 
+  @override
+  void onClose() {
+    emailController.clear();
+    passwordController.clear();
+    nameController.clear();
+
+    super.onClose();
+  }
+
   void registerUser() {
     userRepository
         .registerUser(

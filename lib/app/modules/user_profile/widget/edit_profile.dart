@@ -29,6 +29,17 @@ class EditProfile extends StatelessWidget {
             color: HexColor.fromHex(white),
           ),
         ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_outlined,
+            color: HexColor.fromHex(white),
+            size: 30.0,
+          ),
+          onPressed: () {
+            userProfileCtrl.requesting.value = true;
+            Get.back();
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

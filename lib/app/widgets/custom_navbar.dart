@@ -6,9 +6,9 @@ import 'package:hmfs/app/core/values/colors.dart';
 
 import '../modules/home/controller.dart';
 
-class CustomNavbar extends StatelessWidget {
-  CustomNavbar({Key? key}) : super(key: key);
-  final homeCtrl = Get.find<HomeController>();
+class CustomNavbar extends GetView<HomeController> {
+  const CustomNavbar({Key? key}) : super(key: key);
+  // final homeCtrl = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +32,14 @@ class CustomNavbar extends StatelessWidget {
       BuildContext context, int index, String image, String semanticsLabel) {
     return GestureDetector(
         onTap: () {
-          homeCtrl.selectedItemIndex.value = index;
+          controller.selectedItemIndex.value = index;
         },
         child: Obx(
           () => Container(
             padding: const EdgeInsets.all(13),
             height: 60,
             width: MediaQuery.of(context).size.width / 5,
-            decoration: homeCtrl.selectedItemIndex.value == index
+            decoration: controller.selectedItemIndex.value == index
                 ? activeBoxDecorationItem()
                 : unActiveBoxDecorationItem(),
             child: SvgPicture.asset(
@@ -47,7 +47,7 @@ class CustomNavbar extends StatelessWidget {
               semanticsLabel: semanticsLabel,
               alignment: Alignment.center,
               fit: BoxFit.contain,
-              color: homeCtrl.selectedItemIndex.value == index
+              color: controller.selectedItemIndex.value == index
                   ? HexColor.fromHex(blue)
                   : Colors.grey,
             ),

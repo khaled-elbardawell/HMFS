@@ -35,29 +35,22 @@ class SingleChatScreen extends GetView<SingleChatController> {
             Container(
               padding: const EdgeInsets.only(bottom: 20),
               height: MediaQuery.of(context).size.height - 160,
-              child: ListView(
+              child: ListView.builder(
+                itemCount: controller.listMessage.length,
                 shrinkWrap: true,
-                children: const [
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                  ReplyMessageCard(),
-                  OwnMessageCard(),
-                ],
+                itemBuilder: (context, index) {
+                  final message = controller.listMessage[index];
+                  int userId = int.parse(Get.arguments['userId']);
+                  if (message.senderId == userId) {
+                    return const ReplyMessageCard(
+                        // message: message,
+                        );
+                  } else {
+                    return const OwnMessageCard(
+                        // message: message,
+                        );
+                  }
+                },
               ),
             ),
             Align(

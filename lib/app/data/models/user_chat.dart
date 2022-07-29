@@ -1,7 +1,7 @@
 class UserChats {
   late int chatId;
   late dynamic label;
-  late String lastMessage;
+  late dynamic lastMessage;
   late String updatedAt;
   late int userId;
   late String name;

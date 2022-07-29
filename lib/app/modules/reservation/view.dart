@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/modules/reservation/controller.dart';
 import 'package:hmfs/app/modules/reservation/widget/previousreservations.dart';
@@ -7,8 +7,23 @@ import 'package:hmfs/app/modules/reservation/widget/upcomingreservations.dart';
 
 import '../../core/values/colors.dart';
 
-class ReservationScreen extends GetView<ReservationController> {
+class ReservationScreen extends StatefulWidget {
   const ReservationScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ReservationScreen> createState() => _ReservationScreenState();
+}
+
+class _ReservationScreenState extends State<ReservationScreen> {
+  ReservationController reservationCtrl = Get.find<ReservationController>();
+
+  @override
+  void initState() {
+    reservationCtrl.requesting.value = false;
+    reservationCtrl.getPreviousReservation();
+    reservationCtrl.getUpcomingReservation();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +84,8 @@ class ReservationScreen extends GetView<ReservationController> {
           children: [
             Obx(
               () {
-                if (controller.requesting.value) {
-                  if (controller.upcomingReservationData.isEmpty) {
+                if (reservationCtrl.requesting.value) {
+                  if (reservationCtrl.upcomingReservationData.isEmpty) {
                     return const Center(
                       child: Text(
                         'There is no Reservation',
@@ -80,7 +95,7 @@ class ReservationScreen extends GetView<ReservationController> {
                   } else {
                     return UserUpcomingReservations(
                       upcomingReservationData:
-                          controller.upcomingReservationData,
+                          reservationCtrl.upcomingReservationData,
                     );
                   }
                 } else {
@@ -94,8 +109,8 @@ class ReservationScreen extends GetView<ReservationController> {
             ),
             Obx(
               () {
-                if (controller.requesting.value) {
-                  if (controller.previousReservationData.isEmpty) {
+                if (reservationCtrl.requesting.value) {
+                  if (reservationCtrl.previousReservationData.isEmpty) {
                     return const Center(
                       child: Text(
                         'There is no previous Reservation',
@@ -105,7 +120,7 @@ class ReservationScreen extends GetView<ReservationController> {
                   } else {
                     return PreviousReservations(
                       previousReservationData:
-                          controller.previousReservationData,
+                          reservationCtrl.previousReservationData,
                     );
                   }
                 } else {

@@ -103,8 +103,10 @@ class _ChatScreenState extends State<ChatScreen> {
               );
             }
           } else {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return Center(
+              child: CircularProgressIndicator(
+                color: HexColor.fromHex(blue),
+              ),
             );
           }
         },

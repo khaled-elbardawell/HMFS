@@ -1,17 +1,17 @@
-class Message {
+class ChatMessage {
   late bool status;
   late String msg;
   late int code;
   late Data data;
 
-  Message({
+  ChatMessage({
     required this.status,
     required this.msg,
     required this.code,
     required this.data,
   });
 
-  Message.fromJson(Map<String, dynamic> json) {
+  ChatMessage.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     msg = json['msg'];
     code = json['code'];
@@ -23,9 +23,7 @@ class Message {
     data['status'] = status;
     data['msg'] = msg;
     data['code'] = code;
-
     data['data'] = this.data.toJson();
-
     return data;
   }
 }
@@ -34,7 +32,10 @@ class Data {
   late Receiver receiver;
   late List<Messages> messages;
 
-  Data({required this.receiver, required this.messages});
+  Data({
+    required this.receiver,
+    required this.messages,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     receiver = Receiver.fromJson(json['receiver']);
@@ -47,7 +48,6 @@ class Data {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['receiver'] = receiver.toJson();
     data['messages'] = messages.map((v) => v.toJson()).toList();
-
     return data;
   }
 }
@@ -58,11 +58,12 @@ class Receiver {
   late int chatId;
   late User user;
 
-  Receiver(
-      {required this.id,
-      required this.userId,
-      required this.chatId,
-      required this.user});
+  Receiver({
+    required this.id,
+    required this.userId,
+    required this.chatId,
+    required this.user,
+  });
 
   Receiver.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -77,7 +78,6 @@ class Receiver {
     data['user_id'] = userId;
     data['chat_id'] = chatId;
     data['user'] = user.toJson();
-
     return data;
   }
 }
@@ -86,7 +86,7 @@ class User {
   late int id;
   late String name;
   late String email;
-  late Upload upload;
+  late dynamic upload;
 
   User(
       {required this.id,
@@ -98,7 +98,7 @@ class User {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    upload = Upload.fromJson(json['upload']);
+    upload = json['upload'] != null ? Upload.fromJson(json['upload']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -106,6 +106,7 @@ class User {
     data['id'] = id;
     data['name'] = name;
     data['email'] = email;
+
     data['upload'] = upload.toJson();
 
     return data;
@@ -118,11 +119,12 @@ class Upload {
   late String uploadableType;
   late String file;
 
-  Upload(
-      {required this.id,
-      required this.uploadableId,
-      required this.uploadableType,
-      required this.file});
+  Upload({
+    required this.id,
+    required this.uploadableId,
+    required this.uploadableType,
+    required this.file,
+  });
 
   Upload.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -166,6 +168,7 @@ class Messages {
     message = json['message'];
     chatId = json['chat_id'];
     createdAt = json['created_at'];
+
     json['recipients'].forEach((v) {
       recipients.add(Recipients.fromJson(v));
     });
@@ -216,9 +219,7 @@ class Recipients {
     data['seen_at'] = seenAt;
     data['user_id'] = userId;
     data['message_id'] = messageId;
-
     data['user'] = user.toJson();
-
     return data;
   }
 }

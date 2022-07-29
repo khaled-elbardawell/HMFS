@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -52,18 +53,26 @@ class ChatWebServices {
     }
   }
 
-  Future<Message?> getMessagesChat(String token, String chatId) async {
-    Message? messages;
+  Future<ChatMessage?> getMessagesChat(String token, String chatId) async {
+    ChatMessage? chatMessage;
     try {
       Response response = await dio.get(
         '/api/get/user/chat/messages',
         queryParameters: {
-          "token": token,
           "chat_id": chatId,
+          "token": token,
         },
       );
-      messages = Message.fromJson(response.data);
+      if (kDebugMode) {
+        print('object :' + response.data['data'].toString());
+      }
+      chatMessage = ChatMessage.fromJson(response.data);
     } on DioError catch (e) {
+      if (kDebugMode) {
+        print('object :' + e.error.toString());
+        print('stackTrace :' + e.stackTrace.toString());
+      }
+
       if (e.response?.statusCode == 401) {
         Get.snackbar(
           'Error',
@@ -87,6 +96,6 @@ class ChatWebServices {
         );
       }
     }
-    return messages;
+    return chatMessage;
   }
 }

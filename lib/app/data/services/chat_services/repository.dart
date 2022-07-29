@@ -11,6 +11,6 @@ class ChatRepository {
   Future<List<UserChats>> getUserChats(String token) async =>
       await chatProvider.getUserChats(token);
 
-  Future<Message?> getMessagesChat(String token, String chatId) async =>
+  Future<ChatMessage?> getMessagesChat(String token, String chatId) async =>
       await chatProvider.getMessagesChat(token, chatId);
 }

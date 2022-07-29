@@ -71,7 +71,7 @@ class UserProfileController extends GetxController {
 
   @override
   void onInit() {
-    getUserProfile();
+    // getUserProfile();
     super.onInit();
     if (kDebugMode) {
       print("onInit print user");
@@ -103,7 +103,7 @@ class UserProfileController extends GetxController {
           backgroundColor: Colors.white,
           colorText: Colors.black,
         );
-        Get.offNamed('/SignIn');
+        Get.offAllNamed('/SignIn');
       },
     );
   }

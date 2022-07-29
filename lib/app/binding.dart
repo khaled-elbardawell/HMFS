@@ -17,6 +17,7 @@ import 'package:hmfs/app/modules/reset_password/controller.dart';
 import 'package:hmfs/app/modules/search/controller.dart';
 import 'package:hmfs/app/modules/signin/controller.dart';
 import 'package:hmfs/app/modules/signup/controller.dart';
+import 'package:hmfs/app/modules/single_chat/controller.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
 import 'data/providers/chat/provider.dart';
 import 'data/providers/reservation/provider.dart';
@@ -24,7 +25,6 @@ import 'data/providers/user/provider.dart';
 import 'data/services/chat_services/repository.dart';
 import 'data/services/reservationapi/repository.dart';
 import 'modules/onboarding/controller.dart';
-import 'modules/single_chat/binding.dart';
 
 class Binding extends Bindings {
   @override
@@ -101,7 +101,11 @@ class Binding extends Bindings {
       ),
     );
     Get.lazyPut(
-      () => SingleChatBinding(),
+      () => SingleChatController(
+        chatRepository: ChatRepository(
+          chatProvider: ChatProvider(),
+        ),
+      ),
     );
     Get.lazyPut(
       () => SearchController(

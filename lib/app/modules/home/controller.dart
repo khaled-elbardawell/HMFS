@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/models/reservation.dart';
 import 'package:hmfs/app/data/services/reservationapi/repository.dart';
@@ -11,7 +10,6 @@ import 'package:hmfs/app/modules/home/view.dart';
 import 'package:hmfs/app/modules/chat/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
 import 'package:hmfs/app/modules/user_profile/view.dart';
-
 import '../../data/services/storage/services.dart';
 import '../../data/services/userapi/repository.dart';
 
@@ -64,10 +62,17 @@ class HomeController extends GetxController {
 
   @override
   void onClose() {
-    print("onClose print");
+    print("onClose prints s");
     currentIndex.value = 0;
     selectedItemIndex.value = 0;
     super.onClose();
+  }
+
+  @override
+  InternalFinalCallback<void> get onDelete {
+    currentIndex.value = 0;
+    selectedItemIndex.value = 0;
+    return super.onDelete;
   }
 
   void getUpcomingReservation() {

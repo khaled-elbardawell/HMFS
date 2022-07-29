@@ -12,6 +12,19 @@ class SignInController extends GetxController {
   final UserRepository userRepository;
 
   SignInController({required this.userRepository});
+  @override
+  void onClose() {
+    emailController.clear();
+    passwordController.clear();
+    super.onClose();
+  }
+
+  @override
+  InternalFinalCallback<void> get onDelete {
+    emailController.clear();
+    passwordController.clear();
+    return super.onDelete;
+  }
 
   void loginUser() {
     userRepository
