@@ -130,15 +130,16 @@
                                                         <div class="img-group d-block text-right pr-4">
                                                             @foreach($message->recipients as $recipient)
                                                                 @if($recipient->user_id != auth()->id() && $recipient->seen_at)
-                                                                    @isset($recipient->user->upload)
-                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">
-                                                                            <img style="width: 15px;height: 15px" src="{{CustomAsset('upload/images/full/'.$recipient->user->upload->file)}}" alt="user" class="thumb-md rounded-circle">
-                                                                        </a>
-                                                                    @else
-                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">
-                                                                            <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">{{TextImage($recipient->user->name)}}</div>
-                                                                        </a>
-                                                                    @endisset
+                                                                   <span>Seen</span>
+{{--                                                                    @isset($recipient->user->upload)--}}
+{{--                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">--}}
+{{--                                                                            <img style="width: 15px;height: 15px" src="{{CustomAsset('upload/images/full/'.$recipient->user->upload->file)}}" alt="user" class="thumb-md rounded-circle">--}}
+{{--                                                                        </a>--}}
+{{--                                                                    @else--}}
+{{--                                                                        <a class="user-avatar user-avatar-group" onclick="return false;" href="#">--}}
+{{--                                                                            <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">{{TextImage($recipient->user->name)}}</div>--}}
+{{--                                                                        </a>--}}
+{{--                                                                    @endisset--}}
                                                                 @endif
                                                             @endforeach
 
@@ -310,17 +311,17 @@
    Echo.join('chat.seen.{{request()->chat_id}}')
         .listen('.SeenMessageEvent', (e) => {
             if({{request()->chat_id}} == e.chat_id){
-                var html = '';
-                if(e.user.upload){
-                     html = `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
-                              <img style="width: 15px;height: 15px" src="/upload/images/full/${e.user.upload.file}" alt="user" class="thumb-md rounded-circle">
-                             </a>`
-                 }else{
-                     html =  `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
-                                <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">${$('.chat-header .rounded-circle-text').text()}</div>
-                              </a>`
-                 }
-                $('.media-body.reverse .chat-msg .img-group').html(html)
+                // var html = '';
+                // if(e.user.upload){
+                //      html = `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                //               <img style="width: 15px;height: 15px" src="/upload/images/full/${e.user.upload.file}" alt="user" class="thumb-md rounded-circle">
+                //              </a>`
+                //  }else{
+                //      html =  `<a class="user-avatar user-avatar-group" onclick="return false;" href="#">
+                //                 <div  class="rounded-circle-text" style="border-radius: 50% !important;background-color: #cccccc;width: 15px;height: 15px;text-align: center;line-height: 15px;font-weight: bold;font-size: 7px;">${$('.chat-header .rounded-circle-text').text()}</div>
+                //               </a>`
+                //  }
+                $('.media-body.reverse .chat-msg .img-group').html(`<span>Seen</span>`)
             }
         });
 
