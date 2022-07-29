@@ -275,7 +275,7 @@
             appendMessageToChatBox(message,1)
 
              $(this).val('')
-             sortChats(receiver.id)
+             sortChats(receiver.user_id)
 
             // Send a POST request
             axios({
@@ -297,7 +297,7 @@
     Echo.join('chat.{{request()->chat_id}}')
         .listen('.SendMessageEvent', (e) => {
             appendMessageToChatBox(e.message.message,0)
-            sortChats(receiver.id)
+            sortChats(receiver.user_id)
             seenMessagesRequest()
         })
         .listenForWhisper('typing', e => {
