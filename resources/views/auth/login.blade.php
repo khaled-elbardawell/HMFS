@@ -86,18 +86,4 @@
 @endsection
 
 
-@section('js')
-<script>
-    Echo.join('online')
-        .here(users => {
-            console.log(users)
-        })
-        .joining(user => {
-            console.log(user)
-        })
-        .leaving(user => {
-            console.log(user)
-        });
-</script>
 
-@endsection
