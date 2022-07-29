@@ -1,13 +1,12 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/values/colors.dart';
-import 'package:hmfs/app/data/providers/chat/provider.dart';
 import 'package:hmfs/app/modules/chat/controller.dart';
 import 'package:hmfs/app/modules/chat/widget/singleuserchatcard.dart';
 import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 import '../../core/utils/extensions.dart';
 import '../../data/services/PusherWebSockets/pusher.dart';
-import '../../data/services/chat_services/repository.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -26,7 +25,6 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    print('initState chat');
     // setUpServices();
     super.initState();
   }
@@ -51,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
     //   options,
     //   enableLogging: true,
     //   onError: (error) {
-    //     print("erorr message :" + error.message);
+    //     print("error message :" + error.message);
     //   },
     //   onConnectionStateChange: (status) {
     //     print("status : " + status.currentState);
@@ -63,8 +61,9 @@ class _ChatScreenState extends State<ChatScreen> {
     pusherService.pusher.subscribe("presence-user.2").bind(
       'UserChatNotifyEvent',
       (event) {
-        print('chat event =>qaaa');
-        print('chat event =>' + event.toString());
+        if (kDebugMode) {
+          print('chat event =>' + event.toString());
+        }
       },
     );
   }

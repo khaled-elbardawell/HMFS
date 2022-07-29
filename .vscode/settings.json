@@ -2,7 +2,9 @@
     "cSpell.words": [
         "Aabed",
         "appbar",
+        "buildmap",
         "Crtl",
+        "floatingsearchbar",
         "Geolocator",
         "Getx",
         "healthprofile",
@@ -12,6 +14,7 @@
         "LTRB",
         "mobilephone",
         "placedetails",
+        "placeitem",
         "placesuggestion",
         "reciver",
         "reservationapi",
@@ -21,6 +24,7 @@
         "singlechildscrollview",
         "singleuserchatcard",
         "textfield",
+        "upcomingreservations",
         "Upform",
         "userapi",
         "userprofile"

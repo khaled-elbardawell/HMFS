@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/state_manager.dart';
 import 'package:hmfs/app/core/utils/key.dart';
+import 'package:hmfs/app/data/models/reservation.dart';
+import 'package:hmfs/app/data/services/reservationapi/repository.dart';
 import 'package:hmfs/app/modules/doctors/view.dart';
 import 'package:hmfs/app/modules/home/view.dart';
 import 'package:hmfs/app/modules/chat/view.dart';
@@ -23,11 +25,17 @@ class HomeController extends GetxController {
     const ChatScreen(),
     const DoctorsScreen(),
     const ReservationScreen(),
-    UserProfileScreen(),
+    const UserProfileScreen(),
   ];
+  RxBool requesting = false.obs;
+  List<Reservation> upcomingReservationData = [];
+
+  List<Reservation> previousReservationData = [];
 
   final UserRepository userRepository;
-  HomeController({required this.userRepository});
+  final ReservationRepository reservationRepository;
+  HomeController(
+      {required this.reservationRepository, required this.userRepository});
 
   void meUser() {
     String token = CacheHelper.getTokenData(keyToken);
@@ -41,6 +49,8 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // getUpcomingReservation();
+    getPreviousReservation();
     meUser();
     print("onInit print home");
   }
@@ -58,5 +68,24 @@ class HomeController extends GetxController {
     currentIndex.value = 0;
     selectedItemIndex.value = 0;
     super.onClose();
+  }
+
+  void getUpcomingReservation() {
+    String token = CacheHelper.getTokenData(keyToken);
+    print('init token is : $token');
+    reservationRepository.getUserUpcomingReservations(token).then((value) {
+      upcomingReservationData = value;
+      requesting.value = true;
+    });
+  }
+
+  void getPreviousReservation() {
+    String token = CacheHelper.getTokenData(keyToken);
+    print('token is: $token');
+    reservationRepository.getUserPreviousReservations(token).then((value) {
+      previousReservationData = value;
+
+      requesting.value = true;
+    });
   }
 }

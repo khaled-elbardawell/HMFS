@@ -5,7 +5,6 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/models/placedetails.dart';
-import 'package:hmfs/app/data/services/storage/services.dart';
 
 class LocationServices {
   static Future<Position> getCurrentLocation() async {

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:hmfs/app/data/models/message.dart';
-import 'package:hmfs/app/data/models/user_chat.dart';
 import '../../../core/utils/key.dart';
 
 class ChatWebServices {

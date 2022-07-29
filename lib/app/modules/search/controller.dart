@@ -41,8 +41,7 @@ class SearchController extends GetxController {
     final sessionToken = const Uuid().v4();
     locationRepository.getPlacesDetails(placeId, sessionToken).then(
       (value) {
-        print("test " + value!.result.toString());
-        placeDetails = value;
+        placeDetails = value!;
         requestingDetails.value = true;
       },
     );
@@ -100,6 +99,6 @@ class SearchController extends GetxController {
   }
 
   void addMarkerToMarkers(Marker marker) {
-    markers.value.add(marker);
+    markers.add(marker);
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 
 class SingleSmallCard extends StatelessWidget {
-  final String iconanme;
+  final String iconName;
   final String semanticsLabel;
   final String title;
   final String subTitle;
@@ -11,7 +11,7 @@ class SingleSmallCard extends StatelessWidget {
 
   const SingleSmallCard({
     Key? key,
-    required this.iconanme,
+    required this.iconName,
     required this.title,
     required this.subTitle,
     required this.color,
@@ -39,7 +39,7 @@ class SingleSmallCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
               ),
               child: SvgPicture.asset(
-                iconanme,
+                iconName,
                 semanticsLabel: semanticsLabel,
                 width: 10.0.wp,
                 height: 5.1.hp,

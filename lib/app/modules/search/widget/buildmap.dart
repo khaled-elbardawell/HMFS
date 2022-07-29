@@ -20,7 +20,7 @@ class BuildMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () => GoogleMap(
-        markers: searchCtrl.markers.value,
+        markers: searchCtrl.markers,
         mapType: MapType.normal,
         myLocationEnabled: true,
         myLocationButtonEnabled: false,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
-import 'package:hmfs/app/core/utils/key.dart';
 
 class SingleUserChatCard extends StatelessWidget {
   final dynamic image;

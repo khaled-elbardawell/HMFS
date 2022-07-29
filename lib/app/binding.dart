@@ -34,6 +34,9 @@ class Binding extends Bindings {
         userRepository: UserRepository(
           userProvider: UserProvider(),
         ),
+        reservationRepository: ReservationRepository(
+          reservationProvider: ReservationProvider(),
+        ),
       ),
     );
     Get.lazyPut(

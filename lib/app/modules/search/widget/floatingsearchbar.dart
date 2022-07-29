@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
@@ -12,9 +14,11 @@ class BuildFloatingSearchBar extends StatelessWidget {
   final SearchController searchCtrl;
   late PlaceSuggestion placeSuggestion;
   List<PlaceSuggestion> places = [];
-  BuildFloatingSearchBar(
-      {Key? key, required this.searchBarController, required this.searchCtrl})
-      : super(key: key);
+  BuildFloatingSearchBar({
+    Key? key,
+    required this.searchBarController,
+    required this.searchCtrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +106,6 @@ class BuildFloatingSearchBar extends StatelessWidget {
       itemBuilder: (context, index) {
         return InkWell(
           onTap: () async {
-            print('pla : ' + places[index].description);
             placeSuggestion = places[index];
             searchBarController.close();
             searchCtrl.getPlaceDetails(placeSuggestion.placeId);

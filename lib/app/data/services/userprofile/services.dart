@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -8,7 +7,6 @@ import 'package:hmfs/app/data/models/userprofile.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
 
 import '../../../core/utils/key.dart';
-import '../../models/user.dart';
 
 class UserProfileWebServices {
   late Dio dio;
@@ -65,7 +63,9 @@ class UserProfileWebServices {
   Future<void> updateUserProfileData(String token, dynamic name, dynamic phone,
       dynamic bio, dynamic image) async {
     late FormData data;
-    print("immm : " + image.toString());
+    if (kDebugMode) {
+      print("image update : " + image.toString());
+    }
     if (image != null) {
       String imageName = image.path.split('/').last;
       data = FormData.fromMap({
@@ -76,7 +76,7 @@ class UserProfileWebServices {
       });
     }
     try {
-      Response response = await dio.post(
+      await dio.post(
         '/api/update/user/profile',
         data: {
           "token": token,
@@ -93,10 +93,18 @@ class UserProfileWebServices {
         colorText: Colors.black,
       );
     } on DioError catch (e) {
-      print("error :" + e.error.toString());
-      print("response :" + e.response.toString());
-      print("message :" + e.message.toString());
-      print("stackTrace :" + e.stackTrace.toString());
+      if (kDebugMode) {
+        print("error :" + e.error.toString());
+      }
+      if (kDebugMode) {
+        print("response :" + e.response.toString());
+      }
+      if (kDebugMode) {
+        print("message :" + e.message.toString());
+      }
+      if (kDebugMode) {
+        print("stackTrace :" + e.stackTrace.toString());
+      }
       if (e.response?.statusCode == 401) {
         Get.snackbar(
           'Error',

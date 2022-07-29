@@ -3,15 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/utils/key.dart';
-import 'package:hmfs/app/data/providers/userprofile/provider.dart';
-import 'package:hmfs/app/data/services/userprofile/repository.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
-import 'package:hmfs/app/widgets/custom_new_appbar.dart';
 import 'package:hmfs/app/widgets/user_data_card.dart';
 import '../../core/values/colors.dart';
 
 class UserProfileScreen extends GetView<UserProfileController> {
-  UserProfileScreen({Key? key}) : super(key: key);
+  const UserProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +39,6 @@ class UserProfileScreen extends GetView<UserProfileController> {
       ),
       body: Obx(() {
         if (controller.requesting.value) {
-          print('object ${controller.imageName.value}');
           return Column(
             children: [
               Container(

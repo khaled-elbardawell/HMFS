@@ -2,8 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
-import 'package:hmfs/app/data/providers/userprofile/provider.dart';
-import 'package:hmfs/app/data/services/userprofile/repository.dart';
 import 'package:hmfs/app/modules/user_profile/controller.dart';
 import 'package:hmfs/app/modules/user_profile/widget/edit_text_field.dart';
 import 'package:hmfs/app/widgets/custom_log_bottom.dart';
@@ -44,10 +42,6 @@ class EditProfile extends StatelessWidget {
                   Obx(
                     () {
                       if (userProfileCtrl.imageName.value != '') {
-                        print('rrrr : ${userProfileCtrl.typeImage.value}');
-                        print(
-                            'imageName rrrr : ${userProfileCtrl.imageName.value}');
-
                         return ClipRRect(
                           borderRadius: BorderRadius.circular(600.0),
                           child: userProfileCtrl.typeImage.value == 'network'

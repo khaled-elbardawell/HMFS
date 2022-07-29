@@ -73,18 +73,24 @@ class UserProfileController extends GetxController {
   void onInit() {
     getUserProfile();
     super.onInit();
-    print("onInit print user");
+    if (kDebugMode) {
+      print("onInit print user");
+    }
   }
 
   @override
   void onReady() {
-    print("onReady print");
+    if (kDebugMode) {
+      print("onReady print");
+    }
     super.onReady();
   }
 
   @override
   void onClose() {
-    print("onClose print");
+    if (kDebugMode) {
+      print("onClose print");
+    }
     super.onClose();
   }
 
@@ -110,10 +116,10 @@ class UserProfileController extends GetxController {
       this.image = imageTemp;
       imageName.value = imageTemp.path;
       typeImage.value = 'file';
-      print("file path: " + imageTemp.path);
-      print("fimageName.value: " + imageName.value);
     } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
+      if (kDebugMode) {
+        print('Failed to pick image: $e');
+      }
     }
   }
 }

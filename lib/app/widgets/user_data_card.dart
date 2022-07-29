@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 
@@ -42,8 +41,11 @@ class UserDataCard extends StatelessWidget {
                   width: imageSize.wp,
                   height: imageSize.wp,
                   errorBuilder: (context, url, error) {
-                    print('errors : ' + error.toString());
-                    print('errors : ' + url.toString());
+                    if (kDebugMode) {
+                      print('errors : ' + error.toString());
+                      print('errors url : ' + url.toString());
+                    }
+
                     return Container(
                       color: Colors.amber,
                       alignment: Alignment.center,

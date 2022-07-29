@@ -15,7 +15,6 @@ class ChatController extends GetxController {
 
   void getUserChats() {
     String token = CacheHelper.getTokenData(keyToken);
-    print('token get User Chats  is: $token');
     chatRepository.getUserChats(token).then((value) {
       userChats = value;
       if (userChats.isEmpty) {
@@ -29,7 +28,6 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
-    print('chats onInit controoler');
     getUserChats();
     super.onInit();
   }
