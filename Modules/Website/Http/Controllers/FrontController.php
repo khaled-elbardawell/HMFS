@@ -68,7 +68,8 @@ class FrontController extends Controller
     }
     public function offers()
     {
-        $offers = OfferFeatures::with(['offerFeatures.features'])->get();
+        // $offers = Offer::with(['offerFeatures.features'])->get();
+        $offers = OfferFeatures::with(['features','offer'])->get();
         return view('website::pages.offers',$offers);
     }
     public function postSingle($id)
@@ -76,5 +77,4 @@ class FrontController extends Controller
         $blog = Blog::whereId($id)->with(['user','upload'])->first();
         return view('website::pages.blog-single' , compact('blog'));
     }
-
 }

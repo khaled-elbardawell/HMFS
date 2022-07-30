@@ -15,6 +15,9 @@
             {{-- special class: most-popular --}}
             <div class="block-pricing mt-125 mt-md-50">
                 <div class="row">
+                @foreach ($offers->offer as $offer)
+
+                @endforeach
                     <div class="col-lg-3 col-md-6 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
                         <div class="box-pricing-item">
                             <div class="box-info-price">
