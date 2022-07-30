@@ -28,35 +28,35 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-//
-//        Gate::before(function (User $user){
-//            $is_super_admin = DB::table('user_roles')->where('role_id',1)->where('user_id',$user->id)->first();
-//            if($is_super_admin){
-//               return true;
+
+        Gate::before(function (User $user){
+            $is_super_admin = DB::table('user_roles')->where('role_id',1)->where('user_id',$user->id)->first();
+            if($is_super_admin){
+               return true;
+            }
+        });
+
+
+        Gate::define('is_super_admin', function (User $user){
+            return session('is_super_admin');
+        });
+
+
+        Gate::define('super_admin_preview', function (User $user){
+//            if (session('is_super_admin')){
+//                if (session()->has('organization_id')){
+//                    return true;
+//                }
 //            }
-//        });
-//
-//
-//        Gate::define('is_super_admin', function (User $user){
-//            return session('is_super_admin');
-//        });
-//
-//
-//        Gate::define('super_admin_preview', function (User $user){
-////            if (session('is_super_admin')){
-////                if (session()->has('organization_id')){
-////                    return true;
-////                }
-////            }
-//            return null;
-//        });
-//
-//        $permissions = Permission::all();
-//        foreach ($permissions as $permission){
-//            Gate::define($permission->name, function (User $user) use ($permission) {
-//                return User::hasPermission($permission->name);
-//            });
-//        }
+            return null;
+        });
+
+        $permissions = Permission::all();
+        foreach ($permissions as $permission){
+            Gate::define($permission->name, function (User $user) use ($permission) {
+                return User::hasPermission($permission->name);
+            });
+        }
 
     }
 }
