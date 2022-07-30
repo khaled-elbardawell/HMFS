@@ -35,9 +35,7 @@
                     <div class="met-profile">
                         <div class="row" style="align-items: center;justify-content: space-around;">
                             <div class="col-lg-4 align-self-center mb-3 mb-lg-0">
-                                <div class="met-profile-main" style="justify-content: center;flex-direction: column;">
-                                    <div class="met-profile-main-pic m-0">
-
+                                <div class="met-profile-main" >
                                         @php
                                             $user_upload = $user->upload;
                                              if( isset($user_upload->file) && $user_upload->file != null){
@@ -47,19 +45,17 @@
                                              }
                                         @endphp
 
-                                        {{-- @if (!is_null($user->upload))
-                                            <img src="{{$url}}" alt="profile-user" class="rounded-circle" />
-                                        @else
-                                            <img src="{{CustomAsset('admin/assets/images/users/user-1.png')}}" alt="profile-user" class="rounded-circle" />
-                                        @endif --}}
 
-
-                                        {!!  Builder::FileDropify('image_profile',null,['id' => 'image_profile','use_trans' => true,'is_required' => true]) !!}
-
+                                    <div class="met-profile-main-pic" style="overflow: unset">
+                                            <img style="width: 128px;height: 128px" src="{{$url}}" alt="" class="rounded-circle @if(!$url) d-none @endif" id="image-peview">
+                                            <span id="text-image-peview" style="display: flex;width: 128px;justify-content: center;align-items: center;height: 128px;background: #fff;color: #000;font-size: 25px;font-weight: 500;" class="rounded-circle @if($url) d-none @endif">{{TextImage($user->name)}}</span>
+                                            <span class="fro-profile_main-pic-change">
+                                                <i class="fas fa-camera"></i>
+                                            </span>
                                     </div>
-                                    <div class="met-profile_user-detail text-center">
+
+                                    <div class="met-profile_user-detail">
                                         <h5 class="met-user-name">{{$user->name}}</h5>
-{{--                                        <p class="mb-0 met-user-name-post">UI/UX Designer</p>--}}
                                     </div>
                                 </div>
                             </div><!--end col-->
@@ -83,6 +79,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-6">
+                            <input name="image_profile" type="file" class="file d-none" onchange="showPreview(event);">
                             <input name="name" type="text" placeholder="Full Name" class="form-control" value="{{$user->name??null}}">
                             @error('name')
                                 <div class="invalid-feedback d-block" role="alert">
@@ -159,4 +156,20 @@
     @include('components.alert-action')
     <script src="{{CustomAsset('admin/plugins/dropify/js/dropify.min.js')}}"></script>
     <script src="{{CustomAsset('admin/assets/pages/jquery.form-upload.init.js')}}"></script>
+    <script>
+        function showPreview(event){
+            $('#image-peview').removeClass('d-none');
+            $('#text-image-peview').css('display', 'none');
+            if(event.target.files.length > 0){
+                var src = URL.createObjectURL(event.target.files[0]);
+                var preview = document.getElementById("image-peview");
+                preview.src = src;
+                preview.style.display = "block";
+            }
+        }
+
+        $(".fro-profile_main-pic-change").click(function(){
+            $('.file').trigger('click')
+        })
+    </script>
 @endsection
