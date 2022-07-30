@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <div class="px-3">
                                 <div class="auth-logo-box">
-                                    <a href="../dashboard/analytics-index.html" class="logo logo-admin"><img src="{{CustomAsset('admin/assets/images/logo-sm.png')}}" height="55" alt="logo" class="auth-logo"></a>
+                                    <a href="{{url('/home')}}" class="logo logo-admin"><img src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" height="70" alt="logo" class="auth-logo"></a>
                                 </div><!--end auth-logo-box-->
 
                                 <div class="text-center auth-logo-text">
@@ -86,18 +86,4 @@
 @endsection
 
 
-@section('js')
-<script>
-    Echo.join('online')
-        .here(users => {
-            console.log(users)
-        })
-        .joining(user => {
-            console.log(user)
-        })
-        .leaving(user => {
-            console.log(user)
-        });
-</script>
 
-@endsection

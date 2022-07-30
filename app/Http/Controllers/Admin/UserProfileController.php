@@ -30,35 +30,30 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $user = User::where('id',auth()->user()->id)->with(['upload'])->first();
+        $user = User::where('id',auth()->id())->with(['upload'])->first();
         return view('user-profile.profile' , compact('user'));
     }
 
     public function updateProfile(ProfileRequest $request)
     {
-        $user = User::where('id',auth()->user()->id)->with(['upload'])->first();
+        $user = User::where('id',auth()->id())->with(['upload'])->first();
         $password = $user->password;
 
         try{
-            if($request->has('confirm__password')){
+            if($request->has('confirm__password') && $request->confirm__password){
                 $password =  Hash::make($request->confirm__password);
             }
 
-            $user->updateOrCreate([
-                'email' => $request->email,
-            ],[
+            $user->update([
                 'name' => $request->name,
-                // 'email' => $request->email,
                 'bio' => $request->bio,
                 'phone' => $request->phone,
                 'password' => $password,
             ]);
 
-             if(is_null($user->upload)){
-                 User::saveUpload($user->id,'create','image','en','image_profile');
-             }else{
-                 User::saveUpload($user->id,'update','image','en','image_profile');
-             }
+
+            User::saveUpload($user->id,'update','image','en','image_profile');
+
 
             return redirect(route('profile'))->with(['alert' => true,'status' => 'success', 'message' => 'Updated successfully']);
         }catch (\Exception $e){

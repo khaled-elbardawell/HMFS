@@ -11,7 +11,7 @@
 |
 */
 
-Route::prefix('chat')->group(function() {
+Route::prefix('chat')->middleware('auth')->group(function() {
     Route::get('/', 'ChatController@index')->name('chat');
     Route::get('chat/search/user', 'ChatController@chatSearchUser')->name('chat.search.user');
     Route::get('chat/user', 'ChatController@chatUser')->name('chat.user');
