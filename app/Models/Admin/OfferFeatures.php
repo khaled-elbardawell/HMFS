@@ -18,11 +18,11 @@ class OfferFeatures extends Model
     }
 
     public function offer(){
-        return $this->hasOne('App\Offer', 'id');
+        return $this->belongsTo('App\Models\Admin\Offer', 'id');
     }
 
     public function features(){
-        return $this->hasMany('App\Feature', 'id');
+        return $this->hasMany('App\Models\Admin\Feature', 'id');
     }
 
 }

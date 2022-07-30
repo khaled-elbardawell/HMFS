@@ -23,4 +23,10 @@ Route::group(
         Route::post('/sendContactUs', 'FrontController@sendContactUs')->name('sendContactUs');
         Route::get('/faqs', 'FrontController@faqs')->name('faqs');
         Route::get('/our-services', 'FrontController@ourServices')->name('ourServices');
+
+        Route::get('/createInfoPayments','PaymentController@createInfoPayments')->name('createInfoPayments');
+        Route::post('/storeInfoPayments','PaymentController@storeInfoPayments')->name('storeInfoPayments');
+        Route::get('payment','PaymentController@payment')->name('payment');
+        Route::get('cancel/payment','PaymentController@cancelPayment')->name('cancel-payment');
+        Route::get('success/payment','PaymentController@successPayment')->name('success-payment');
     });

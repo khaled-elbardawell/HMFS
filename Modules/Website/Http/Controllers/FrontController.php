@@ -4,6 +4,8 @@ namespace Modules\Website\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Blog;
 use App\Models\Admin\Contact;
+use App\Models\Admin\Offer;
+use App\Models\Admin\OfferFeatures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -66,7 +68,8 @@ class FrontController extends Controller
     }
     public function offers()
     {
-        return view('website::pages.offers');
+        $offers = OfferFeatures::with(['offerFeatures.features'])->get();
+        return view('website::pages.offers',$offers);
     }
     public function postSingle($id)
     {
