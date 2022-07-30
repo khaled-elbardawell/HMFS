@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace Modules\Website\Models;
 
 use App\Traits\Paginate;
 use Illuminate\Database\Eloquent\Model;
