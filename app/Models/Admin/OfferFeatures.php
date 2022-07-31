@@ -18,7 +18,7 @@ class OfferFeatures extends Model
     }
 
     public function offer(){
-        return $this->belongsTo('App\Models\Admin\Offer', 'id');
+        return $this->hasOne('App\Models\Admin\Offer', 'id');
     }
 
     public function features(){
