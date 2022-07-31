@@ -13,4 +13,8 @@ class Feature extends Model
 
     protected $guarded = [];
 
+    public function offerFeatures(){
+        return $this->belongsToMany(Offer::class, 'offer_features','feature_id','offer_id');
+    }
+
 }

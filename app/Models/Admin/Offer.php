@@ -13,8 +13,10 @@ class Offer extends Model
 
     protected $guarded = [];
 
+
+
     public function offerFeatures(){
-        return $this->hasMany('App\Models\Admin\OfferFeatures', 'id');
+        return $this->belongsToMany(Feature::class, 'offer_features','offer_id','feature_id');
     }
 
 }
