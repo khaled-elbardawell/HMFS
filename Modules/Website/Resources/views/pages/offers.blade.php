@@ -15,34 +15,41 @@
             {{-- special class: most-popular --}}
             <div class="block-pricing mt-125 mt-md-50">
                 <div class="row">
-                @foreach ($offers->offer as $offer)
-
-                @endforeach
-                    <div class="col-lg-3 col-md-6 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
-                        <div class="box-pricing-item">
-                            <div class="box-info-price">
-                                <span class="text-price for-month display-month">$20</span>
-                                <span class="text-price for-year">$240</span>
-                                <span class="text-month">/month</span>
-                            </div>
-                            <div>
-                                <h4 class="mb-15">Intro</h4>
-                                <p class="text-desc-package mb-30">
-                                    For most businesses that want to otpimize web queries
-                                </p>
-                            </div>
-                            <ul class="list-package-feature">
-                                <li>All limited links</li>
-                                <li>Own analytics platform</li>
-                                <li>Chat support</li>
-                                <li>Optimize hashtags</li>
-                                <li>Unlimited users</li>
-                            </ul>
-                            <div>
-                                <a href="{{route('createInfoPayments')}}" class="btn btn-border">Choose plan</a>
+                @foreach ($offers as $offer)
+                    @if ($offer->offerFeatures->count() > 0)
+                        <div class="col-lg-3 col-md-6 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
+                            <div class="box-pricing-item">
+                                <div class="box-info-price">
+                                    @php
+                                        $sum = 0;
+                                    @endphp
+                                    @foreach ($offer->offerFeatures as $features)
+                                    @php
+                                        $sum += $features->value;
+                                    @endphp
+                                    @endforeach
+                                    <span class="text-price for-month display-month">{{$sum}}</span>
+                                    {{-- <span class="text-price for-year">$240</span> --}}
+                                    <span class="text-month">/month</span>
+                                </div>
+                                <div>
+                                    <h4 class="mb-15">Intro</h4>
+                                    <p class="text-desc-package mb-30">
+                                        For most businesses that want to otpimize web queries
+                                    </p>
+                                </div>
+                                <ul class="list-package-feature">
+                                    @foreach ($offer->offerFeatures as $features)
+                                        <li>{{$features->key}}</li>
+                                    @endforeach
+                                </ul>
+                                <div>
+                                    <a href="{{route('createInfoPayments',['offer_id' => $offer->id])}}" class="btn btn-border">Choose plan</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+                @endforeach
                 </div>
             </div>
         </div>

@@ -4,8 +4,11 @@ namespace Modules\Website\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\OrganiztionRequest;
+use App\Models\Admin\Offer;
+use App\Models\Admin\OfferFeatures;
 use App\Models\Admin\Organization;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Modules\Website\Models\Payment;
 
 class PaymentController extends Controller
@@ -14,6 +17,7 @@ class PaymentController extends Controller
 
     public function createInfoPayments()
     {
+        session()->put('offer_id',request()->offer_id);
         return view('website::pages.payment');
     }
 
@@ -21,9 +25,13 @@ class PaymentController extends Controller
     {
         try{
             $owner = User::create([
-                "email" => $request->email,"name" => $request->name,"phone" => $request->phone,
+                "email" => $request->email,
+                "name" => $request->name,
+                "phone" => $request->phone,
                 "password"  => bcrypt($request->password),"bio" => $request->bio,
             ]);
+            session()->put('user_id',$owner->id);
+
 
             $organization = Organization::create([
                 'name' => $request->organization_name,'description'=> $request->description,'country' => $request->country,
@@ -51,12 +59,20 @@ class PaymentController extends Controller
             )
         );
 
+        $sum = OfferFeatures::where('offer_id',session()->get('offer_id'))->with(['features'])->get()->sum(function ($item) {
+            dump($item->features);
+            // return $item->features->sum('value');
+        });
+        dd($sum);
+
+        session()->put('total_features',$sum);
+
         // After Step 2
         $payer = new \PayPal\Api\Payer();
         $payer->setPaymentMethod('paypal');
 
         $amount = new \PayPal\Api\Amount();
-        $amount->setTotal('1.00');
+        $amount->setTotal(50);
         $amount->setCurrency('USD');
 
         $transaction = new \PayPal\Api\Transaction();
@@ -89,14 +105,15 @@ class PaymentController extends Controller
     public function successPayment ()
     {
         $payment = Payment::create([
-            // 'user_id' => request()-> ,
+            'user_id' => session()->get('user_id') ,
             'payment_id' => request()->paymentId ,
             'payer_id' => request()->PayerID ,
-            // 'amount' => request()-> ,
-            // 'currency' => request()-> ,
-            // 'payment_status' => request()-> ,
+            'amount' => session()->get('total_features') ,
+            'currency' => env('PAYPAL_CLIENT_CURRENCY') ,
+            'payment_status' => 'complete' ,
         ]);
-        return request();
+        Auth::loginUsingId(session()->get('user_id'));
+        return redirect()->route('login');
     }
 
     public function cancelPayment ()

@@ -69,9 +69,7 @@ class FrontController extends Controller
     public function offers()
     {
         $offers =Offer::with(['offerFeatures'])->get();
-        return $offers;
-
-        return view('website::pages.offers',$offers);
+        return view('website::pages.offers',compact('offers'));
     }
     public function postSingle($id)
     {

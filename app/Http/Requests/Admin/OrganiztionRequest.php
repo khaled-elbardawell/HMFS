@@ -54,7 +54,7 @@ class OrganiztionRequest extends FormRequest
         if ($this->method() == "POST"){
             return 'required|file|mimes:jpg,png,jpeg|max:204800|dimensions:max_width=100,max_height=100';
         }
-        return 'nullable|file|mimes:jpg,png,jpeg|max:204800|dimensions:max_width=100,max_height=20';
+        return 'nullable|file|mimes:jpg,png,jpeg|max:204800|dimensions:max_width=100,max_height=100';
     }// end method
 
 
