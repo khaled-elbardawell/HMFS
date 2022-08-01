@@ -7,6 +7,8 @@ import 'package:hmfs/app/data/services/storage/services.dart';
 import 'package:hmfs/app/home.dart';
 import 'package:hmfs/app/modules/doctor_profile/view.dart';
 import 'package:hmfs/app/modules/doctor_review/view.dart';
+import 'package:hmfs/app/modules/health_profile/view.dart';
+import 'package:hmfs/app/modules/health_profile/widget/single_health_profile.dart';
 import 'package:hmfs/app/modules/home/binding.dart';
 import 'package:hmfs/app/modules/onboarding/view.dart';
 import 'package:hmfs/app/modules/reservation/view.dart';
@@ -107,6 +109,16 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/SearchScreen',
           page: () => const SearchScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/HealthProfileScreen',
+          page: () => HealthProfileScreen(),
+          transition: Transition.rightToLeftWithFade,
+        ),
+        GetPage(
+          name: '/SingleHealthProfile',
+          page: () => SingleHealthProfile(),
           transition: Transition.rightToLeftWithFade,
         ),
       ],

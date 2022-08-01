@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/models/message.dart';
 
 class OwnMessageCard extends StatelessWidget {
-  const OwnMessageCard({Key? key}) : super(key: key);
+  const OwnMessageCard({Key? key, required this.message}) : super(key: key);
+  final Messages message;
 
   @override
   Widget build(BuildContext context) {
@@ -30,25 +32,27 @@ class OwnMessageCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(4.0),
             child: Stack(
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                     left: 10,
                     right: 50,
                     top: 5,
                     bottom: 20,
                   ),
                   child: Text(
-                    'HeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHeyHey',
-                    style: TextStyle(color: Colors.white, fontSize: 18),
+                    message.message,
+                    style: const TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
-                Positioned(
-                  bottom: 4,
-                  right: 10,
-                  child: Icon(Icons.done_all_outlined,
-                      color: Colors.white, size: 20),
-                ),
+                message.recipients[1].seenAt != null
+                    ? const Positioned(
+                        bottom: 4,
+                        right: 10,
+                        child: Icon(Icons.done_all_outlined,
+                            color: Colors.white, size: 20),
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),

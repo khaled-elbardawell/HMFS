@@ -42,6 +42,8 @@ dependencies:
   image_picker: ^0.8.3
   get: ^4.6.1
 
+
+
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
@@ -49,7 +51,7 @@ dev_dependencies:
 
 
 
-# 
+# laravel_flutter_pusher: ^0.0.3
 # dart_pusher_channels: ^0.2.1
 # laravel_flutter_pusher: ^0.0.4
 # For information on the generic Dart part of this file, see the

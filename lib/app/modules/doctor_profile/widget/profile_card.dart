@@ -4,10 +4,13 @@ import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
 import 'package:hmfs/app/data/models/doctor.dart';
+import 'package:hmfs/app/modules/doctor_profile/controller.dart';
 
 class ProfileCard extends StatelessWidget {
   final Doctor doctor;
-  const ProfileCard({Key? key, required this.doctor}) : super(key: key);
+  final DoctorProfileController doctorCtrl;
+  const ProfileCard({Key? key, required this.doctor, required this.doctorCtrl})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +26,7 @@ class ProfileCard extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
-                  Get.toNamed('/SingleChat',
-                      parameters: {'doctorId': doctor.id.toString()});
+                  doctorCtrl.createChat();
                 },
                 child: Container(
                   padding: EdgeInsets.all(2.0.wp),

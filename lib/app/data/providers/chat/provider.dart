@@ -14,4 +14,17 @@ class ChatProvider {
     final chatMessage = await _webServices.getMessagesChat(token, chatId);
     return chatMessage;
   }
+
+  Future<void> sendMessage(String token, String chatId, String message) async {
+    await _webServices.sendMessage(token, chatId, message);
+  }
+
+  Future<void> seenMessage(String token, String chatId) async {
+    await _webServices.seenMessage(token, chatId);
+  }
+
+  Future<dynamic> createChat(String token, String userId) async {
+    final chatId = await _webServices.createChat(token, userId);
+    return chatId;
+  }
 }

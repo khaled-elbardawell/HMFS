@@ -98,4 +98,114 @@ class ChatWebServices {
     }
     return chatMessage;
   }
+
+  Future<void> sendMessage(String token, String chatId, String message) async {
+    try {
+      await dio.post(
+        '/api/user/chat/send',
+        data: {
+          "token": token,
+          "chat_id": chatId,
+          "message": message,
+        },
+      );
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        Get.snackbar(
+          'Error',
+          'Invalid email or password',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else if (e.response?.statusCode == 500) {
+        Get.snackbar(
+          'Error',
+          'Check your internet connection',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Something is wrong',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      }
+    }
+  }
+
+  Future<void> seenMessage(String token, String chatId) async {
+    try {
+      await dio.post(
+        '/api/user/chat/seen/messages',
+        data: {
+          "token": token,
+          "chat_id": chatId,
+        },
+      );
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        Get.snackbar(
+          'Error',
+          'Invalid email or password',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else if (e.response?.statusCode == 500) {
+        Get.snackbar(
+          'Error',
+          'Check your internet connection',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Something is wrong',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      }
+    }
+  }
+
+  Future<dynamic> createChat(String token, String userId) async {
+    dynamic chatId = '';
+    try {
+      Response response = await dio.post(
+        '/api/create/user/chat',
+        data: {
+          "token": token,
+          "user_id": userId,
+        },
+      );
+      chatId = response.data['chat_id'];
+      return chatId;
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401) {
+        Get.snackbar(
+          'Error',
+          'Invalid email or password',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else if (e.response?.statusCode == 500) {
+        Get.snackbar(
+          'Error',
+          'Check your internet connection',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      } else {
+        Get.snackbar(
+          'Error',
+          'Something is wrong',
+          backgroundColor: Colors.white,
+          colorText: Colors.black,
+        );
+      }
+      return chatId;
+    }
+  }
 }

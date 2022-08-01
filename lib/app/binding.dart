@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:hmfs/app/data/providers/doctor/provider.dart';
+import 'package:hmfs/app/data/providers/healthprofile/provider.dart';
 import 'package:hmfs/app/data/providers/location/provider.dart';
 import 'package:hmfs/app/data/providers/userprofile/provider.dart';
 import 'package:hmfs/app/data/services/doctorapi/repository.dart';
+import 'package:hmfs/app/data/services/healthprofile/repository.dart';
 import 'package:hmfs/app/data/services/location/repository.dart';
 import 'package:hmfs/app/data/services/userapi/repository.dart';
 import 'package:hmfs/app/data/services/userprofile/repository.dart';
@@ -10,6 +12,7 @@ import 'package:hmfs/app/modules/chat/controller.dart';
 import 'package:hmfs/app/modules/doctor_profile/controller.dart';
 import 'package:hmfs/app/modules/doctor_review/controller.dart';
 import 'package:hmfs/app/modules/doctors/controller.dart';
+import 'package:hmfs/app/modules/health_profile/controller.dart';
 import 'package:hmfs/app/modules/home/controller.dart';
 import 'package:hmfs/app/modules/new_password/controller.dart';
 import 'package:hmfs/app/modules/reservation/controller.dart';
@@ -50,6 +53,9 @@ class Binding extends Bindings {
       () => DoctorProfileController(
         doctorRepository: DoctorRepository(
           doctorProvider: DoctorProvider(),
+        ),
+        chatRepository: ChatRepository(
+          chatProvider: ChatProvider(),
         ),
       ),
     );
@@ -111,6 +117,16 @@ class Binding extends Bindings {
       () => SearchController(
         locationRepository: LocationRepository(
           locationProvider: LocationProvider(),
+        ),
+      ),
+    );
+    Get.lazyPut(
+      () => HealthProfileController(
+        healthProfileRepository: HealthProfileRepository(
+          healthProfileProvider: HealthProfileProvider(),
+        ),
+        chatRepository: ChatRepository(
+          chatProvider: ChatProvider(),
         ),
       ),
     );

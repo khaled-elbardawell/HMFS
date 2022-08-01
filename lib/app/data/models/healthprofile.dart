@@ -30,9 +30,12 @@ class HealthProfile {
     doctorId = json['doctor_id'];
     createdAt = json['created_at'];
     doctor = HealthProfileDoctor.fromJson(json['doctor']);
-    json['uploads'].forEach((v) {
-      uploads.add(Uploads.fromJson(v));
-    });
+    if (json['uploads'] != null) {
+      uploads = <Uploads>[];
+      json['uploads'].forEach((v) {
+        uploads.add(Uploads.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -68,7 +71,9 @@ class HealthProfileDoctor {
     id = json['id'];
     name = json['name'];
     email = json['email'];
-    upload = json['upload'];
+    if (json['upload'] != null) {
+      upload = Uploads.fromJson(json['upload']);
+    }
   }
 
   Map<String, dynamic> toJson() {

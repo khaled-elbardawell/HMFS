@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:hmfs/app/data/models/message.dart';
 
 import '../../../core/utils/extensions.dart';
 import '../../../core/values/colors.dart';
 
 class ReplyMessageCard extends StatelessWidget {
-  const ReplyMessageCard({Key? key}) : super(key: key);
+  const ReplyMessageCard({Key? key, required this.message}) : super(key: key);
+  final Messages message;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class ReplyMessageCard extends StatelessWidget {
                     bottom: 15,
                   ),
                   child: Text(
-                    'HeyHeyHeyHeyHe',
+                    message.message,
                     style: TextStyle(
                         color: HexColor.fromHex(darkBlue), fontSize: 18),
                   ),

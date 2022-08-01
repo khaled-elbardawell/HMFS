@@ -13,4 +13,13 @@ class ChatRepository {
 
   Future<ChatMessage?> getMessagesChat(String token, String chatId) async =>
       await chatProvider.getMessagesChat(token, chatId);
+
+  Future<void> sendMessage(String token, String chatId, String message) async =>
+      await chatProvider.sendMessage(token, chatId, message);
+
+  Future<void> seenMessage(String token, String chatId) async =>
+      await chatProvider.seenMessage(token, chatId);
+
+  Future<dynamic> createChat(String token, String userId) async =>
+      await chatProvider.createChat(token, userId);
 }

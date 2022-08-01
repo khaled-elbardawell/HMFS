@@ -8,6 +8,7 @@ class SingleUserChatCard extends StatelessWidget {
   final int userId;
   final dynamic lastMessage;
   final String updatedAt;
+  final int chatId;
 
   const SingleUserChatCard({
     Key? key,
@@ -16,6 +17,7 @@ class SingleUserChatCard extends StatelessWidget {
     required this.userId,
     required this.lastMessage,
     required this.updatedAt,
+    required this.chatId,
   }) : super(key: key);
 
   String daysBetween(String updatedAt) {
@@ -24,11 +26,11 @@ class SingleUserChatCard extends StatelessWidget {
     if (to.difference(from).inDays != 0) {
       return "${to.difference(from).inDays.toString()} days";
     } else if (to.difference(from).inHours != 0) {
-      return "inHours ${to.difference(from).inHours.toString()} hours";
+      return "${to.difference(from).inHours.toString()} hours";
     } else if (to.difference(from).inMinutes != 0) {
-      return "inMinutes ${to.difference(from).inMinutes.toString()} minutes";
+      return "${to.difference(from).inMinutes.toString()} minutes";
     } else if (to.difference(from).inSeconds != 0) {
-      return "inSeconds ${to.difference(from).inSeconds.toString()} seconds";
+      return "${to.difference(from).inSeconds.toString()} seconds";
     } else {
       return "Now";
     }
@@ -39,7 +41,8 @@ class SingleUserChatCard extends StatelessWidget {
     return ListTile(
       onTap: () {
         Get.toNamed('/SingleChat', arguments: {
-          "chatId": userId.toString(),
+          "userId": userId.toString(),
+          "chatId": chatId.toString(),
           "name": name,
         });
       },

@@ -29,7 +29,7 @@ class ChatMessage {
 }
 
 class Data {
-  late Receiver receiver;
+  late dynamic receiver;
   late List<Messages> messages;
 
   Data({
@@ -38,10 +38,15 @@ class Data {
   });
 
   Data.fromJson(Map<String, dynamic> json) {
-    receiver = Receiver.fromJson(json['receiver']);
-    json['messages'].forEach((v) {
-      messages.add(Messages.fromJson(v));
-    });
+    if (json['receiver'] != null) {
+      receiver = Receiver.fromJson(json['receiver']);
+    }
+    if (json['messages'] != null) {
+      messages = <Messages>[];
+      json['messages'].forEach((v) {
+        messages.add(Messages.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -169,9 +174,12 @@ class Messages {
     chatId = json['chat_id'];
     createdAt = json['created_at'];
 
-    json['recipients'].forEach((v) {
-      recipients.add(Recipients.fromJson(v));
-    });
+    if (json['recipients'] != null) {
+      recipients = <Recipients>[];
+      json['recipients'].forEach((v) {
+        recipients.add(Recipients.fromJson(v));
+      });
+    }
 
     sender = User.fromJson(json['sender']);
   }

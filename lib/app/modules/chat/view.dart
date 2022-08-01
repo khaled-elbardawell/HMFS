@@ -16,11 +16,6 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  // ChatController chatCtrl = Get.put(ChatController(
-  //   chatRepository: ChatRepository(
-  //     chatProvider: ChatProvider(),
-  //   ),
-  // ));
   ChatController chatCtrl = Get.find<ChatController>();
 
   @override
@@ -56,16 +51,16 @@ class _ChatScreenState extends State<ChatScreen> {
     //   },
     // );
 
-    PusherService pusherService = PusherService();
+    // PusherService pusherService = PusherService();
 
-    pusherService.pusher.subscribe("presence-user.2").bind(
-      'UserChatNotifyEvent',
-      (event) {
-        if (kDebugMode) {
-          print('chat event =>' + event.toString());
-        }
-      },
-    );
+    // pusherService.pusher.subscribe("presence-user.2").bind(
+    //   'UserChatNotifyEvent',
+    //   (event) {
+    //     if (kDebugMode) {
+    //       print('chat event =>' + event.toString());
+    //     }
+    //   },
+    // );
   }
 
   @override
@@ -91,6 +86,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           name: chatCtrl.userChats[index].name,
                           updatedAt: chatCtrl.userChats[index].updatedAt,
                           userId: chatCtrl.userChats[index].userId,
+                          chatId: chatCtrl.userChats[index].chatId,
                         );
                       },
                     ),

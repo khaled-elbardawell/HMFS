@@ -2,8 +2,6 @@
     package="com.example.hmfs">
 
 
-    
-
    <application
         android:label="hmfs"
         android:name="${applicationName}"
@@ -48,6 +46,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

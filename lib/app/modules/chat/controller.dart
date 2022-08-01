@@ -3,20 +3,22 @@ import 'package:hmfs/app/core/utils/key.dart';
 import 'package:hmfs/app/data/models/user_chat.dart';
 import 'package:hmfs/app/data/services/storage/services.dart';
 
+import '../../data/services/PusherWebSockets/pusher.dart';
 import '../../data/services/chat_services/repository.dart';
 
 class ChatController extends GetxController {
   RxBool requesting = false.obs;
   RxBool isNotEmptyUsers = false.obs;
-  List<UserChats> userChats = [];
+  RxList<UserChats> userChats = <UserChats>[].obs;
   final ChatRepository chatRepository;
 
+  PusherService pusherService = PusherService();
   ChatController({required this.chatRepository});
 
   void getUserChats() {
     String token = CacheHelper.getTokenData(keyToken);
     chatRepository.getUserChats(token).then((value) {
-      userChats = value;
+      userChats.value = value;
       if (userChats.isEmpty) {
         isNotEmptyUsers.value = false;
       } else {
@@ -28,7 +30,17 @@ class ChatController extends GetxController {
 
   @override
   void onInit() {
+    // userChatNotifyEvent();
     getUserChats();
     super.onInit();
   }
+
+  // void userChatNotifyEvent(int userId) {
+  //   pusherService.pusher.subscribe("presence-user.$userId").bind(
+  //     'UserChatNotifyEvent',
+  //     (event) {
+  //       getUserChats();
+  //     },
+  //   );
+  // }
 }

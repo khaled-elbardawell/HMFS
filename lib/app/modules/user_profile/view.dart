@@ -167,6 +167,43 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                             padding: EdgeInsets.symmetric(vertical: 2.5.wp),
                             child: ListTile(
                               onTap: () {
+                                Get.toNamed('/HealthProfileScreen');
+                              },
+                              contentPadding: const EdgeInsets.all(0.0),
+                              title: Text(
+                                'Health Profile',
+                                style: TextStyle(
+                                  fontSize: 13.0.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: HexColor.fromHex(darkBlue),
+                                ),
+                              ),
+                              leading: Container(
+                                padding: EdgeInsets.all(2.0.wp),
+                                decoration: BoxDecoration(
+                                  color:
+                                      HexColor.fromHex(blue).withOpacity(0.15),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: SvgPicture.asset(
+                                  'assets/images/Icon-heart-rate.svg',
+                                  semanticsLabel: 'Icon setting',
+                                  color: HexColor.fromHex(blue),
+                                  width: 4.5.wp,
+                                  height: 4.5.hp,
+                                ),
+                              ),
+                              trailing: Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                color: HexColor.fromHex(lightBlue),
+                                size: 5.0.wp,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(vertical: 2.5.wp),
+                            child: ListTile(
+                              onTap: () {
                                 userProfileCtrl.requesting.value = false;
                                 Get.toNamed('/editAccount');
                               },

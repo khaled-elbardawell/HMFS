@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hmfs/app/core/utils/extensions.dart';
 import 'package:hmfs/app/core/values/colors.dart';
+import 'package:hmfs/app/data/providers/chat/provider.dart';
+import 'package:hmfs/app/data/services/chat_services/repository.dart';
 import 'package:hmfs/app/modules/doctor_profile/controller.dart';
 import 'package:hmfs/app/modules/doctor_profile/widget/profile_card.dart';
 import 'package:hmfs/app/modules/doctor_profile/widget/single_small_card.dart';
@@ -12,11 +14,16 @@ import '../../data/services/doctorapi/repository.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   DoctorProfileScreen({Key? key}) : super(key: key);
-  final doctorProfileCtrl = Get.put(DoctorProfileController(
-    doctorRepository: DoctorRepository(
-      doctorProvider: DoctorProvider(),
+  final doctorProfileCtrl = Get.put(
+    DoctorProfileController(
+      doctorRepository: DoctorRepository(
+        doctorProvider: DoctorProvider(),
+      ),
+      chatRepository: ChatRepository(
+        chatProvider: ChatProvider(),
+      ),
     ),
-  ));
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,9 @@ class DoctorProfileScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  ProfileCard(doctor: doctorProfileCtrl.doctor),
+                  ProfileCard(
+                      doctor: doctorProfileCtrl.doctor,
+                      doctorCtrl: doctorProfileCtrl),
                   SizedBox(
                     height: 3.0.hp,
                   ),
