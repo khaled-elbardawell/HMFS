@@ -59,11 +59,12 @@ class PaymentController extends Controller
             )
         );
 
+//        return  OfferFeatures::where('offer_id',session()->get('offer_id'))->with(['features'])->get()->sum();
+
         $sum = OfferFeatures::where('offer_id',session()->get('offer_id'))->with(['features'])->get()->sum(function ($item) {
-            dump($item->features);
-            // return $item->features->sum('value');
+//            dump($item->features);
+             return $item->features->sum('value');
         });
-        dd($sum);
 
         session()->put('total_features',$sum);
 
@@ -72,7 +73,7 @@ class PaymentController extends Controller
         $payer->setPaymentMethod('paypal');
 
         $amount = new \PayPal\Api\Amount();
-        $amount->setTotal(50);
+        $amount->setTotal($sum);
         $amount->setCurrency('USD');
 
         $transaction = new \PayPal\Api\Transaction();

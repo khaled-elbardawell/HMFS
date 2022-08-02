@@ -74,6 +74,7 @@ class FrontController extends Controller
     public function postSingle($id)
     {
         $blog = Blog::whereId($id)->with(['user','upload'])->first();
-        return view('website::pages.blog-single' , compact('blog'));
+        $latest_blog = Blog::where('id','<>',$id)->with(['user','upload'])->orderByDesc('updated_at')->limit(6)->get();
+        return view('website::pages.blog-single' , compact('blog','latest_blog'));
     }
 }
