@@ -49,8 +49,7 @@
             </div>
             <div class="header-right">
                 <div class="block-signin">
-                    <a href="#" class="text-link-bd-btom btn-sm hover-up">Apply Now</a>
-                    <a href="#" class="btn btn-default  btn-sm btn-shadow ml-40 hover-up">Sign in</a>
+                    <a href="{{route('login')}}" class="btn btn-default  btn-sm btn-shadow ml-40 hover-up">Sign in</a>
                 </div>
             </div>
         </div>

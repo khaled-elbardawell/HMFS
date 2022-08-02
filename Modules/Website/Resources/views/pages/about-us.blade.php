@@ -209,11 +209,7 @@
         </div>
     </section>
 
-    {{-- @include('website::layouts.testimonials') --}}
-
-    @include('website::layouts.latest-blog')
-
-    {{-- @include('website::layouts.newsletter') --}}
+    @include('website::layouts.latest-blog',['blogs' => $latest_blog])
 
     <!-- End Content -->
 

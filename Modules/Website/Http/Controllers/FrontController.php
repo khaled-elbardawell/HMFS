@@ -14,11 +14,14 @@ class FrontController extends Controller
 
     public function index()
     {
-        return view('website::pages.index');
+        $latest_blog = Blog::with(['user','upload'])->orderByDesc('updated_at')->limit(6)->get();
+        $offers =Offer::with(['offerFeatures'])->orderByDesc('updated_at')->limit(4)->get();
+        return view('website::pages.index',compact('latest_blog','offers'));
     }
     public function aboutUs()
     {
-        return view('website::pages.about-us');
+        $latest_blog = Blog::with(['user','upload'])->orderByDesc('updated_at')->limit(6)->get();
+        return view('website::pages.about-us',compact('latest_blog'));
     }
     public function contactUs()
     {
@@ -55,7 +58,8 @@ class FrontController extends Controller
     }
     public function faqs()
     {
-        return view('website::pages.faqs');
+        $latest_blog = Blog::with(['user','upload'])->orderByDesc('updated_at')->limit(6)->get();
+        return view('website::pages.faqs',compact('latest_blog'));
     }
     public function ourServices()
     {
@@ -69,7 +73,8 @@ class FrontController extends Controller
     public function offers()
     {
         $offers =Offer::with(['offerFeatures'])->get();
-        return view('website::pages.offers',compact('offers'));
+        $latest_blog = Blog::with(['user','upload'])->orderByDesc('updated_at')->limit(6)->get();
+        return view('website::pages.offers',compact('offers','latest_blog'));
     }
     public function postSingle($id)
     {

@@ -28,14 +28,14 @@
                                         $sum += $features->value;
                                     @endphp
                                     @endforeach
-                                    <span class="text-price for-month display-month">{{$sum}}</span>
+                                    <span class="text-price for-month display-month">${{$sum}}</span>
                                     {{-- <span class="text-price for-year">$240</span> --}}
                                     <span class="text-month">/month</span>
                                 </div>
                                 <div>
-                                    <h4 class="mb-15">Intro</h4>
+                                    <h4 class="mb-15">{{$offer->name}}</h4>
                                     <p class="text-desc-package mb-30">
-                                        For most businesses that want to otpimize web queries
+                                        {{$offer->description}}
                                     </p>
                                 </div>
                                 <ul class="list-package-feature">
@@ -55,9 +55,7 @@
         </div>
     </section>
 
-    @include('website::layouts.latest-blog')
-
-    {{-- @include('website::layouts.newsletter') --}}
+    @include('website::layouts.latest-blog',['blogs' => $latest_blog])
 
     <!-- End Content -->
 

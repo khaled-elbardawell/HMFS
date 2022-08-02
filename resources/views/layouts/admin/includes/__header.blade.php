@@ -5,7 +5,7 @@
     <div class="topbar-left">
         <a href="{{url('home')}}" class="logo">
             <span>
-                <img  src="{{CustomAsset('front/assets/imgs/hmfs_logo_1.svg')}}" alt="HMFS" class="w-100 h-100">
+                <img  src="{{CustomAsset('front/assets/imgs/logo-horizontal.svg')}}" alt="HMFS" height="50px" class="w-75">
             </span>
         </a>
     </div>

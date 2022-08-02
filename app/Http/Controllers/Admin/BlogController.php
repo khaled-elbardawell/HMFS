@@ -48,7 +48,6 @@ class BlogController extends Controller
 
         try{
             $blog = Blog::create([
-                // 'organization_id' => session('organization_id'),
                 'user_id' => auth()->user()->id,
                 'title' => $request->title,
                 'excerpt' => $request->excerpt,
@@ -101,7 +100,7 @@ class BlogController extends Controller
                 'title' => $request->title,
                 'excerpt' => $request->excerpt,
                 'description'=> $request->description,
-                'post_date'=> Carbon::now(),
+                'post_date'=> Carbon::now()->subDay()->format('m-d-Y'),
             ]);
 
             Blog::saveUpload($blog->id,'update','image','en','logo');

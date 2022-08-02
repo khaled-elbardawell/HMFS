@@ -8056,9 +8056,6 @@ label {
   .section-title-large {
     font-size: 38px;
   }
-  .header-right {
-    display: none;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -8068,15 +8065,6 @@ label {
     .burger-icon {
         display: none;
     }
-    .header-right {
-        display: none;
-    }
 }
 
-/*OTHER SCREEN*/
-/* @media screen and (min-width: 1200px) and (max-width: 1440px) {
-  .header-right {
-    display: none;
-  }
-} */
 /*# sourceMappingURL=main.css.map */

@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    @include('website::layouts.latest-blog')
+    @include('website::layouts.latest-blog',['blogs' => $latest_blog])
 
     {{-- @include('website::layouts.newsletter') --}}
 

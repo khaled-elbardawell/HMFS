@@ -17,7 +17,6 @@
             </div>
             <!-- end page title end breadcrumb -->
 
-
             <div class="row justify-content-center">
                 <?php  $bgColors = ['success','danger','purple','dark','info','primary','secondary']; ?>
 
@@ -194,10 +193,6 @@
                 </div> <!--end col-->
             </div><!--end row-->
 
-
-
-
-
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card h-100">
@@ -246,7 +241,6 @@
                     </div><!--end card-->
                 </div><!--end col-->
             </div><!--end row-->
-
 
 @endsection
 

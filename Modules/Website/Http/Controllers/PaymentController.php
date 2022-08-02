@@ -9,6 +9,7 @@ use App\Models\Admin\OfferFeatures;
 use App\Models\Admin\Organization;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Modules\Website\Models\OrganizationFeature;
 use Modules\Website\Models\Payment;
 
 class PaymentController extends Controller
@@ -41,6 +42,8 @@ class PaymentController extends Controller
 
             Organization::saveUpload($organization->id,'create','image','en','logo');
             Organization::AssignOwnerToOrganizationWithRoles($request,$owner,$organization);
+
+            // session()->put('organization_id',$organization->id);
 
             return redirect(route('payment'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
         }catch (\Exception $e){
@@ -114,6 +117,15 @@ class PaymentController extends Controller
             'payment_status' => 'complete' ,
         ]);
         Auth::loginUsingId(session()->get('user_id'));
+
+        $offerFeatures = OfferFeatures::where('offer_id',session()->get('offer_id'))->with(['feature'])->get();
+        foreach($offerFeatures as $offer_feature){
+            OrganizationFeature::create([
+                'organization_id' => session()->get('organization_id'),
+                'key' => $offer_feature->feature->key,
+                'value' => $offer_feature->feature->value,
+            ]);
+        }
         return redirect()->route('login');
     }
 

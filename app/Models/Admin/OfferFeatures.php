@@ -25,4 +25,8 @@ class OfferFeatures extends Model
         return $this->hasMany('App\Models\Admin\Feature', 'id');
     }
 
+    public function feature(){
+        return $this->hasOne('App\Models\Admin\Feature', 'id');
+    }
+
 }
