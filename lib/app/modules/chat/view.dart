@@ -20,48 +20,10 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   void initState() {
-    // setUpServices();
+    chatCtrl.getUserChats();
     super.initState();
   }
 
-  void setUpServices() {
-    // String token = CacheHelper.getTokenData(keyToken);
-
-    // var options = PusherOptions(
-    //   host: '10.0.2.2',
-    //   port: 6001,
-    //   cluster: 'mt1',
-    //   auth: PusherAuth(
-    //     'http://10.0.2.2:8000/broadcasting/auth',
-    //     headers: {
-    //       'Authorization': 'Bearer ' + token,
-    //     },
-    //   ),
-    // );
-
-    // LaravelFlutterPusher pusher = LaravelFlutterPusher(
-    //   'pusherKey',
-    //   options,
-    //   enableLogging: true,
-    //   onError: (error) {
-    //     print("error message :" + error.message);
-    //   },
-    //   onConnectionStateChange: (status) {
-    //     print("status : " + status.currentState);
-    //   },
-    // );
-
-    // PusherService pusherService = PusherService();
-
-    // pusherService.pusher.subscribe("presence-user.2").bind(
-    //   'UserChatNotifyEvent',
-    //   (event) {
-    //     if (kDebugMode) {
-    //       print('chat event =>' + event.toString());
-    //     }
-    //   },
-    // );
-  }
 
   @override
   Widget build(BuildContext context) {

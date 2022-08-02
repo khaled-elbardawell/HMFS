@@ -13,10 +13,12 @@ class SingleChatController extends GetxController {
   RxBool isNotEmptyUsers = false.obs;
   late ChatMessage chatMessage;
   RxList<Messages> listMessage = <Messages>[].obs;
+  RxList<Messages> myListMessage = <Messages>[].obs;
   final ChatRepository chatRepository;
   PusherService pusherService = PusherService();
   final formKey = GlobalKey<FormState>();
   final messageController = TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   String userId = Get.arguments['userId'];
   String chatId = Get.arguments['chatId'];
@@ -26,9 +28,18 @@ class SingleChatController extends GetxController {
   void onInit() {
     print('userId :$userId , chatId: $chatId');
     userChatNotifyEvent(int.parse(userId));
-    // seenMessageEvent(int.parse(chatId));
+    seenMessageEvent(int.parse(chatId));
     getMessagesChat();
+    scrollDown();
     super.onInit();
+  }
+
+  void scrollDown() {
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 
   void getMessagesChat() {
@@ -39,6 +50,9 @@ class SingleChatController extends GetxController {
     chatRepository.getMessagesChat(token, chatId).then((value) {
       chatMessage = value!;
       listMessage.value = value.data.messages;
+
+      seenMessageEvent(int.parse(chatId));
+      scrollDown();
       if (kDebugMode) {
         print('Successful login! ' + value.toString());
       }

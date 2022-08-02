@@ -50,6 +50,7 @@ class _SingleChatScreenState extends State<SingleChatScreen> {
                 padding: const EdgeInsets.only(bottom: 20),
                 height: MediaQuery.of(context).size.height - 160,
                 child: ListView.builder(
+                  controller: singleChatCtrl.scrollController,
                   itemCount: singleChatCtrl.listMessage.length,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
