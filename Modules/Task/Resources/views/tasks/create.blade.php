@@ -46,7 +46,7 @@
                                         <select name="user_to" class="form-control"  id="user_to-input">
                                             <option value="-1">{{__('task::admin.Select_User')}}</option>
                                             @foreach ($users as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                                <option value="{{$user->user->id}}">{{$user->user->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('user_to')

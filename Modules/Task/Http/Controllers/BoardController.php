@@ -52,7 +52,6 @@ class BoardController extends Controller
                 'user_id' => auth()->user()->id,
             ]);
 
-            dd($board);
 
             return redirect(route('board.index'))->with(['alert' => true,'status' => 'success', 'message' => 'Created successfully']);
        }catch (\Exception $e){
