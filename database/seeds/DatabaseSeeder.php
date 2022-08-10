@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Database\Seedes\RolesWithUsersAndPermissionsSeeder;
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -14,7 +16,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
 
 
-//         $this->call(RolesWithUsersAndPermissionsSeeder::class);
-//         $this->call(OrgainzationDataSeeder::class);
+        $this->call(RolesWithUsersAndPermissionsSeeder::class);
+        $this->call(OrgainzationDataSeeder::class);
     }
 }
