@@ -25,7 +25,7 @@
             <div class="col-lg-9">
                 <div class="card">
                     <div class="card-body">
-                        <input type="hidden" name="board_card_id" value="{{$board_card->id}}}">
+                        <input type="hidden" name="board_card_id" value="{{$board_card->id}}">
                         <div class="row">
                             <div class="col-lg-12 col-12">
                                 <div class="form-group">
@@ -47,7 +47,7 @@
                                         <select name="user_to" class="form-control" id="user_to-input">
                                             <option value="-1">{{__('task::admin.Select_User')}}</option>
                                             @foreach ($users as $user)
-                                                <option @if ($user->id == $task->user_to) selected @endif value="{{$user->id}}">{{$user->name}}</option>
+                                                <option @if ($user->id == $task->user_to) selected @endif value="{{$user->user->id}}">{{$user->user->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('user_to')

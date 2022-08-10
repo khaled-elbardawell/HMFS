@@ -64,7 +64,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; padding: 0 0 20px;" valign="top">
-                                                                    <a href="{{route('task.index')}}" class="btn-gradient-primary" style=" font-size: 14px; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: block; border-radius: 5px; text-transform: capitalize; border: none; padding: 10px 20px; background: linear-gradient(14deg, #1761fd 0%, rgba(23,97,253,0.6)); color: #fff; box-shadow: 0 7px 14px 0 rgb(23 97 253 / 50%);">Show Tasks</a>
+                                                                    <a href="{{route('task.edit',[$task->id,'board_card_id' => $task->board_card_id])}}" class="btn-gradient-primary" style=" font-size: 14px; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: block; border-radius: 5px; text-transform: capitalize; border: none; padding: 10px 20px; background: linear-gradient(14deg, #1761fd 0%, rgba(23,97,253,0.6)); color: #fff; box-shadow: 0 7px 14px 0 rgb(23 97 253 / 50%);">Show Tasks</a>
                                                                 </td>
                                                             </tr>
                                                             <tr>
